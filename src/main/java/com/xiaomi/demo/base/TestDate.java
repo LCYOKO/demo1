@@ -1,4 +1,4 @@
-package com.xiaomi.demo.base.word;
+package com.xiaomi.demo.base;
 
 import org.junit.Test;
 
