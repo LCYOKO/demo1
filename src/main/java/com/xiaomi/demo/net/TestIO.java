@@ -1,6 +1,7 @@
 package com.xiaomi.demo.net;
 
 import io.netty.channel.epoll.EpollSocketChannel;
+import org.apache.commons.lang3.RandomUtils;
 import org.junit.Test;
 import org.springframework.data.relational.core.sql.In;
 
@@ -8,9 +9,7 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * @Author：liuchiyun
@@ -21,7 +20,12 @@ public class TestIO {
     @Test
     public void test() throws FileNotFoundException {
 //
-       firstMissingPositive(new int[]{-1,1,2,0,4});
+//        Random random = new Random();
+//        for(int i=0;i<20;i++){
+//            System.out.println(random.nextDouble());
+//        }
+//
+          PriorityQueue<Integer> priorityQueue=new PriorityQueue<>();
     }
 
 
@@ -45,6 +49,32 @@ public class TestIO {
     private boolean compl(List<Integer> p1, List<Integer> p2, List<Integer> p3){
         int x1=p1.get(0)-p2.get(0),y1=p1.get(1)-p2.get(1),x2=p3.get(0)-p2.get(0),y2=p3.get(1)-p2.get(1);
         return  x1*x2+y1*y2>=0?true:false;
+    }
+
+    public int findUnsortedSubarray(int[] nums) {
+        if (nums.length == 0 || nums.length == 1) {
+            return 0;
+        }
+        int n = nums.length;
+        Deque<Integer> que = new ArrayDeque<>();
+        int l = -1, r = -1;
+        for (int i = 0; i < n; i++) {
+            boolean flag = true;
+            while (!que.isEmpty() && ( i - que.peekLast() > 1 || nums[i]<nums[que.peekLast()])) {
+                int idx = que.pollLast();
+                if (l == -1 && flag) {
+                    l = idx;
+                } else if (flag) {
+                    r = idx;
+                }
+                flag =false;
+            }
+            que.addLast(i);
+        }
+        if (l == r && l == -1) {
+            return 0;
+        }
+        return r-l+1;
     }
 
     public int firstMissingPositive(int[] nums) {
@@ -81,5 +111,45 @@ public class TestIO {
        TreeNode(int val){
            this.val=val;
        }
+    }
+
+
+    public int findMaxConsecutiveOnes(int[] nums) {
+        int max=0,cur=0,n=nums.length;
+        for(int i=0;i<n;i++){
+            if(nums[i]==1){
+                cur++;
+            }
+            else cur=0;
+            max=Math.max(max,cur);
+        }
+        return cur;
+    }
+
+    public String reverseStr(String s, int k) {
+        int n=s.length(),l=0,r=0;
+        if(k==1 || k>=n){
+            return  s;
+        }
+        char[]c=s.toCharArray();
+        while(r<n){
+            if(r-l+1==k){
+                swap(c,l,r);
+                l=r+1;
+            }
+            r++;
+        }
+        if(l<n){
+            swap(c,l,r-1);
+        }
+        return new String(c);
+    }
+
+    private void swap(char[]c,int i,int j){
+        while(i<j){
+            char temp=c[i];
+            c[i++]=c[j];
+            c[j--]=temp;
+        }
     }
 }
