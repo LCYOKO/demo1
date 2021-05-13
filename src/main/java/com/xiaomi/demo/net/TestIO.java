@@ -26,6 +26,7 @@ public class TestIO {
 //        }
 //
           PriorityQueue<Integer> priorityQueue=new PriorityQueue<>();
+          countSegments("Of all the gin joints in all the towns in all the world,   ");
     }
 
 
@@ -151,5 +152,29 @@ public class TestIO {
             c[i++]=c[j];
             c[j--]=temp;
         }
+    }
+
+    public int countSegments(String s) {
+        int cnt=0,i=0;
+        if(s.length()==0){
+            return cnt;
+        }
+        for(;i<s.length();i++){
+            if(i!=0 && !isAlpha(s.charAt(i)) && isAlpha(s.charAt(i-1))){
+                System.out.println(s.charAt(i));
+                cnt++;
+            }
+        }
+        if(isAlpha(s.charAt(i-1))){
+            cnt++;
+        }
+        return cnt;
+    }
+
+    private boolean isAlpha(char c){
+        if(c==' '){
+            return false;
+        }
+        return true;
     }
 }

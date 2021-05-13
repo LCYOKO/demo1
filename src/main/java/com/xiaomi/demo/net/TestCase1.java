@@ -3,6 +3,8 @@ package com.xiaomi.demo.net;
 import org.junit.Test;
 import org.w3c.dom.Node;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -10,6 +12,55 @@ import java.util.Random;
  * @Date: 2021/5/10
  */
 public class TestCase1 {
+
+    @Test
+    public void test(){
+        int[][] arr=new int[][]{
+                {1,2,3},
+        {4,5,6},
+        {7,8,9}
+        };
+        spiralOrder(arr);
+    }
+    public List<Integer> spiralOrder(int[][] matrix) {
+        List<Integer> ans=new ArrayList<>();
+        int n=matrix.length;
+        if(n==0){
+            return  ans;
+        }
+        int m=matrix[0].length;
+        if(m==0){
+            return ans;
+        }
+        int u=0,d=n-1,l=0,r=m-1;
+        while(true){
+            for(int i=l;i<=r;i++){
+                ans.add(matrix[u][i]);
+            }
+            if(++u>d){
+                break;
+            }
+            for(int i=u;i<=d;i++){
+                ans.add(matrix[i][r]);
+            }
+            if(--r<l){
+                break;
+            }
+            for(int i=r;i>=l;i--){
+                ans.add(matrix[d][i]);
+            }
+            if(--d<u){
+                break;
+            }
+            for(int i=d;i>=u;i--){
+                ans.add(matrix[i][l]);
+            }
+            if(++l>r){
+                break;
+            }
+        }
+        return  ans;
+    }
 
 
      @Test
