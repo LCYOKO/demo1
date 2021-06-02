@@ -3,12 +3,10 @@ package com.xiaomi.demo.net;
 import io.netty.channel.epoll.EpollSocketChannel;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.Test;
-import org.springframework.data.relational.core.sql.In;
+import org.springframework.web.bind.WebDataBinder;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.time.LocalDate;
 import java.util.*;
 
 /**
@@ -19,14 +17,92 @@ public class TestIO {
 
     @Test
     public void test() throws FileNotFoundException {
-//
-//        Random random = new Random();
-//        for(int i=0;i<20;i++){
-//            System.out.println(random.nextDouble());
-//        }
-//
-          PriorityQueue<Integer> priorityQueue=new PriorityQueue<>();
-          countSegments("Of all the gin joints in all the towns in all the world,   ");
+        MyCircularQueue queue = new MyCircularQueue(8);
+        queue.enQueue(3);
+        queue.enQueue(9);
+        queue.enQueue(5);
+        queue.enQueue(0);
+        queue.deQueue();
+        queue.deQueue();
+        System.out.println(queue.Rear());
+    }
+
+    class MyCircularQueue {
+        int head,tail,size;
+        int data[];
+        public MyCircularQueue(int k) {
+            head=tail=0;
+            size=k+1;
+            data=new int[size];
+        }
+
+        public boolean enQueue(int value) {
+//        1 ,2 , 3 , 4
+            if(isFull()){
+                return false;
+            }
+            data[tail]=value;
+            tail=(tail+1)%size;
+            return true;
+        }
+
+        public boolean deQueue() {
+            if(isEmpty()){
+                return false;
+            }
+            tail=(tail+size-1)%size;
+            return true;
+        }
+
+        public int Front() {
+            if (isEmpty()){
+                return -1;
+            }
+            return data[head];
+        }
+
+        public int Rear() {
+            if(isEmpty()){
+                return -1;
+            }
+            return data[(tail+size-1)%size];
+        }
+
+        public boolean isEmpty() {
+            return head==tail;
+
+        }
+
+        public boolean isFull() {
+            return head==(tail+1)%size;
+        }
+    }
+
+
+    public int findPairs(int[] nums, int k) {
+        Arrays.sort(nums);
+        int n=nums.length,ans=0;
+//   1 1 3 4 5
+        for(int i=0;i<n-1;i++){
+            int l=i,r=n-1;
+            if(l!=0 && nums[l]==nums[l-1]){
+                continue;
+            }
+            l=l+1;
+            while(l<r){
+                int mid=(r-l)/2+l;
+                int diff=Math.abs(nums[mid]-nums[i]);
+                if(diff==k){
+                    ans++;
+                    break;
+                }
+                if(diff<k){
+                    l=mid+1;
+                }
+                else r=mid-1;
+            }
+        }
+        return  ans;
     }
 
 
@@ -176,5 +252,102 @@ public class TestIO {
             return false;
         }
         return true;
+    }
+
+    class MyLinkedList {
+        Node head;
+        Node tail;
+        int size;
+        /** Initialize your data structure here. */
+        public MyLinkedList() {
+            head=new Node(-1);
+            tail=head;
+            size=0;
+        }
+
+        /** Get the value of the index-th node in the linked list. If the index is invalid, return -1. */
+        public int get(int index) {
+            if(index>=size){
+                return  -1;
+            }
+            Node temp=head.next;
+            while(index>0){
+                temp=temp.next;
+                index--;
+            }
+            return temp.val;
+        }
+
+        /** Add a node of value val before the first element of the linked list. After the insertion, the new node will be the first node of the linked list. */
+        public void addAtHead(int val) {
+            Node node=new Node(val);
+            node.next=head.next;
+            head.next=node;
+            if(tail==head){
+                tail=node;
+            }
+            size++;
+        }
+
+        /** Append a node of value val to the last element of the linked list. */
+        public void addAtTail(int val) {
+            if(head==tail){
+                addAtHead(val);
+            }
+            else{
+                Node node=new Node(val);
+                tail.next=node;
+                tail=node;
+            }
+            size++;
+        }
+
+        /** Add a node of value val before the index-th node in the linked list. If index equals to the length of linked list, the node will be appended to the end of linked list. If index is greater than the length, the node will not be inserted. */
+        public void addAtIndex(int index, int val) {
+            if(index==0){
+                addAtHead(val);
+            }
+            else if(index>=size){
+                addAtTail(val);
+            }
+            else {
+                Node temp=head;
+                while(index>0){
+                    temp=temp.next;
+                    index--;
+                }
+                Node node=new Node(val);
+                node.next=temp.next;
+                temp.next=node;
+                size++;
+            }
+
+        }
+
+        /** Delete the index-th node in the linked list, if the index is valid. */
+        public void deleteAtIndex(int index) {
+            if(index>=size){
+                return;
+            }
+            Node temp=head;
+            while(index>0){
+                temp=temp.next;
+                index--;
+            }
+
+            temp.next=temp.next.next;
+            if(index==size-1){
+                tail=temp.next;
+            }
+            size--;
+        }
+
+        class Node{
+            int val;
+            Node next;
+            Node(int val){
+                this.val=val;
+            }
+        }
     }
 }
