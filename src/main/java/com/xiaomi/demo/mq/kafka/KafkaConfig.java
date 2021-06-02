@@ -19,6 +19,5 @@ public class KafkaConfig {
     @Bean
     public KafkaTemplate<String,String> kafkaTemplate(ProducerFactory<String,String> factory){
         return  new KafkaTemplate(factory);
-        Cluster
     }
 }
