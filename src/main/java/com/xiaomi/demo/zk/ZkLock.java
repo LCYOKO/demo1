@@ -19,7 +19,9 @@ public class ZkLock implements Lock {
 
     private CuratorFramework client;
 
-    private String base;
+    private String lockPath;
+
+    private String lockName;
 
     private ConcurrentMap<Thread,LockData> lockMetaData=new ConcurrentHashMap<>();
     @Override
@@ -42,7 +44,7 @@ public class ZkLock implements Lock {
         Thread cur = Thread.currentThread();
         LockData lockData = lockMetaData.get(cur);
         if(null==lockData){
-            throw new IllegalArgumentException("you do not own lock "+base);
+            throw new IllegalArgumentException("you do not own lock "+ lockPath);
         }
         int lockCount= lockData.count.incrementAndGet();
         if(lockCount>0){
@@ -62,7 +64,6 @@ public class ZkLock implements Lock {
     @AllArgsConstructor
     private static class LockData{
        private AtomicInteger count;
-
        private Thread owner;
     }
 }

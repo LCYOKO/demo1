@@ -1,8 +1,10 @@
 package com.xiaomi.demo.zk;
 
+import com.sun.org.apache.regexp.internal.RE;
 import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
+import org.apache.curator.framework.recipes.cache.*;
 import org.apache.curator.framework.recipes.locks.InterProcessMutex;
 
 import org.apache.curator.retry.ExponentialBackoffRetry;
@@ -13,6 +15,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * @Author：liuchiyun
@@ -21,6 +24,8 @@ import java.util.List;
 public class ZkTest {
 
     private CuratorFramework client;
+
+    private String path="/test";
     @Before
     public void init(){
         RetryPolicy retry = new ExponentialBackoffRetry(2000,3);
@@ -41,8 +46,12 @@ public class ZkTest {
     public void test() throws Exception {
 //     testCreate();
 //     testSet();
-//        testDel();
-     testGet();
+//     testDel();
+     registerNodeWatcher();
+      registerPathWatcher();
+      registerTreeWatcher();
+        Scanner scanner = new Scanner(System.in);
+        scanner.nextLine();
     }
 
     private void testCreate() throws Exception {
@@ -72,4 +81,43 @@ public class ZkTest {
         client.delete().deletingChildrenIfNeeded()
                 .forPath("/test_temp1");
     }
+
+    private void registerNodeWatcher() throws Exception {
+        NodeCache nodeCache = new NodeCache(client, path);
+        nodeCache.getListenable().addListener(new NodeCacheListener() {
+            @Override
+            public void nodeChanged() throws Exception {
+               System.out.println("Node cache Change ");
+               System.out.println(nodeCache.getPath());
+               System.out.println(new String(nodeCache.getCurrentData().getData()));
+            }
+        });
+        nodeCache.start();
+    }
+
+    private void registerPathWatcher() throws Exception {
+        PathChildrenCache pathChildrenCache = new PathChildrenCache(client, path,true);
+        pathChildrenCache.getListenable().addListener(new PathChildrenCacheListener() {
+            @Override
+            public void childEvent(CuratorFramework client, PathChildrenCacheEvent event) throws Exception {
+                System.out.println("path changed");
+                System.out.println(event.toString());
+            }
+        });
+        pathChildrenCache.start();
+    }
+
+    private void registerTreeWatcher() throws Exception {
+        TreeCache treeCache = new TreeCache(client,path);
+        treeCache.getListenable().addListener(new TreeCacheListener() {
+            @Override
+            public void childEvent(CuratorFramework client, TreeCacheEvent event) throws Exception {
+                System.out.println("tree changed");
+                System.out.println(event.toString());
+            }
+        });
+        treeCache.start();
+    }
+
+
 }
