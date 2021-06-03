@@ -81,7 +81,7 @@ public class Server {
 
         @Override
         public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-             System.out.println(((ByteBuf)msg).toString(StandardCharsets.UTF_8));
+//             System.out.println(((ByteBuf)msg).toString(StandardCharsets.UTF_8));
         }
 
         @Override

@@ -58,9 +58,6 @@ public class Client {
     }
 
     private static class ClientHandler extends SimpleChannelInboundHandler<String>{
-
-
-
         @Override
         public void channelActive(ChannelHandlerContext ctx) throws Exception {
             Scanner scanner = new Scanner(System.in);
