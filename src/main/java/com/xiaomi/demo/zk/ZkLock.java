@@ -4,6 +4,8 @@ import com.xiaomi.demo.lock.Lock;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.apache.curator.framework.CuratorFramework;
+import org.apache.zookeeper.WatchedEvent;
+import org.apache.zookeeper.Watcher;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -24,6 +26,13 @@ public class ZkLock implements Lock {
     private String lockName;
 
     private ConcurrentMap<Thread,LockData> lockMetaData=new ConcurrentHashMap<>();
+
+    private Watcher watcher= new Watcher() {
+        @Override
+        public void process(WatchedEvent event) {
+
+        }
+    };
     @Override
     public boolean tryLock() {
         return false;
@@ -31,13 +40,21 @@ public class ZkLock implements Lock {
 
     @Override
     public boolean lock() {
-        return lock();
+        return lock(-1L,null);
     }
 
     @Override
     public boolean lock(Long timeout, TimeUnit timeUnit) {
+        LockData data = lockMetaData.get(Thread.currentThread());
+        if(null != data){
+            data.count.incrementAndGet();
+            return true;
+        }
+
         return false;
     }
+
+
 
     @Override
     public void unlock() {
@@ -64,6 +81,15 @@ public class ZkLock implements Lock {
     @AllArgsConstructor
     private static class LockData{
        private AtomicInteger count;
+
        private Thread owner;
+
+       private String lockPath;
+    }
+
+    private static class LockResult{
+        private boolean locked;
+
+        private String preNode;
     }
 }

@@ -13,7 +13,9 @@ import org.apache.zookeeper.data.Stat;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.data.relational.core.sql.In;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -44,14 +46,50 @@ public class ZkTest {
 
     @Test
     public void test() throws Exception {
-//     testCreate();
-//     testSet();
-//     testDel();
-     registerNodeWatcher();
-      registerPathWatcher();
-      registerTreeWatcher();
-        Scanner scanner = new Scanner(System.in);
-        scanner.nextLine();
+
+    }
+
+    boolean[][] col=new boolean[9][9];
+    boolean[][] row=new boolean[9][9];
+    boolean[][] table=new boolean[9][9];
+    public void solveSudoku(char[][] board) {
+        dfs(board,0,0);
+
+    }
+
+    private boolean dfs(char board[][],int i,int j){
+        if(j==9){
+            i++;
+            j=0;
+        }
+        if(i==9){
+            return true;
+        }
+        if(board[i][j]=='.'){
+            for(int k=1;k<=9;k++){
+                if(col[j][k-1] || row[i][k-1] ||table[i/3*3+j/3][k-1]){
+                    continue;
+                }
+                col[j][k-1]=true;
+                row[i][k-1]=true;
+                table[i/3*3+j/3][k-1]=true;
+                board[i][j]=(char)(k+'0');
+                if(dfs(board,i,j+1)){
+                    return true;
+                }
+                col[j][k-1]=false;
+                row[i][k-1]=false;
+                table[i/3*3+j/3][k-1]=false;
+            }
+            return false;
+        }
+        else {
+            col[j][board[i][j]-'1']=true;
+            row[i][board[i][j]-'1']=true;
+            table[i/3*3+j/3][board[i][j]-'1']=true;
+            return dfs(board,i,j+1);
+        }
+        // return false;
     }
 
     private void testCreate() throws Exception {
