@@ -1,4 +1,4 @@
-namespace java com.xiaomi.demo.client.thrift
+namespace java com.xiaomi.demo.thrift
 
 enum BizCode{
 
@@ -28,6 +28,5 @@ struct Book{
 
 service BookService{
    BookInfo getBookInfo(1: i32 bookId);
-
    list<Book> getAllBook();
 }

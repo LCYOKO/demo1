@@ -1,0 +1,25 @@
+syntax = "proto3";
+option java_package = "com.xiaomi.demo.proto";
+option java_multiple_files = true;
+
+message Book{
+  int64 bookId = 1;
+  string bookName = 2;
+}
+enum Status{
+  SUCCESS = 0;
+  FAILED = 1;
+}
+
+message BookRequest{
+  int64 bookId =1;
+}
+
+message BookResponse{
+  repeated Book books =1;
+  Status status = 2;
+}
+
+service BookService{
+  rpc getBooks(BookRequest) returns(stream BookResponse);
+}
