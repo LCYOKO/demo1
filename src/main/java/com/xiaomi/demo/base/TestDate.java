@@ -1,5 +1,17 @@
 package com.xiaomi.demo.base;
 
+import com.netflix.appinfo.ApplicationInfoManager;
+import com.netflix.appinfo.EurekaInstanceConfig;
+import com.netflix.appinfo.InstanceInfo;
+import com.netflix.appinfo.MyDataCenterInstanceConfig;
+import com.netflix.appinfo.providers.EurekaConfigBasedInstanceInfoProvider;
+import com.netflix.config.DynamicPropertyFactory;
+import com.netflix.discovery.DefaultEurekaClientConfig;
+import com.netflix.discovery.DiscoveryClient;
+import com.netflix.discovery.EurekaClient;
+import com.netflix.discovery.EurekaClientConfig;
+import com.netflix.eureka.EurekaBootStrap;
+import io.netty.channel.epoll.EpollSocketChannel;
 import org.junit.Test;
 
 import java.text.DateFormat;
@@ -15,37 +27,31 @@ import java.util.logging.SimpleFormatter;
  * @Date: 2021/4/30
  */
 public class TestDate {
+  public static ApplicationInfoManager applicationInfoManager;
+  public static EurekaClient eurekaClient;
+    private static synchronized ApplicationInfoManager initializeApplicationInfoManager(EurekaInstanceConfig instanceConfig) {
+        if (applicationInfoManager == null) {
+            InstanceInfo instanceInfo = new EurekaConfigBasedInstanceInfoProvider(instanceConfig).get();
+            applicationInfoManager = new ApplicationInfoManager(instanceConfig, instanceInfo);
+        }
+
+        return applicationInfoManager;
+    }
+
+    private static synchronized EurekaClient initializeEurekaClient(ApplicationInfoManager applicationInfoManager, EurekaClientConfig clientConfig) {
+        if (eurekaClient == null) {
+            eurekaClient = new DiscoveryClient(applicationInfoManager, clientConfig);
+        }
+
+        return eurekaClient;
+    }
 
     @Test
     public  void test(){
-        StringBuilder builder = new StringBuilder();
-        builder.deleteCharAt()
-    }
-
-    public boolean checkInclusion(String s1, String s2) {
-        int table[]=new int[26];
-        int n=s2.length(),l=0,r=0,cnt=0;
-        for(int i=0;i<s1.length();i++){
-            table[s1.charAt(i)-'a']++;
-            cnt++;
-        }
-        while(r<n){
-            char c=s2.charAt(r);
-            if(table[c-'a']>0){
-                cnt--;
-            }
-            table[c-'a']--;
-            if(cnt==0){
-                return true;
-            }
-            while(l<=r&&table[s2.charAt(r)-'a']==-1){
-                if(l<r&&s2.charAt(l)!=c){
-                    cnt++;
-                }
-                table[s2.charAt(l++)-'a']++;
-            }
-            r++;
-        }
-        return false;
+        new EpollSocketChannel()
+        DynamicPropertyFactory configInstance = com.netflix.config.DynamicPropertyFactory.getInstance();
+        ApplicationInfoManager applicationInfoManager = initializeApplicationInfoManager(new MyDataCenterInstanceConfig());
+        EurekaClient eurekaClient = initializeEurekaClient(applicationInfoManager, new DefaultEurekaClientConfig());
+        System.out.println(eurekaClient.getApplications().getRegisteredApplications());
     }
 }

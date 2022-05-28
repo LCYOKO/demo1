@@ -1,16 +1,18 @@
 package com.xiaomi.demo.mq.kafka;
 
 import com.google.common.collect.Lists;
+import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.producer.ProducerConfig;
-import org.apache.kafka.common.Cluster;
-import org.apache.kafka.common.serialization.Serializer;
+import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
-import org.apache.tomcat.util.file.ConfigFileLoader;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.kafka.core.DefaultKafkaProducerFactory;
-import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.kafka.core.ProducerFactory;
+import org.springframework.context.annotation.Primary;
+import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
+import org.springframework.kafka.core.*;
+import org.springframework.kafka.listener.ContainerProperties;
+import org.springframework.kafka.listener.KafkaMessageListenerContainer;
+import org.springframework.kafka.listener.MessageListener;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,8 +24,6 @@ import java.util.Map;
  */
 @Configuration
 public class KafkaConfig {
-
-
     @Bean
     public ProducerFactory<String,String>  producerFactory(){
         Map<String,Object> props=new HashMap<>();
@@ -39,5 +39,40 @@ public class KafkaConfig {
     @Bean
     public KafkaTemplate<String,String> kafkaTemplate(ProducerFactory<String,String> factory){
         return  new KafkaTemplate<>(factory);
+    }
+
+    @Bean
+    @Primary
+    public ConsumerFactory<String,String> consumerFactory(){
+        Map<String,Object> props=new HashMap<>();
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG,"localhost:9092");
+        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG,StringDeserializer.class);
+        props.put(ConsumerConfig.GROUP_ID_CONFIG,"test");
+        return new DefaultKafkaConsumerFactory<>(props);
+    }
+
+    @Bean
+    public ContainerProperties containerProperties(MessageListener<String,String> customListener){
+        ContainerProperties properties = new ContainerProperties("test");
+        properties.setMessageListener(customListener);
+        return properties;
+    }
+
+    @Bean
+    public KafkaMessageListenerContainer<String,String> kafkaMessageListenerContainer(
+                                        ContainerProperties containerProperties,
+                                                                      ConsumerFactory<String,String> consumerFactory
+    ){
+
+        KafkaMessageListenerContainer<String, String> container = new KafkaMessageListenerContainer<>(consumerFactory, containerProperties);
+        return container;
+    }
+
+    @Bean
+    public ConcurrentKafkaListenerContainerFactory<String,String> concurrentMessageListenerContainer(){
+        ConcurrentKafkaListenerContainerFactory<String, String> container = new ConcurrentKafkaListenerContainerFactory<>();
+        container.setConcurrency(2);
+        return container;
     }
 }

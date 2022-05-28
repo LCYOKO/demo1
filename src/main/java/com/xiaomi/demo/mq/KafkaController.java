@@ -1,6 +1,7 @@
 package com.xiaomi.demo.mq;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +15,9 @@ import java.awt.image.Kernel;
  */
 @RestController
 public class KafkaController {
+
+   @Autowired
+   private ApplicationContext applicationContext;
   @Autowired
     private KafkaTemplate<String,String> kafkaTemplate;
   @GetMapping("/send")
