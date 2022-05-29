@@ -37,5 +37,6 @@ build/
 mvnw
 mvnw.cmd
 
+
 ### txt ###
 *.txt
