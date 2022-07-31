@@ -1,5 +1,9 @@
 package com.xiaomi.demo.spring;
 
+import java.io.IOException;
+import java.nio.channels.Selector;
+import java.nio.channels.ServerSocketChannel;
+
 /**
  * @Author liuchiyun
  * @Date 2022/5/28 7:36 下午
@@ -67,7 +71,7 @@ public class Test {
      *      * 3）直接返回该集合，并注册到BD递归解析。
      *
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
     }
 }

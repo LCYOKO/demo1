@@ -1,6 +1,5 @@
 package com.xiaomi.demo.zk;
 
-import com.sun.org.apache.regexp.internal.RE;
 import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
