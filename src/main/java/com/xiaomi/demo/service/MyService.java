@@ -5,7 +5,6 @@ import org.apache.dubbo.common.timer.HashedWheelTimer;
 public class MyService {
 
     public void sayHello(){
-          new HashedWheelTimer()
             System.out.println("say hello");
     }
 }

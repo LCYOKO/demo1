@@ -23,12 +23,12 @@ public class Test {
      * 3）invokeBeanFactoryPostProcessor()
      *    调用beanFactoryPostProcessor找到所有的前置处理器并执行,在初始化AnnotationContext的时候会注册几个Bd
      *    其中包含一个ConfigurationClassPostProcessor 完成
-     *    3.1  调用所有实现priority的BeanDefinitionRegistryPostProcess
+     *    3.1调用所有实现priority的BeanDefinitionRegistryPostProcess
      *          3.1.1 postProcessBeanDefinitionRegistry方法中完成bean的注册
      *          3.1.2 处理Import注解中导入的class，实现ImportSelector接口的对象   ImportBeanDefinitionRegistrar接口的对象
-     *    3.2  调用所有实现order的BeanDefinitionRegistryPostProcess
-     *    3.3  调用剩下的BeanDefinitionRegistryPostProcess  完成 beanDefinition的注册
-     *    3.4  调用普通的BeanFactoryPostProcessor() 完成前置处理
+     *    3.2调用所有实现order的BeanDefinitionRegistryPostProcess
+     *    3.3调用剩下的BeanDefinitionRegistryPostProcess  完成 beanDefinition的注册
+     *    3.4调用普通的BeanFactoryPostProcessor() 完成前置处理
      * 4）调用registerBeanPostProcessor  完成BeanPostProcessor
      * 5）接下来就是初始化消息源，时间监听器啥的
      *

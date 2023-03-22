@@ -29,11 +29,20 @@
         </dependencies>
     </dependencyManagement>
     <dependencies>
-
+        <dependency>
+            <groupId>org.quickfixj</groupId>
+            <artifactId>quickfixj-core</artifactId>
+            <version>2.2.0</version>
+        </dependency>
         <dependency>
             <groupId>org.apache.thrift</groupId>
             <artifactId>libthrift</artifactId>
             <version>0.9.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.rabbitmq</groupId>
+            <artifactId>amqp-client</artifactId>
+            <version>3.6.5</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -121,13 +130,6 @@
             <version>2.7.5</version>
         </dependency>
         <dependency>
-            <groupId>com.xiaomi</groupId>
-            <artifactId>lcy</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-
-
-        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
@@ -201,7 +203,11 @@
             <artifactId>zookeeper</artifactId>
             <version>3.6.1</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.quickfixj</groupId>
+            <artifactId>quickfixj-messages-fix42</artifactId>
+            <version>2.1.0</version>
+        </dependency>
 
     </dependencies>
 
