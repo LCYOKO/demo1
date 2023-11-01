@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  * @Date 2021/6/14 2:50 下午
  * @Version 1.0
  */
-@Component
+//@Component
 public class CustomerListener implements ConsumerAwareMessageListener<String,String> {
     @Override
     public void onMessage(ConsumerRecord<String, String> data, Consumer<?, ?> consumer) {

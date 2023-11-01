@@ -34,7 +34,7 @@ import com.rabbitmq.client.Channel;
  * spring.rabbitmq.listener.order.exchange.ignoreDeclarationExceptions=true
  * spring.rabbitmq.listener.order.key=springboot.*
  */
-@Component
+//@Component
 public class RabbitReceiver {
 
 	

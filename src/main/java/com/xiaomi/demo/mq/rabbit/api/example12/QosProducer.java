@@ -1,6 +1,6 @@
 package com.xiaomi.demo.mq.rabbit.api.example12;
 
-import com.rabbitmq.client.BuiltinExchangeType;
+
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -21,7 +21,7 @@ public class QosProducer {
 
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
-        channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.DIRECT);
+//        channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.DIRECT);
 
         String routingKey = "error";
 

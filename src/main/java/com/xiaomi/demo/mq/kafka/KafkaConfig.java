@@ -22,7 +22,7 @@ import java.util.Map;
  * @Date 2021/5/9 9:06 下午
  * @Version 1.0
  */
-@Configuration
+//@Configuration
 public class KafkaConfig {
     @Bean
     public ProducerFactory<String,String>  producerFactory(){

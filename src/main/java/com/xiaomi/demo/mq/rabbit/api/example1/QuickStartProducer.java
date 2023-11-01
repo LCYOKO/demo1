@@ -1,6 +1,6 @@
 package com.xiaomi.demo.mq.rabbit.api.example1;
 
-import com.rabbitmq.client.BuiltinExchangeType;
+
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -27,7 +27,7 @@ public class QuickStartProducer {
 
         // 4.创建交换器
         // 因为不知道生产者和消费者程序哪个先启动，所以一般的做法是在生产者和消费者2边都创建交换器（有的话不会重复创建）
-        channel.exchangeDeclare(QuickStartProducer.EXCHANGE_NAME, BuiltinExchangeType.DIRECT);
+//        channel.exchangeDeclare(QuickStartProducer.EXCHANGE_NAME, BuiltinExchangeType.DIRECT);
 
         String routingKey = "error";
         // 5.通过channel发送数据
