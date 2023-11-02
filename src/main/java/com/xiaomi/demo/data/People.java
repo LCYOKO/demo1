@@ -4,7 +4,7 @@
 package com.xiaomi.demo.data;
 
 public final class People {
-  private People() {}
+  public People() {}
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistryLite registry) {
   }

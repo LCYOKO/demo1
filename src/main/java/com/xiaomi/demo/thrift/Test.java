@@ -11,7 +11,6 @@ import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.protocol.TProtocolFactory;
 import org.apache.thrift.server.*;
 import org.apache.thrift.transport.*;
-import org.apache.tools.ant.Project;
 
 import java.io.IOException;
 import java.util.List;

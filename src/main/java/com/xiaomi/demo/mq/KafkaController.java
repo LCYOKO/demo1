@@ -18,7 +18,7 @@ public class KafkaController {
 
    @Autowired
    private ApplicationContext applicationContext;
-  @Autowired
+  @Autowired(required = false)
     private KafkaTemplate<String,String> kafkaTemplate;
   @GetMapping("/send")
   public String send(String msg){

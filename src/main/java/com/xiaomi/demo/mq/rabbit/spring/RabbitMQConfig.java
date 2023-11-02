@@ -23,9 +23,11 @@ import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+<<<<<<< HEAD
 
+=======
+>>>>>>> b851ed070e17a898821b47436d3fdb41bcd50833
 @Configuration
-@ComponentScan({"com.bfxy.spring.*"})
 public class RabbitMQConfig {
 
 	@Bean

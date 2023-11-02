@@ -7,8 +7,13 @@ package com.xiaomi.demo.mq.rabbit.cloud.consumer;
 //import org.springframework.stereotype.Service;
 //
 //import com.rabbitmq.client.Channel;
+<<<<<<< HEAD
 //
 //
+=======
+
+
+>>>>>>> b851ed070e17a898821b47436d3fdb41bcd50833
 //@EnableBinding(Barista.class)
 //@Service
 //public class RabbitmqReceiver {

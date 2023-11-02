@@ -1,6 +1,10 @@
 package com.xiaomi.demo.mq.rabbit.api.example12;
 
+<<<<<<< HEAD
 //import com.rabbitmq.client.BuiltinExchangeType;
+=======
+
+>>>>>>> b851ed070e17a898821b47436d3fdb41bcd50833
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
