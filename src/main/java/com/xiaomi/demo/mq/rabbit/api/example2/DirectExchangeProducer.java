@@ -1,6 +1,6 @@
 package com.xiaomi.demo.mq.rabbit.api.example2;
 
-import com.rabbitmq.client.BuiltinExchangeType;
+//import com.rabbitmq.client.BuiltinExchangeType;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -20,7 +20,7 @@ public class DirectExchangeProducer {
         Connection connection = connectionFactory.newConnection();
         Channel channel = connection.createChannel();
 
-        channel.exchangeDeclare(DirectExchangeProducer.EXCHANGE_NAME, BuiltinExchangeType.DIRECT);
+//        channel.exchangeDeclare(DirectExchangeProducer.EXCHANGE_NAME, BuiltinExchangeType.DIRECT);
 
         String[] logLevel = {"info", "warning", "error"};
         for (int i = 0; i < 3; i++) {

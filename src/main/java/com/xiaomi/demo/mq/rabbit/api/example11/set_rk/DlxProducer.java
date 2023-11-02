@@ -1,6 +1,6 @@
 package com.xiaomi.demo.mq.rabbit.api.example11.set_rk;
 
-import com.rabbitmq.client.BuiltinExchangeType;
+//import com.rabbitmq.client.BuiltinExchangeType;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -22,7 +22,7 @@ public class DlxProducer {
 
         Channel channel = connection.createChannel();
 
-        channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.TOPIC);
+//        channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.TOPIC);
 
         String[] logLevel = {"error","info","warning"};
         for (int i = 0; i < 3; i++) {

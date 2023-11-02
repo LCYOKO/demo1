@@ -2,6 +2,10 @@ package com.xiaomi.demo.mq.rabbit.spring;
 
 import java.util.UUID;
 
+import com.xiaomi.demo.mq.rabbit.spring.adapter.MessageDelegate;
+import com.xiaomi.demo.mq.rabbit.spring.convert.ImageMessageConverter;
+import com.xiaomi.demo.mq.rabbit.spring.convert.PDFMessageConverter;
+import com.xiaomi.demo.mq.rabbit.spring.convert.TextMessageConverter;
 import org.springframework.amqp.core.AcknowledgeMode;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
@@ -19,11 +23,6 @@ import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-
-import com.bfxy.spring.adapter.MessageDelegate;
-import com.bfxy.spring.convert.ImageMessageConverter;
-import com.bfxy.spring.convert.PDFMessageConverter;
-import com.bfxy.spring.convert.TextMessageConverter;
 
 @Configuration
 @ComponentScan({"com.bfxy.spring.*"})
