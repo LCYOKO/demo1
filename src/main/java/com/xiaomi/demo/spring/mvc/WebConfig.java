@@ -1,4 +1,4 @@
-package com.xiaomi.demo.mvc;
+package com.xiaomi.demo.spring.mvc;
 
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.HttpMessageConverter;

@@ -1,4 +1,4 @@
-package com.xiaomi.demo.mvc;
+package com.xiaomi.demo.spring.mvc;
 
 import javax.servlet.ServletContainerInitializer;
 import javax.servlet.ServletContext;

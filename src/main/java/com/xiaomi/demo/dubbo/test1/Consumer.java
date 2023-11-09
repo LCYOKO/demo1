@@ -14,9 +14,7 @@ public class Consumer {
     public static void main(String[] args) {
         System.setProperty("dubbo.application.logger", "sl4j");
         System.setProperty("native", "true");
-
-            runWithRefer();
-
+        runWithRefer();
     }
 
     private static boolean isClassic(String[] args) {
@@ -54,6 +52,6 @@ public class Consumer {
         reference.setInterface(HelloService.class);
         HelloService service = reference.get();
         String message = service.sayHello("dubbo");
-        System.out.println("return value: "+message);
+        System.out.println("return value: " + message);
     }
 }

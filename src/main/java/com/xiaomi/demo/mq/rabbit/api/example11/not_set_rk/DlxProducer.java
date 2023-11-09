@@ -1,9 +1,5 @@
 package com.xiaomi.demo.mq.rabbit.api.example11.not_set_rk;
 
-<<<<<<< HEAD
-=======
-//import com.rabbitmq.client.BuiltinExchangeType;
->>>>>>> b851ed070e17a898821b47436d3fdb41bcd50833
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -32,12 +28,12 @@ public class DlxProducer {
 
 //        channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.TOPIC);
 
-        String[] logLevel = {"error","info","warning"};
+        String[] logLevel = {"error", "info", "warning"};
         for (int i = 0; i < 3; i++) {
             String routingKey = logLevel[i % 3];
             String message = "hello rabbitmq " + i;
             channel.basicPublish(EXCHANGE_NAME, routingKey, null, message.getBytes());
-            log.info("send message, routingKey: {}, message: {}", routingKey ,message);
+            log.info("send message, routingKey: {}, message: {}", routingKey, message);
         }
         channel.close();
         connection.close();

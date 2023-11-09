@@ -1,10 +1,5 @@
 package com.xiaomi.demo.mq.rabbit.api.example12;
 
-<<<<<<< HEAD
-//import com.rabbitmq.client.BuiltinExchangeType;
-=======
-
->>>>>>> b851ed070e17a898821b47436d3fdb41bcd50833
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -32,7 +27,7 @@ public class QosProducer {
         for (int i = 0; i < 30; i++) {
             String message = "hello rabbitmq " + i;
             channel.basicPublish(EXCHANGE_NAME, routingKey, null, message.getBytes());
-            log.info("send message, routingKey: {}, message: {}", routingKey ,message);
+            log.info("send message, routingKey: {}, message: {}", routingKey, message);
         }
         channel.close();
         connection.close();
