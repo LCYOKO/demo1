@@ -1,8 +1,6 @@
 package com.xiaomi.demo.algo;
 
 import lombok.Data;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
@@ -11,19 +9,11 @@ import java.util.concurrent.CountDownLatch;
  * @Author liuchiyun
  * @Date 2022/4/7 11:07 下午
  */
-@Component
-@Service
 public class Test {
 
 
     public native void sayHello();
 
-
-    //    @Bean
-//    public TransactionTemplate transactionTemplate(DataSource dataSourceName){
-//        DataSourceTransactionManager transactionManager = new DataSourceTransactionManager(dataSourceName);
-//        return new TransactionTemplate(transactionManager);
-//    }
     private static final int _1MB = 1024 * 1024;
 
     private static int count;

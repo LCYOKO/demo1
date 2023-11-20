@@ -3,6 +3,7 @@ package com.xiaomi.demo.mq.kafka;
 import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.listener.MessageListener;
 import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.handler.annotation.Header;
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Component;
  * @Version 1.0
  */
 //@Component
-//public class MyConsumer implements KafkaConsumer {
+public class MyConsumer implements MessageListener {
 //    public void receive(@Payload Message message,
 //                        @Header(KafkaHeaders.RECEIVED_PARTITION_ID) int partition,
 //                        @Header(KafkaHeaders.RECEIVED_TOPIC) String topic,
@@ -27,5 +28,9 @@ import org.springframework.stereotype.Component;
 //        // ack这种方式提交也可以
 //        // ack.acknowledge();
 //    }
-//
-//}
+
+    @Override
+    public void onMessage(Object data) {
+
+    }
+}
