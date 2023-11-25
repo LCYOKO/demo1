@@ -1,0 +1,7 @@
+server:
+  port: 8777
+  servlet:
+    context-path: /test
+spring:
+  application:
+    name: hahaha

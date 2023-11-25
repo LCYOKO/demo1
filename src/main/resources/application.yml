@@ -8,31 +8,28 @@
 #  redis:
 #    host: localhost
 #    port: 6379p
-
 server:
   port: 8777
+  servlet:
+    context-path: /test
 spring:
   application:
     name: test111
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka
 
 
 
-management:
-  endpoints:
-    # 暴露 EndPoint 以供访问，有jmx和web两种方式，exclude 的优先级高于 include
-    jmx:
-      exposure:
-        exclude: '*'
-        include: '*'
-    web:
-      exposure:
+#management:
+#  endpoints:
+#    # 暴露 EndPoint 以供访问，有jmx和web两种方式，exclude 的优先级高于 include
+#    jmx:
+#      exposure:
+#        exclude: '*'
+#        include: '*'
+#    web:
+#      exposure:
 #         exclude: '*'
 #        include: '*'
-              include: ["health","info","beans","mappings","logfile","metrics","shutdown","env","prometheus"]
+#              include: ["health","info","beans","mappings","logfile","metrics","shutdown","env","prometheus"]
 #      base-path: /actuator  # 配置 Endpoint 的基础路径
 #      cors: # 配置跨域资源共享
 #        allowed-origins: http://example.com
@@ -81,3 +78,14 @@ management:
 #      enabled: true
 #    prometheus: #19、以可以被Prometheus服务器抓取的格式显示metrics信息，默认开启
 #      enabled: true
+#apollo:
+#  cache-dir: /opt/data/some-cache-dir             # 配置缓存路径
+#  autoUpdateInjectedSpringProperties: true        # 是否开启 Spring 参数自动更新
+#  bootstrap:
+#    enabled: true                                 # 是否开启 Apollo
+#    namespaces: application                       # 设置命名空间
+#    eagerLoad:
+#      enabled: true                               # 饥饿加载
+#  meta: http://localhost:8090
+#app:
+#  id: test

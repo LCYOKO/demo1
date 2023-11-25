@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/prometheus")
 public class PrometheusController {
-    @Autowired
+    @Autowired(required = false)
     private MeterRegistry meterRegistry;
 
     @GetMapping("/timer")
