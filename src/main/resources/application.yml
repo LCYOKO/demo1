@@ -16,6 +16,10 @@ spring:
   application:
     name: test111
 
+app:
+  id: test
+apollo:
+  meta: http://localhost:8080
 
 
 #management:

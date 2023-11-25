@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/apollo")
 public class Test {
 
-    @ApolloJsonValue("key")
+    @ApolloJsonValue("${key}")
     private String apolloKey;
 
     @GetMapping("/key")
