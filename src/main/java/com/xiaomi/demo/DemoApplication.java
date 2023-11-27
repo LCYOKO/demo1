@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, KafkaAutoConfiguration.class})
 @EnableTransactionManagement
 @EnableAspectJAutoProxy
-@EnableApolloConfig
+//@EnableApolloConfig
 //@NacosPropertySource(dataId = "test", autoRefreshed = true)
 public class DemoApplication {
     public static void main(String[] args) {
