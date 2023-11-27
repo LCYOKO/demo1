@@ -14,7 +14,9 @@ server:
     context-path: /test
 spring:
   application:
-    name: test111
+    name: demo
+  profiles:
+    active:
 
 app:
   id: test
