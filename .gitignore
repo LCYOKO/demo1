@@ -40,3 +40,4 @@ mvnw.cmd
 
 ### txt ###
 *.txt
+*.log
