@@ -132,6 +132,10 @@
                     <artifactId>logback-classic</artifactId>
                     <groupId>ch.qos.logback</groupId>
                 </exclusion>
+                <exclusion>
+                    <artifactId>rocketmq-common</artifactId>
+                    <groupId>org.apache.rocketmq</groupId>
+                </exclusion>
             </exclusions>
         </dependency>
 
@@ -179,11 +183,11 @@
         </dependency>
 
         <!--grpc相关-->
-        <dependency>
-            <groupId>io.grpc</groupId>
-            <artifactId>grpc-all</artifactId>
-            <version>1.20.0</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>io.grpc</groupId>-->
+<!--            <artifactId>grpc-all</artifactId>-->
+<!--            <version>1.20.0</version>-->
+<!--        </dependency>-->
 
         <!--thrift相关-->
         <dependency>
@@ -278,6 +282,13 @@
             <groupId>org.apache.skywalking</groupId>
             <artifactId>apm-toolkit-trace</artifactId>
             <version>8.12.0</version>
+        </dependency>
+
+        <!--rocketmq-->
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-client</artifactId>
+            <version>5.1.0</version>
         </dependency>
     </dependencies>
 
