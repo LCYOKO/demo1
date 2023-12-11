@@ -9,7 +9,7 @@ import org.mybatis.generator.api.dom.xml.XmlElement;
  * @Date 2023/7/25 2:06 下午
  * ref https://github.com/beihaifeiwu/dolphin
  */
-public class MySqlUpsertPlugin extends com.jxyh.common.mybatis.plugins.AbstractUpsertPlugin {
+public class MySqlUpsertPlugin extends AbstractUpsertPlugin {
 
     @Override
     protected void generateSqlMapContent(IntrospectedTable introspectedTable, XmlElement parent) {

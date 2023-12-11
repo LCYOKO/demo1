@@ -7,7 +7,7 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.google.common.collect.Lists;
-import com.jxyh.common.report.csv.ReflectionUtils;
+import com.xiaomi.demo.document.report.csv.ReflectionUtils;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -36,7 +36,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static com.jxyh.common.report.excel.FileParseUtils.CellField;
+import static com.xiaomi.demo.document.report.excel.FileParseUtils.CellField;
 
 
 /**
