@@ -16,5 +16,5 @@ import java.util.List;
  * @Date 2022/5/15 11:47 上午
  * @Version 1.0
  */
-public class WebConfig extends WebMvcConfigurerAdapter {
+public class WebConfig implements   WebMvcConfigurer {
 }

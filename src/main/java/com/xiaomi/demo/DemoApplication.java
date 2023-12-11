@@ -4,10 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration;
-
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.core.env.Environment;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
@@ -20,9 +17,6 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 //@NacosPropertySource(dataId = "test", autoRefreshed = true)
 public class DemoApplication {
     public static void main(String[] args) {
-        ConfigurableApplicationContext context = SpringApplication.run(DemoApplication.class, args);
-        Environment environment = context.getBean(Environment.class);
-        environment.getActiveProfiles();
+        SpringApplication.run(DemoApplication.class, args);
     }
-
 }

@@ -12,12 +12,6 @@
     <groupId>com.xiaomi</groupId>
     <artifactId>demo</artifactId>
     <version>1.0</version>
-    <name>demo</name>
-
-
-    <properties>
-        <java.version>1.8</java.version>
-    </properties>
 
     <dependencyManagement>
         <dependencies>
@@ -30,6 +24,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
     <dependencies>
         <!--        <dependency>-->
         <!--            <groupId>org.springframework.cloud</groupId>-->
@@ -163,7 +158,6 @@
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
-
         <!--工具类-->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -180,6 +174,38 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>27.0.1-jre</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/cn.hutool/hutool-all -->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.8.23</version>
+        </dependency>
+        <!--mybatis相关-->
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>3.5.13</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>2.1.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis.generator</groupId>
+            <artifactId>mybatis-generator-core</artifactId>
+            <version>1.3.5</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.4.7</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.16</version>
         </dependency>
 
         <!--grpc相关-->
@@ -223,7 +249,6 @@
             <artifactId>quickfixj-core</artifactId>
             <version>2.2.0</version>
         </dependency>
-
         <!--prometheus 相关 -->
         <dependency>
             <groupId>io.prometheus</groupId>
@@ -239,7 +264,6 @@
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-registry-prometheus</artifactId>
         </dependency>
-
         <!--        JMH 压测相关-->
         <dependency>
             <groupId>org.openjdk.jmh</groupId>
@@ -289,6 +313,17 @@
             <groupId>org.apache.rocketmq</groupId>
             <artifactId>rocketmq-client</artifactId>
             <version>5.1.0</version>
+        </dependency>
+        <!--   文件存储     -->
+        <dependency>
+            <groupId>io.minio</groupId>
+            <artifactId>minio</artifactId>
+            <version>8.5.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.aliyun.oss</groupId>
+            <artifactId>aliyun-sdk-oss</artifactId>
+            <version>3.15.2</version>
         </dependency>
     </dependencies>
 

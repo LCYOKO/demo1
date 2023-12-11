@@ -48,8 +48,6 @@ public class Test {
         tomcat.start();
 
         tomcat.getServer().await();
-
-
        DispatcherServlet dispatcherServlet = new DispatcherServlet();
     }
 }
