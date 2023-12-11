@@ -146,7 +146,6 @@
             <artifactId>sentinel-core</artifactId>
             <version>1.8.2</version>
         </dependency>
-
         <!--dubbo相关-->
         <dependency>
             <groupId>org.apache.dubbo</groupId>
@@ -180,6 +179,11 @@
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
             <version>5.8.23</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>1.5.3.Final</version>
         </dependency>
         <!--mybatis相关-->
         <dependency>
