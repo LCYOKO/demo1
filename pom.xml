@@ -379,6 +379,12 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/src/main/resources/lib/aspose-words-20.12-jdk17-cracked.jar</systemPath>
         </dependency>
+        <!--   Jol     -->
+        <dependency>
+            <groupId>org.openjdk.jol</groupId>
+            <artifactId>jol-core</artifactId>
+            <version>0.10</version>
+        </dependency>
     </dependencies>
 
     <build>

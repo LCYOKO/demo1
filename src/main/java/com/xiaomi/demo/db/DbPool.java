@@ -5,7 +5,6 @@ import java.sql.Connection;
 /**
  * @Author l
  * @Date 2021/1/23 23:19
- * @Version 1.0
  */
 public interface DbPool {
 

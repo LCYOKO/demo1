@@ -26,7 +26,7 @@ import java.io.IOException;
  * @Date: 2023/12/11
  */
 @Slf4j
-@RestControllerAdvice
+//@RestControllerAdvice
 public class LogResponseAdvice implements ResponseBodyAdvice<Object> {
     @Value("${http.respLog.enabled:true}")
     private boolean logEnabled;

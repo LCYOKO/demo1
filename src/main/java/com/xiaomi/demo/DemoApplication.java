@@ -7,6 +7,8 @@ import org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import java.util.Arrays;
+
 /**
  * @author liuchiyun
  */
@@ -17,6 +19,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 //@NacosPropertySource(dataId = "test", autoRefreshed = true)
 public class DemoApplication {
     public static void main(String[] args) {
+        System.out.println(Arrays.toString(args));
         SpringApplication.run(DemoApplication.class, args);
     }
 }

@@ -18,6 +18,6 @@ public class TestController {
 
     @GetMapping("message")
     public Map<String, Object> getMessage() {
-        return Collections.singletonMap("lcy","123");
+        return Collections.singletonMap("lcy", "123");
     }
 }
