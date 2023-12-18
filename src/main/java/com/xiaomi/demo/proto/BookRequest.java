@@ -6,7 +6,7 @@ package com.xiaomi.demo.proto;
 /**
  * Protobuf type {@code BookRequest}
  */
-public  final class BookRequest extends
+public final class BookRequest extends
     com.google.protobuf.GeneratedMessageV3 implements
     // @@protoc_insertion_point(message_implements:BookRequest)
     BookRequestOrBuilder {
@@ -16,10 +16,16 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private BookRequest() {
-    bookId_ = 0L;
   }
 
-  @Override
+  @java.lang.Override
+  @SuppressWarnings({"unused"})
+  protected java.lang.Object newInstance(
+      UnusedPrivateParameter unused) {
+    return new BookRequest();
+  }
+
+  @java.lang.Override
   public final com.google.protobuf.UnknownFieldSet
   getUnknownFields() {
     return this.unknownFields;
@@ -30,7 +36,7 @@ private static final long serialVersionUID = 0L;
       throws com.google.protobuf.InvalidProtocolBufferException {
     this();
     if (extensionRegistry == null) {
-      throw new NullPointerException();
+      throw new java.lang.NullPointerException();
     }
     int mutable_bitField0_ = 0;
     com.google.protobuf.UnknownFieldSet.Builder unknownFields =
@@ -48,8 +54,21 @@ private static final long serialVersionUID = 0L;
             bookId_ = input.readInt64();
             break;
           }
+          case 18: {
+            com.google.protobuf.StringValue.Builder subBuilder = null;
+            if (((bitField0_ & 0x00000001) != 0)) {
+              subBuilder = bookName_.toBuilder();
+            }
+            bookName_ = input.readMessage(com.google.protobuf.StringValue.parser(), extensionRegistry);
+            if (subBuilder != null) {
+              subBuilder.mergeFrom(bookName_);
+              bookName_ = subBuilder.buildPartial();
+            }
+            bitField0_ |= 0x00000001;
+            break;
+          }
           default: {
-            if (!parseUnknownFieldProto3(
+            if (!parseUnknownField(
                 input, unknownFields, extensionRegistry, tag)) {
               done = true;
             }
@@ -69,28 +88,57 @@ private static final long serialVersionUID = 0L;
   }
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return BookOuterClass.internal_static_BookRequest_descriptor;
+    return com.xiaomi.demo.proto.BookOuterClass.internal_static_BookRequest_descriptor;
   }
 
-  @Override
-  protected FieldAccessorTable
+  @java.lang.Override
+  protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return BookOuterClass.internal_static_BookRequest_fieldAccessorTable
+    return com.xiaomi.demo.proto.BookOuterClass.internal_static_BookRequest_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            BookRequest.class, BookRequest.Builder.class);
+            com.xiaomi.demo.proto.BookRequest.class, com.xiaomi.demo.proto.BookRequest.Builder.class);
   }
 
+  private int bitField0_;
   public static final int BOOKID_FIELD_NUMBER = 1;
   private long bookId_;
   /**
    * <code>int64 bookId = 1;</code>
+   * @return The bookId.
    */
+  @java.lang.Override
   public long getBookId() {
     return bookId_;
   }
 
+  public static final int BOOKNAME_FIELD_NUMBER = 2;
+  private com.google.protobuf.StringValue bookName_;
+  /**
+   * <code>.google.protobuf.StringValue bookName = 2;</code>
+   * @return Whether the bookName field is set.
+   */
+  @java.lang.Override
+  public boolean hasBookName() {
+    return ((bitField0_ & 0x00000001) != 0);
+  }
+  /**
+   * <code>.google.protobuf.StringValue bookName = 2;</code>
+   * @return The bookName.
+   */
+  @java.lang.Override
+  public com.google.protobuf.StringValue getBookName() {
+    return bookName_ == null ? com.google.protobuf.StringValue.getDefaultInstance() : bookName_;
+  }
+  /**
+   * <code>.google.protobuf.StringValue bookName = 2;</code>
+   */
+  @java.lang.Override
+  public com.google.protobuf.StringValueOrBuilder getBookNameOrBuilder() {
+    return bookName_ == null ? com.google.protobuf.StringValue.getDefaultInstance() : bookName_;
+  }
+
   private byte memoizedIsInitialized = -1;
-  @Override
+  @java.lang.Override
   public final boolean isInitialized() {
     byte isInitialized = memoizedIsInitialized;
     if (isInitialized == 1) return true;
@@ -100,16 +148,19 @@ private static final long serialVersionUID = 0L;
     return true;
   }
 
-  @Override
+  @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
     if (bookId_ != 0L) {
       output.writeInt64(1, bookId_);
     }
+    if (((bitField0_ & 0x00000001) != 0)) {
+      output.writeMessage(2, getBookName());
+    }
     unknownFields.writeTo(output);
   }
 
-  @Override
+  @java.lang.Override
   public int getSerializedSize() {
     int size = memoizedSize;
     if (size != -1) return size;
@@ -119,29 +170,37 @@ private static final long serialVersionUID = 0L;
       size += com.google.protobuf.CodedOutputStream
         .computeInt64Size(1, bookId_);
     }
+    if (((bitField0_ & 0x00000001) != 0)) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeMessageSize(2, getBookName());
+    }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
     return size;
   }
 
-  @Override
-  public boolean equals(final Object obj) {
+  @java.lang.Override
+  public boolean equals(final java.lang.Object obj) {
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof BookRequest)) {
+    if (!(obj instanceof com.xiaomi.demo.proto.BookRequest)) {
       return super.equals(obj);
     }
-    BookRequest other = (BookRequest) obj;
+    com.xiaomi.demo.proto.BookRequest other = (com.xiaomi.demo.proto.BookRequest) obj;
 
-    boolean result = true;
-    result = result && (getBookId()
-        == other.getBookId());
-    result = result && unknownFields.equals(other.unknownFields);
-    return result;
+    if (getBookId()
+        != other.getBookId()) return false;
+    if (hasBookName() != other.hasBookName()) return false;
+    if (hasBookName()) {
+      if (!getBookName()
+          .equals(other.getBookName())) return false;
+    }
+    if (!unknownFields.equals(other.unknownFields)) return false;
+    return true;
   }
 
-  @Override
+  @java.lang.Override
   public int hashCode() {
     if (memoizedHashCode != 0) {
       return memoizedHashCode;
@@ -151,74 +210,78 @@ private static final long serialVersionUID = 0L;
     hash = (37 * hash) + BOOKID_FIELD_NUMBER;
     hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
         getBookId());
+    if (hasBookName()) {
+      hash = (37 * hash) + BOOKNAME_FIELD_NUMBER;
+      hash = (53 * hash) + getBookName().hashCode();
+    }
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
   }
 
-  public static BookRequest parseFrom(
+  public static com.xiaomi.demo.proto.BookRequest parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static BookRequest parseFrom(
+  public static com.xiaomi.demo.proto.BookRequest parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static BookRequest parseFrom(
+  public static com.xiaomi.demo.proto.BookRequest parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static BookRequest parseFrom(
+  public static com.xiaomi.demo.proto.BookRequest parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static BookRequest parseFrom(byte[] data)
+  public static com.xiaomi.demo.proto.BookRequest parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static BookRequest parseFrom(
+  public static com.xiaomi.demo.proto.BookRequest parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static BookRequest parseFrom(java.io.InputStream input)
+  public static com.xiaomi.demo.proto.BookRequest parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static BookRequest parseFrom(
+  public static com.xiaomi.demo.proto.BookRequest parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
-  public static BookRequest parseDelimitedFrom(java.io.InputStream input)
+  public static com.xiaomi.demo.proto.BookRequest parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
-  public static BookRequest parseDelimitedFrom(
+  public static com.xiaomi.demo.proto.BookRequest parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static BookRequest parseFrom(
+  public static com.xiaomi.demo.proto.BookRequest parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static BookRequest parseFrom(
+  public static com.xiaomi.demo.proto.BookRequest parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -226,23 +289,23 @@ private static final long serialVersionUID = 0L;
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
 
-  @Override
+  @java.lang.Override
   public Builder newBuilderForType() { return newBuilder(); }
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(BookRequest prototype) {
+  public static Builder newBuilder(com.xiaomi.demo.proto.BookRequest prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
-  @Override
+  @java.lang.Override
   public Builder toBuilder() {
     return this == DEFAULT_INSTANCE
         ? new Builder() : new Builder().mergeFrom(this);
   }
 
-  @Override
+  @java.lang.Override
   protected Builder newBuilderForType(
-      BuilderParent parent) {
+      com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
     Builder builder = new Builder(parent);
     return builder;
   }
@@ -252,18 +315,18 @@ private static final long serialVersionUID = 0L;
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
       // @@protoc_insertion_point(builder_implements:BookRequest)
-      BookRequestOrBuilder {
+      com.xiaomi.demo.proto.BookRequestOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return BookOuterClass.internal_static_BookRequest_descriptor;
+      return com.xiaomi.demo.proto.BookOuterClass.internal_static_BookRequest_descriptor;
     }
 
-    @Override
-    protected FieldAccessorTable
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return BookOuterClass.internal_static_BookRequest_fieldAccessorTable
+      return com.xiaomi.demo.proto.BookOuterClass.internal_static_BookRequest_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              BookRequest.class, BookRequest.Builder.class);
+              com.xiaomi.demo.proto.BookRequest.class, com.xiaomi.demo.proto.BookRequest.Builder.class);
     }
 
     // Construct using com.xiaomi.demo.proto.BookRequest.newBuilder()
@@ -272,118 +335,139 @@ private static final long serialVersionUID = 0L;
     }
 
     private Builder(
-        BuilderParent parent) {
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
       super(parent);
       maybeForceBuilderInitialization();
     }
     private void maybeForceBuilderInitialization() {
       if (com.google.protobuf.GeneratedMessageV3
               .alwaysUseFieldBuilders) {
+        getBookNameFieldBuilder();
       }
     }
-    @Override
+    @java.lang.Override
     public Builder clear() {
       super.clear();
       bookId_ = 0L;
 
+      if (bookNameBuilder_ == null) {
+        bookName_ = null;
+      } else {
+        bookNameBuilder_.clear();
+      }
+      bitField0_ = (bitField0_ & ~0x00000001);
       return this;
     }
 
-    @Override
+    @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return BookOuterClass.internal_static_BookRequest_descriptor;
+      return com.xiaomi.demo.proto.BookOuterClass.internal_static_BookRequest_descriptor;
     }
 
-    @Override
-    public BookRequest getDefaultInstanceForType() {
-      return BookRequest.getDefaultInstance();
+    @java.lang.Override
+    public com.xiaomi.demo.proto.BookRequest getDefaultInstanceForType() {
+      return com.xiaomi.demo.proto.BookRequest.getDefaultInstance();
     }
 
-    @Override
-    public BookRequest build() {
-      BookRequest result = buildPartial();
+    @java.lang.Override
+    public com.xiaomi.demo.proto.BookRequest build() {
+      com.xiaomi.demo.proto.BookRequest result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
       return result;
     }
 
-    @Override
-    public BookRequest buildPartial() {
-      BookRequest result = new BookRequest(this);
+    @java.lang.Override
+    public com.xiaomi.demo.proto.BookRequest buildPartial() {
+      com.xiaomi.demo.proto.BookRequest result = new com.xiaomi.demo.proto.BookRequest(this);
+      int from_bitField0_ = bitField0_;
+      int to_bitField0_ = 0;
       result.bookId_ = bookId_;
+      if (((from_bitField0_ & 0x00000001) != 0)) {
+        if (bookNameBuilder_ == null) {
+          result.bookName_ = bookName_;
+        } else {
+          result.bookName_ = bookNameBuilder_.build();
+        }
+        to_bitField0_ |= 0x00000001;
+      }
+      result.bitField0_ = to_bitField0_;
       onBuilt();
       return result;
     }
 
-    @Override
+    @java.lang.Override
     public Builder clone() {
-      return (Builder) super.clone();
+      return super.clone();
     }
-    @Override
+    @java.lang.Override
     public Builder setField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
-        Object value) {
-      return (Builder) super.setField(field, value);
+        java.lang.Object value) {
+      return super.setField(field, value);
     }
-    @Override
+    @java.lang.Override
     public Builder clearField(
         com.google.protobuf.Descriptors.FieldDescriptor field) {
-      return (Builder) super.clearField(field);
+      return super.clearField(field);
     }
-    @Override
+    @java.lang.Override
     public Builder clearOneof(
         com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-      return (Builder) super.clearOneof(oneof);
+      return super.clearOneof(oneof);
     }
-    @Override
+    @java.lang.Override
     public Builder setRepeatedField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
-        int index, Object value) {
-      return (Builder) super.setRepeatedField(field, index, value);
+        int index, java.lang.Object value) {
+      return super.setRepeatedField(field, index, value);
     }
-    @Override
+    @java.lang.Override
     public Builder addRepeatedField(
         com.google.protobuf.Descriptors.FieldDescriptor field,
-        Object value) {
-      return (Builder) super.addRepeatedField(field, value);
+        java.lang.Object value) {
+      return super.addRepeatedField(field, value);
     }
-    @Override
+    @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof BookRequest) {
-        return mergeFrom((BookRequest)other);
+      if (other instanceof com.xiaomi.demo.proto.BookRequest) {
+        return mergeFrom((com.xiaomi.demo.proto.BookRequest)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(BookRequest other) {
-      if (other == BookRequest.getDefaultInstance()) return this;
+    public Builder mergeFrom(com.xiaomi.demo.proto.BookRequest other) {
+      if (other == com.xiaomi.demo.proto.BookRequest.getDefaultInstance()) return this;
       if (other.getBookId() != 0L) {
         setBookId(other.getBookId());
+      }
+      if (other.hasBookName()) {
+        mergeBookName(other.getBookName());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
       return this;
     }
 
-    @Override
+    @java.lang.Override
     public final boolean isInitialized() {
       return true;
     }
 
-    @Override
+    @java.lang.Override
     public Builder mergeFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      BookRequest parsedMessage = null;
+      com.xiaomi.demo.proto.BookRequest parsedMessage = null;
       try {
         parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        parsedMessage = (BookRequest) e.getUnfinishedMessage();
+        parsedMessage = (com.xiaomi.demo.proto.BookRequest) e.getUnfinishedMessage();
         throw e.unwrapIOException();
       } finally {
         if (parsedMessage != null) {
@@ -392,39 +476,165 @@ private static final long serialVersionUID = 0L;
       }
       return this;
     }
+    private int bitField0_;
 
     private long bookId_ ;
     /**
      * <code>int64 bookId = 1;</code>
+     * @return The bookId.
      */
+    @java.lang.Override
     public long getBookId() {
       return bookId_;
     }
     /**
      * <code>int64 bookId = 1;</code>
+     * @param value The bookId to set.
+     * @return This builder for chaining.
      */
     public Builder setBookId(long value) {
-
+      
       bookId_ = value;
       onChanged();
       return this;
     }
     /**
      * <code>int64 bookId = 1;</code>
+     * @return This builder for chaining.
      */
     public Builder clearBookId() {
-
+      
       bookId_ = 0L;
       onChanged();
       return this;
     }
-    @Override
+
+    private com.google.protobuf.StringValue bookName_;
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.google.protobuf.StringValue, com.google.protobuf.StringValue.Builder, com.google.protobuf.StringValueOrBuilder> bookNameBuilder_;
+    /**
+     * <code>.google.protobuf.StringValue bookName = 2;</code>
+     * @return Whether the bookName field is set.
+     */
+    public boolean hasBookName() {
+      return ((bitField0_ & 0x00000001) != 0);
+    }
+    /**
+     * <code>.google.protobuf.StringValue bookName = 2;</code>
+     * @return The bookName.
+     */
+    public com.google.protobuf.StringValue getBookName() {
+      if (bookNameBuilder_ == null) {
+        return bookName_ == null ? com.google.protobuf.StringValue.getDefaultInstance() : bookName_;
+      } else {
+        return bookNameBuilder_.getMessage();
+      }
+    }
+    /**
+     * <code>.google.protobuf.StringValue bookName = 2;</code>
+     */
+    public Builder setBookName(com.google.protobuf.StringValue value) {
+      if (bookNameBuilder_ == null) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bookName_ = value;
+        onChanged();
+      } else {
+        bookNameBuilder_.setMessage(value);
+      }
+      bitField0_ |= 0x00000001;
+      return this;
+    }
+    /**
+     * <code>.google.protobuf.StringValue bookName = 2;</code>
+     */
+    public Builder setBookName(
+        com.google.protobuf.StringValue.Builder builderForValue) {
+      if (bookNameBuilder_ == null) {
+        bookName_ = builderForValue.build();
+        onChanged();
+      } else {
+        bookNameBuilder_.setMessage(builderForValue.build());
+      }
+      bitField0_ |= 0x00000001;
+      return this;
+    }
+    /**
+     * <code>.google.protobuf.StringValue bookName = 2;</code>
+     */
+    public Builder mergeBookName(com.google.protobuf.StringValue value) {
+      if (bookNameBuilder_ == null) {
+        if (((bitField0_ & 0x00000001) != 0) &&
+            bookName_ != null &&
+            bookName_ != com.google.protobuf.StringValue.getDefaultInstance()) {
+          bookName_ =
+            com.google.protobuf.StringValue.newBuilder(bookName_).mergeFrom(value).buildPartial();
+        } else {
+          bookName_ = value;
+        }
+        onChanged();
+      } else {
+        bookNameBuilder_.mergeFrom(value);
+      }
+      bitField0_ |= 0x00000001;
+      return this;
+    }
+    /**
+     * <code>.google.protobuf.StringValue bookName = 2;</code>
+     */
+    public Builder clearBookName() {
+      if (bookNameBuilder_ == null) {
+        bookName_ = null;
+        onChanged();
+      } else {
+        bookNameBuilder_.clear();
+      }
+      bitField0_ = (bitField0_ & ~0x00000001);
+      return this;
+    }
+    /**
+     * <code>.google.protobuf.StringValue bookName = 2;</code>
+     */
+    public com.google.protobuf.StringValue.Builder getBookNameBuilder() {
+      bitField0_ |= 0x00000001;
+      onChanged();
+      return getBookNameFieldBuilder().getBuilder();
+    }
+    /**
+     * <code>.google.protobuf.StringValue bookName = 2;</code>
+     */
+    public com.google.protobuf.StringValueOrBuilder getBookNameOrBuilder() {
+      if (bookNameBuilder_ != null) {
+        return bookNameBuilder_.getMessageOrBuilder();
+      } else {
+        return bookName_ == null ?
+            com.google.protobuf.StringValue.getDefaultInstance() : bookName_;
+      }
+    }
+    /**
+     * <code>.google.protobuf.StringValue bookName = 2;</code>
+     */
+    private com.google.protobuf.SingleFieldBuilderV3<
+        com.google.protobuf.StringValue, com.google.protobuf.StringValue.Builder, com.google.protobuf.StringValueOrBuilder> 
+        getBookNameFieldBuilder() {
+      if (bookNameBuilder_ == null) {
+        bookNameBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+            com.google.protobuf.StringValue, com.google.protobuf.StringValue.Builder, com.google.protobuf.StringValueOrBuilder>(
+                getBookName(),
+                getParentForChildren(),
+                isClean());
+        bookName_ = null;
+      }
+      return bookNameBuilder_;
+    }
+    @java.lang.Override
     public final Builder setUnknownFields(
         final com.google.protobuf.UnknownFieldSet unknownFields) {
-      return super.setUnknownFieldsProto3(unknownFields);
+      return super.setUnknownFields(unknownFields);
     }
 
-    @Override
+    @java.lang.Override
     public final Builder mergeUnknownFields(
         final com.google.protobuf.UnknownFieldSet unknownFields) {
       return super.mergeUnknownFields(unknownFields);
@@ -435,18 +645,18 @@ private static final long serialVersionUID = 0L;
   }
 
   // @@protoc_insertion_point(class_scope:BookRequest)
-  private static final BookRequest DEFAULT_INSTANCE;
+  private static final com.xiaomi.demo.proto.BookRequest DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new BookRequest();
+    DEFAULT_INSTANCE = new com.xiaomi.demo.proto.BookRequest();
   }
 
-  public static BookRequest getDefaultInstance() {
+  public static com.xiaomi.demo.proto.BookRequest getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
   private static final com.google.protobuf.Parser<BookRequest>
       PARSER = new com.google.protobuf.AbstractParser<BookRequest>() {
-    @Override
+    @java.lang.Override
     public BookRequest parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -459,13 +669,13 @@ private static final long serialVersionUID = 0L;
     return PARSER;
   }
 
-  @Override
+  @java.lang.Override
   public com.google.protobuf.Parser<BookRequest> getParserForType() {
     return PARSER;
   }
 
-  @Override
-  public BookRequest getDefaultInstanceForType() {
+  @java.lang.Override
+  public com.xiaomi.demo.proto.BookRequest getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

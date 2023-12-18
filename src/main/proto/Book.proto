@@ -1,6 +1,10 @@
 syntax = "proto3";
 option java_package = "com.xiaomi.demo.proto";
 option java_multiple_files = true;
+option java_generic_services = true;
+
+import "google/protobuf/wrappers.proto";
+
 
 message Book{
   int64 bookId = 1;
@@ -9,15 +13,19 @@ message Book{
 enum Status{
   SUCCESS = 0;
   FAILED = 1;
+  DEAD = 2;
 }
 
+
 message BookRequest{
-  int64 bookId =1;
+  int64 bookId = 1;
+  optional google.protobuf.StringValue bookName = 2;
 }
 
 message BookResponse{
-  repeated Book books =1;
+  repeated Book books = 1;
   Status status = 2;
+  map<string, Book> bookMap = 3;
 }
 
 service BookService{

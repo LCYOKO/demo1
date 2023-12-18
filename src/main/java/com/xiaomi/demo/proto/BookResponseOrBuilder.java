@@ -10,12 +10,12 @@ public interface BookResponseOrBuilder extends
   /**
    * <code>repeated .Book books = 1;</code>
    */
-  java.util.List<Book>
+  java.util.List<com.xiaomi.demo.proto.Book> 
       getBooksList();
   /**
    * <code>repeated .Book books = 1;</code>
    */
-  Book getBooks(int index);
+  com.xiaomi.demo.proto.Book getBooks(int index);
   /**
    * <code>repeated .Book books = 1;</code>
    */
@@ -23,20 +23,56 @@ public interface BookResponseOrBuilder extends
   /**
    * <code>repeated .Book books = 1;</code>
    */
-  java.util.List<? extends BookOrBuilder>
+  java.util.List<? extends com.xiaomi.demo.proto.BookOrBuilder> 
       getBooksOrBuilderList();
   /**
    * <code>repeated .Book books = 1;</code>
    */
-  BookOrBuilder getBooksOrBuilder(
-          int index);
+  com.xiaomi.demo.proto.BookOrBuilder getBooksOrBuilder(
+      int index);
 
   /**
    * <code>.Status status = 2;</code>
+   * @return The enum numeric value on the wire for status.
    */
   int getStatusValue();
   /**
    * <code>.Status status = 2;</code>
+   * @return The status.
    */
-  Status getStatus();
+  com.xiaomi.demo.proto.Status getStatus();
+
+  /**
+   * <code>map&lt;string, .Book&gt; bookMap = 3;</code>
+   */
+  int getBookMapCount();
+  /**
+   * <code>map&lt;string, .Book&gt; bookMap = 3;</code>
+   */
+  boolean containsBookMap(
+      java.lang.String key);
+  /**
+   * Use {@link #getBookMapMap()} instead.
+   */
+  @java.lang.Deprecated
+  java.util.Map<java.lang.String, com.xiaomi.demo.proto.Book>
+  getBookMap();
+  /**
+   * <code>map&lt;string, .Book&gt; bookMap = 3;</code>
+   */
+  java.util.Map<java.lang.String, com.xiaomi.demo.proto.Book>
+  getBookMapMap();
+  /**
+   * <code>map&lt;string, .Book&gt; bookMap = 3;</code>
+   */
+
+  com.xiaomi.demo.proto.Book getBookMapOrDefault(
+      java.lang.String key,
+      com.xiaomi.demo.proto.Book defaultValue);
+  /**
+   * <code>map&lt;string, .Book&gt; bookMap = 3;</code>
+   */
+
+  com.xiaomi.demo.proto.Book getBookMapOrThrow(
+      java.lang.String key);
 }

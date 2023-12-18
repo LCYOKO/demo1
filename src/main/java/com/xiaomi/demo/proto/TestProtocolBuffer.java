@@ -1,23 +1,24 @@
-//package com.xiaomi.demo.proto;
-//
-//import io.grpc.ManagedChannel;
-//import io.grpc.ManagedChannelBuilder;
-//import io.grpc.Server;
-//import io.grpc.ServerBuilder;
-//
-//import java.io.IOException;
-//import java.util.Iterator;
-//
-///**
-// * @Author liuchiyun
-// * @Date 2022/5/28 10:23 下午
-// */
-//public class Test {
-//
-//    public static void main(String[] args) throws IOException, InterruptedException {
-//startClient();
-//    }
-//
+package com.xiaomi.demo.proto;
+
+import com.google.protobuf.StringValue;
+import org.junit.Test;
+
+/**
+ * @Author liuchiyun
+ * @Date 2022/5/28 10:23 下午
+ */
+public class TestProtocolBuffer {
+
+    @Test
+    public void testNewBook() {
+        BookRequest.Builder builder = BookRequest.newBuilder();
+//        builder.setBookId(1L);
+        builder.setBookName((StringValue) null);
+
+        BookRequest request = builder.build();
+        System.out.println(request.getBookName().isInitialized());
+    }
+
 //    public static void startClient(){
 //        ManagedChannel channel = ManagedChannelBuilder
 //                .forAddress("127.0.0.1",9999)
@@ -35,4 +36,4 @@
 //        server.start();
 //        server.awaitTermination();
 //    }
-//}
+}

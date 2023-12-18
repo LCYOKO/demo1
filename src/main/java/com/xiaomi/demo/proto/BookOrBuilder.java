@@ -9,15 +9,18 @@ public interface BookOrBuilder extends
 
   /**
    * <code>int64 bookId = 1;</code>
+   * @return The bookId.
    */
   long getBookId();
 
   /**
    * <code>string bookName = 2;</code>
+   * @return The bookName.
    */
-  String getBookName();
+  java.lang.String getBookName();
   /**
    * <code>string bookName = 2;</code>
+   * @return The bytes for bookName.
    */
   com.google.protobuf.ByteString
       getBookNameBytes();

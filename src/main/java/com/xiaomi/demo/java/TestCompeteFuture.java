@@ -2,6 +2,7 @@ package com.xiaomi.demo.java;
 
 
 import lombok.extern.slf4j.Slf4j;
+import org.junit.Test;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -11,9 +12,9 @@ import java.util.concurrent.ExecutionException;
  * @Date: 2023/12/13
  */
 @Slf4j
-public class Test {
+public class TestCompeteFuture {
 
-    @org.junit.Test
+    @Test
     public void testFuture() throws ExecutionException, InterruptedException {
         CompletableFuture.runAsync(() -> {
             try {
@@ -29,8 +30,6 @@ public class Test {
             log.error("exeception", throwable);
             return null;
         }).get();
-
         CompletableFuture.allOf().join();
-
     }
 }

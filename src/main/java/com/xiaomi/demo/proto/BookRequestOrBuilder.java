@@ -9,6 +9,22 @@ public interface BookRequestOrBuilder extends
 
   /**
    * <code>int64 bookId = 1;</code>
+   * @return The bookId.
    */
   long getBookId();
+
+  /**
+   * <code>.google.protobuf.StringValue bookName = 2;</code>
+   * @return Whether the bookName field is set.
+   */
+  boolean hasBookName();
+  /**
+   * <code>.google.protobuf.StringValue bookName = 2;</code>
+   * @return The bookName.
+   */
+  com.google.protobuf.StringValue getBookName();
+  /**
+   * <code>.google.protobuf.StringValue bookName = 2;</code>
+   */
+  com.google.protobuf.StringValueOrBuilder getBookNameOrBuilder();
 }

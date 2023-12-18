@@ -29,6 +29,11 @@ public final class BookOuterClass {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_BookResponse_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_BookResponse_BookMapEntry_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_BookResponse_BookMapEntry_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -37,45 +42,51 @@ public final class BookOuterClass {
   private static  com.google.protobuf.Descriptors.FileDescriptor
       descriptor;
   static {
-    String[] descriptorData = {
-      "\n\nBook.proto\"(\n\004Book\022\016\n\006bookId\030\001 \001(\003\022\020\n\010" +
-      "bookName\030\002 \001(\t\"\035\n\013BookRequest\022\016\n\006bookId\030" +
-      "\001 \001(\003\"=\n\014BookResponse\022\024\n\005books\030\001 \003(\0132\005.B" +
-      "ook\022\027\n\006status\030\002 \001(\0162\007.Status*!\n\006Status\022\013" +
-      "\n\007SUCCESS\020\000\022\n\n\006FAILED\020\00128\n\013BookService\022)" +
-      "\n\010getBooks\022\014.BookRequest\032\r.BookResponse0" +
-      "\001B\031\n\025com.xiaomi.demo.protoP\001b\006proto3"
+    java.lang.String[] descriptorData = {
+      "\n\nBook.proto\032\036google/protobuf/wrappers.p" +
+      "roto\"(\n\004Book\022\016\n\006bookId\030\001 \001(\003\022\020\n\010bookName" +
+      "\030\002 \001(\t\"_\n\013BookRequest\022\016\n\006bookId\030\001 \001(\003\0223\n" +
+      "\010bookName\030\002 \001(\0132\034.google.protobuf.String" +
+      "ValueH\000\210\001\001B\013\n\t_bookName\"\241\001\n\014BookResponse" +
+      "\022\024\n\005books\030\001 \003(\0132\005.Book\022\027\n\006status\030\002 \001(\0162\007" +
+      ".Status\022+\n\007bookMap\030\003 \003(\0132\032.BookResponse." +
+      "BookMapEntry\0325\n\014BookMapEntry\022\013\n\003key\030\001 \001(" +
+      "\t\022\024\n\005value\030\002 \001(\0132\005.Book:\0028\001*+\n\006Status\022\013\n" +
+      "\007SUCCESS\020\000\022\n\n\006FAILED\020\001\022\010\n\004DEAD\020\00228\n\013Book" +
+      "Service\022)\n\010getBooks\022\014.BookRequest\032\r.Book" +
+      "Response0\001B\034\n\025com.xiaomi.demo.protoP\001\210\001\001" +
+      "b\006proto3"
     };
-    com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
-    com.google.protobuf.Descriptors.FileDescriptor
+    descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
-        }, assigner);
+          com.google.protobuf.WrappersProto.getDescriptor(),
+        });
     internal_static_Book_descriptor =
       getDescriptor().getMessageTypes().get(0);
     internal_static_Book_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Book_descriptor,
-        new String[] { "BookId", "BookName", });
+        new java.lang.String[] { "BookId", "BookName", });
     internal_static_BookRequest_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_BookRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_BookRequest_descriptor,
-        new String[] { "BookId", });
+        new java.lang.String[] { "BookId", "BookName", "BookName", });
     internal_static_BookResponse_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_BookResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_BookResponse_descriptor,
-        new String[] { "Books", "Status", });
+        new java.lang.String[] { "Books", "Status", "BookMap", });
+    internal_static_BookResponse_BookMapEntry_descriptor =
+      internal_static_BookResponse_descriptor.getNestedTypes().get(0);
+    internal_static_BookResponse_BookMapEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_BookResponse_BookMapEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
+    com.google.protobuf.WrappersProto.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)
