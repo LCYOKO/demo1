@@ -8,7 +8,6 @@ enum BizCode{
 
 }
 
-
 exception BizException{
  1: string msg,
  2: BizCode code

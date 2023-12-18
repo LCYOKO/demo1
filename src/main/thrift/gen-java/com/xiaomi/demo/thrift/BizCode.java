@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.HashMap;
 import org.apache.thrift.TEnum;
 
-public enum BizCode implements TEnum {
+public enum BizCode implements org.apache.thrift.TEnum {
   SUCCESS(200),
   INTERNAL_ERROR(500);
 

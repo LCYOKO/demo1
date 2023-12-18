@@ -341,11 +341,11 @@ public class Book implements org.apache.thrift.TBase<Book, Book._Fields>, java.i
     return _Fields.findByThriftId(fieldId);
   }
 
-  public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
+  public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
     schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
   }
 
-  public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
+  public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
     schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
   }
 
@@ -369,7 +369,7 @@ public class Book implements org.apache.thrift.TBase<Book, Book._Fields>, java.i
     return sb.toString();
   }
 
-  public void validate() throws TException {
+  public void validate() throws org.apache.thrift.TException {
     // check for required fields
     // alas, we cannot check 'bookId' because it's a primitive and you chose the non-beans generator.
     // check for sub-struct validity
@@ -381,7 +381,7 @@ public class Book implements org.apache.thrift.TBase<Book, Book._Fields>, java.i
   private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
     try {
       write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-    } catch (TException te) {
+    } catch (org.apache.thrift.TException te) {
       throw new java.io.IOException(te);
     }
   }
@@ -391,7 +391,7 @@ public class Book implements org.apache.thrift.TBase<Book, Book._Fields>, java.i
       // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
       __isset_bitfield = 0;
       read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-    } catch (TException te) {
+    } catch (org.apache.thrift.TException te) {
       throw new java.io.IOException(te);
     }
   }
@@ -404,7 +404,7 @@ public class Book implements org.apache.thrift.TBase<Book, Book._Fields>, java.i
 
   private static class BookStandardScheme extends StandardScheme<Book> {
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot, Book struct) throws TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot, Book struct) throws org.apache.thrift.TException {
       org.apache.thrift.protocol.TField schemeField;
       iprot.readStructBegin();
       while (true)
@@ -440,12 +440,12 @@ public class Book implements org.apache.thrift.TBase<Book, Book._Fields>, java.i
 
       // check for required fields of primitive type, which can't be checked in the validate method
       if (!struct.isSetBookId()) {
-        throw new TProtocolException("Required field 'bookId' was not found in serialized data! Struct: " + toString());
+        throw new org.apache.thrift.protocol.TProtocolException("Required field 'bookId' was not found in serialized data! Struct: " + toString());
       }
       struct.validate();
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot, Book struct) throws TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot, Book struct) throws org.apache.thrift.TException {
       struct.validate();
 
       oprot.writeStructBegin(STRUCT_DESC);
@@ -472,7 +472,7 @@ public class Book implements org.apache.thrift.TBase<Book, Book._Fields>, java.i
   private static class BookTupleScheme extends TupleScheme<Book> {
 
     @Override
-    public void write(org.apache.thrift.protocol.TProtocol prot, Book struct) throws TException {
+    public void write(org.apache.thrift.protocol.TProtocol prot, Book struct) throws org.apache.thrift.TException {
       TTupleProtocol oprot = (TTupleProtocol) prot;
       oprot.writeI32(struct.bookId);
       BitSet optionals = new BitSet();
@@ -486,7 +486,7 @@ public class Book implements org.apache.thrift.TBase<Book, Book._Fields>, java.i
     }
 
     @Override
-    public void read(org.apache.thrift.protocol.TProtocol prot, Book struct) throws TException {
+    public void read(org.apache.thrift.protocol.TProtocol prot, Book struct) throws org.apache.thrift.TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
       struct.bookId = iprot.readI32();
       struct.setBookIdIsSet(true);

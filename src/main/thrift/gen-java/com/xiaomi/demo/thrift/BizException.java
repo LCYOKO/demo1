@@ -355,11 +355,11 @@ public class BizException extends TException implements org.apache.thrift.TBase<
     return _Fields.findByThriftId(fieldId);
   }
 
-  public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
+  public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
     schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
   }
 
-  public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
+  public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
     schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
   }
 
@@ -387,7 +387,7 @@ public class BizException extends TException implements org.apache.thrift.TBase<
     return sb.toString();
   }
 
-  public void validate() throws TException {
+  public void validate() throws org.apache.thrift.TException {
     // check for required fields
     // check for sub-struct validity
   }
@@ -395,7 +395,7 @@ public class BizException extends TException implements org.apache.thrift.TBase<
   private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
     try {
       write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-    } catch (TException te) {
+    } catch (org.apache.thrift.TException te) {
       throw new java.io.IOException(te);
     }
   }
@@ -403,7 +403,7 @@ public class BizException extends TException implements org.apache.thrift.TBase<
   private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
     try {
       read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-    } catch (TException te) {
+    } catch (org.apache.thrift.TException te) {
       throw new java.io.IOException(te);
     }
   }
@@ -416,7 +416,7 @@ public class BizException extends TException implements org.apache.thrift.TBase<
 
   private static class BizExceptionStandardScheme extends StandardScheme<BizException> {
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot, BizException struct) throws TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot, BizException struct) throws org.apache.thrift.TException {
       org.apache.thrift.protocol.TField schemeField;
       iprot.readStructBegin();
       while (true)
@@ -436,7 +436,7 @@ public class BizException extends TException implements org.apache.thrift.TBase<
             break;
           case 2: // CODE
             if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
-              struct.code = BizCode.findByValue(iprot.readI32());
+              struct.code = com.xiaomi.demo.thrift.BizCode.findByValue(iprot.readI32());
               struct.setCodeIsSet(true);
             } else { 
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
@@ -453,7 +453,7 @@ public class BizException extends TException implements org.apache.thrift.TBase<
       struct.validate();
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot, BizException struct) throws TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot, BizException struct) throws org.apache.thrift.TException {
       struct.validate();
 
       oprot.writeStructBegin(STRUCT_DESC);
@@ -482,7 +482,7 @@ public class BizException extends TException implements org.apache.thrift.TBase<
   private static class BizExceptionTupleScheme extends TupleScheme<BizException> {
 
     @Override
-    public void write(org.apache.thrift.protocol.TProtocol prot, BizException struct) throws TException {
+    public void write(org.apache.thrift.protocol.TProtocol prot, BizException struct) throws org.apache.thrift.TException {
       TTupleProtocol oprot = (TTupleProtocol) prot;
       BitSet optionals = new BitSet();
       if (struct.isSetMsg()) {
@@ -501,7 +501,7 @@ public class BizException extends TException implements org.apache.thrift.TBase<
     }
 
     @Override
-    public void read(org.apache.thrift.protocol.TProtocol prot, BizException struct) throws TException {
+    public void read(org.apache.thrift.protocol.TProtocol prot, BizException struct) throws org.apache.thrift.TException {
       TTupleProtocol iprot = (TTupleProtocol) prot;
       BitSet incoming = iprot.readBitSet(2);
       if (incoming.get(0)) {
@@ -509,7 +509,7 @@ public class BizException extends TException implements org.apache.thrift.TBase<
         struct.setMsgIsSet(true);
       }
       if (incoming.get(1)) {
-        struct.code = BizCode.findByValue(iprot.readI32());
+        struct.code = com.xiaomi.demo.thrift.BizCode.findByValue(iprot.readI32());
         struct.setCodeIsSet(true);
       }
     }

@@ -11,13 +11,14 @@ import java.util.List;
  * @Date 2022/5/28 8:49 下午
  */
 public class MyBookServiceAsync implements BookService.AsyncIface {
+
     @Override
-    public void getBookInfo(int bookId, AsyncMethodCallback<BookInfo> resultHandler) throws TException {
-       resultHandler.onComplete(BookUtil.generateBookInfo());
+    public void getBookInfo(int bookId, AsyncMethodCallback resultHandler) throws TException {
+        resultHandler.onComplete(BookUtil.generateBookInfo());
     }
 
     @Override
-    public void getAllBook(AsyncMethodCallback<List<Book>> resultHandler) throws TException {
-         resultHandler.onComplete(Lists.newArrayList(BookUtil.generateBook()));
+    public void getAllBook(AsyncMethodCallback resultHandler) throws TException {
+        resultHandler.onComplete(Lists.newArrayList(BookUtil.generateBook()));
     }
 }
