@@ -1,6 +1,5 @@
 package com.xiaomi.demo.proto;
 
-import com.google.protobuf.StringValue;
 import org.junit.Test;
 
 /**
@@ -12,11 +11,9 @@ public class TestProtocolBuffer {
     @Test
     public void testNewBook() {
         BookRequest.Builder builder = BookRequest.newBuilder();
-//        builder.setBookId(1L);
-        builder.setBookName((StringValue) null);
-
+        builder.setBookId(1L);
         BookRequest request = builder.build();
-        System.out.println(request.getBookName().isInitialized());
+        System.out.println(request.toString());
     }
 
 //    public static void startClient(){

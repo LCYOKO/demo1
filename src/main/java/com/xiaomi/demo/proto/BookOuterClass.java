@@ -52,10 +52,13 @@ public final class BookOuterClass {
       ".Status\022+\n\007bookMap\030\003 \003(\0132\032.BookResponse." +
       "BookMapEntry\0325\n\014BookMapEntry\022\013\n\003key\030\001 \001(" +
       "\t\022\024\n\005value\030\002 \001(\0132\005.Book:\0028\001*+\n\006Status\022\013\n" +
-      "\007SUCCESS\020\000\022\n\n\006FAILED\020\001\022\010\n\004DEAD\020\00228\n\013Book" +
-      "Service\022)\n\010getBooks\022\014.BookRequest\032\r.Book" +
-      "Response0\001B\034\n\025com.xiaomi.demo.protoP\001\210\001\001" +
-      "b\006proto3"
+      "\007SUCCESS\020\000\022\n\n\006FAILED\020\001\022\010\n\004DEAD\020\0022\275\001\n\013Boo" +
+      "kService\022(\n\tgetBooks1\022\014.BookRequest\032\r.Bo" +
+      "okResponse\022*\n\tgetBooks2\022\014.BookRequest\032\r." +
+      "BookResponse0\001\022*\n\tgetBooks3\022\014.BookReques" +
+      "t\032\r.BookResponse(\001\022,\n\tgetBooks4\022\014.BookRe" +
+      "quest\032\r.BookResponse(\0010\001B\031\n\025com.xiaomi.d" +
+      "emo.protoP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

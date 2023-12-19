@@ -1,10 +1,7 @@
 syntax = "proto3";
 option java_package = "com.xiaomi.demo.proto";
 option java_multiple_files = true;
-option java_generic_services = true;
-
 import "google/protobuf/wrappers.proto";
-
 
 message Book{
   int64 bookId = 1;
@@ -29,5 +26,10 @@ message BookResponse{
 }
 
 service BookService{
-  rpc getBooks(BookRequest) returns(stream BookResponse);
+  rpc getBooks1(BookRequest) returns(BookResponse);
+  rpc getBooks2(BookRequest) returns(stream BookResponse);
+  rpc getBooks3(stream BookRequest) returns(BookResponse);
+  rpc getBooks4(stream BookRequest) returns(stream BookResponse);
+
+
 }
