@@ -80,7 +80,7 @@ public class BookServiceImpl extends BookServiceGrpc.BookServiceImplBase {
             public void onCompleted() {
 
             }
-        }
+        };
     }
 
 }

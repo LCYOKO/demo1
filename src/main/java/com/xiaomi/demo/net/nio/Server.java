@@ -1,5 +1,7 @@
 package com.xiaomi.demo.net.nio;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
@@ -17,11 +19,11 @@ import java.util.Iterator;
  * @Author：liuchiyun
  * @Date: 2021/5/7
  */
+@Slf4j
 public class Server {
     public static void main(String[] args) throws IOException {
         server();
     }
-
 
     private static void server() throws IOException {
         Selector selector = Selector.open();
