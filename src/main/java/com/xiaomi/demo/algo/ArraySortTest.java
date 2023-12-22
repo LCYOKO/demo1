@@ -5,4 +5,7 @@ package com.xiaomi.demo.algo;
  * @Date 2022/4/7 11:07 下午
  */
 public class ArraySortTest {
+    public void testMergeSort(){
+
+    }
 }
