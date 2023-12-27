@@ -1,13 +1,9 @@
 package com.xiaomi.demo.algo;
 
-import com.github.benmanes.caffeine.cache.Caffeine;
-import com.github.benmanes.caffeine.cache.LoadingCache;
 import lombok.extern.slf4j.Slf4j;
-import org.checkerframework.checker.nullness.qual.NonNull;
-import org.checkerframework.checker.nullness.qual.Nullable;
 import org.junit.Test;
 
-import java.util.concurrent.TimeUnit;
+import java.util.Arrays;
 
 /**
  * @Author liuchiyun
@@ -15,22 +11,29 @@ import java.util.concurrent.TimeUnit;
  */
 @Slf4j
 public class ArraySortTest {
+
     @Test
-    public void testMergeSort() throws InterruptedException {
-        LoadingCache<String, String> cache = Caffeine.newBuilder()
-                .refreshAfterWrite(1, TimeUnit.SECONDS)
-                .build(new com.github.benmanes.caffeine.cache.CacheLoader<String, String>() {
-                    @Override
-                    public @Nullable String load(@NonNull String key) throws Exception {
-                        return loadFunc();
-                    }
-                });
-
-
-        log.info("getCache:{}", cache.get("test"));
-        Thread.sleep(10000);
-        log.info("getCache:{}", cache.get("test"));
+    public void testArraySort() {
+        Integer[] arr = new Integer[]{10, 8, 6, 1, 2, 3, 4, 5, 7};
+        Arrays.sort(arr, (o1, o2) -> {
+            return o2 - o1;
+        });
+        System.out.println(Arrays.toString(arr));
     }
+
+
+    @Test
+    public void testMergeSort() {
+        int[] arr = new int[]{10, 8, 6, 1, 2, 3, 4, 5, 7};
+
+    }
+
+//    private int[] mergeSort(int[] arr, int l, int r) {
+//        if (l == r) {
+//
+//        }
+//
+//    }
 
     private String loadFunc() {
         log.info("execute loadFunc");
