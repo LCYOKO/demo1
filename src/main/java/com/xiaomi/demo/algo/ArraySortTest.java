@@ -18,6 +18,7 @@ public class ArraySortTest {
         Arrays.sort(arr, (o1, o2) -> {
             return o2 - o1;
         });
+        // 降序排列
         System.out.println(Arrays.toString(arr));
     }
 
@@ -28,12 +29,19 @@ public class ArraySortTest {
 
     }
 
-//    private int[] mergeSort(int[] arr, int l, int r) {
-//        if (l == r) {
-//
-//        }
-//
-//    }
+    private int[] mergeSort(int[] arr, int l, int r) {
+        if (l >= r) {
+            return arr;
+        }
+        int mid = (r - l) / 2 + l;
+        int[] leftArray = mergeSort(arr, l, mid);
+        int[] rightArray = mergeSort(arr, mid + 1, r);
+        return merge()
+    }
+
+    private int[] merge(int[] leftArray,) {
+
+    }
 
     private String loadFunc() {
         log.info("execute loadFunc");
