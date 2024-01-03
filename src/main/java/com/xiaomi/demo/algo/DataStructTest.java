@@ -20,6 +20,8 @@ public class DataStructTest {
         System.out.println(queue);
     }
 
-    public void testQueue() {
+    @Test
+    public void test1() {
+        System.out.println(7^5);
     }
 }

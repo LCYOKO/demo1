@@ -29,19 +29,19 @@ public class ArraySortTest {
 
     }
 
-    private int[] mergeSort(int[] arr, int l, int r) {
-        if (l >= r) {
-            return arr;
-        }
-        int mid = (r - l) / 2 + l;
-        int[] leftArray = mergeSort(arr, l, mid);
-        int[] rightArray = mergeSort(arr, mid + 1, r);
-        return merge()
-    }
-
-    private int[] merge(int[] leftArray,) {
-
-    }
+//    private int[] mergeSort(int[] arr, int l, int r) {
+//        if (l >= r) {
+//            return arr;
+//        }
+//        int mid = (r - l) / 2 + l;
+//        int[] leftArray = mergeSort(arr, l, mid);
+//        int[] rightArray = mergeSort(arr, mid + 1, r);
+////        return merge();
+//    }
+//
+//    private int[] merge(int[] leftArray,) {
+//
+//    }
 
     private String loadFunc() {
         log.info("execute loadFunc");
