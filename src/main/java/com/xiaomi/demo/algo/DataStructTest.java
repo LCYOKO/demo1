@@ -21,7 +21,12 @@ public class DataStructTest {
     }
 
     @Test
-    public void test1() {
-        System.out.println(7^5);
+    public void testMap(){
+
+    }
+
+    @Test
+    public void testCopyList(){
+
     }
 }
