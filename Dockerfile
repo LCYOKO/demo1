@@ -1,5 +1,5 @@
-FROM openjdk:8u312-jre-slim-buster
-COPY target/demo-*.jar demo.jar
+FROM registry.cn-hangzhou.aliyuncs.com/yhdja/openjdk:8-jre-alpine
+ENV JAVA_OPTS="-javaagent:/agent/skywalking-agent.jar -Xms128m -Xmx256m -Djava.security.egd=file:/dev/./urandom"
+COPY target/demo-*.jar app.jar
 EXPOSE 8777
-ENTRYPOINT ["java", "-jar", "demo.jar"]
-CMD []
+ENTRYPOINT ["sh","-c","java $JAVA_OPTS -jar app.jar $PARAMS"]
