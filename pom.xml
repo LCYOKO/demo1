@@ -11,7 +11,14 @@
 
     <groupId>com.xiaomi</groupId>
     <artifactId>demo</artifactId>
-    <version>1.0</version>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>gateway</module>
+        <module>account</module>
+        <module>order</module>
+    </modules>
 
     <properties>
         <protobuf.version>3.15.0</protobuf.version>
@@ -408,7 +415,8 @@
                 <artifactId>protobuf-maven-plugin</artifactId>
                 <version>0.6.1</version>
                 <configuration>
-                    <protocArtifact>com.google.protobuf:protoc:${protobuf.version}:exe:${os.detected.classifier}</protocArtifact>
+                    <protocArtifact>com.google.protobuf:protoc:${protobuf.version}:exe:${os.detected.classifier}
+                    </protocArtifact>
                     <pluginId>grpc-java</pluginId>
                     <pluginArtifact>io.grpc:protoc-gen-grpc-java:1.51.0:exe:${os.detected.classifier}</pluginArtifact>
                     <!--                    <protocExecutable>/Users/chiyunliu/Downloads/protoc-3.6.0-osx-x86_64/bin/protoc</protocExecutable>-->

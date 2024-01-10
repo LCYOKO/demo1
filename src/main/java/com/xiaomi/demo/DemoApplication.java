@@ -19,7 +19,6 @@ import java.util.Arrays;
 //@NacosPropertySource(dataId = "test", autoRefreshed = true)
 public class DemoApplication {
     public static void main(String[] args) {
-        System.out.println(Arrays.toString(args));
         SpringApplication.run(DemoApplication.class, args);
     }
 }
