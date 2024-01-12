@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ngx-deploy
+  name: ngx-deploy
+spec:
+  replicas: 2 #副本数
+  selector:
+    matchLabels: # 期望管控的pod的lable
+      app: ngx-deploy-pod
+  template:
+    metadata:
+      labels:
+        app: ngx-deploy-pod
+    spec:
+      containers:
+        - name: ngx-dep
+          image: nginx:alpine
+          ports:
+            - containerPort: 80
+              name: http
+              protocol: TCP

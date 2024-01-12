@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: cron-pod
+  labels:
+    app: cron-pod
+spec:
+  backoffLimit: 4
+  parallelism: 1
+  completions: 1
+  template:
+    spec:
+      containers:
+      - name: cron-pod
+        image: alpine
+        command: ["sh", "-c", "echo Hello World!"]
+        imagePullPolicy: IfNotPresent
+      restartPolicy: Never

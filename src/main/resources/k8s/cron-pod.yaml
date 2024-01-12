@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: echo-cj
+spec:
+  schedule: '*/1 * * * *'
+  concurrencyPolicy: Replace
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: echo-cj
+              image: alpine
+              command: [ "sh", "-c", "echo Hello World!" ]
+              imagePullPolicy: IfNotPresent
+          restartPolicy: Never
+
