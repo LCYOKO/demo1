@@ -18,6 +18,9 @@
         <module>gateway</module>
         <module>account</module>
         <module>order</module>
+        <module>study</module>
+        <module>auth</module>
+        <module>task</module>
     </modules>
 
     <properties>
@@ -364,29 +367,6 @@
             <groupId>com.alibaba</groupId>
             <artifactId>easyexcel</artifactId>
             <version>3.1.1</version>
-        </dependency>
-
-        <!-- pdf-->
-        <dependency>
-            <groupId>aspose</groupId>
-            <artifactId>aspose-cells</artifactId>
-            <version>20.7.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/resources/lib/aspose-cells-20.7-crack.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>aspose</groupId>
-            <artifactId>aspose-slides</artifactId>
-            <version>15.9.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/resources/lib/aspose.slides-15.9.0.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>aspose</groupId>
-            <artifactId>aspose-words</artifactId>
-            <version>20.12.0</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/src/main/resources/lib/aspose-words-20.12-jdk17-cracked.jar</systemPath>
         </dependency>
         <!--   Jol     -->
         <dependency>

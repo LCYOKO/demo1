@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>demo</artifactId>
+        <groupId>com.xiaomi</groupId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>study</artifactId>
+    <version>1.0.0</version>
+
+    <dependencies>
+        <!-- pdf-->
+        <dependency>
+            <groupId>aspose</groupId>
+            <artifactId>aspose-cells</artifactId>
+            <version>20.7.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/lib/aspose-cells-20.7-crack.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>aspose</groupId>
+            <artifactId>aspose-slides</artifactId>
+            <version>15.9.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/lib/aspose.slides-15.9.0.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>aspose</groupId>
+            <artifactId>aspose-words</artifactId>
+            <version>20.12.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/lib/aspose-words-20.12-jdk17-cracked.jar</systemPath>
+        </dependency>
+    </dependencies>
+</project>
