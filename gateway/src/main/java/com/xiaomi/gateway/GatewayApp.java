@@ -11,9 +11,9 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
  * @Date: 2024/1/10
  */
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, RabbitAutoConfiguration.class, RedisAutoConfiguration.class})
-public class App {
+public class GatewayApp {
     public static void main(String[] args) {
-        SpringApplication.run(App.class, args);
+        SpringApplication.run(GatewayApp.class, args);
 
     }
 }

@@ -21,6 +21,7 @@
         <module>study</module>
         <module>auth</module>
         <module>task</module>
+        <module>common</module>
     </modules>
 
     <properties>
