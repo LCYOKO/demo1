@@ -27,8 +27,14 @@ public class JsonResult<T> {
 
     public static <T> JsonResult<T> ok(T data) {
         return new JsonResult<>(HttpCode.OK.getCode(), HttpCode.OK.getMsg(), data);
-
     }
 
+    public static JsonResult<Void> error() {
+        return new JsonResult<>(HttpCode.ERROR.getCode(), HttpCode.ERROR.getMsg(), null);
+    }
+
+    public static <T> JsonResult<T> error(T data) {
+        return new JsonResult<T>(HttpCode.ERROR.getCode(), HttpCode.ERROR.getMsg(), data);
+    }
 
 }

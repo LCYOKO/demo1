@@ -19,11 +19,22 @@
             <artifactId>sa-token-spring-boot-starter</artifactId>
             <version>1.37.0</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.apache.shiro</groupId>-->
-<!--            <artifactId>shiro-spring-boot-starter</artifactId>-->
-<!--            <version>1.11.0</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>cn.dev33</groupId>
+            <artifactId>sa-token-redis-jackson</artifactId>
+            <version>1.37.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.auth0/java-jwt -->
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>3.19.2</version>
+        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>org.apache.shiro</groupId>-->
+        <!--            <artifactId>shiro-spring-boot-starter</artifactId>-->
+        <!--            <version>1.11.0</version>-->
+        <!--        </dependency>-->
         <dependency>
             <groupId>com.xiaomi</groupId>
             <artifactId>common</artifactId>

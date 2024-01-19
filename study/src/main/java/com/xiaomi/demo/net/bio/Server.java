@@ -1,11 +1,14 @@
 package com.xiaomi.demo.net.bio;
 
+import cn.hutool.core.io.IoUtil;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.stream.Collectors;
 
 /**
  * @Author：liuchiyun
@@ -19,7 +22,9 @@ public class Server {
             Socket socket = serverSocket.accept();
             System.out.println(socket);
             new Thread(() -> {
-                try (PrintWriter writer = new PrintWriter(socket.getOutputStream());) {
+                try (PrintWriter writer = new PrintWriter(socket.getOutputStream());
+                     BufferedReader reader = IoUtil.getUtf8Reader(socket.getInputStream());) {
+                    System.out.println(reader.lines().collect(Collectors.joining()));
                     writer.println("hello world");
                     writer.flush();
                 } catch (Exception exception) {

@@ -1,0 +1,10 @@
+###
+POST http://localhost:8081/auth-sa/login
+Content-Type: application/json
+
+{"username":"lcy","password":"123456"}
+
+### isLogin
+GET http://localhost:8081/auth-sa/is-login
+Accept: application/json
+satoken: ee353a44-7a81-4fad-83b3-acecf54b1681

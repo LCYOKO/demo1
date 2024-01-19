@@ -11,8 +11,8 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class MetricConfig {
-    @Bean
-    public TimedAspect timedAspect(MeterRegistry meterRegistry) {
-        return new TimedAspect(meterRegistry);
-    }
+//    @Bean
+//    public TimedAspect timedAspect(MeterRegistry meterRegistry) {
+//        return new TimedAspect(meterRegistry);
+//    }
 }
