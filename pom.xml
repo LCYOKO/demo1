@@ -22,6 +22,8 @@
         <module>auth</module>
         <module>task</module>
         <module>common</module>
+        <module>webserver-core</module>
+        <module>webserver-example</module>
     </modules>
 
     <properties>
