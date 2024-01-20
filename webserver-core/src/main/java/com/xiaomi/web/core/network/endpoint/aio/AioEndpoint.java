@@ -11,10 +11,8 @@ import java.net.InetSocketAddress;
 import java.nio.channels.AsynchronousChannelGroup;
 import java.nio.channels.AsynchronousServerSocketChannel;
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
-/**
- * Created by SinjinSong on 2017/7/20.
- */
 @Slf4j
 public class AioEndpoint extends Endpoint {
 
@@ -29,11 +27,11 @@ public class AioEndpoint extends Endpoint {
 
     private void initServerSocket(int port) throws IOException {
         ThreadFactory threadFactory = new ThreadFactory() {
-            private int count;
+            private AtomicInteger count;
 
             @Override
             public Thread newThread(Runnable r) {
-                return new Thread(r, "Endpoint Pool-" + count++);
+                return new Thread(r, "Endpoint Pool-" + count.incrementAndGet());
             }
         };
         int processors = Runtime.getRuntime().availableProcessors();
@@ -63,10 +61,9 @@ public class AioEndpoint extends Endpoint {
         try {
             initDispatcherServlet();
             initServerSocket(port);
-            log.info("服务器启动");
+            log.info("服务器启动. port:{}", port);
         } catch (Exception e) {
-            e.printStackTrace();
-            log.info("初始化服务器失败");
+            log.info("初始化服务器失败", e);
             close();
         }
     }
@@ -77,16 +74,13 @@ public class AioEndpoint extends Endpoint {
         try {
             server.close();
         } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
     /**
      * 执行读已就绪的客户端连接的请求
-     * @param socketWrapper
      */
     public void execute(AioSocketWrapper socketWrapper) {
         aioDispatcher.doDispatch(socketWrapper);
     }
-
 }

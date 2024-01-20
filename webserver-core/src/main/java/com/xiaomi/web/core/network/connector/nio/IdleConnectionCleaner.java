@@ -22,12 +22,7 @@ public class IdleConnectionCleaner implements Runnable {
     }
 
     public void start() {
-        ThreadFactory threadFactory = new ThreadFactory() {
-            @Override
-            public Thread newThread(Runnable r) {
-                return new Thread(r, "IdleConnectionCleaner");
-            }
-        };
+        ThreadFactory threadFactory = r -> new Thread(r, "IdleConnectionCleaner");
         executor = Executors.newSingleThreadScheduledExecutor(threadFactory);
         executor.scheduleWithFixedDelay(this, 0, 5, TimeUnit.SECONDS);
     }

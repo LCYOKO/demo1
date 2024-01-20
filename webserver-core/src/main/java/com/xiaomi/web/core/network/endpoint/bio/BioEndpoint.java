@@ -8,10 +8,9 @@ import lombok.extern.slf4j.Slf4j;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
- * @author sinjinsong
- * @date 2018/5/4
  * BIO网络传输模块的入口
  */
 @Slf4j
@@ -19,22 +18,22 @@ public class BioEndpoint extends Endpoint {
     private ServerSocket server;
     private BioAcceptor acceptor;
     private BioDispatcher dispatcher;
-    private volatile boolean isRunning = true;
-    
+    private final AtomicBoolean isRunning = new AtomicBoolean(false);
+
     @Override
     public void start(int port) {
         try {
             dispatcher = new BioDispatcher();
             server = new ServerSocket(port);
+            isRunning.compareAndSet(false, true);
             initAcceptor();
-            log.info("服务器启动");
+            log.info("server start at port:{} success", port);
         } catch (Exception e) {
-            e.printStackTrace();
-            log.info("初始化服务器失败");
+            log.error("server start at port:{} failed", port);
             close();
         }
     }
-    
+
     private void initAcceptor() {
         acceptor = new BioAcceptor(this, dispatcher);
         Thread t = new Thread(acceptor, "bio-acceptor");
@@ -44,13 +43,16 @@ public class BioEndpoint extends Endpoint {
 
     @Override
     public void close() {
-        isRunning = false;
+        if (!isRunning()) {
+            return;
+        }
         dispatcher.shutdown();
         try {
             server.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            log.error("close endpoint failed.", ex);
         }
+        isRunning.compareAndSet(true, false);
     }
 
     public Socket accept() throws IOException {
@@ -58,6 +60,6 @@ public class BioEndpoint extends Endpoint {
     }
 
     public boolean isRunning() {
-        return isRunning;
+        return isRunning.get();
     }
 }

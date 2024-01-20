@@ -1,7 +1,7 @@
 package com.xiaomi.web.servlet;
 
 import com.xiaomi.service.UserService;
-import com.xiaomi.web.core.exception.base.ServletException;
+import com.xiaomi.web.core.exception.ServletException;
 import com.xiaomi.web.core.request.Request;
 import com.xiaomi.web.core.response.Response;
 import com.xiaomi.web.core.servlet.impl.HttpServlet;

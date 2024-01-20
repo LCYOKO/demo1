@@ -2,6 +2,7 @@ package com.xiaomi.web.core;
 
 
 import com.xiaomi.web.core.network.endpoint.Endpoint;
+import com.xiaomi.web.core.network.endpoint.EndpointType;
 import com.xiaomi.web.core.util.PropertyUtil;
 
 import java.util.Scanner;
@@ -21,11 +22,8 @@ public class BootStrap {
         if(port == null) {
             throw new IllegalArgumentException("server.port 不存在");
         }
-        String connector = PropertyUtil.getProperty("server.connector");
-        if(connector == null || (!connector.equalsIgnoreCase("bio") && !connector.equalsIgnoreCase("nio") && !connector.equalsIgnoreCase("aio"))) {
-            throw new IllegalArgumentException("server.network 不存在或不符合规范");
-        }
-        Endpoint server = Endpoint.getInstance(connector);
+        EndpointType type = EndpointType.getOrThrow(PropertyUtil.getProperty("server.connector"));
+        Endpoint server = Endpoint.getInstance(type);
         server.start(Integer.parseInt(port));
         Scanner scanner = new Scanner(System.in);
         String order;

@@ -1,9 +1,8 @@
-package com.xiaomi.web.core.response;
-
+package com.xiaomi.demo.net;
 
 import com.xiaomi.web.core.cookie.Cookie;
 import com.xiaomi.web.core.enumeration.HttpStatus;
-import com.xiaomi.web.core.network.handler.AbstractRequestHandler;
+import com.xiaomi.web.core.response.Header;
 import lombok.extern.slf4j.Slf4j;
 
 import java.nio.ByteBuffer;
@@ -17,7 +16,8 @@ import static com.xiaomi.web.core.constant.CharsetProperties.UTF_8_CHARSET;
 import static com.xiaomi.web.core.constant.ContextConstant.DEFAULT_CONTENT_TYPE;
 
 /**
- * Created by SinjinSong on 2017/7/20.
+ * @Author: liuchiyun
+ * @Date: 2024/1/20
  */
 @Slf4j
 public class Response {
@@ -27,7 +27,7 @@ public class Response {
     private HttpStatus status = HttpStatus.OK;
     private String contentType = DEFAULT_CONTENT_TYPE;
     private byte[] body = new byte[0];
-    private AbstractRequestHandler requestHandler;
+    private com.xiaomi.web.core.network.handler.AbstractRequestHandler requestHandler;
 
     public Response() {
         this.headerAppender = new StringBuilder();
@@ -111,23 +111,22 @@ public class Response {
         return response;
     }
 
-    /**
-     * 重定向，注意重定向后会立即写数据至socket中
-     */
-    public void sendRedirect(String url) {
-        log.info("重定向至{}", url);
-        addHeader(new Header("Location", url));
-        setStatus(HttpStatus.MOVED_TEMPORARILY);
-        buildResponse();
-        // 刷新至客户端
-        requestHandler.flushResponse();
-    }
-
-    /**
-     * 用于调用不同RequestHandler的写刷新（将response写入到客户端）
-     *
-     */
-    public void setRequestHandler(AbstractRequestHandler requestHandler) {
-        this.requestHandler = requestHandler;
-    }
+//    /**
+//     * 重定向，注意重定向后会立即写数据至socket中
+//     */
+//    public void sendRedirect(String url) {
+//        log.info("重定向至{}", url);
+//        addHeader(new Header("Location", url));
+//        setStatus(HttpStatus.MOVED_TEMPORARILY);
+//        buildResponse();
+//        // 刷新至客户端
+//        requestHandler.flushResponse();
+//    }
+//
+//    /**
+//     * 用于调用不同RequestHandler的写刷新（将response写入到客户端）
+//     */
+//    public void setRequestHandler(AbstractRequestHandler requestHandler) {
+//        this.requestHandler = requestHandler;
+//    }
 }

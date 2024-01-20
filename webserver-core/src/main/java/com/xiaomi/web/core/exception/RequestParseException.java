@@ -2,16 +2,21 @@ package com.xiaomi.web.core.exception;
 
 
 import com.xiaomi.web.core.enumeration.HttpStatus;
-import com.xiaomi.web.core.exception.base.ServletException;
 
 /**
- * Created by SinjinSong on 2017/7/20.
- * 请求解析出国
+ * @author liuchiyun
  */
 public class RequestParseException extends ServletException {
-    private static final HttpStatus status = HttpStatus.BAD_REQUEST;
 
     public RequestParseException() {
-        super(status);
+        super(HttpStatus.BAD_REQUEST);
+    }
+
+    public RequestParseException(String message) {
+        super(HttpStatus.BAD_REQUEST, message);
+    }
+
+    public RequestParseException(String message, Throwable throwable) {
+        super(HttpStatus.BAD_REQUEST, message, throwable);
     }
 }

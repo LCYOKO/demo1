@@ -7,10 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 import java.nio.channels.AsynchronousSocketChannel;
 import java.nio.channels.CompletionHandler;
 
-/**
- * @author sinjinsong
- * @date 2018/5/4
- */
 @Slf4j
 public class AioAcceptor implements CompletionHandler<AsynchronousSocketChannel, Void> {
     private AioEndpoint aioEndpoint;
@@ -27,7 +23,6 @@ public class AioAcceptor implements CompletionHandler<AsynchronousSocketChannel,
 
     @Override
     public void failed(Throwable e, Void attachment) {
-        log.info("accept failed...");
-        e.printStackTrace();
+        log.error("accept failed... attachment:{}", attachment, e);
     }
 }

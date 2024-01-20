@@ -1,7 +1,7 @@
 package com.xiaomi.web.core.network.dispatcher.bio;
 
 import com.xiaomi.web.core.exception.RequestInvalidException;
-import com.xiaomi.web.core.exception.base.ServletException;
+import com.xiaomi.web.core.exception.ServletException;
 import com.xiaomi.web.core.network.dispatcher.AbstractDispatcher;
 import com.xiaomi.web.core.network.handler.bio.BioRequestHandler;
 import com.xiaomi.web.core.network.wrapper.SocketWrapper;
@@ -40,14 +40,13 @@ public class BioDispatcher extends AbstractDispatcher {
                 e.printStackTrace();
             }
             // 这里这里不要把in关掉，把in关掉就等同于把socket关掉
-            //解析请求
             response = new Response();
             request = new Request(buf);
             pool.execute(new BioRequestHandler(socketWrapper, servletContext, exceptionHandler, resourceHandler, request, response));
         } catch (ServletException e) {
             exceptionHandler.handle(e, response, socketWrapper);
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            log.error("");
         }
     }
 }

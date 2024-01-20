@@ -83,7 +83,6 @@ public class NioEndpoint extends Endpoint {
         cleaner.start();
     }
 
-    //************************初始化结束***************************************************************
     @Override
     public void start(int port) {
         try {

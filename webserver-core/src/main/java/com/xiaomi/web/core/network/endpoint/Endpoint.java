@@ -1,15 +1,15 @@
 package com.xiaomi.web.core.network.endpoint;
 
-import org.springframework.util.StringUtils;
+import lombok.extern.slf4j.Slf4j;
 
-/**
- * @author sinjinsong
- * @date 2018/5/4
- */
+import javax.annotation.Nonnull;
+
+@Slf4j
 public abstract class Endpoint {
     /**
      * 启动服务器
-     * @param port
+     *
+     * @param port 端口
      */
     public abstract void start(int port);
 
@@ -18,28 +18,12 @@ public abstract class Endpoint {
      */
     public abstract void close();
 
-    /**
-     * 根据传入的bio、nio、aio获取相应的Endpoint实例
-     * @param connector
-     * @return
-     */
-    public static Endpoint getInstance(String connector) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("com.xiaomi.web.core.network.endpoint")
-                .append(".")
-                .append(connector)
-                .append(".")
-                .append(StringUtils.capitalize(connector))
-                .append("Endpoint");
+    public static Endpoint getInstance(@Nonnull EndpointType endpointType) {
         try {
-            return (Endpoint) Class.forName(sb.toString()).newInstance();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            return (Endpoint) endpointType.getClazz().newInstance();
+        } catch (Exception ex) {
+            log.error("get instance failed. type:{}", endpointType);
+            throw new RuntimeException("get instance failed. type:" + endpointType);
         }
-        throw new IllegalArgumentException(connector);
     }
 }

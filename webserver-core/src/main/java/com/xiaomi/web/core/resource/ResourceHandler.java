@@ -3,7 +3,7 @@ package com.xiaomi.web.core.resource;
 import com.xiaomi.web.core.constant.CharsetProperties;
 import com.xiaomi.web.core.exception.RequestParseException;
 import com.xiaomi.web.core.exception.ResourceNotFoundException;
-import com.xiaomi.web.core.exception.base.ServletException;
+import com.xiaomi.web.core.exception.ServletException;
 import com.xiaomi.web.core.exception.handler.ExceptionHandler;
 import com.xiaomi.web.core.network.wrapper.nio.NioSocketWrapper;
 import com.xiaomi.web.core.request.Request;

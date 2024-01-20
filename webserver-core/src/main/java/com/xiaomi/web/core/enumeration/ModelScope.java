@@ -1,9 +1,8 @@
 package com.xiaomi.web.core.enumeration;
 
 /**
- * Created by SinjinSong on 2017/7/21.
- * 域对象的三种范围
+ * @Author：liuchiyun
  */
 public enum ModelScope {
-    REQUEST,SESSION,APPLICATION;
+    REQUEST, SESSION, APPLICATION;
 }

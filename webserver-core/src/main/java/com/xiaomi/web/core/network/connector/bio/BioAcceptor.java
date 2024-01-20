@@ -24,13 +24,11 @@ public class BioAcceptor implements Runnable {
 
     @Override
     public void run() {
-        log.info("开始监听");
         while (server.isRunning()) {
             Socket client;
             try {
                 //TCP的短连接，请求处理完即关闭
                 client = server.accept();
-                log.info("client:{}", client);
                 dispatcher.doDispatch(new BioSocketWrapper(client));
             } catch (IOException e) {
                 e.printStackTrace();

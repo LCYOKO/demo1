@@ -1,6 +1,6 @@
 package com.xiaomi.web.core.network.dispatcher.aio;
 
-import com.xiaomi.web.core.exception.base.ServletException;
+import com.xiaomi.web.core.exception.ServletException;
 import com.xiaomi.web.core.network.dispatcher.AbstractDispatcher;
 import com.xiaomi.web.core.network.handler.aio.AioRequestHandler;
 import com.xiaomi.web.core.network.wrapper.SocketWrapper;

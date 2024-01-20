@@ -1,8 +1,8 @@
 package com.xiaomi.web.core.enumeration;
 
 /**
- * Created by SinjinSong on 2017/7/20.
+ * @Author：liuchiyun
  */
 public enum RequestMethod {
-    GET,POST,PUT,DELETE;
+    GET, POST, PUT, DELETE;
 }

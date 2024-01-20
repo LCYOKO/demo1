@@ -74,10 +74,12 @@ public class ServletContext {
      * 域
      */
     private Map<String, Object> attributes;
+
     /**
      * 整个应用对应的session们
      */
     private Map<String, HttpSession> sessions;
+
     /**
      * 路径匹配器，由Spring提供
      */
@@ -95,11 +97,11 @@ public class ServletContext {
      */
     public Servlet mapServlet(String url) throws ServletNotFoundException {
         // 1、精确匹配
-
         String servletAlias = servletMapping.get(url);
         if (servletAlias != null) {
             return initAndGetServlet(servletAlias);
         }
+
         // 2、路径匹配
         List<String> matchingPatterns = new ArrayList<>();
         Set<String> patterns = servletMapping.keySet();
@@ -111,7 +113,7 @@ public class ServletContext {
 
         if (!matchingPatterns.isEmpty()) {
             Comparator<String> patternComparator = matcher.getPatternComparator(url);
-            Collections.sort(matchingPatterns, patternComparator);
+            matchingPatterns.sort(patternComparator);
             String bestMatch = matchingPatterns.get(0);
             return initAndGetServlet(bestMatch);
         }
@@ -228,6 +230,9 @@ public class ServletContext {
      */
     private void parseConfig() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         Document doc = XMLUtil.getDocument(ServletContext.class.getResourceAsStream("/web.xml"));
+        if (doc == null) {
+            throw new RuntimeException("get web.xml failed");
+        }
         Element root = doc.getRootElement();
         // 解析servlet
         List<Element> servlets = root.elements("servlet");
@@ -322,7 +327,6 @@ public class ServletContext {
         for (Iterator<Map.Entry<String, HttpSession>> it = sessions.entrySet().iterator(); it.hasNext(); ) {
             Map.Entry<String, HttpSession> entry = it.next();
             if (Duration.between(entry.getValue().getLastAccessed(), Instant.now()).getSeconds() >= DEFAULT_SESSION_EXPIRE_TIME) {
-//                log.info("该session {} 已过期", entry.getKey());
                 afterSessionDestroyed(entry.getValue());
                 it.remove();
             }

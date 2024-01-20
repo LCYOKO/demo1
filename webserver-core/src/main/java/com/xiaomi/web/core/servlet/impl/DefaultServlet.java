@@ -1,7 +1,7 @@
 package com.xiaomi.web.core.servlet.impl;
 
 import com.xiaomi.web.core.enumeration.RequestMethod;
-import com.xiaomi.web.core.exception.base.ServletException;
+import com.xiaomi.web.core.exception.ServletException;
 import com.xiaomi.web.core.request.Request;
 import com.xiaomi.web.core.response.Response;
 import lombok.extern.slf4j.Slf4j;

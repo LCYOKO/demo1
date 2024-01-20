@@ -5,7 +5,7 @@ import com.xiaomi.web.core.context.ServletContext;
 import com.xiaomi.web.core.exception.FilterNotFoundException;
 import com.xiaomi.web.core.exception.ServerErrorException;
 import com.xiaomi.web.core.exception.ServletNotFoundException;
-import com.xiaomi.web.core.exception.base.ServletException;
+import com.xiaomi.web.core.exception.ServletException;
 import com.xiaomi.web.core.exception.handler.ExceptionHandler;
 import com.xiaomi.web.core.filter.Filter;
 import com.xiaomi.web.core.filter.FilterChain;

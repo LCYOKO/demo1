@@ -1,7 +1,7 @@
 package com.xiaomi.web.core.network.dispatcher.nio;
 
 import com.xiaomi.web.core.exception.ServerErrorException;
-import com.xiaomi.web.core.exception.base.ServletException;
+import com.xiaomi.web.core.exception.ServletException;
 import com.xiaomi.web.core.network.dispatcher.AbstractDispatcher;
 import com.xiaomi.web.core.network.handler.nio.NioRequestHandler;
 import com.xiaomi.web.core.network.wrapper.SocketWrapper;
