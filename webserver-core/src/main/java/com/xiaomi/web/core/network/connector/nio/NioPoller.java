@@ -66,14 +66,13 @@ public class NioPoller implements Runnable {
 
     @Override
     public void run() {
-        log.info("{} 开始监听", Thread.currentThread().getName());
+        log.info("{} start select", Thread.currentThread().getName());
         while (nioEndpoint.isRunning()) {
             try {
                 events();
                 if (selector.select() <= 0) {
                     continue;
                 }
-                log.info("select()返回,开始获取当前选择器中所有注册的监听事件");
                 //获取当前选择器中所有注册的监听事件
                 for (Iterator<SelectionKey> it = selector.selectedKeys().iterator(); it.hasNext(); ) {
                     SelectionKey key = it.next();
@@ -81,7 +80,7 @@ public class NioPoller implements Runnable {
                     if (key.isReadable()) {
                         //如果"读取"事件已就绪
                         //交由读取事件的处理器处理
-                        log.info("serverSocket读已就绪,准备读");
+                        log.info("read event is ready");
                         NioSocketWrapper attachment = (NioSocketWrapper) key.attachment();
                         if (attachment != null) {
                             processSocket(attachment);
@@ -90,10 +89,8 @@ public class NioPoller implements Runnable {
                     //处理完毕后，需要取消当前的选择键
                     it.remove();
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ClosedSelectorException e) {
-                log.info("{} 对应的selector 已关闭", this.pollerName);
+            } catch (Exception e) {
+                log.info("{} selector is closed", this.pollerName);
             }
         }
     }
@@ -104,7 +101,7 @@ public class NioPoller implements Runnable {
     }
 
     private boolean events() {
-        log.info("Queue大小为{},清空Queue,将连接到的Socket注册到selector中", events.size());
+        log.info("Queues size{},ready to clear queue and register socket to selector", events.size());
         boolean result = false;
         PollerEvent pollerEvent;
         for (int i = 0, size = events.size(); i < size && (pollerEvent = events.poll()) != null; i++) {
@@ -163,8 +160,8 @@ public class NioPoller implements Runnable {
                 } else {
                     log.error("socket:{}已经被关闭，无法注册到Poller", wrapper.getSocketChannel());
                 }
-            } catch (ClosedChannelException e) {
-                e.printStackTrace();
+            } catch (Exception e) {
+                log.error("register socket:{} failed.", wrapper, e);
             }
         }
     }
