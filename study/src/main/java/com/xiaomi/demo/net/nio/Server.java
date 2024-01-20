@@ -30,8 +30,8 @@ public class Server {
         ServerSocketChannel severChannel = ServerSocketChannel.open();
         severChannel.configureBlocking(false);
         severChannel.bind(new InetSocketAddress(8888));
-        System.out.println("Server start!");
-        severChannel.register(selector, SelectionKey.OP_ACCEPT);
+        log.info("Server start!");
+        SelectionKey selectionKey = severChannel.register(selector, SelectionKey.OP_ACCEPT);
         //select会阻塞，知道有就绪连接写入selectionKeys
         while (!Thread.currentThread().isInterrupted()) {
             if (selector.select(100) == 0) {
@@ -45,7 +45,7 @@ public class Server {
                 // 未处理完成的事件删除后会被再次通知
                 keys.remove();
                 if (key.isAcceptable()) {
-                    System.out.println("触发连接事件");
+                    log.info("触发连接事件");
                     SocketChannel socketChannel = severChannel.accept();
                     socketChannel.configureBlocking(false);
                     socketChannel.register(selector, SelectionKey.OP_READ);
@@ -58,11 +58,10 @@ public class Server {
                         socketChannel.close();
                     }
                     if (byteBuffer.remaining() > 0) {
-                        System.out.print(new String(getString(byteBuffer)));
+                        System.out.print(getString(byteBuffer));
                     }
                     socketChannel.register(selector, SelectionKey.OP_READ);
                     System.out.println("触发读事件");
-
                 }
             }
         }
@@ -79,7 +78,7 @@ public class Server {
             charBuffer = decoder.decode(buffer.asReadOnlyBuffer());
             return charBuffer.toString();
         } catch (Exception ex) {
-            ex.printStackTrace();
+            log.error("read buffer error", ex);
             return "";
         }
     }

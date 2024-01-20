@@ -42,7 +42,6 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 @ComponentScan("com.xiaomi.gateway")
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.REACTIVE)
 public class DynamicRouteAutoConfiguration {
-
     /**
      * redis 监听配置
      *
@@ -70,12 +69,10 @@ public class DynamicRouteAutoConfiguration {
      */
     @Bean
     public DynamicRouteHealthIndicator healthIndicator(RedisTemplate redisTemplate) {
-
         redisTemplate.setKeySerializer(new StringRedisSerializer());
         if (!redisTemplate.hasKey(Constants.ROUTE_KEY)) {
             log.info("路由信息未初始化，网关路由失败");
         }
-
         return new DynamicRouteHealthIndicator(redisTemplate);
     }
 

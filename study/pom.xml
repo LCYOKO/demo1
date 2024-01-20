@@ -35,5 +35,11 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/src/main/resources/lib/aspose-words-20.12-jdk17-cracked.jar</systemPath>
         </dependency>
+        <dependency>
+            <groupId>com.xiaomi</groupId>
+            <artifactId>webserver-core</artifactId>
+            <version>1.0.0</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 </project>
