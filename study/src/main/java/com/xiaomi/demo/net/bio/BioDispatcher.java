@@ -18,7 +18,6 @@ public class BioDispatcher extends AbstractDispatcher<BioSocketWrapper> {
         try {
             BufferedInputStream bin = new BufferedInputStream(socketWrapper.getSocket().getInputStream());
             byte[] buf;
-
             buf = new byte[bin.available()];
             int len = bin.read(buf);
             if (len <= 0) {
