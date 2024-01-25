@@ -1,0 +1,27 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+header 页眉毛
+footer 页脚 如果想用页码，则加上 %page% of %lastpage%
+title 页面标题
+'skinparam sequenceMessageAlign，后接参数left,right或center
+skinparam sequenceMessageAlign center
+
+actor        角色    order 0 #yellow
+boundary     边界    order 2 #red
+control      控制    order 1 #blue
+entity       实体    order 5 #gray
+database     数据库  order 4 #pink
+collections  集合    order 6 #orange
+participant  流程框  order 7 #brown
+queue        队列    order 8
+
+角色 --> 边界 : To boundary
+角色 -> 控制 : To control
+角色 -> 实体 : To entity
+角色 -> 数据库 : To database
+角色 -> 集合 : To collections
+角色 -> 流程框 : To participant
+角色 -> 队列 : To queue
+@enduml
+
+@enduml

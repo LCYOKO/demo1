@@ -1,4 +1,4 @@
-package com.xiaomi.demo.net.netty;
+package com.xiaomi.demo.netty;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.Unpooled;
@@ -6,8 +6,6 @@ import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.handler.codec.http.HttpObject;
-import io.netty.util.concurrent.FutureListener;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
