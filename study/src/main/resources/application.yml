@@ -23,6 +23,8 @@ apollo:
 
 
 management:
+  server:
+    port:
   endpoints:
     # 暴露 EndPoint 以供访问，有jmx和web两种方式，exclude 的优先级高于 include
     jmx:
