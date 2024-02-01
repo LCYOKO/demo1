@@ -1,10 +1,10 @@
 package com.xiaomi.demo.algo;
 
 import org.junit.Test;
-import org.springframework.data.relational.core.sql.In;
 
-import java.util.ArrayList;
 import java.util.PriorityQueue;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.LinkedBlockingDeque;
 
 /**
  * @Author: liuchiyun
@@ -23,12 +23,25 @@ public class DataStructTest {
     }
 
     @Test
-    public void testMap(){
+    public void testMap() {
+        //JDK 1.7 hashMap 头插法会有死循环
+        //  a b c
+        // 线程A next = a .next
+        // 线程B  c->b->a
+        // 线程A  a->c->b->a    b->a->c->b->a
 
+        //1.8
+        // a b c a b c
     }
 
     @Test
-    public void testCopyList(){
+    public void testCopyList() {
+//         new ArrayList<>()
+    }
 
+    @Test
+    public void testBlockQueue() {
+//        new LinkedBlockingDeque<>();
+//        new ArrayBlockingQueue<>();
     }
 }
