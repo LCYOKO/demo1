@@ -15,6 +15,34 @@ import java.util.List;
 public class AlgoTest {
 
     @Test
+    public void testNums(){
+        System.out.println(firstMissingPositive(new int[]{1,2}));
+    }
+    public int firstMissingPositive(int[] nums) {
+        int n = nums.length;
+        for(int i=0;i<nums.length;){
+            if(nums[i]<=0 || nums[i]>n || nums[nums[i]-1]==i+1){
+                i++;
+                continue;
+            }
+            if(nums[nums[i]-1]!=nums[i]){
+                int temp = nums[i];
+                nums[i] = nums[temp-1];
+                nums[temp-1] = temp;
+            } else {
+                i++;
+            }
+        }
+        System.out.println(Arrays.toString(nums));
+        for(int i=0;i<n;i++){
+            if(nums[i]<=0 || nums[i]>n || nums[nums[i]-1]!=i+1){
+                return i+1;
+            }
+        }
+        return n+1;
+    }
+
+    @Test
     public void testAlgo() {
         solveSudoku(new char[][]{
                 {'5', '3', '.', '.', '7', '.', '.', '.', '.'},
