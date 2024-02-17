@@ -21,6 +21,7 @@ public class MetricController {
     @GetMapping("/timing")
     @Timed(value = "test", extraTags = {"test_tag", "test_info"})
     public String testTiming() {
-        return "timing";
+        throw new RuntimeException();
+//        return "timing";
     }
 }

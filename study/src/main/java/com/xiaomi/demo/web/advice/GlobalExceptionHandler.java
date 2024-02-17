@@ -5,11 +5,14 @@ import com.xiaomi.demo.web.exception.InvalidParamException;
 import com.xiaomi.demo.web.result.JsonResult;
 import com.xiaomi.demo.web.result.ServiceException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.HandlerMethod;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -72,8 +75,9 @@ public class GlobalExceptionHandler {
 
 
     @ExceptionHandler(value = {RuntimeException.class, Exception.class})
-    public JsonResult<?> handleRuntimeException(HttpServletRequest request, Exception e) {
-        log.error("未处理的全局异常", e);
+    @ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
+    public JsonResult<?> handleRuntimeException(HttpServletRequest request, HandlerMethod method, Exception e) {
+        log.error("未处理的全局异常,method:{}", method.getMethod().toGenericString(), e);
         return JsonResult.error(HttpCode.ERROR, HttpCode.ERROR.getMsg());
     }
 }

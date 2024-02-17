@@ -7,6 +7,5 @@ import org.springframework.test.context.ContextConfiguration;
  * @Author: liuchiyun
  * @Date: 2024/2/8
  */
-@SpringBootTest(classes = )
-public class TestApp {
-}
+//public class TestApp {
+//}

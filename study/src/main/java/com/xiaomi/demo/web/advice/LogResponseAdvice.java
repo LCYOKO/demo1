@@ -62,15 +62,15 @@ public class LogResponseAdvice implements ResponseBodyAdvice<Object> {
     }
 
     private String getRequestBody(HttpServletRequest request) {
-        String requestBody = "";
+        StringBuilder stringBuilder = new StringBuilder();
         ContentCachingRequestWrapper wrapper = WebUtils.getNativeRequest(request, ContentCachingRequestWrapper.class);
         if (wrapper != null) {
             try {
-                requestBody = new String(wrapper.getContentAsByteArray(), wrapper.getCharacterEncoding());
+                stringBuilder.append(new String(wrapper.getContentAsByteArray(), wrapper.getCharacterEncoding()));
             } catch (IOException e) {
                 log.warn("get request body data error", e);
             }
         }
-        return requestBody;
+        return stringBuilder.toString();
     }
 }

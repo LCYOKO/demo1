@@ -15,4 +15,5 @@ public class AlgoTest {
     @Test
     public void test() {
     }
+
 }
