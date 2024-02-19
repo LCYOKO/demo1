@@ -7,56 +7,58 @@ import quickfix.field.MsgType;
 @Slf4j
 public class FixAcceptorApplication extends MessageCracker implements Application {
     @Override
-    public void onCreate(SessionID sessionID) {
-        log.info("onCreate sessionId:{}", sessionID);
+    public void onCreate(SessionID sessionId) {
+        log.info("onCreate sessionId:{}", sessionId);
     }
 
     @Override
-    public void onLogon(SessionID sessionID) {
-        log.info("onLogon sessionId:{}",sessionID);
+    public void onLogon(SessionID sessionId) {
+        log.info("onLogon sessionId:{}", sessionId);
     }
 
     @Override
-    public void onLogout(SessionID sessionID) {
-        log.info("onLogout sessionId:{}", sessionID);
+    public void onLogout(SessionID sessionId) {
+        log.info("onLogout sessionId:{}", sessionId);
     }
 
     @Override
-    public void toAdmin(Message message, SessionID sessionID) {
-        log.info("toAdmin sessionId:{}, message:{}", sessionID, message);
+    public void toAdmin(Message message, SessionID sessionId) {
+        log.info("toAdmin sessionId:{}, message:{}", sessionId, message);
     }
 
     @Override
-    public void fromAdmin(Message message, SessionID sessionID) throws FieldNotFound, IncorrectDataFormat, IncorrectTagValue, RejectLogon {
-        log.info("fromAdmin sessionId:{}, message:{}", sessionID, message);
+    public void fromAdmin(Message message, SessionID sessionId) {
+        log.info("fromAdmin sessionId:{}, message:{}", sessionId, message);
     }
 
     @Override
-    public void toApp(Message message, SessionID sessionID) throws DoNotSend {
-        log.info("fromApp sessionId:{}, message:{}", sessionID, message);
+    public void toApp(Message message, SessionID sessionId) {
+        log.info("fromApp sessionId:{}, message:{}", sessionId, message);
     }
 
     @Override
-    public void fromApp(Message message, SessionID sessionID) throws FieldNotFound, IncorrectDataFormat, IncorrectTagValue, UnsupportedMessageType {
-        log.info("fromApp sessionId:{}, message:{}", sessionID, message);
+    public void fromApp(Message message, SessionID sessionId) {
+        log.info("fromApp sessionId:{}, message:{}", sessionId, message);
     }
 
     @Override
-    protected void onMessage(Message message, SessionID sessionID) throws FieldNotFound, UnsupportedMessageType, IncorrectTagValue {
+    protected void onMessage(Message message, SessionID sessionId) {
         try {
             String msgType = message.getHeader().getString(35);
-            Session session = Session.lookupSession(sessionID);
+            Session session = Session.lookupSession(sessionId);
             switch (msgType) {
-                case MsgType.LOGON: // 登陆
+                // 登陆
+                case MsgType.LOGON:
                     session.logon();
                     session.sentLogon();
                     break;
-                case MsgType.HEARTBEAT: // 心跳
+                // 心跳
+                case MsgType.HEARTBEAT:
+                default:
                     session.generateHeartbeat();
-                    break;
             }
-        } catch (FieldNotFound e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            log.error("process message:{} failed.", message, e);
         }
     }
 }

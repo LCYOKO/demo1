@@ -13,13 +13,14 @@ import java.time.LocalDateTime;
 @Slf4j
 public class FixInitor {
     private SessionSettings settings;
-    private Initiator initiator;
-    private SessionID sessionID;
+    private final Initiator initiator;
+    private final SessionID sessionID;
+
     public FixInitor() throws ConfigError {
         try {
             settings = new SessionSettings("src/main/resources/quickfix-initor.properties");
         } catch (ConfigError configError) {
-            log.error("Warning config error",configError);
+            log.error("Warning config error", configError);
         }
         FixInitorApplication application = new FixInitorApplication();
         MessageFactory messageFactory = new DefaultMessageFactory();
@@ -27,7 +28,7 @@ public class FixInitor {
         FileStoreFactory fileStoreFactory = new FileStoreFactory(settings);
         initiator = new ThreadedSocketInitiator(application, fileStoreFactory, settings, logFactory,
                 messageFactory);
-        this.sessionID = new SessionID("FIX.4.2","CLIENT","SERVER");
+        this.sessionID = new SessionID("FIX.4.2", "CLIENT", "SERVER");
     }
 
     public void start() throws ConfigError {
@@ -40,7 +41,7 @@ public class FixInitor {
         Session.sendToTarget(newOrder, sessionID);
     }
 
-    public void stop(){
+    public void stop() {
 
     }
 }

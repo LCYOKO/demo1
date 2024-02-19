@@ -11,24 +11,21 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 
-public class HelloServiceImpl implements HelloService{
+public class HelloServiceImpl implements HelloService {
     @Override
     public String sayHello(String msg) {
         return msg;
     }
 
-
     public static void main(String[] args) throws Exception {
         System.setProperty("dubbo.application.logger", "slf4j");
         System.setProperty("native", "true");
-//        startWithBootstrap();
         startWithExport();
 //        if (isClassic(args)) {
 //            startWithExport();
 //        } else {
 //            startWithBootstrap();
 //        }
-        System.in.read();
     }
 
     private static boolean isClassic(String[] args) {
@@ -48,7 +45,6 @@ public class HelloServiceImpl implements HelloService{
         Map<String, String> m = new HashMap<>(1);
         m.put("proxy", "jdk");
         applicationConfig.setParameters(m);
-
         bootstrap.application(applicationConfig)
                 .registry(new RegistryConfig("zookeeper://192.168.255.128:2181?timeout=60000"))
                 .protocol(new ProtocolConfig(CommonConstants.DUBBO, -1))
@@ -61,21 +57,15 @@ public class HelloServiceImpl implements HelloService{
         ServiceConfig<HelloServiceImpl> service = new ServiceConfig<>();
         service.setInterface(HelloService.class);
         service.setRef(new HelloServiceImpl());
-
         ApplicationConfig applicationConfig = new ApplicationConfig("dubbo-demo-api-provider");
         applicationConfig.setQosEnable(false);
         applicationConfig.setCompiler("jdk");
-
         Map<String, String> m = new HashMap<>(1);
         m.put("proxy", "jdk");
         applicationConfig.setParameters(m);
-
         service.setApplication(applicationConfig);
-
         service.setRegistry(new RegistryConfig("zookeeper://192.168.255.128:2181?timeout=60000"));
         service.export();
-
-        System.out.println("dubbo service started");
         new CountDownLatch(1).await();
     }
 }

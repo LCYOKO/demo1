@@ -24,9 +24,7 @@ public class TestCompeteFuture {
             }
             log.info("hhahaha");
             throw new RuntimeException("error");
-        }).whenComplete((unused, throwable) -> {
-            log.info("complete");
-        }).exceptionally(throwable -> {
+        }).whenComplete((unused, throwable) -> log.info("complete")).exceptionally(throwable -> {
             log.error("exeception", throwable);
             return null;
         }).get();
