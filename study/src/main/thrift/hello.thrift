@@ -13,5 +13,4 @@ service HelloService{
     oneway void HelloOneway()
 
     string HelloNull()
-
 }

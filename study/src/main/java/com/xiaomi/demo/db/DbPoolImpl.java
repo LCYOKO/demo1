@@ -26,7 +26,7 @@ public class DbPoolImpl implements DbPool {
     /**
      * 当前正在被使用的连接数
      */
-    private AtomicInteger activeSize = new AtomicInteger(0);
+    private final AtomicInteger activeSize = new AtomicInteger(0);
 
     /**
      * 最大连接数
