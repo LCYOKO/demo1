@@ -1,6 +1,7 @@
 package com.xiaomi.demo.mapstructure;
 
 import lombok.Data;
+import org.junit.Test;
 
 import java.util.Date;
 
@@ -8,9 +9,9 @@ import java.util.Date;
  * @Author: liuchiyun
  * @Date: 2023/12/11
  */
-public class Test {
+public class Main {
 
-    @org.junit.Test
+    @Test
     public void test1() {
         Programer programer = new Programer();
         programer.setName("lisi");
@@ -53,6 +54,4 @@ public class Test {
     static class AddressDto {
         private String address;
     }
-
-
 }

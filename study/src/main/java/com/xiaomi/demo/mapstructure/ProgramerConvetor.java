@@ -12,5 +12,5 @@ public interface ProgramerConvetor {
 
     ProgramerConvetor INSTANCE = Mappers.getMapper(ProgramerConvetor.class);
 
-    Test.ProgramerDto toProgramerDto(Test.Programer programer);
+    Main.ProgramerDto toProgramerDto(Main.Programer programer);
 }
