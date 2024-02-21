@@ -1,7 +1,7 @@
 package com.xiaomi.demo.spring.mvc;
 
-import com.xiaomi.demo.utils.JsonUtils;
-import com.xiaomi.demo.utils.TextUtils;
+import com.xiaomi.common.utils.JsonUtils;
+import com.xiaomi.common.utils.TextUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,7 +12,6 @@ import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.http.server.ServletServerHttpResponse;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 import org.springframework.web.util.ContentCachingRequestWrapper;
 import org.springframework.web.util.WebUtils;
@@ -26,7 +25,6 @@ import java.io.IOException;
  * @Date: 2023/12/11
  */
 @Slf4j
-//@RestControllerAdvice
 public class LogResponseAdvice implements ResponseBodyAdvice<Object> {
     @Value("${http.respLog.enabled:true}")
     private boolean logEnabled;

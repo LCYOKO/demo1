@@ -1,7 +1,7 @@
 package com.xiaomi.demo.oss.minio;
 
 import cn.hutool.core.io.FileUtil;
-import com.xiaomi.demo.http.Constants;
+import com.xiaomi.common.http.Constants;
 import io.minio.*;
 import io.minio.errors.ErrorResponseException;
 import io.minio.errors.InsufficientDataException;

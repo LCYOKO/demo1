@@ -2,7 +2,7 @@ package com.xiaomi.common.http;
 
 import cn.hutool.http.HttpStatus;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.xiaomi.demo.utils.JsonUtils;
+import com.xiaomi.common.utils.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 import org.apache.commons.lang3.StringUtils;
@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import static com.xiaomi.demo.http.Constants.MEDIA_JSON;
+import static com.xiaomi.common.http.Constants.MEDIA_JSON;
 
 /**
  * @Author: liuchiyun

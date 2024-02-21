@@ -7,7 +7,7 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.google.common.collect.Lists;
-import com.xiaomi.demo.document.report.csv.ReflectionUtils;
+import com.xiaomi.common.document.report.csv.ReflectionUtils;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -35,9 +35,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import static com.xiaomi.demo.document.report.excel.FileParseUtils.CellField;
-
 
 /**
  * @Author liuchiyun
@@ -100,7 +97,7 @@ public class ExcelUtils {
         firstRow.iterator().forEachRemaining(cell -> headers.add(cell.getStringCellValue().trim()));
         log.info("File header:{} ", headers);
         try {
-            List<CellField> fields = sortFieldByAnnotation(itemClass, headers.toArray(new String[0]));
+            List<FileParseUtils.CellField> fields = sortFieldByAnnotation(itemClass, headers.toArray(new String[0]));
             for (int rowNum = headRow + 1; rowNum <= sheet.getLastRowNum() - skipTailRows; rowNum++) {
                 Row row = sheet.getRow(rowNum);
                 if (row == null) {
@@ -109,7 +106,7 @@ public class ExcelUtils {
                 boolean f = true;
                 T item = ReflectionUtils.newInstance(itemClass);
                 for (int i = 0; i < fields.size(); i++) {
-                    CellField cellField = fields.get(i);
+                    FileParseUtils.CellField cellField = fields.get(i);
                     Cell cell = row.getCell(i);
                     Object value = getCellValue(cell);
                     if (cellField == null || value == null) {
@@ -402,7 +399,7 @@ public class ExcelUtils {
             return;
         }
         T data = dataSet.iterator().next();
-        List<CellField> fieldList = sortFieldByAnnotation(data.getClass(), headers);
+        List<FileParseUtils.CellField> fieldList = sortFieldByAnnotation(data.getClass(), headers);
         Iterator<T> it = dataSet.iterator();
         int index = addHeaderRecord ? startIndex : startIndex - 1;
         while (it.hasNext()) {
@@ -414,7 +411,7 @@ public class ExcelUtils {
                     if (Objects.isNull(fieldList.get(i))) {
                         continue;
                     }
-                    CellField cellField = fieldList.get(i);
+                    FileParseUtils.CellField cellField = fieldList.get(i);
                     Cell cell = row.createCell(i);
                     setCellValue(cell, cellField.field, t);
                 }
@@ -443,7 +440,7 @@ public class ExcelUtils {
             return;
         }
         T data = dataSet.iterator().next();
-        List<CellField> fieldList = sortFieldByAnnotation(data.getClass(), headers);
+        List<FileParseUtils.CellField> fieldList = sortFieldByAnnotation(data.getClass(), headers);
         Iterator<T> it = dataSet.iterator();
         int index = addHeaderRecord ? startIndex : startIndex - 1;
         while (it.hasNext()) {
@@ -455,7 +452,7 @@ public class ExcelUtils {
                     if (Objects.isNull(fieldList.get(i))) {
                         continue;
                     }
-                    CellField cellField = fieldList.get(i);
+                    FileParseUtils.CellField cellField = fieldList.get(i);
                     Cell cell = row.createCell(i);
                     setCellValue(cell, cellField.field, t);
                 }
@@ -547,14 +544,14 @@ public class ExcelUtils {
         return formatter;
     }
 
-    private static List<CellField> sortFieldByAnnotation(Class<?> clazz, String[] headers) {
+    private static List<FileParseUtils.CellField> sortFieldByAnnotation(Class<?> clazz, String[] headers) {
         Field[] fields = clazz.getDeclaredFields();
-        Map<String, CellField> fieldMap = Stream.of(fields)
+        Map<String, FileParseUtils.CellField> fieldMap = Stream.of(fields)
                 .filter(f -> f.getAnnotation(ExcelCell.class) != null)
                 .map(f -> {
                     ExcelCell cell = f.getAnnotation(ExcelCell.class);
-                    return new CellField(cell.value(), cell.required(), f, cell.formats());
-                }).collect(Collectors.toMap(CellField::getHeader, Function.identity()));
+                    return new FileParseUtils.CellField(cell.value(), cell.required(), f, cell.formats());
+                }).collect(Collectors.toMap(FileParseUtils.CellField::getHeader, Function.identity()));
         return Stream.of(headers).map(fieldMap::get).collect(Collectors.toList());
     }
 
