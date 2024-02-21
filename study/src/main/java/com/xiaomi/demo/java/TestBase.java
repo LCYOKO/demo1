@@ -1,9 +1,12 @@
 package com.xiaomi.demo.java;
 
 import lombok.Data;
+import org.junit.Test;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.LinkedBlockingDeque;
 
 /**
  * @Author: liuchiyun
@@ -19,8 +22,22 @@ public class TestBase {
         list.add(new People());
     }
 
-    public void test3(){
-        new ArrayList<Integer>().stream().mapToInt(i-> i).toArray();
+
+    @Test
+    public void test3() {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        //如果不存在则放入
+        map.putIfAbsent(1, 1);
+        map.computeIfAbsent(1, integer -> integer * 2);
+        map.computeIfPresent(1, (key, oldValue) -> null);
+    }
+
+    @Test
+    public void test4() {
+        //2把锁
+        new ArrayBlockingQueue<Integer>(100);
+        //只有1把锁
+        new LinkedBlockingDeque<>(100);
     }
 
     static class Item<T extends Base> {
