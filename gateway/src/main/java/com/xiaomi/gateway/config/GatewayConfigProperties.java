@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 public class GatewayConfigProperties {
 
 	/**
-	 * 网关解密登录前端密码 秘钥 {@link com.jxyh.project.gateway.filter.PasswordDecoderFilter}
+	 * 网关解密登录前端密码 秘钥 {@link com.xiaomi.gateway.filter.PasswordDecoderFilter}
 	 */
 	public String encodeKey;
 

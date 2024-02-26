@@ -2,7 +2,7 @@ package com.xiaomi.gateway.configuration;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.xiaomi.gateway.utils.JsonResult;
+import com.xiaomi.common.web.result.JsonResult;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.reactive.error.ErrorWebExceptionHandler;
@@ -49,7 +49,7 @@ public class GlobalExceptionConfiguration implements ErrorWebExceptionHandler {
             try {
                 log.error("Error request :{} Error Spring Cloud Gateway ", exchange.getRequest().getPath(),
                         ex);
-                return bufferFactory.wrap(objectMapper.writeValueAsBytes(JsonResult.failed(ex.getMessage())));
+                return bufferFactory.wrap(objectMapper.writeValueAsBytes(JsonResult.error(ex.getMessage())));
             } catch (JsonProcessingException e) {
                 log.warn("Error writing response", ex);
                 return bufferFactory.wrap(new byte[0]);

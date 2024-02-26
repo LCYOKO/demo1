@@ -9,7 +9,7 @@ import java.util.List;
 public class NetSearchServiceImpl implements SearchService {
     @Override
     public List<String> getAllFiles(String query) {
-        System.out.println("get answer"+query);
+        System.out.println("get answer" + query);
         return null;
     }
 }

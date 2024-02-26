@@ -25,14 +25,11 @@ import cn.hutool.crypto.symmetric.AES;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import com.jxyh.project.common.core.constant.CacheConstants;
-import com.jxyh.project.common.core.constant.CommonConstants;
-import com.jxyh.project.common.core.constant.SecurityConstants;
-import com.jxyh.project.common.core.constant.enums.EncFlagTypeEnum;
-import com.jxyh.project.common.core.util.WebUtils;
-import com.jxyh.project.gateway.config.GatewayConfigProperties;
+import com.xiaomi.gateway.config.GatewayConfigProperties;
+import com.xiaomi.gateway.utils.CacheConstants;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.dubbo.common.constants.CommonConstants;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.cloud.gateway.filter.factory.rewrite.CachedBodyOutputMessage;
@@ -51,8 +48,10 @@ import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.server.HandlerStrategies;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.server.ServerWebExchange;
+import org.springframework.web.util.WebUtils;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import sun.security.util.SecurityConstants;
 
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
@@ -87,16 +86,16 @@ public class PasswordDecoderFilter extends AbstractGatewayFilterFactory {
 	public GatewayFilter apply(Object config) {
 		return (exchange, chain) -> {
 			ServerHttpRequest request = exchange.getRequest();
-			// 1. 不是登录请求，直接向下执行
-			if (!StrUtil.containsAnyIgnoreCase(request.getURI().getPath(), SecurityConstants.OAUTH_TOKEN_URL)) {
-				return chain.filter(exchange);
-			}
-
-			// 2. 刷新token类型，直接向下执行
-			String grantType = request.getQueryParams().getFirst("grant_type");
-			if (StrUtil.equals(SecurityConstants.REFRESH_TOKEN, grantType)) {
-				return chain.filter(exchange);
-			}
+//			// 1. 不是登录请求，直接向下执行
+//			if (!StrUtil.containsAnyIgnoreCase(request.getURI().getPath(), SecurityConstants.OAUTH_TOKEN_URL)) {
+//				return chain.filter(exchange);
+//			}
+//
+//			// 2. 刷新token类型，直接向下执行
+//			String grantType = request.getQueryParams().getFirst("grant_type");
+//			if (StrUtil.equals(SecurityConstants.REFRESH_TOKEN, grantType)) {
+//				return chain.filter(exchange);
+//			}
 
 			// 3. 判断客户端是否需要解密，明文传输直接向下执行
 			if (!isEncClient(request)) {
@@ -131,25 +130,25 @@ public class PasswordDecoderFilter extends AbstractGatewayFilterFactory {
 	 * @return true 加密传输 、 false 原文传输
 	 */
 	private boolean isEncClient(ServerHttpRequest request) {
-		String header = request.getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
-		String clientId = WebUtils.extractClientId(header).orElse(null);
-		// 获取租户拼接区分租户的key
-		String tenantId = request.getHeaders().getFirst(CommonConstants.TENANT_ID);
-		String key = String.format("%s:%s:%s", StrUtil.isBlank(tenantId) ? CommonConstants.TENANT_ID_1 : tenantId,
-				CacheConstants.CLIENT_FLAG, clientId);
-
-		redisTemplate.setKeySerializer(new StringRedisSerializer());
-		Object val = redisTemplate.opsForValue().get(key);
-
-		// 当配置不存在时，默认需要解密
-		if (val == null) {
-			return true;
-		}
-
-		JSONObject information = JSONUtil.parseObj(val.toString());
-		if (StrUtil.equals(EncFlagTypeEnum.NO.getType(), information.getStr(CommonConstants.ENC_FLAG))) {
-			return false;
-		}
+//		String header = request.getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
+//		String clientId = WebUtils.extractClientId(header).orElse(null);
+//		// 获取租户拼接区分租户的key
+//		String tenantId = request.getHeaders().getFirst(CommonConstants.TENANT_ID);
+//		String key = String.format("%s:%s:%s", StrUtil.isBlank(tenantId) ? CommonConstants.TENANT_ID_1 : tenantId,
+//				CacheConstants.CLIENT_FLAG, clientId);
+//
+//		redisTemplate.setKeySerializer(new StringRedisSerializer());
+//		Object val = redisTemplate.opsForValue().get(key);
+//
+//		// 当配置不存在时，默认需要解密
+//		if (val == null) {
+//			return true;
+//		}
+//
+//		JSONObject information = JSONUtil.parseObj(val.toString());
+//		if (StrUtil.equals(EncFlagTypeEnum.NO.getType(), information.getStr(CommonConstants.ENC_FLAG))) {
+//			return false;
+//		}
 		return true;
 	}
 

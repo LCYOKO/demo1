@@ -1,21 +1,12 @@
-package com.xiaomi.demo.jvm;
+package com.xiaomi.demo.java;
 
 import org.junit.Test;
 
 /**
  * @Author: liuchiyun
- * @Date: 2023/12/14
- * -XX:+PrintGCDetails
- * -XX:+PrintGCTimeStamps
- * -XX:+PrintGCDateStamps
- * -Xloggc:logs/gc.log
- * -XX:+PrintTenuringDistribution
- * -XX:+UseG1GC
- * -Xmx10M
- * -Xms10M
+ * @Date: 2024/2/26
  */
-public class GarbageCollector {
-
+public class TestGarbageCollector {
     private static final int _1MB = 1024 * 1024;
 
     @Test

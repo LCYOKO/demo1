@@ -15,29 +15,29 @@ public final class BookServiceGrpc {
   public static final String SERVICE_NAME = "BookService";
 
   // Static method descriptors that strictly reflect the proto.
-  private static volatile io.grpc.MethodDescriptor<BookRequest,
-      BookResponse> getGetBooks1Method;
+  private static volatile io.grpc.MethodDescriptor<com.xiaomi.demo.proto.BookRequest,
+      com.xiaomi.demo.proto.BookResponse> getGetBooks1Method;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "getBooks1",
-      requestType = BookRequest.class,
-      responseType = BookResponse.class,
+      requestType = com.xiaomi.demo.proto.BookRequest.class,
+      responseType = com.xiaomi.demo.proto.BookResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<BookRequest,
-      BookResponse> getGetBooks1Method() {
-    io.grpc.MethodDescriptor<BookRequest, BookResponse> getGetBooks1Method;
+  public static io.grpc.MethodDescriptor<com.xiaomi.demo.proto.BookRequest,
+      com.xiaomi.demo.proto.BookResponse> getGetBooks1Method() {
+    io.grpc.MethodDescriptor<com.xiaomi.demo.proto.BookRequest, com.xiaomi.demo.proto.BookResponse> getGetBooks1Method;
     if ((getGetBooks1Method = BookServiceGrpc.getGetBooks1Method) == null) {
       synchronized (BookServiceGrpc.class) {
         if ((getGetBooks1Method = BookServiceGrpc.getGetBooks1Method) == null) {
           BookServiceGrpc.getGetBooks1Method = getGetBooks1Method =
-              io.grpc.MethodDescriptor.<BookRequest, BookResponse>newBuilder()
+              io.grpc.MethodDescriptor.<com.xiaomi.demo.proto.BookRequest, com.xiaomi.demo.proto.BookResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "getBooks1"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  BookRequest.getDefaultInstance()))
+                  com.xiaomi.demo.proto.BookRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  BookResponse.getDefaultInstance()))
+                  com.xiaomi.demo.proto.BookResponse.getDefaultInstance()))
               .setSchemaDescriptor(new BookServiceMethodDescriptorSupplier("getBooks1"))
               .build();
         }
@@ -46,29 +46,29 @@ public final class BookServiceGrpc {
     return getGetBooks1Method;
   }
 
-  private static volatile io.grpc.MethodDescriptor<BookRequest,
-      BookResponse> getGetBooks2Method;
+  private static volatile io.grpc.MethodDescriptor<com.xiaomi.demo.proto.BookRequest,
+      com.xiaomi.demo.proto.BookResponse> getGetBooks2Method;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "getBooks2",
-      requestType = BookRequest.class,
-      responseType = BookResponse.class,
+      requestType = com.xiaomi.demo.proto.BookRequest.class,
+      responseType = com.xiaomi.demo.proto.BookResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
-  public static io.grpc.MethodDescriptor<BookRequest,
-      BookResponse> getGetBooks2Method() {
-    io.grpc.MethodDescriptor<BookRequest, BookResponse> getGetBooks2Method;
+  public static io.grpc.MethodDescriptor<com.xiaomi.demo.proto.BookRequest,
+      com.xiaomi.demo.proto.BookResponse> getGetBooks2Method() {
+    io.grpc.MethodDescriptor<com.xiaomi.demo.proto.BookRequest, com.xiaomi.demo.proto.BookResponse> getGetBooks2Method;
     if ((getGetBooks2Method = BookServiceGrpc.getGetBooks2Method) == null) {
       synchronized (BookServiceGrpc.class) {
         if ((getGetBooks2Method = BookServiceGrpc.getGetBooks2Method) == null) {
           BookServiceGrpc.getGetBooks2Method = getGetBooks2Method =
-              io.grpc.MethodDescriptor.<BookRequest, BookResponse>newBuilder()
+              io.grpc.MethodDescriptor.<com.xiaomi.demo.proto.BookRequest, com.xiaomi.demo.proto.BookResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.SERVER_STREAMING)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "getBooks2"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  BookRequest.getDefaultInstance()))
+                  com.xiaomi.demo.proto.BookRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  BookResponse.getDefaultInstance()))
+                  com.xiaomi.demo.proto.BookResponse.getDefaultInstance()))
               .setSchemaDescriptor(new BookServiceMethodDescriptorSupplier("getBooks2"))
               .build();
         }
@@ -77,29 +77,29 @@ public final class BookServiceGrpc {
     return getGetBooks2Method;
   }
 
-  private static volatile io.grpc.MethodDescriptor<BookRequest,
-      BookResponse> getGetBooks3Method;
+  private static volatile io.grpc.MethodDescriptor<com.xiaomi.demo.proto.BookRequest,
+      com.xiaomi.demo.proto.BookResponse> getGetBooks3Method;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "getBooks3",
-      requestType = BookRequest.class,
-      responseType = BookResponse.class,
+      requestType = com.xiaomi.demo.proto.BookRequest.class,
+      responseType = com.xiaomi.demo.proto.BookResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.CLIENT_STREAMING)
-  public static io.grpc.MethodDescriptor<BookRequest,
-      BookResponse> getGetBooks3Method() {
-    io.grpc.MethodDescriptor<BookRequest, BookResponse> getGetBooks3Method;
+  public static io.grpc.MethodDescriptor<com.xiaomi.demo.proto.BookRequest,
+      com.xiaomi.demo.proto.BookResponse> getGetBooks3Method() {
+    io.grpc.MethodDescriptor<com.xiaomi.demo.proto.BookRequest, com.xiaomi.demo.proto.BookResponse> getGetBooks3Method;
     if ((getGetBooks3Method = BookServiceGrpc.getGetBooks3Method) == null) {
       synchronized (BookServiceGrpc.class) {
         if ((getGetBooks3Method = BookServiceGrpc.getGetBooks3Method) == null) {
           BookServiceGrpc.getGetBooks3Method = getGetBooks3Method =
-              io.grpc.MethodDescriptor.<BookRequest, BookResponse>newBuilder()
+              io.grpc.MethodDescriptor.<com.xiaomi.demo.proto.BookRequest, com.xiaomi.demo.proto.BookResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.CLIENT_STREAMING)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "getBooks3"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  BookRequest.getDefaultInstance()))
+                  com.xiaomi.demo.proto.BookRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  BookResponse.getDefaultInstance()))
+                  com.xiaomi.demo.proto.BookResponse.getDefaultInstance()))
               .setSchemaDescriptor(new BookServiceMethodDescriptorSupplier("getBooks3"))
               .build();
         }
@@ -108,29 +108,29 @@ public final class BookServiceGrpc {
     return getGetBooks3Method;
   }
 
-  private static volatile io.grpc.MethodDescriptor<BookRequest,
-      BookResponse> getGetBooks4Method;
+  private static volatile io.grpc.MethodDescriptor<com.xiaomi.demo.proto.BookRequest,
+      com.xiaomi.demo.proto.BookResponse> getGetBooks4Method;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "getBooks4",
-      requestType = BookRequest.class,
-      responseType = BookResponse.class,
+      requestType = com.xiaomi.demo.proto.BookRequest.class,
+      responseType = com.xiaomi.demo.proto.BookResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
-  public static io.grpc.MethodDescriptor<BookRequest,
-      BookResponse> getGetBooks4Method() {
-    io.grpc.MethodDescriptor<BookRequest, BookResponse> getGetBooks4Method;
+  public static io.grpc.MethodDescriptor<com.xiaomi.demo.proto.BookRequest,
+      com.xiaomi.demo.proto.BookResponse> getGetBooks4Method() {
+    io.grpc.MethodDescriptor<com.xiaomi.demo.proto.BookRequest, com.xiaomi.demo.proto.BookResponse> getGetBooks4Method;
     if ((getGetBooks4Method = BookServiceGrpc.getGetBooks4Method) == null) {
       synchronized (BookServiceGrpc.class) {
         if ((getGetBooks4Method = BookServiceGrpc.getGetBooks4Method) == null) {
           BookServiceGrpc.getGetBooks4Method = getGetBooks4Method =
-              io.grpc.MethodDescriptor.<BookRequest, BookResponse>newBuilder()
+              io.grpc.MethodDescriptor.<com.xiaomi.demo.proto.BookRequest, com.xiaomi.demo.proto.BookResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.BIDI_STREAMING)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "getBooks4"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  BookRequest.getDefaultInstance()))
+                  com.xiaomi.demo.proto.BookRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  BookResponse.getDefaultInstance()))
+                  com.xiaomi.demo.proto.BookResponse.getDefaultInstance()))
               .setSchemaDescriptor(new BookServiceMethodDescriptorSupplier("getBooks4"))
               .build();
         }
@@ -145,7 +145,7 @@ public final class BookServiceGrpc {
   public static BookServiceStub newStub(io.grpc.Channel channel) {
     io.grpc.stub.AbstractStub.StubFactory<BookServiceStub> factory =
       new io.grpc.stub.AbstractStub.StubFactory<BookServiceStub>() {
-        @Override
+        @java.lang.Override
         public BookServiceStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
           return new BookServiceStub(channel, callOptions);
         }
@@ -160,7 +160,7 @@ public final class BookServiceGrpc {
       io.grpc.Channel channel) {
     io.grpc.stub.AbstractStub.StubFactory<BookServiceBlockingStub> factory =
       new io.grpc.stub.AbstractStub.StubFactory<BookServiceBlockingStub>() {
-        @Override
+        @java.lang.Override
         public BookServiceBlockingStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
           return new BookServiceBlockingStub(channel, callOptions);
         }
@@ -175,7 +175,7 @@ public final class BookServiceGrpc {
       io.grpc.Channel channel) {
     io.grpc.stub.AbstractStub.StubFactory<BookServiceFutureStub> factory =
       new io.grpc.stub.AbstractStub.StubFactory<BookServiceFutureStub>() {
-        @Override
+        @java.lang.Override
         public BookServiceFutureStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
           return new BookServiceFutureStub(channel, callOptions);
         }
@@ -189,61 +189,61 @@ public final class BookServiceGrpc {
 
     /**
      */
-    public void getBooks1(BookRequest request,
-                          io.grpc.stub.StreamObserver<BookResponse> responseObserver) {
+    public void getBooks1(com.xiaomi.demo.proto.BookRequest request,
+        io.grpc.stub.StreamObserver<com.xiaomi.demo.proto.BookResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetBooks1Method(), responseObserver);
     }
 
     /**
      */
-    public void getBooks2(BookRequest request,
-                          io.grpc.stub.StreamObserver<BookResponse> responseObserver) {
+    public void getBooks2(com.xiaomi.demo.proto.BookRequest request,
+        io.grpc.stub.StreamObserver<com.xiaomi.demo.proto.BookResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetBooks2Method(), responseObserver);
     }
 
     /**
      */
-    public io.grpc.stub.StreamObserver<BookRequest> getBooks3(
-        io.grpc.stub.StreamObserver<BookResponse> responseObserver) {
+    public io.grpc.stub.StreamObserver<com.xiaomi.demo.proto.BookRequest> getBooks3(
+        io.grpc.stub.StreamObserver<com.xiaomi.demo.proto.BookResponse> responseObserver) {
       return io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall(getGetBooks3Method(), responseObserver);
     }
 
     /**
      */
-    public io.grpc.stub.StreamObserver<BookRequest> getBooks4(
-        io.grpc.stub.StreamObserver<BookResponse> responseObserver) {
+    public io.grpc.stub.StreamObserver<com.xiaomi.demo.proto.BookRequest> getBooks4(
+        io.grpc.stub.StreamObserver<com.xiaomi.demo.proto.BookResponse> responseObserver) {
       return io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall(getGetBooks4Method(), responseObserver);
     }
 
-    @Override public final io.grpc.ServerServiceDefinition bindService() {
+    @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
             getGetBooks1Method(),
             io.grpc.stub.ServerCalls.asyncUnaryCall(
               new MethodHandlers<
-                BookRequest,
-                BookResponse>(
+                com.xiaomi.demo.proto.BookRequest,
+                com.xiaomi.demo.proto.BookResponse>(
                   this, METHODID_GET_BOOKS1)))
           .addMethod(
             getGetBooks2Method(),
             io.grpc.stub.ServerCalls.asyncServerStreamingCall(
               new MethodHandlers<
-                BookRequest,
-                BookResponse>(
+                com.xiaomi.demo.proto.BookRequest,
+                com.xiaomi.demo.proto.BookResponse>(
                   this, METHODID_GET_BOOKS2)))
           .addMethod(
             getGetBooks3Method(),
             io.grpc.stub.ServerCalls.asyncClientStreamingCall(
               new MethodHandlers<
-                BookRequest,
-                BookResponse>(
+                com.xiaomi.demo.proto.BookRequest,
+                com.xiaomi.demo.proto.BookResponse>(
                   this, METHODID_GET_BOOKS3)))
           .addMethod(
             getGetBooks4Method(),
             io.grpc.stub.ServerCalls.asyncBidiStreamingCall(
               new MethodHandlers<
-                BookRequest,
-                BookResponse>(
+                com.xiaomi.demo.proto.BookRequest,
+                com.xiaomi.demo.proto.BookResponse>(
                   this, METHODID_GET_BOOKS4)))
           .build();
     }
@@ -257,7 +257,7 @@ public final class BookServiceGrpc {
       super(channel, callOptions);
     }
 
-    @Override
+    @java.lang.Override
     protected BookServiceStub build(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new BookServiceStub(channel, callOptions);
@@ -265,32 +265,32 @@ public final class BookServiceGrpc {
 
     /**
      */
-    public void getBooks1(BookRequest request,
-                          io.grpc.stub.StreamObserver<BookResponse> responseObserver) {
+    public void getBooks1(com.xiaomi.demo.proto.BookRequest request,
+        io.grpc.stub.StreamObserver<com.xiaomi.demo.proto.BookResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getGetBooks1Method(), getCallOptions()), request, responseObserver);
     }
 
     /**
      */
-    public void getBooks2(BookRequest request,
-                          io.grpc.stub.StreamObserver<BookResponse> responseObserver) {
+    public void getBooks2(com.xiaomi.demo.proto.BookRequest request,
+        io.grpc.stub.StreamObserver<com.xiaomi.demo.proto.BookResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncServerStreamingCall(
           getChannel().newCall(getGetBooks2Method(), getCallOptions()), request, responseObserver);
     }
 
     /**
      */
-    public io.grpc.stub.StreamObserver<BookRequest> getBooks3(
-        io.grpc.stub.StreamObserver<BookResponse> responseObserver) {
+    public io.grpc.stub.StreamObserver<com.xiaomi.demo.proto.BookRequest> getBooks3(
+        io.grpc.stub.StreamObserver<com.xiaomi.demo.proto.BookResponse> responseObserver) {
       return io.grpc.stub.ClientCalls.asyncClientStreamingCall(
           getChannel().newCall(getGetBooks3Method(), getCallOptions()), responseObserver);
     }
 
     /**
      */
-    public io.grpc.stub.StreamObserver<BookRequest> getBooks4(
-        io.grpc.stub.StreamObserver<BookResponse> responseObserver) {
+    public io.grpc.stub.StreamObserver<com.xiaomi.demo.proto.BookRequest> getBooks4(
+        io.grpc.stub.StreamObserver<com.xiaomi.demo.proto.BookResponse> responseObserver) {
       return io.grpc.stub.ClientCalls.asyncBidiStreamingCall(
           getChannel().newCall(getGetBooks4Method(), getCallOptions()), responseObserver);
     }
@@ -304,7 +304,7 @@ public final class BookServiceGrpc {
       super(channel, callOptions);
     }
 
-    @Override
+    @java.lang.Override
     protected BookServiceBlockingStub build(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new BookServiceBlockingStub(channel, callOptions);
@@ -312,15 +312,15 @@ public final class BookServiceGrpc {
 
     /**
      */
-    public BookResponse getBooks1(BookRequest request) {
+    public com.xiaomi.demo.proto.BookResponse getBooks1(com.xiaomi.demo.proto.BookRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getGetBooks1Method(), getCallOptions(), request);
     }
 
     /**
      */
-    public java.util.Iterator<BookResponse> getBooks2(
-        BookRequest request) {
+    public java.util.Iterator<com.xiaomi.demo.proto.BookResponse> getBooks2(
+        com.xiaomi.demo.proto.BookRequest request) {
       return io.grpc.stub.ClientCalls.blockingServerStreamingCall(
           getChannel(), getGetBooks2Method(), getCallOptions(), request);
     }
@@ -334,7 +334,7 @@ public final class BookServiceGrpc {
       super(channel, callOptions);
     }
 
-    @Override
+    @java.lang.Override
     protected BookServiceFutureStub build(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new BookServiceFutureStub(channel, callOptions);
@@ -342,8 +342,8 @@ public final class BookServiceGrpc {
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<BookResponse> getBooks1(
-        BookRequest request) {
+    public com.google.common.util.concurrent.ListenableFuture<com.xiaomi.demo.proto.BookResponse> getBooks1(
+        com.xiaomi.demo.proto.BookRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getGetBooks1Method(), getCallOptions()), request);
     }
@@ -367,34 +367,34 @@ public final class BookServiceGrpc {
       this.methodId = methodId;
     }
 
-    @Override
-    @SuppressWarnings("unchecked")
+    @java.lang.Override
+    @java.lang.SuppressWarnings("unchecked")
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
         case METHODID_GET_BOOKS1:
-          serviceImpl.getBooks1((BookRequest) request,
-              (io.grpc.stub.StreamObserver<BookResponse>) responseObserver);
+          serviceImpl.getBooks1((com.xiaomi.demo.proto.BookRequest) request,
+              (io.grpc.stub.StreamObserver<com.xiaomi.demo.proto.BookResponse>) responseObserver);
           break;
         case METHODID_GET_BOOKS2:
-          serviceImpl.getBooks2((BookRequest) request,
-              (io.grpc.stub.StreamObserver<BookResponse>) responseObserver);
+          serviceImpl.getBooks2((com.xiaomi.demo.proto.BookRequest) request,
+              (io.grpc.stub.StreamObserver<com.xiaomi.demo.proto.BookResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
       }
     }
 
-    @Override
-    @SuppressWarnings("unchecked")
+    @java.lang.Override
+    @java.lang.SuppressWarnings("unchecked")
     public io.grpc.stub.StreamObserver<Req> invoke(
         io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
         case METHODID_GET_BOOKS3:
           return (io.grpc.stub.StreamObserver<Req>) serviceImpl.getBooks3(
-              (io.grpc.stub.StreamObserver<BookResponse>) responseObserver);
+              (io.grpc.stub.StreamObserver<com.xiaomi.demo.proto.BookResponse>) responseObserver);
         case METHODID_GET_BOOKS4:
           return (io.grpc.stub.StreamObserver<Req>) serviceImpl.getBooks4(
-              (io.grpc.stub.StreamObserver<BookResponse>) responseObserver);
+              (io.grpc.stub.StreamObserver<com.xiaomi.demo.proto.BookResponse>) responseObserver);
         default:
           throw new AssertionError();
       }
@@ -405,12 +405,12 @@ public final class BookServiceGrpc {
       implements io.grpc.protobuf.ProtoFileDescriptorSupplier, io.grpc.protobuf.ProtoServiceDescriptorSupplier {
     BookServiceBaseDescriptorSupplier() {}
 
-    @Override
+    @java.lang.Override
     public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
-      return BookOuterClass.getDescriptor();
+      return com.xiaomi.demo.proto.BookOuterClass.getDescriptor();
     }
 
-    @Override
+    @java.lang.Override
     public com.google.protobuf.Descriptors.ServiceDescriptor getServiceDescriptor() {
       return getFileDescriptor().findServiceByName("BookService");
     }
@@ -430,7 +430,7 @@ public final class BookServiceGrpc {
       this.methodName = methodName;
     }
 
-    @Override
+    @java.lang.Override
     public com.google.protobuf.Descriptors.MethodDescriptor getMethodDescriptor() {
       return getServiceDescriptor().findMethodByName(methodName);
     }

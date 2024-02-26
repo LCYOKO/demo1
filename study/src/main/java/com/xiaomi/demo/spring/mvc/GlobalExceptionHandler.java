@@ -1,4 +1,4 @@
-package com.xiaomi.common.web.advice;
+package com.xiaomi.demo.spring.mvc;
 
 
 import com.xiaomi.common.web.constants.HttpCode;
@@ -8,6 +8,7 @@ import com.xiaomi.common.web.result.ServiceException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.validation.BindException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -16,11 +17,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.HandlerMethod;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.ConstraintViolationException;
 
-/**
- * @author: yukai
- * @create: 2023-11-20 19:18:51
- */
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -65,6 +63,20 @@ public class GlobalExceptionHandler {
         return JsonResult.error(HttpCode.PARAM_ERROR);
     }
 
+    @ExceptionHandler
+    @ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
+    public JsonResult<?> paramError(BindException ex) {
+        log.error("paramError:{}", ex.getAllErrors());
+        return JsonResult.error();
+    }
+
+    @ExceptionHandler
+    @ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
+    public JsonResult<Void> paramHasError(ConstraintViolationException ex) {
+        log.error("paramError", ex);
+        return JsonResult.error();
+    }
+
     /**
      * 业务异常拦截
      */
@@ -73,7 +85,6 @@ public class GlobalExceptionHandler {
         log.error("业务服务异常:", httpRequestMethodNotSupportedException);
         return JsonResult.error(HttpCode.PARAM_REQUEST_METHOD_ERROR, httpRequestMethodNotSupportedException.getMessage());
     }
-
 
     @ExceptionHandler(value = {RuntimeException.class, Exception.class})
     @ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)

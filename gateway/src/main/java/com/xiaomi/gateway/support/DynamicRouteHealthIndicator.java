@@ -1,7 +1,5 @@
 package com.xiaomi.gateway.support;
 
-import com.jxyh.project.common.core.constant.CacheConstants;
-import com.xiaomi.gateway.utils.CacheConstants;
 import com.xiaomi.gateway.utils.Constants;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

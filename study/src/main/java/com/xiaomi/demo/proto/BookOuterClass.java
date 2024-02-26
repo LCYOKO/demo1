@@ -42,7 +42,7 @@ public final class BookOuterClass {
   private static  com.google.protobuf.Descriptors.FileDescriptor
       descriptor;
   static {
-    String[] descriptorData = {
+    java.lang.String[] descriptorData = {
       "\n\nBook.proto\032\036google/protobuf/wrappers.p" +
       "roto\"(\n\004Book\022\016\n\006bookId\030\001 \001(\003\022\020\n\010bookName" +
       "\030\002 \001(\t\"_\n\013BookRequest\022\016\n\006bookId\030\001 \001(\003\0223\n" +
@@ -70,25 +70,25 @@ public final class BookOuterClass {
     internal_static_Book_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Book_descriptor,
-        new String[] { "BookId", "BookName", });
+        new java.lang.String[] { "BookId", "BookName", });
     internal_static_BookRequest_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_BookRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_BookRequest_descriptor,
-        new String[] { "BookId", "BookName", "BookName", });
+        new java.lang.String[] { "BookId", "BookName", "BookName", });
     internal_static_BookResponse_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_BookResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_BookResponse_descriptor,
-        new String[] { "Books", "Status", "BookMap", });
+        new java.lang.String[] { "Books", "Status", "BookMap", });
     internal_static_BookResponse_BookMapEntry_descriptor =
       internal_static_BookResponse_descriptor.getNestedTypes().get(0);
     internal_static_BookResponse_BookMapEntry_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_BookResponse_BookMapEntry_descriptor,
-        new String[] { "Key", "Value", });
+        new java.lang.String[] { "Key", "Value", });
     com.google.protobuf.WrappersProto.getDescriptor();
   }
 

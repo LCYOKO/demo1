@@ -3,7 +3,7 @@ package com.xiaomi.auth.controller;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.dev33.satoken.util.SaResult;
 import com.xiaomi.auth.req.UserLoginReq;
-import com.xiaomi.common.web.JsonResult;
+import com.xiaomi.common.web.result.JsonResult;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 

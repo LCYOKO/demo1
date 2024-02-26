@@ -17,7 +17,7 @@ public interface BookOrBuilder extends
    * <code>string bookName = 2;</code>
    * @return The bookName.
    */
-  String getBookName();
+  java.lang.String getBookName();
   /**
    * <code>string bookName = 2;</code>
    * @return The bytes for bookName.

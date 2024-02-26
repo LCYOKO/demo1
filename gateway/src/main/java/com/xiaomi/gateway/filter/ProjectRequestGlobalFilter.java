@@ -17,8 +17,6 @@
 
 package com.xiaomi.gateway.filter;
 
-import com.jxyh.project.common.core.constant.CommonConstants;
-import com.jxyh.project.common.core.constant.SecurityConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
@@ -63,12 +61,13 @@ public class ProjectRequestGlobalFilter implements GlobalFilter, Ordered {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         // 1. 清洗请求头中from 参数
-        ServerHttpRequest request = exchange.getRequest().mutate().headers(httpHeaders -> {
-            httpHeaders.remove(SecurityConstants.FROM);
-            // 设置请求时间
-            httpHeaders.put(CommonConstants.REQUEST_START_TIME,
-                    Collections.singletonList(String.valueOf(System.currentTimeMillis())));
-        }).build();
+        ServerHttpRequest request = null;
+//        exchange.getRequest().mutate().headers(httpHeaders -> {
+//            httpHeaders.remove(SecurityConstants.FROM);
+//            // 设置请求时间
+//            httpHeaders.put(CommonConstants.REQUEST_START_TIME,
+//                    Collections.singletonList(String.valueOf(System.currentTimeMillis())));
+//        }).build();
 
         // 2. 重写StripPrefix
         addOriginalRequestUrl(exchange, request.getURI());

@@ -1,10 +1,10 @@
-package com.xiaomi.demo.jvm;
+package com.xiaomi.demo.java;
 
 /**
  * @Author: liuchiyun
- * @Date: 2023/12/14
+ * @Date: 2024/2/26
  */
-public class Compile {
+public class TestOptimize {
     /**
      * 即时编译
      * 从 Java 8 开始，Java 虚拟机默认采用分层编译的方式。

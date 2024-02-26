@@ -1,4 +1,4 @@
-package com.xiaomi.demo.spring;
+package com.xiaomi.demo.spring.core;
 
 import java.io.IOException;
 import java.nio.channels.Selector;

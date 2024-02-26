@@ -17,13 +17,8 @@
 
 package com.xiaomi.gateway.handler;
 
-import com.anji.captcha.model.common.ResponseModel;
-import com.anji.captcha.model.vo.CaptchaVO;
-import com.anji.captcha.service.CaptchaService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jxyh.project.common.core.constant.CommonConstants;
-import com.jxyh.project.common.core.util.R;
-import com.jxyh.project.common.core.util.SpringContextHolder;
+import com.xiaomi.common.web.result.JsonResult;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -45,18 +40,18 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class ImageCodeCreateHandler implements HandlerFunction<ServerResponse> {
 
-	private final ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper;
 
-	@Override
-	@SneakyThrows
-	public Mono<ServerResponse> handle(ServerRequest serverRequest) {
-		CaptchaVO vo = new CaptchaVO();
-		vo.setCaptchaType(CommonConstants.IMAGE_CODE_TYPE);
-		CaptchaService captchaService = SpringContextHolder.getBean(CaptchaService.class);
-		ResponseModel responseModel = captchaService.get(vo);
+    @Override
+    @SneakyThrows
+    public Mono<ServerResponse> handle(ServerRequest serverRequest) {
+//		CaptchaVO vo = new CaptchaVO();
+//		vo.setCaptchaType(CommonConstants.IMAGE_CODE_TYPE);
+//		CaptchaService captchaService = SpringContextHolder.getBean(CaptchaService.class);
+//		ResponseModel responseModel = captchaService.get(vo);
 
-		return ServerResponse.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON)
-				.body(BodyInserters.fromValue(objectMapper.writeValueAsString(R.ok(responseModel))));
-	}
+        return ServerResponse.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON)
+                .body(BodyInserters.fromValue(objectMapper.writeValueAsString(JsonResult.ok())));
+    }
 
 }

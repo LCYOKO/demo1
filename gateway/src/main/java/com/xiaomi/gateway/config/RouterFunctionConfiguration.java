@@ -17,9 +17,9 @@
 
 package com.xiaomi.gateway.config;
 
-import com.jxyh.project.gateway.handler.ImageCodeCheckHandler;
-import com.jxyh.project.gateway.handler.ImageCodeCreateHandler;
-import com.jxyh.project.gateway.handler.ImageCodeFlagHandler;
+import com.xiaomi.gateway.handler.ImageCodeCheckHandler;
+import com.xiaomi.gateway.handler.ImageCodeCreateHandler;
+import com.xiaomi.gateway.handler.ImageCodeFlagHandler;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -38,22 +38,22 @@ import org.springframework.web.reactive.function.server.RouterFunctions;
 @AllArgsConstructor
 public class RouterFunctionConfiguration {
 
-	private final ImageCodeCheckHandler imageCodeCheckHandler;
+    private final ImageCodeCheckHandler imageCodeCheckHandler;
 
-	private final ImageCodeCreateHandler imageCodeCreateHandler;
+    private final ImageCodeCreateHandler imageCodeCreateHandler;
 
-	private final ImageCodeFlagHandler imageCodeFlagHandler;
+    private final ImageCodeFlagHandler imageCodeFlagHandler;
 
-	@Bean
-	public RouterFunction routerFunction() {
-		return RouterFunctions
-				.route(RequestPredicates.path("/code/create").and(RequestPredicates.accept(MediaType.TEXT_PLAIN)),
-						imageCodeCreateHandler)
-				.andRoute(RequestPredicates.POST("/code/check").and(RequestPredicates.accept(MediaType.ALL)),
-						imageCodeCheckHandler)
-				.andRoute(RequestPredicates.GET("/code/flag").and(RequestPredicates.accept(MediaType.ALL)),
-						imageCodeFlagHandler);
+    @Bean
+    public RouterFunction routerFunction() {
+        return RouterFunctions
+                .route(RequestPredicates.path("/code/create").and(RequestPredicates.accept(MediaType.TEXT_PLAIN)),
+                        imageCodeCreateHandler)
+                .andRoute(RequestPredicates.POST("/code/check").and(RequestPredicates.accept(MediaType.ALL)),
+                        imageCodeCheckHandler)
+                .andRoute(RequestPredicates.GET("/code/flag").and(RequestPredicates.accept(MediaType.ALL)),
+                        imageCodeFlagHandler);
 
-	}
+    }
 
 }

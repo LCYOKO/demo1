@@ -1,4 +1,4 @@
-package com.xiaomi.demo.spring;
+package com.xiaomi.demo.spring.mvc;
 
 import com.xiaomi.demo.spring.mvc.LoggingRequestAndResponseFilter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;

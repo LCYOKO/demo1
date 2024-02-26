@@ -17,8 +17,8 @@
 
 package com.xiaomi.gateway.handler;
 
-import com.jxyh.project.common.core.util.R;
-import com.jxyh.project.gateway.filter.ValidateCodeGatewayFilter;
+import com.xiaomi.common.web.result.JsonResult;
+import com.xiaomi.gateway.filter.ValidateCodeGatewayFilter;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -40,13 +40,13 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class ImageCodeFlagHandler implements HandlerFunction<ServerResponse> {
 
-	private final ValidateCodeGatewayFilter validateCodeGatewayFilter;
+    private final ValidateCodeGatewayFilter validateCodeGatewayFilter;
 
-	@Override
-	@SneakyThrows
-	public Mono<ServerResponse> handle(ServerRequest serverRequest) {
-		return ServerResponse.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON)
-				.body(BodyInserters.fromValue(R.ok(validateCodeGatewayFilter.isCheckCaptchaClient(serverRequest.exchange().getRequest()))));
-	}
+    @Override
+    @SneakyThrows
+    public Mono<ServerResponse> handle(ServerRequest serverRequest) {
+        return ServerResponse.status(HttpStatus.OK).contentType(MediaType.APPLICATION_JSON)
+                .body(BodyInserters.fromValue(JsonResult.ok(validateCodeGatewayFilter.isCheckCaptchaClient(serverRequest.exchange().getRequest()))));
+    }
 
 }

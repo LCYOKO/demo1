@@ -1,18 +1,19 @@
-package com.xiaomi.demo.jvm;
+package com.xiaomi.demo.java;
 
 import lombok.Builder;
 import lombok.Data;
 import org.openjdk.jol.info.ClassLayout;
 
+import java.lang.ref.PhantomReference;
+import java.lang.ref.ReferenceQueue;
 import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
 
 /**
  * @Author: liuchiyun
- * @Date: 2023/12/14
+ * @Date: 2024/2/26
  */
-public class Basic {
-
+public class TestJvmBasic {
     /**
      * JVM内存分区
      * 私有:
@@ -25,6 +26,9 @@ public class Basic {
      * 方法区:  存放类相关的信息和常量
      * 1.7 这个地方成为永久代，在堆中
      * 1.8 常量池放到堆中，类相关信息放堆外称元空间
+     * <p>
+     * 特殊：
+     * 堆外：直接内存，DirectBuffer
      */
     public void test1() {
 
@@ -45,7 +49,7 @@ public class Basic {
         //弱引用
         WeakReference<Car> weakReference = new WeakReference<>(car);
         //虚引用
-//        PhantomReference<Car> phantomReference = new PhantomReference<>();
+        PhantomReference<Car> phantomReference = new PhantomReference<>(car, new ReferenceQueue<>());
     }
 
     /**
