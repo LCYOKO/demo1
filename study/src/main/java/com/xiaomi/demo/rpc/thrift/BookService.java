@@ -12,7 +12,6 @@ import org.apache.thrift.scheme.StandardScheme;
 
 import org.apache.thrift.scheme.TupleScheme;
 import org.apache.thrift.protocol.TTupleProtocol;
-import org.apache.thrift.protocol.TProtocolException;
 import org.apache.thrift.EncodingUtils;
 import org.apache.thrift.TException;
 import org.apache.thrift.async.AsyncMethodCallback;
@@ -22,13 +21,9 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.EnumMap;
-import java.util.Set;
-import java.util.HashSet;
 import java.util.EnumSet;
 import java.util.Collections;
 import java.util.BitSet;
-import java.nio.ByteBuffer;
-import java.util.Arrays;
 import javax.annotation.Generated;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,17 +34,17 @@ public class BookService {
 
   public interface Iface {
 
-    public BookInfo getBookInfo(int bookId) throws org.apache.thrift.TException;
+    public BookInfo getBookInfo(int bookId) throws TException;
 
-    public List<Book> getAllBook() throws org.apache.thrift.TException;
+    public List<Book> getAllBook() throws TException;
 
   }
 
   public interface AsyncIface {
 
-    public void getBookInfo(int bookId, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void getBookInfo(int bookId, AsyncMethodCallback resultHandler) throws TException;
 
-    public void getAllBook(org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException;
+    public void getAllBook(AsyncMethodCallback resultHandler) throws TException;
 
   }
 
@@ -73,20 +68,20 @@ public class BookService {
       super(iprot, oprot);
     }
 
-    public BookInfo getBookInfo(int bookId) throws org.apache.thrift.TException
+    public BookInfo getBookInfo(int bookId) throws TException
     {
       send_getBookInfo(bookId);
       return recv_getBookInfo();
     }
 
-    public void send_getBookInfo(int bookId) throws org.apache.thrift.TException
+    public void send_getBookInfo(int bookId) throws TException
     {
       getBookInfo_args args = new getBookInfo_args();
       args.setBookId(bookId);
       sendBase("getBookInfo", args);
     }
 
-    public BookInfo recv_getBookInfo() throws org.apache.thrift.TException
+    public BookInfo recv_getBookInfo() throws TException
     {
       getBookInfo_result result = new getBookInfo_result();
       receiveBase(result, "getBookInfo");
@@ -96,19 +91,19 @@ public class BookService {
       throw new org.apache.thrift.TApplicationException(org.apache.thrift.TApplicationException.MISSING_RESULT, "getBookInfo failed: unknown result");
     }
 
-    public List<Book> getAllBook() throws org.apache.thrift.TException
+    public List<Book> getAllBook() throws TException
     {
       send_getAllBook();
       return recv_getAllBook();
     }
 
-    public void send_getAllBook() throws org.apache.thrift.TException
+    public void send_getAllBook() throws TException
     {
       getAllBook_args args = new getAllBook_args();
       sendBase("getAllBook", args);
     }
 
-    public List<Book> recv_getAllBook() throws org.apache.thrift.TException
+    public List<Book> recv_getAllBook() throws TException
     {
       getAllBook_result result = new getAllBook_result();
       receiveBase(result, "getAllBook");
@@ -136,7 +131,7 @@ public class BookService {
       super(protocolFactory, clientManager, transport);
     }
 
-    public void getBookInfo(int bookId, org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void getBookInfo(int bookId, AsyncMethodCallback resultHandler) throws TException {
       checkReady();
       getBookInfo_call method_call = new getBookInfo_call(bookId, resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
@@ -145,12 +140,12 @@ public class BookService {
 
     public static class getBookInfo_call extends org.apache.thrift.async.TAsyncMethodCall {
       private int bookId;
-      public getBookInfo_call(int bookId, org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public getBookInfo_call(int bookId, AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws TException {
         super(client, protocolFactory, transport, resultHandler, false);
         this.bookId = bookId;
       }
 
-      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("getBookInfo", org.apache.thrift.protocol.TMessageType.CALL, 0));
         getBookInfo_args args = new getBookInfo_args();
         args.setBookId(bookId);
@@ -158,8 +153,8 @@ public class BookService {
         prot.writeMessageEnd();
       }
 
-      public BookInfo getResult() throws org.apache.thrift.TException {
-        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+      public BookInfo getResult() throws TException {
+        if (getState() != State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
@@ -168,7 +163,7 @@ public class BookService {
       }
     }
 
-    public void getAllBook(org.apache.thrift.async.AsyncMethodCallback resultHandler) throws org.apache.thrift.TException {
+    public void getAllBook(AsyncMethodCallback resultHandler) throws TException {
       checkReady();
       getAllBook_call method_call = new getAllBook_call(resultHandler, this, ___protocolFactory, ___transport);
       this.___currentMethod = method_call;
@@ -176,19 +171,19 @@ public class BookService {
     }
 
     public static class getAllBook_call extends org.apache.thrift.async.TAsyncMethodCall {
-      public getAllBook_call(org.apache.thrift.async.AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws org.apache.thrift.TException {
+      public getAllBook_call(AsyncMethodCallback resultHandler, org.apache.thrift.async.TAsyncClient client, org.apache.thrift.protocol.TProtocolFactory protocolFactory, org.apache.thrift.transport.TNonblockingTransport transport) throws TException {
         super(client, protocolFactory, transport, resultHandler, false);
       }
 
-      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws org.apache.thrift.TException {
+      public void write_args(org.apache.thrift.protocol.TProtocol prot) throws TException {
         prot.writeMessageBegin(new org.apache.thrift.protocol.TMessage("getAllBook", org.apache.thrift.protocol.TMessageType.CALL, 0));
         getAllBook_args args = new getAllBook_args();
         args.write(prot);
         prot.writeMessageEnd();
       }
 
-      public List<Book> getResult() throws org.apache.thrift.TException {
-        if (getState() != org.apache.thrift.async.TAsyncMethodCall.State.RESPONSE_READ) {
+      public List<Book> getResult() throws TException {
+        if (getState() != State.RESPONSE_READ) {
           throw new IllegalStateException("Method call not finished!");
         }
         org.apache.thrift.transport.TMemoryInputTransport memoryTransport = new org.apache.thrift.transport.TMemoryInputTransport(getFrameBuffer().array());
@@ -228,7 +223,7 @@ public class BookService {
         return false;
       }
 
-      public getBookInfo_result getResult(I iface, getBookInfo_args args) throws org.apache.thrift.TException {
+      public getBookInfo_result getResult(I iface, getBookInfo_args args) throws TException {
         getBookInfo_result result = new getBookInfo_result();
         result.success = iface.getBookInfo(args.bookId);
         return result;
@@ -248,7 +243,7 @@ public class BookService {
         return false;
       }
 
-      public getAllBook_result getResult(I iface, getAllBook_args args) throws org.apache.thrift.TException {
+      public getAllBook_result getResult(I iface, getAllBook_args args) throws TException {
         getAllBook_result result = new getAllBook_result();
         result.success = iface.getAllBook();
         return result;
@@ -319,7 +314,7 @@ public class BookService {
         return false;
       }
 
-      public void start(I iface, getBookInfo_args args, org.apache.thrift.async.AsyncMethodCallback<BookInfo> resultHandler) throws TException {
+      public void start(I iface, getBookInfo_args args, AsyncMethodCallback<BookInfo> resultHandler) throws TException {
         iface.getBookInfo(args.bookId,resultHandler);
       }
     }
@@ -370,7 +365,7 @@ public class BookService {
         return false;
       }
 
-      public void start(I iface, getAllBook_args args, org.apache.thrift.async.AsyncMethodCallback<List<Book>> resultHandler) throws TException {
+      public void start(I iface, getAllBook_args args, AsyncMethodCallback<List<Book>> resultHandler) throws TException {
         iface.getAllBook(resultHandler);
       }
     }
@@ -609,11 +604,11 @@ public class BookService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
     }
 
@@ -629,7 +624,7 @@ public class BookService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -637,7 +632,7 @@ public class BookService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -647,7 +642,7 @@ public class BookService {
         // it doesn't seem like you should have to do this, but java serialization is wacky, and doesn't call the default constructor.
         __isset_bitfield = 0;
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -660,7 +655,7 @@ public class BookService {
 
     private static class getBookInfo_argsStandardScheme extends StandardScheme<getBookInfo_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, getBookInfo_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, getBookInfo_args struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -689,7 +684,7 @@ public class BookService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, getBookInfo_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, getBookInfo_args struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -711,7 +706,7 @@ public class BookService {
     private static class getBookInfo_argsTupleScheme extends TupleScheme<getBookInfo_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, getBookInfo_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, getBookInfo_args struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetBookId()) {
@@ -724,7 +719,7 @@ public class BookService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, getBookInfo_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, getBookInfo_args struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -966,11 +961,11 @@ public class BookService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
       }
 
@@ -990,7 +985,7 @@ public class BookService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
       if (success != null) {
@@ -1001,7 +996,7 @@ public class BookService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -1009,7 +1004,7 @@ public class BookService {
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -1022,7 +1017,7 @@ public class BookService {
 
     private static class getBookInfo_resultStandardScheme extends StandardScheme<getBookInfo_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, getBookInfo_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, getBookInfo_result struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -1052,7 +1047,7 @@ public class BookService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, getBookInfo_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, getBookInfo_result struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -1076,7 +1071,7 @@ public class BookService {
     private static class getBookInfo_resultTupleScheme extends TupleScheme<getBookInfo_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, getBookInfo_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, getBookInfo_result struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetSuccess()) {
@@ -1089,7 +1084,7 @@ public class BookService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, getBookInfo_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, getBookInfo_result struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
@@ -1252,11 +1247,11 @@ public class BookService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
     }
 
@@ -1269,7 +1264,7 @@ public class BookService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -1277,7 +1272,7 @@ public class BookService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -1285,7 +1280,7 @@ public class BookService {
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -1298,7 +1293,7 @@ public class BookService {
 
     private static class getAllBook_argsStandardScheme extends StandardScheme<getAllBook_args> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, getAllBook_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, getAllBook_args struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -1319,7 +1314,7 @@ public class BookService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, getAllBook_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, getAllBook_args struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -1338,12 +1333,12 @@ public class BookService {
     private static class getAllBook_argsTupleScheme extends TupleScheme<getAllBook_args> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, getAllBook_args struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, getAllBook_args struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, getAllBook_args struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, getAllBook_args struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
       }
     }
@@ -1600,11 +1595,11 @@ public class BookService {
       return _Fields.findByThriftId(fieldId);
     }
 
-    public void read(org.apache.thrift.protocol.TProtocol iprot) throws org.apache.thrift.TException {
+    public void read(org.apache.thrift.protocol.TProtocol iprot) throws TException {
       schemes.get(iprot.getScheme()).getScheme().read(iprot, this);
     }
 
-    public void write(org.apache.thrift.protocol.TProtocol oprot) throws org.apache.thrift.TException {
+    public void write(org.apache.thrift.protocol.TProtocol oprot) throws TException {
       schemes.get(oprot.getScheme()).getScheme().write(oprot, this);
       }
 
@@ -1624,7 +1619,7 @@ public class BookService {
       return sb.toString();
     }
 
-    public void validate() throws org.apache.thrift.TException {
+    public void validate() throws TException {
       // check for required fields
       // check for sub-struct validity
     }
@@ -1632,7 +1627,7 @@ public class BookService {
     private void writeObject(java.io.ObjectOutputStream out) throws java.io.IOException {
       try {
         write(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(out)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -1640,7 +1635,7 @@ public class BookService {
     private void readObject(java.io.ObjectInputStream in) throws java.io.IOException, ClassNotFoundException {
       try {
         read(new org.apache.thrift.protocol.TCompactProtocol(new org.apache.thrift.transport.TIOStreamTransport(in)));
-      } catch (org.apache.thrift.TException te) {
+      } catch (TException te) {
         throw new java.io.IOException(te);
       }
     }
@@ -1653,7 +1648,7 @@ public class BookService {
 
     private static class getAllBook_resultStandardScheme extends StandardScheme<getAllBook_result> {
 
-      public void read(org.apache.thrift.protocol.TProtocol iprot, getAllBook_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol iprot, getAllBook_result struct) throws TException {
         org.apache.thrift.protocol.TField schemeField;
         iprot.readStructBegin();
         while (true)
@@ -1693,7 +1688,7 @@ public class BookService {
         struct.validate();
       }
 
-      public void write(org.apache.thrift.protocol.TProtocol oprot, getAllBook_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol oprot, getAllBook_result struct) throws TException {
         struct.validate();
 
         oprot.writeStructBegin(STRUCT_DESC);
@@ -1724,7 +1719,7 @@ public class BookService {
     private static class getAllBook_resultTupleScheme extends TupleScheme<getAllBook_result> {
 
       @Override
-      public void write(org.apache.thrift.protocol.TProtocol prot, getAllBook_result struct) throws org.apache.thrift.TException {
+      public void write(org.apache.thrift.protocol.TProtocol prot, getAllBook_result struct) throws TException {
         TTupleProtocol oprot = (TTupleProtocol) prot;
         BitSet optionals = new BitSet();
         if (struct.isSetSuccess()) {
@@ -1743,7 +1738,7 @@ public class BookService {
       }
 
       @Override
-      public void read(org.apache.thrift.protocol.TProtocol prot, getAllBook_result struct) throws org.apache.thrift.TException {
+      public void read(org.apache.thrift.protocol.TProtocol prot, getAllBook_result struct) throws TException {
         TTupleProtocol iprot = (TTupleProtocol) prot;
         BitSet incoming = iprot.readBitSet(1);
         if (incoming.get(0)) {
