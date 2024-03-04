@@ -19,11 +19,6 @@ public class RedisClient {
      */
     private static final long DEFAULT_TIME_OUT = 10;
 
-    /**
-     * 默认过期时间, 单位:s
-     */
-    private final static int DEFAULT_EXPIRE_TIME = 10 * 60 * 60;
-
     private static final TimeUnit DEFAULT_TIMEUNIT = TimeUnit.MINUTES;
 
     public RedisClient(RedisTemplate<String, Object> redisTemplate) {
