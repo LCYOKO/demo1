@@ -1,6 +1,9 @@
 spring:
+  h2
   datasource:
-    url: jdbc:h2:./data/test;AUTO_SERVER=TRUE
+    url: jdbc:h2:mem:testdb;MODE=MYSQL;DB_CLOSE_DELAY=-1
     username: sa
     password: 123456
     driver-class-name: org.h2.Driver
+    schema: classpath:/script/init.sql
+    data: classpath:/script/data.sql

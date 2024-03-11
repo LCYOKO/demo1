@@ -6,7 +6,6 @@ import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.read.listener.ReadListener;
 import lombok.Data;
 import org.junit.Test;
-import org.springframework.http.HttpStatus;
 
 import java.io.File;
 import java.util.Collection;
@@ -19,7 +18,7 @@ import java.util.function.Supplier;
  * @Author: liuchiyun
  * @Date: 2024/2/8
  */
-public class TestApp {
+public class ExcelTest {
     @Test
     public void test() {
         Map<String, Item> map = new HashMap<>();

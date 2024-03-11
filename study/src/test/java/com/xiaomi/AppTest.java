@@ -1,25 +1,48 @@
 package com.xiaomi;
 
-import org.junit.Before;
+import com.xiaomi.demo.DemoApplication;
+import lombok.Data;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.junit4.SpringRunner;
 
 /**
  * Unit test for simple App.
  */
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = DemoApplication.class, properties = "application-test.yaml")
 public class AppTest {
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
-    @Before
-    public void before() {
-        System.out.println("before");
+    @Sql(value = {
+            "/script/init.sql",
+            "/script/data.sql"
+    })
+    @Test
+    public void init() {
+        System.out.println("init");
     }
 
     @Test
-    public void shouldAnswerWithTrue() {
-        System.out.println(1);
+    public void test1() {
+        System.out.println(jdbcTemplate.query("select * from users", new BeanPropertyRowMapper<User>(User.class)));
     }
 
     @Test
     public void test2() {
         System.out.println(2);
+    }
+
+    @Data
+    public static class User {
+        private Long id;
+        private String email;
+        private int age;
     }
 }

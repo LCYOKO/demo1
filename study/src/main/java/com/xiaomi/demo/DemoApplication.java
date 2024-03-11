@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 /**
  * @author liuchiyun
  */
-@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, KafkaAutoConfiguration.class})
+@SpringBootApplication(exclude = { KafkaAutoConfiguration.class})
 @EnableTransactionManagement
 @EnableAspectJAutoProxy
 //@EnableApolloConfig
