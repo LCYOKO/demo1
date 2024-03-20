@@ -25,8 +25,8 @@ public class Test {
      * 2）该selector会遍历所有的META-INF/spring.factories文件，把对象的全类名添加到集合
      * 3）直接返回该集合，并注册到BD递归解析。
      */
+//    @SpringBootApplication
     public static void main(String[] args) {
-//        @SpringBootApplication
         SpringApplication.run(DemoApplication.class, args);
     }
 }
