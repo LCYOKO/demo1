@@ -3,9 +3,14 @@ package com.xiaomi.demo.spring.mvc;
 import com.xiaomi.demo.spring.mvc.LoggingRequestAndResponseFilter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.MessageSourceResourceBundle;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.filter.CommonsRequestLoggingFilter;
+
+import java.nio.charset.StandardCharsets;
 
 /**
  * @Author: liuchiyun
@@ -13,7 +18,7 @@ import org.springframework.web.filter.CommonsRequestLoggingFilter;
  */
 @Configuration
 public class Config {
-//    @Bean
+    //    @Bean
     public FilterRegistrationBean<CommonsRequestLoggingFilter> logFilterRegistration() {
         CommonsRequestLoggingFilter filter = new LoggingRequestAndResponseFilter();
         // 是否打印header中的内容，参数很多
@@ -41,5 +46,13 @@ public class Config {
         registration.setOrder(0);
         registration.setName("commonsRequestLoggingFilter");
         return registration;
+    }
+
+    @Bean
+    public MessageSource messageSource() {
+        ResourceBundleMessageSource messageSourceResourceBundle = new ResourceBundleMessageSource();
+        messageSourceResourceBundle.setBasename("i18n/messages");
+        messageSourceResourceBundle.setDefaultEncoding(StandardCharsets.UTF_8.name());
+        return messageSourceResourceBundle;
     }
 }

@@ -10,14 +10,14 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 /**
  * @author liuchiyun
  */
-@SpringBootApplication(exclude = { KafkaAutoConfiguration.class})
+@SpringBootApplication(exclude = {KafkaAutoConfiguration.class, DataSourceAutoConfiguration.class})
 @EnableTransactionManagement
 @EnableAspectJAutoProxy
 //@EnableApolloConfig
 //@NacosPropertySource(dataId = "test", autoRefreshed = true)
 public class DemoApplication {
     public static void main(String[] args) {
-        
+
         SpringApplication.run(DemoApplication.class, args);
     }
 }
