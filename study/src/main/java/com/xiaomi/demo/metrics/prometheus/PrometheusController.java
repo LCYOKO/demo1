@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/prometheus")
 public class PrometheusController {
+
     @Autowired(required = false)
     private MeterRegistry meterRegistry;
 

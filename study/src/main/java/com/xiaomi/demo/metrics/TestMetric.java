@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
  * <p>
  * 回答是：没有关系，并存关系。
  * <p>
- * 我们知道，Spring2监控框架是基于Micrometer，并深度集成的。然而Hadoop、HBase则是基于Dropwizard-Metrics拓展开来，你猜是为什么？先读读下面一句话。
+ * 我们知道，Spring监控框架是基于Micrometer，并深度集成的。然而Hadoop、HBase则是基于Dropwizard-Metrics拓展开来，你猜是为什么？先读读下面一句话。
  * “springboot2在spring-boot-actuator中引入了micrometer，对1.x的metrics进行了重构，另外支持对接的监控系统也更加丰富(Atlas、Datadog、Ganglia、Graphite、Influx、JMX、NewRelic、Prometheus、SignalFx、StatsD、Wavefront)。1.x的metrics都有点对齐dropwizard-metrics的味道，而micrometer除了一些基本metrics与dropwizard-metrics相类似外，重点支持了tag。这是一个很重要的信号，标志着老一代的statsd、graphite逐步让步于支持tag的influx以及prometheus。”
  * 看着好像Micrometer更强大似的，简直像Dropwizard-Metrics二代升级版呀！不仅对接的监控系统更加丰富，而且还重点支持了tag
  */
