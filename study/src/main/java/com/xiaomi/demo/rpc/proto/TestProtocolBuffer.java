@@ -13,7 +13,7 @@ public class TestProtocolBuffer {
         BookRequest.Builder builder = BookRequest.newBuilder();
         builder.setBookId(1L);
         BookRequest request = builder.build();
-        System.out.println(request.toString());
+        System.out.println(request);
     }
 
 //    public static void startClient(){
