@@ -44,7 +44,7 @@ public class AlgoTest {
         boolean[][] visited = new boolean[n][m];
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
-                if(i==0 || i == n - 1 || j == 0 || j == m - 1) {
+                if (i == 0 || i == n - 1 || j == 0 || j == m - 1) {
                     que.add(new int[]{i, j, heightMap[i][j]});
                     visited[i][j] = true;
                 }
