@@ -21,7 +21,6 @@ app:
 apollo:
   meta: http://localhost:8080
 
-
 management:
   server:
     port:
@@ -98,3 +97,5 @@ management:
 http:
   respLog:
     enabled: true
+
+env: sv
