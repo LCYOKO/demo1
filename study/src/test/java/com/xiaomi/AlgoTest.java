@@ -1,13 +1,10 @@
 package com.xiaomi;
 
-import org.apache.rocketmq.common.CountDownLatch2;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 
-import java.util.Arrays;
 import java.util.Locale;
-import java.util.concurrent.CountDownLatch;
 
 /**
  * @Author: liuchiyun
