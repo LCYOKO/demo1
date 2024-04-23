@@ -10,7 +10,6 @@ import javax.annotation.PostConstruct;
  */
 @Component
 public class TestBean {
-
     @PostConstruct
     public void init() {
         System.out.println("test bean");
