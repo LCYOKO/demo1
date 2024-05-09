@@ -3,6 +3,9 @@ package com.xiaomi.demo.algo;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.PriorityQueue;
 
 /**
@@ -172,5 +175,10 @@ public class AlgoTest {
         }
         ans = ans + divide((int) (dividendL - divisorL), temp);
         return isNegative ? -ans : ans;
+    }
+
+
+    @Test
+    public void test1() {
     }
 }
