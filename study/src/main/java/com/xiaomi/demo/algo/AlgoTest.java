@@ -2,11 +2,10 @@ package com.xiaomi.demo.algo;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
+import org.springframework.data.relational.core.sql.In;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.PriorityQueue;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @Author: liuchiyun
@@ -14,6 +13,18 @@ import java.util.PriorityQueue;
  */
 @Slf4j
 public class AlgoTest {
+
+    @Test
+    public void test12(){
+        AtomicInteger atomicInteger = new AtomicInteger(Integer.MAX_VALUE);
+        atomicInteger.getAndIncrement();
+        System.out.println(atomicInteger.getAndIncrement());
+    }
+
+    @Test
+    public void testCircleSteps() {
+        System.out.println(circleSteps(10, 2));
+    }
 
     /**
      * 圆环上有10个点，编号为0~9。从0点出发，每次可以逆时针和顺时针走一步，问走n步回到0点共有多少种走法。
@@ -37,14 +48,7 @@ public class AlgoTest {
     }
 
     @Test
-    public void testCircleSteps() {
-        System.out.println(circleSteps(10, 2));
-    }
-
-    @Test
     public void test() {
-//        System.out.println(findMaxForm(new String[]{"10", "0", "1"}, 1, 1));
-//        System.out.println(coinChange(new int[]{1,2,5},3));
         trapRainWater(new int[][]{
                 {1, 4, 3, 1, 3, 2},
                 {3, 2, 1, 3, 2, 4},
@@ -69,6 +73,7 @@ public class AlgoTest {
         if (m <= 2) {
             return 0;
         }
+
         PriorityQueue<int[]> que = new PriorityQueue<>((o1, o2) -> o1[2] - o2[2]);
         boolean[][] visited = new boolean[n][m];
         for (int i = 0; i < n; i++) {
@@ -114,7 +119,6 @@ public class AlgoTest {
                 }
             }
         }
-
         return dp[n][amount] == Integer.MAX_VALUE ? -1 : dp[n][amount];
     }
 
