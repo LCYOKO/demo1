@@ -2,10 +2,9 @@ package com.xiaomi.demo.algo;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
-import org.springframework.data.relational.core.sql.In;
+import org.springframework.http.HttpStatus;
 
-import java.util.PriorityQueue;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.*;
 
 /**
  * @Author: liuchiyun
@@ -15,10 +14,64 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class AlgoTest {
 
     @Test
-    public void test12(){
-        AtomicInteger atomicInteger = new AtomicInteger(Integer.MAX_VALUE);
-        atomicInteger.getAndIncrement();
-        System.out.println(atomicInteger.getAndIncrement());
+    public void test12() {
+        System.out.println(longestValidParentheses("(()"));
+    }
+
+    public int longestValidParentheses(String s) {
+        int n = s.length();
+        int ans = 0;
+        int[] dp = new int[n];
+        for(int i=1;i<n;i++){
+            if(s.charAt(i)!=')'){
+                continue;
+            }
+            for(int j=0;j<i;j++){
+                if(s.charAt(j)=='(' && dp[i-1]==j-i-1){
+                    dp[i]=Math.max(dp[i],dp[i-1]+2+(j>0?dp[j-1]:0));
+                }
+                ans = Math.max(ans,dp[i]);
+            }
+        }
+        return ans;
+    }
+
+
+    List<String> ans = new ArrayList<>();
+    boolean[] dp;
+    Set<String> wordDictSet;
+
+    public List<String> wordBreak(String s, List<String> wordDict) {
+        wordDictSet = new HashSet(wordDict);
+        dp = new boolean[s.length() + 1];
+        dp[0] = true;
+        for (int i = 1; i <= s.length(); i++) {
+            for (int j = 0; j < i; j++) {
+                if (dp[j] && wordDictSet.contains(s.substring(j, i))) {
+                    dp[i] = true;
+                }
+            }
+        }
+        if (!dp[s.length()]) {
+            return ans;
+        }
+        dfs(0, s, new ArrayList<>());
+        return ans;
+    }
+
+    private void dfs(int start, String str, List<String> list) {
+        if (start >= str.length()) {
+            ans.add(String.join(" ", list));
+            return;
+        }
+        for (int i = start + 1; i <= str.length(); i++) {
+            String substring = str.substring(start, i);
+            if (dp[i] && wordDictSet.contains(substring)) {
+                list.add(substring);
+                dfs(i, str, list);
+                list.remove(list.size() - 1);
+            }
+        }
     }
 
     @Test
