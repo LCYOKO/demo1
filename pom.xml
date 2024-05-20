@@ -23,6 +23,7 @@
         <module>common</module>
         <module>webserver-core</module>
         <module>webserver-example</module>
+        <module>api</module>
     </modules>
 
     <properties>

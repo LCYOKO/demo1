@@ -2,7 +2,6 @@ package com.xiaomi.demo.algo;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
-import org.springframework.http.HttpStatus;
 
 import java.util.*;
 
@@ -15,27 +14,7 @@ public class AlgoTest {
 
     @Test
     public void test12() {
-        System.out.println(longestValidParentheses("(()"));
     }
-
-    public int longestValidParentheses(String s) {
-        int n = s.length();
-        int ans = 0;
-        int[] dp = new int[n];
-        for(int i=1;i<n;i++){
-            if(s.charAt(i)!=')'){
-                continue;
-            }
-            for(int j=0;j<i;j++){
-                if(s.charAt(j)=='(' && dp[i-1]==j-i-1){
-                    dp[i]=Math.max(dp[i],dp[i-1]+2+(j>0?dp[j-1]:0));
-                }
-                ans = Math.max(ans,dp[i]);
-            }
-        }
-        return ans;
-    }
-
 
     List<String> ans = new ArrayList<>();
     boolean[] dp;
