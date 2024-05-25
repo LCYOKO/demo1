@@ -10,8 +10,8 @@ import java.util.concurrent.ExecutionException;
  * @Date: 2024/4/23
  */
 public class BookRpcClient {
-    private ManagedChannel managedChannel;
-    private BookServiceGrpc.BookServiceFutureStub service;
+    private final ManagedChannel managedChannel;
+    private final BookServiceGrpc.BookServiceFutureStub service;
 
     public BookRpcClient() {
         managedChannel = ManagedChannelBuilder.forAddress("localhost", 8972).usePlaintext().build();
@@ -21,6 +21,5 @@ public class BookRpcClient {
     public static void main(String[] args) throws InterruptedException, ExecutionException {
         Book.BookResponse bookResponse = new BookRpcClient().service.getBook(Book.BookRequest.newBuilder().build()).get();
         System.out.println(bookResponse);
-        Thread.sleep(10000);
     }
 }

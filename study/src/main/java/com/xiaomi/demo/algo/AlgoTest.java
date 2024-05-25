@@ -14,7 +14,7 @@ public class AlgoTest {
 
     @Test
     public void test12() {
-        System.out.println(("+.E3"));
+
     }
 
     List<String> ans = new ArrayList<>();
