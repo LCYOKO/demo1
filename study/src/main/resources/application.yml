@@ -10,6 +10,9 @@
 #    port: 6379
 server:
   port: 8777
+  tomcat:
+    threads:
+      max:
 spring:
   application:
     name: demo
@@ -108,3 +111,4 @@ env: sv
 #    data-id: "application-dev"
 #    bootstrap:
 #      enable: true
+

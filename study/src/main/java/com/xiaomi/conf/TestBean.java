@@ -1,6 +1,5 @@
 package com.xiaomi.conf;
 
-import com.alibaba.nacos.api.config.annotation.NacosValue;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -11,7 +10,7 @@ import javax.annotation.PostConstruct;
  */
 @Component
 public class TestBean {
-    @NacosValue("${name}")
+
     private String name;
 
     @PostConstruct
