@@ -19,7 +19,7 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.UUID;
 
-@Configuration
+//@Configuration
 public class RabbitMQConfig {
 
     @Bean

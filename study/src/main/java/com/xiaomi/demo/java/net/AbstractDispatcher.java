@@ -1,6 +1,6 @@
 package com.xiaomi.demo.java.net;
 
-import org.apache.dubbo.common.utils.NamedThreadFactory;
+import cn.hutool.core.thread.NamedThreadFactory;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ThreadFactory;
@@ -15,7 +15,7 @@ public abstract class AbstractDispatcher<T> {
     protected ThreadPoolExecutor threadPoolExecutor;
 
     public AbstractDispatcher() {
-        ThreadFactory threadFactory = new NamedThreadFactory("Worker Pool-");
+        ThreadFactory threadFactory = new NamedThreadFactory("Worker Pool-", false);
         this.threadPoolExecutor = new ThreadPoolExecutor(100, 100, 1, TimeUnit.SECONDS, new ArrayBlockingQueue<>(200), threadFactory, new ThreadPoolExecutor.CallerRunsPolicy());
     }
 
@@ -26,5 +26,5 @@ public abstract class AbstractDispatcher<T> {
         threadPoolExecutor.shutdown();
     }
 
-    public abstract  void doDispatch(T socketWrapper);
+    public abstract void doDispatch(T socketWrapper);
 }

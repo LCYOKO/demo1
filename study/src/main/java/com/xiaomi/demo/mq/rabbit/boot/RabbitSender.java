@@ -24,7 +24,7 @@ import org.springframework.stereotype.Component;
  * spring.rabbitmq.template.mandatory=true
  */
 
-@Component
+//@Component
 public class RabbitSender {
 
 	//自动注入RabbitTemplate模板类

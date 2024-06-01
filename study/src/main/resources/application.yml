@@ -7,14 +7,14 @@
 #    bootstrap-servers: localhost:9092
 #  redis:
 #    host: localhost
-#    port: 6379p
+#    port: 6379
 server:
   port: 8777
 spring:
   application:
     name: demo
   profiles:
-    active:
+    active: "dev"
 
 app:
   id: test
@@ -99,3 +99,12 @@ http:
     enabled: true
 
 env: sv
+
+#nacos:
+#  config:
+#    server-addr: "localhost:8848"
+#    namespace: "f93a57f1-4416-4db6-a4ff-6a71ecdde69d"
+#    group: "demo"
+#    data-id: "application-dev"
+#    bootstrap:
+#      enable: true

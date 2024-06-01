@@ -3,14 +3,16 @@ package com.xiaomi.demo.algo;
 import org.junit.Test;
 
 import java.util.PriorityQueue;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.LinkedBlockingDeque;
 
 /**
  * @Author: liuchiyun
  * @Date: 2023/12/22
  */
 public class DataStructTest {
+
+    @Test
+    public void test1() {
+    }
 
     @Test
     public void testPriorityQueue() {
