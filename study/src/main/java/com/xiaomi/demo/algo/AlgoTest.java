@@ -2,7 +2,6 @@ package com.xiaomi.demo.algo;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
-import org.springframework.data.relational.core.sql.In;
 
 import java.util.PriorityQueue;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -15,7 +14,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class AlgoTest {
 
     @Test
-    public void test12(){
+    public void test12() {
         AtomicInteger atomicInteger = new AtomicInteger(Integer.MAX_VALUE);
         atomicInteger.getAndIncrement();
         System.out.println(atomicInteger.getAndIncrement());
