@@ -30,11 +30,12 @@ SERVER_FILE_NAME=$(ls -t "${DIR_PATH}" | grep -E '\.jar$|\.war$' | grep -v "_exe
 # ---------------------------------------------------------------
 # === Java 参数
 JAVA_OPT="${JAVA_OPT} -Duser.timezone=Asia/Shanghai -Dfile.encoding=UTF-8"
-JAVA_OPT="${JAVA_OPT} -Xms128m -Xmx128m"
+JAVA_OPT="${JAVA_OPT} -Xms128m -Xmx128m -XX:MetaspaceSize=128M -XX:MaxMetaspaceSize=128M -Xss512k"
+JAVA_OPT="${JAVA_OPT} -XX:+UseParNewGC -XX:+UseConcMarkSweepGC"
 JAVA_OPT="${JAVA_OPT} -XX:-OmitStackTraceInFastThrow -XX:+HeapDumpOnOutOfMemoryError"
 JAVA_OPT="${JAVA_OPT} -XX:HeapDumpPath=${DIR_PATH}/logs/heap_dump.hprof"
-JAVA_OPT="${JAVA_OPT} -Xloggc:${DIR_PATH}/logs/gc.log -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps"
-JAVA_OPT="${JAVA_OPT} -XX:+PrintGCTimeStamps -XX:+UseGCLogFileRotation -XX:NumberOfGCLogFiles=10 -XX:GCLogFileSize=100M"
+JAVA_OPT="${JAVA_OPT} -Xloggc:${DIR_PATH}/logs/gc.log -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintHeapAtGC"
+JAVA_OPT="${JAVA_OPT} -XX:+UseGCLogFileRotation -XX:NumberOfGCLogFiles=10 -XX:GCLogFileSize=100M"
 # ---------------------------------------------------------------
 # === Spring 参数
 SPRING_OPT="${SPRING_OPT} --spring.profiles.active=prod"

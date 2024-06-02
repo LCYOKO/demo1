@@ -10,9 +10,7 @@
 #    port: 6379
 server:
   port: 8777
-  tomcat:
-    threads:
-      max:
+
 spring:
   application:
     name: demo
