@@ -1,4 +1,4 @@
-package com.xiaomi.demo.java.net.bio;
+package com.xiaomi.demo.java.net.netty.bio;
 
 import com.xiaomi.demo.java.net.Endpoint;
 import lombok.extern.slf4j.Slf4j;

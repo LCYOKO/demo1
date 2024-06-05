@@ -1,16 +1,13 @@
 package com.xiaomi.demo.java.net.bio;
 
-import java.util.concurrent.CountDownLatch;
+import java.io.IOException;
 
 /**
  * @Author: liuchiyun
- * @Date: 2024/1/20
+ * @Date: 2024/6/5
  */
 public class Main {
-    public static void main(String[] args) throws InterruptedException {
-        CountDownLatch downLatch = new CountDownLatch(1);
-        BioEndpoint endpoint = new BioEndpoint(8888);
-        endpoint.start();
-        downLatch.await();
+    public static void main(String[] args) throws IOException {
+          new Server(9999).start();
     }
 }
