@@ -16,11 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/dubbo")
 public class DubboCtrl {
 
-    @DubboReference
+    @DubboReference(loadbalance = "roundrobin")
     private UserService userService;
 
     @GetMapping("/user")
     public UserDto get() {
+
         return userService.getById(1L);
     }
 }

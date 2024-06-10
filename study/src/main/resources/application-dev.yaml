@@ -5,22 +5,13 @@ nacos:
     group: "demo"
     data-id: "application-dev"
     auto-refresh: true
-    bootstrap:
-      enable: true
-  discovery:
-    server-addr: "localhost:8848"
-    namespace: "f93a57f1-4416-4db6-a4ff-6a71ecdde69d"
-    username: "nacos"
-    password: "nacos"
-    auto-register: true
-    register:
-      enabled: true
 dubbo:
   registry:
-    address: "nacos://127.0.0.1:8848"
+    address: "nacos://localhost:8848?username=nacos&password=nacos"
   application:
     name: "demo"
     logger: "slf4j"
+    register-mode: instance
   protocol:
     name: "dubbo"
     port: -1
