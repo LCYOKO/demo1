@@ -3,7 +3,9 @@ package com.xiaomi.auth.controller;
 
 import com.xiaomi.pojo.UserDto;
 import com.xiaomi.service.UserService;
+import org.apache.dubbo.common.constants.LoadbalanceRules;
 import org.apache.dubbo.config.annotation.DubboReference;
+import org.apache.dubbo.rpc.cluster.support.AbstractClusterInvoker;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/dubbo")
 public class DubboCtrl {
 
-    @DubboReference
+    @DubboReference(loadbalance = LoadbalanceRules.ROUND_ROBIN)
     private UserService userService;
 
     @GetMapping("/user")
