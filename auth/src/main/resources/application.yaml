@@ -41,3 +41,5 @@ dubbo:
   protocol:
     name: "dubbo"
     port: -1
+  application:
+    register-consumer: true
