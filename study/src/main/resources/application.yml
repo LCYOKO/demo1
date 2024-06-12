@@ -109,4 +109,9 @@ env: sv
 #    data-id: "application-dev"
 #    bootstrap:
 #      enable: true
+user:
+  name: "lisi"
+  age: 13
+conf:
+  enabled: false
 
