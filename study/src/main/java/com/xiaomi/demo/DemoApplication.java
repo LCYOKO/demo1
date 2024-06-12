@@ -18,7 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 //@EnableAspectJAutoProxy
 //@EnableApolloConfig
 @EnableNacosDiscovery
-@EnableDubbo
 public class DemoApplication {
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
