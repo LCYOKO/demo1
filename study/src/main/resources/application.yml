@@ -60,6 +60,8 @@ management:
       enabled: true
       show-details: always
     info: # 8、显示任意的应用信息，默认开启
+      git:
+        mode: full
       enabled: true
     liquibase: # 9、展示任何Liquibase数据库迁移路径，如果有的话，默认开启
       enabled: true

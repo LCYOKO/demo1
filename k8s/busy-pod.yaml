@@ -11,7 +11,7 @@ metadata:
 spec:
   containers:
   - name: pod-env
-    image: busybox
+    image: busybox:latest
     imagePullPolicy: IfNotPresent
     env:
       - name: os

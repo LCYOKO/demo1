@@ -24,7 +24,7 @@ import lombok.extern.slf4j.Slf4j;
  * 看着好像Micrometer更强大似的，简直像Dropwizard-Metrics二代升级版呀！不仅对接的监控系统更加丰富，而且还重点支持了tag
  */
 @Slf4j
-public class TestMetric {
+public class MetricTest {
 //    private final MetricRegistry metricRegistry = new MetricRegistry();
 //    private final ConsoleReporter reporter = ConsoleReporter.forRegistry(metricRegistry).build();
 //
