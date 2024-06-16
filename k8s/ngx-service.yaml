@@ -1,0 +1,21 @@
+apiVersion: v1
+# 一个代理层，向外暴露端口
+kind: Service
+metadata:
+  name: ngx-svc
+  labels:
+    app: ngx-svc
+# 对象. 名字空间.svc.cluster.local  例如 ngx-svc.default.svc.cluster.local
+spec:
+  selector:
+    app: nginx-dep
+
+  ports:
+    # 向外暴露的端口
+    - port: 8666
+      # pod暴露的端口
+      targetPort: 80
+  # 向外暴露端口    ExternalName, LoadBalancer,NodePort, ClusterIp(默认值)
+  type: NodePort
+
+

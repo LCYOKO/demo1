@@ -1,23 +1,93 @@
 apiVersion: apps/v1
+# Deployment 会部署一组Pod并按配置文件维持副本数量
 kind: Deployment
 metadata:
+  name: nginx-deploy
   labels:
-    app: ngx-deploy
-  name: ngx-deploy
+    app: nginx-deploy
+  annotations:
+    kubernetes.io/change-cause: v1, ngx=1.21
 spec:
-  replicas: 2 #副本数
+  # 副本的数量  kubectl scale --replicas=5 deploy ngx-nginx-deploy
+  replicas: 2
   selector:
-    matchLabels: # 期望管控的pod的lable
-      app: ngx-deploy-pod
+    # 选择app=nginx的Pod
+    matchLabels:
+      app: nginx-dep
+  # 选择或创建的Pod的模板
   template:
     metadata:
       labels:
-        app: ngx-deploy-pod
+        app: nginx-dep
     spec:
+      # 容器的路径
       containers:
-        - name: ngx-dep
-          image: nginx:alpine
+        - image: nginx:latest
+          name: nginx-latest
           ports:
             - containerPort: 80
-              name: http
-              protocol: TCP
+              name: nginx-80
+          resources:
+            requests:
+              # 1000m = 1个cpu
+              cpu: 100m
+              # Ki、Mi、Gi 来表示 KB、MB、GB
+              memory: 500mi
+            limits:
+              cpu: 200m
+              memory: 1Gi
+          #启动探针
+          startupProbe:
+           periodSeconds: 1
+           exec:
+            command: [ "cat", "/var/run/nginx.pid" ]
+          #存活探针
+          livenessProbe:
+           periodSeconds: 10
+           tcpSocket:
+            port: 80
+          #就绪探针 访问某个接口比如/ready
+          readinessProbe:
+           periodSeconds: 5
+           # 超时时间
+           timeoutSeconds: 10
+           # 多少次失败才算失败
+           failureThreshold: 3
+           # 多少次才算成功
+           successThreshold: 1
+           httpGet:
+            path: /ready
+            port: 80
+          # 容器内的路径
+#          volumeMounts:
+#            - name: config
+#              mountPath: /etc/nginx/nginx.conf
+#            - name: config-include
+#              mountPath: /etc/nginx/conf.d/
+#            - name: log
+#              mountPath: /var/log/nginx/
+#            - name: html
+#              mountPath: /usr/share/nginx/html/
+#            - name: cert
+#              mountPath: /etc/nginx/cert/
+#      # 主机的路径
+#      volumes:
+#        - name: config #和volumeMounts中的内容要对应
+#          hostPath:
+#            path: /work/devops/k8s/app/nginx/config/nginx.conf
+#            type: File
+#        - name: config-include #和volumeMounts中的内容要对应
+#          hostPath:
+#            path: /work/devops/k8s/app/nginx/config/conf.d/
+#            type: DirectoryOrCreate
+#        - name: log #和volumeMounts中的内容要对应
+#          hostPath:
+#            path: /work/devops/k8s/app/nginx/logs/
+#            type: DirectoryOrCreate
+#        - name: html #和volumeMounts中的内容要对应
+#          hostPath:
+#            path: /work/devops/k8s/app/nginx/html/
+#            type: DirectoryOrCreate
+#        - name: cert #和volumeMounts中的内容要对应
+#          hostPath:
+#            path: /work/devops/k8s/app/nginx/cert/

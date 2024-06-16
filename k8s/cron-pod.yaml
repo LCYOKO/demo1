@@ -3,10 +3,16 @@ kind: CronJob
 metadata:
   name: echo-cj
 spec:
-  schedule: '*/1 * * * *'
+  #和Linux下的cronTable一样 分钟、小时、日、月、星期
+  schedule: '*/10 * * * *'
+  #concurrencyPolicy=Allow，这也是默认情况，这意味着这些 Job 可以同时存在；
+  #concurrencyPolicy=Forbid，这意味着不会创建新的 Pod，该创建周期被跳过；
+  #concurrencyPolicy=Replace，这意味着新产生的 Job 会替换旧的、没有执行完的 Job。
   concurrencyPolicy: Replace
-  successfulJobsHistoryLimit: 1
+  successfulJobsHistoryLimit: 3
   failedJobsHistoryLimit: 1
+  # 而如果某一次 Job 创建失败，这次创建就会被标记为“miss”。当在指定的时间窗口内，miss 的数目达到 100 时，那么 CronJob 会停止再创建这个 Job。
+  startingDeadlineSeconds: 200
   jobTemplate:
     spec:
       template:

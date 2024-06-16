@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ngx-pod
+spec:
+  containers:
+    - name: ngx
+      image: nginx:latest
+      # kubectl port-forward ngx-pod 8080:80 & 来暴露端口
+      ports:
+        - containerPort: 80
+      imagePullPolicy: IfNotPresent

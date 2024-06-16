@@ -1,0 +1,16 @@
+# pvc
+# try to find the most suitable pv
+# capacity/accessModes
+apiVersion: v1
+kind: PersistentVolumeClaim
+
+metadata:
+  name: host-5m-pvc
+
+spec:
+  storageClassName: host-test
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Mi

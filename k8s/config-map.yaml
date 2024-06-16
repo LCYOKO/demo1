@@ -5,6 +5,7 @@ metadata:
   labels:
     app: my-config
 data:
+  name: lisi
   my-config: |
     {
       "name": "my-config",

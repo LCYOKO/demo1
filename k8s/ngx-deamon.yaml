@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+# DaemonSet 每个worker都会部署
+kind: DaemonSet
+metadata:
+  name: redis-ds
+  labels:
+    app: redis-ds
+spec:
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        name: redis
+
+    spec:
+      containers:
+        - image: redis:latest
+          name: redis
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 6379
+#      # 默认master节点是不会部署pod的。设置这个master节点也可以部署片pod
+#      tolerations:
+#        - key: node-role.kubernetes.io/master
+#          effect: NoSchedule
+#          operator: Exists
+
