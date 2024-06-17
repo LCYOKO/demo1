@@ -1,14 +1,11 @@
-package com.xiaomi.demo.distributed.conf.apollo;
-
-import lombok.extern.slf4j.Slf4j;
+package com.xiaomi.demo.distributed.apollo;
 
 /**
  * @Author: liuchiyun
- * @Date: 2023/11/9
+ * @Date: 2024/2/26
  * https://www.apolloconfig.com/#/zh/design/apollo-introduction
  */
-@Slf4j
-public class Test {
+public class ConfigController {
 
     public void test1() {
 

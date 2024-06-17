@@ -1,4 +1,4 @@
-package com.xiaomi.demo.distributed.cache.redis;
+package com.xiaomi.demo.distributed.cache;
 
 import org.springframework.context.annotation.Configuration;
 

@@ -1,4 +1,4 @@
-package com.xiaomi.demo.conf;
+package com.xiaomi.demo.distributed.zk;
 
 /**
  * @Author liuchiyun

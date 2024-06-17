@@ -1,4 +1,4 @@
-package com.xiaomi.demo.distributed.cache.local;
+package com.xiaomi.demo.distributed.cache;
 
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.google.common.cache.CacheBuilder;
