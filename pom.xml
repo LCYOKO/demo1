@@ -255,7 +255,7 @@
         <dependency>
             <groupId>io.grpc</groupId>
             <artifactId>grpc-all</artifactId>
-            <version>1.50.0</version>
+            <version>1.48.0</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.google.protobuf/protobuf-java -->
         <dependency>
@@ -291,19 +291,12 @@
             <artifactId>curator-recipes</artifactId>
             <version>4.2.0</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.curator/curator-recipes -->
-        <dependency>
-            <groupId>org.apache.curator</groupId>
-            <artifactId>curator-recipes</artifactId>
-            <version>4.2.0</version>
-        </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.curator/curator-client -->
         <dependency>
             <groupId>org.apache.curator</groupId>
             <artifactId>curator-client</artifactId>
             <version>4.2.0</version>
         </dependency>
-
         <!--quickfix相关-->
         <dependency>
             <groupId>org.quickfixj</groupId>
@@ -370,11 +363,11 @@
             <version>8.12.0</version>
         </dependency>
         <!--rocketmq-->
-        <dependency>
-            <groupId>org.apache.rocketmq</groupId>
-            <artifactId>rocketmq-client</artifactId>
-            <version>5.1.0</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.apache.rocketmq</groupId>-->
+<!--            <artifactId>rocketmq-client</artifactId>-->
+<!--            <version>5.1.0</version>-->
+<!--        </dependency>-->
         <!--   文件存储     -->
         <dependency>
             <groupId>io.minio</groupId>
@@ -397,6 +390,11 @@
             <groupId>org.openjdk.jol</groupId>
             <artifactId>jol-core</artifactId>
             <version>0.10</version>
+        </dependency>
+        <dependency>
+            <groupId>io.etcd</groupId>
+            <artifactId>jetcd-core</artifactId>
+            <version>0.7.2</version>
         </dependency>
     </dependencies>
 
