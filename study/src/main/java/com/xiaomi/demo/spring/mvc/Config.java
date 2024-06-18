@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.MessageSourceResourceBundle;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.filter.CommonsRequestLoggingFilter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.nio.charset.StandardCharsets;
 
@@ -17,7 +18,7 @@ import java.nio.charset.StandardCharsets;
  * @Date: 2023/12/9
  */
 @Configuration
-public class Config {
+public class Config implements WebMvcConfigurer {
     //    @Bean
     public FilterRegistrationBean<CommonsRequestLoggingFilter> logFilterRegistration() {
         CommonsRequestLoggingFilter filter = new LoggingRequestAndResponseFilter();

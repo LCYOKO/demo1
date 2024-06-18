@@ -11,7 +11,7 @@ import java.io.IOException;
  * @Version 1.0
  */
 @MapperScan
-public class Test {
+public class CoreTest {
     /**
      * ---------------------------------容器初始化---------------------------------
      * 1) AnnotationConfigApplicationContext初始化的时候会创建2个类  BeanDefinitionReader BeanDefinitionScanner

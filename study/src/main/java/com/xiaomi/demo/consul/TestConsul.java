@@ -1,4 +1,4 @@
-package com.xiaomi.demo.distributed.consul;
+package com.xiaomi.demo.consul;
 
 /**
  * @author lcy

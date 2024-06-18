@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Configuration xmlns="http://logging.apache.org/log4j/2.0/config"   status="off">
+    <Properties>
+        <Property name="pattern">%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %m%n</Property>
+    </Properties>
+
+    <Appenders>
+        <!-- 控制台appender-->
+        <Console name="consoleAppender" target="SYSTEM_OUT">
+            <PatternLayout pattern="${pattern}"/>
+        </Console>
+        <!--异步日志 AsyncAppender方式-->
+        <Async name="asyncAppender">
+            <AppenderRef ref="consoleAppender"/>
+        </Async>
+    </Appenders>
+
+    <Loggers>
+        <Root level="trace">
+            <AppenderRef ref="asyncAppender"/>
+        </Root>
+        <!--
+            异步记录日志
+            includeLocation="false" 去除日志记录中的行号信息，这个行号信息非常的影响日志记录的效率（生产中都不加这个行号）
+            additivity="false" 表示不继承rootLogger
+        -->
+        <AsyncLogger name="cn.giteasy.async" level="trace" includeLocation="false" additivity="false">
+            <!--将控制台输出consoleAppender设置为异步-->
+            <AppenderRef ref="consoleAppender"/>
+        </AsyncLogger>
+    </Loggers>
+</Configuration>

@@ -1,4 +1,4 @@
-package com.xiaomi.demo.distributed.mongo;
+package com.xiaomi.demo.mongo;
 
 /**
  * @Author liuchiyun

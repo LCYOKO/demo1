@@ -1,4 +1,4 @@
-package com.xiaomi.demo.distributed.idgenerator;
+package com.xiaomi.demo.sharding;
 
 /**
  * @Author: liuchiyun

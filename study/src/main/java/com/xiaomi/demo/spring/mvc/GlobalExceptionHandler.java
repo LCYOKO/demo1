@@ -27,6 +27,7 @@ public class GlobalExceptionHandler {
      * 业务异常拦截
      */
     @ExceptionHandler(ServiceException.class)
+    @ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
     public JsonResult<String> serviceExceptionHandler(ServiceException serviceException) {
         log.error("业务服务异常:", serviceException);
         return JsonResult.error(serviceException.getHttpCode(), serviceException.getMessage());
@@ -37,6 +38,7 @@ public class GlobalExceptionHandler {
      * 业务异常拦截
      */
     @ExceptionHandler(InvalidParamException.class)
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     public JsonResult<String> invalidParamExceptionHandler(InvalidParamException invalidParamException) {
         log.error("业务服务异常:", invalidParamException);
         return JsonResult.error(HttpCode.PARAM_ERROR, invalidParamException.getMessage());
@@ -46,6 +48,7 @@ public class GlobalExceptionHandler {
      * 业务异常拦截
      */
     @ExceptionHandler(HttpMessageNotReadableException.class)
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     public JsonResult<String> invalidFormatExceptionHandler(HttpMessageNotReadableException httpMessageNotReadableException) {
         log.error("业务服务异常:", httpMessageNotReadableException);
         return JsonResult.error(HttpCode.PARAM_FORMAT_ERROR);
@@ -55,6 +58,7 @@ public class GlobalExceptionHandler {
      * 业务异常拦截
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     public JsonResult<String> methodArgumentNotValidExceptionHandler(MethodArgumentNotValidException methodArgumentNotValidException) {
         log.error("业务服务异常:", methodArgumentNotValidException);
         if (!methodArgumentNotValidException.getFieldErrors().isEmpty()) {
@@ -81,6 +85,7 @@ public class GlobalExceptionHandler {
      * 业务异常拦截
      */
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    @ResponseStatus(code = HttpStatus.METHOD_NOT_ALLOWED)
     public JsonResult<String> httpRequestMethodNotSupportedExceptionHandler(HttpRequestMethodNotSupportedException httpRequestMethodNotSupportedException) {
         log.error("业务服务异常:", httpRequestMethodNotSupportedException);
         return JsonResult.error(HttpCode.PARAM_REQUEST_METHOD_ERROR, httpRequestMethodNotSupportedException.getMessage());

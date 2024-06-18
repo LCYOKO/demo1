@@ -2,13 +2,12 @@ package com.xiaomi.demo.spring.boot;
 
 import com.xiaomi.demo.DemoApplication;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @Author: liuchiyun
  * @Date: 2024/2/26
  */
-public class Test {
+public class BootTest {
 
     /**
      * -----------------------SpringBoot启动流程-------------------------

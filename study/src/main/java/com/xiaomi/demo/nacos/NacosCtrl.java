@@ -1,4 +1,4 @@
-package com.xiaomi.demo.distributed.nacos;
+package com.xiaomi.demo.nacos;
 
 
 import com.alibaba.nacos.api.config.annotation.NacosValue;
