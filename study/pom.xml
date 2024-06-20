@@ -14,6 +14,7 @@
     <properties>
         <xdoc_version>1.0.5</xdoc_version>
         <resilience4j_version>1.7.1</resilience4j_version>
+        <elasticsearch_version>7.2.0</elasticsearch_version>
     </properties>
 
 
@@ -100,6 +101,34 @@
             <artifactId>resilience4j-timelimiter</artifactId>
             <version>${resilience4j_version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.elasticsearch.client</groupId>
+            <artifactId>elasticsearch-rest-high-level-client</artifactId>
+            <version>${elasticsearch_version}</version>
+            <exclusions>
+                <!-- 默认引入的低版本 所以要排除重新依赖 -->
+                <exclusion>
+                    <groupId>org.elasticsearch</groupId>
+                    <artifactId>elasticsearch</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.elasticsearch.client</groupId>
+                    <artifactId>elasticsearch-rest-client</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- 重新依赖 -->
+        <dependency>
+            <groupId>org.elasticsearch.client</groupId>
+            <artifactId>elasticsearch-rest-client</artifactId>
+            <version>${elasticsearch_version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.elasticsearch</groupId>
+            <artifactId>elasticsearch</artifactId>
+            <version>${elasticsearch_version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -118,7 +147,8 @@
                     <verbose>true</verbose>
                     <dateFormat>yyyy-MM-dd'T'HH:mm:ssZ</dateFormat>
                     <generateGitPropertiesFile>true</generateGitPropertiesFile>
-                    <generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties</generateGitPropertiesFilename>
+                    <generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties
+                    </generateGitPropertiesFilename>
                 </configuration>
             </plugin>
         </plugins>

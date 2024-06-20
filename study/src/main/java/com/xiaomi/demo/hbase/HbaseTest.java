@@ -5,4 +5,12 @@ package com.xiaomi.demo.hbase;
  * @Date: 2023/11/9
  */
 public class HbaseTest {
+
+    public void testCreateTable(){
+
+    }
+
+    public void testPut(){
+
+    }
 }
