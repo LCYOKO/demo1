@@ -3,8 +3,8 @@ package com.xiaomi.demo.oss.minio;
 import cn.hutool.core.io.FileUtil;
 import com.xiaomi.common.http.Constants;
 import io.minio.*;
+import io.minio.errors.InternalException;
 import io.minio.http.Method;
-import jdk.nashorn.internal.runtime.regexp.joni.exception.InternalException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 

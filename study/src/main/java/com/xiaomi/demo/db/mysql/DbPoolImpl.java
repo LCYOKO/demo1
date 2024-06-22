@@ -3,7 +3,6 @@ package com.xiaomi.demo.db.mysql;
 import lombok.extern.slf4j.Slf4j;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -19,12 +18,12 @@ public class DbPoolImpl implements DbPool {
     /**
      * 空闲连接池
      */
-    private LinkedBlockingQueue<Connection> idleConnectPool;
+    private final LinkedBlockingQueue<Connection> idleConnectPool;
 
     /**
      * 活跃连接池
      */
-    private LinkedBlockingQueue<Connection> busyConnectPool;
+    private final LinkedBlockingQueue<Connection> busyConnectPool;
 
     /**
      * 当前正在被使用的连接数
@@ -38,14 +37,6 @@ public class DbPoolImpl implements DbPool {
 
     public DbPoolImpl(int maxSize) {
         this.maxSize = maxSize;
-        init();// init pool
-    }
-
-    /**
-     * 连接池初始化
-     */
-    @Override
-    public void init() {
         idleConnectPool = new LinkedBlockingQueue<>();
         busyConnectPool = new LinkedBlockingQueue<>();
     }
@@ -77,8 +68,7 @@ public class DbPoolImpl implements DbPool {
             if (connection == null) {
                 throw new RuntimeException("等待连接超时");
             }
-        } catch (
-                Exception e) {
+        } catch (Exception e) {
             log.error("get connection failed", e);
         }
         return connection;
@@ -117,8 +107,8 @@ public class DbPoolImpl implements DbPool {
                     connection = createConnection();
                 }
                 idleConnectPool.offer(connection);
-            } catch (SQLException e) {
-                e.printStackTrace();
+            } catch (Exception ex) {
+                log.info("check connection failed", ex);
             }
         }
     }

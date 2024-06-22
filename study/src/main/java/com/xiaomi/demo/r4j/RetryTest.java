@@ -10,7 +10,6 @@ import org.springframework.retry.backoff.ExponentialBackOffPolicy;
 import org.springframework.retry.support.RetryTemplate;
 import org.springframework.retry.support.RetryTemplateBuilder;
 
-import javax.xml.ws.WebServiceException;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.concurrent.TimeoutException;
@@ -24,7 +23,7 @@ public class RetryTest {
     RetryConfig config = RetryConfig.custom()
             .maxAttempts(2)
             .waitDuration(Duration.ofSeconds(2))
-            .retryOnException(e -> e instanceof WebServiceException)
+            .retryOnException(e -> e instanceof RuntimeException)
             .retryExceptions(IOException.class, TimeoutException.class)
             .ignoreExceptions(IllegalArgumentException.class)
             .build();
@@ -44,7 +43,7 @@ public class RetryTest {
     public void test2() {
         retry.executeRunnable(() -> {
             log.info("start");
-            throw new WebServiceException();
+            throw new RuntimeException("123");
         });
     }
 
@@ -58,16 +57,11 @@ public class RetryTest {
         RetryTemplate template = new RetryTemplateBuilder()
                 .maxAttempts(4)
                 .customBackoff(policy)
-                .retryOn(WebServiceException.class)
+                .retryOn(RuntimeException.class)
                 .build();
-        template.execute(new RetryCallback<Object, Exception>() {
-
-            @Override
-            public Object doWithRetry(RetryContext context) {
-                log.info("do start");
-                throw new WebServiceException();
-//                return null;
-            }
+        template.execute((RetryCallback<Object, Exception>) context -> {
+            log.info("do start");
+            throw new RuntimeException();
         });
     }
 }
