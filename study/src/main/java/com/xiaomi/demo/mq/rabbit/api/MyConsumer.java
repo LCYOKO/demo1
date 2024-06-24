@@ -1,4 +1,4 @@
-package com.xiaomi.demo.mq.rabbit.api.consumer;
+package com.xiaomi.demo.mq.rabbit.api;
 
 import java.io.IOException;
 
@@ -22,6 +22,4 @@ public class MyConsumer extends DefaultConsumer {
 		System.err.println("properties: " + properties);
 		System.err.println("body: " + new String(body));
 	}
-
-
 }

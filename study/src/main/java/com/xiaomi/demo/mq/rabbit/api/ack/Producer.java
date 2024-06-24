@@ -20,17 +20,11 @@ public class Producer {
 		
 		Connection connection = connectionFactory.newConnection();
 		Channel channel = connection.createChannel();
-		
 		String exchange = "test_ack_exchange";
 		String routingKey = "ack.save";
-		
-		
-		
 		for(int i =0; i<5; i ++){
-			
 			Map<String, Object> headers = new HashMap<String, Object>();
 			headers.put("num", i);
-			
 			AMQP.BasicProperties properties = new AMQP.BasicProperties.Builder()
 					.deliveryMode(2)
 					.contentEncoding("UTF-8")
@@ -39,6 +33,5 @@ public class Producer {
 			String msg = "Hello RabbitMQ ACK Message " + i;
 			channel.basicPublish(exchange, routingKey, true, properties, msg.getBytes());
 		}
-		
 	}
 }

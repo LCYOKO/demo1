@@ -2,6 +2,7 @@ package com.xiaomi.demo.mq.rabbit.boot;
 
 import java.util.Map;
 
+import com.xiaomi.demo.mq.Order;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.amqp.rabbit.core.RabbitTemplate.ConfirmCallback;
@@ -10,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.support.MessageBuilder;
-import org.springframework.stereotype.Component;
 
 /**
  * spring.rabbitmq.addresses=192.168.11.76:5672
