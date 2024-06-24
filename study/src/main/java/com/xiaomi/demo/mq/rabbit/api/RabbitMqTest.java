@@ -31,6 +31,18 @@ public class RabbitMqTest {
         connectionFactory.setNetworkRecoveryInterval(3000);
         Connection connection = connectionFactory.newConnection();
         channel = connection.createChannel();
+        //6 添加一个确认监听
+        channel.addConfirmListener(new ConfirmListener() {
+            @Override
+            public void handleNack(long deliveryTag, boolean multiple) throws IOException {
+                log.info("nAck deliverTag:{}", deliveryTag);
+            }
+
+            @Override
+            public void handleAck(long deliveryTag, boolean multiple) throws IOException {
+                log.info("ack deliverTag:{}", deliveryTag);
+            }
+        });
     }
 
     @Test
