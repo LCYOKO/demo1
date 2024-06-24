@@ -34,14 +34,25 @@ public class RabbitMqTest {
         //6 添加一个确认监听
         channel.addConfirmListener(new ConfirmListener() {
             @Override
-            public void handleNack(long deliveryTag, boolean multiple) throws IOException {
+            public void handleNack(long deliveryTag, boolean multiple) {
                 log.info("nAck deliverTag:{}", deliveryTag);
             }
 
             @Override
-            public void handleAck(long deliveryTag, boolean multiple) throws IOException {
+            public void handleAck(long deliveryTag, boolean multiple) {
                 log.info("ack deliverTag:{}", deliveryTag);
             }
+        });
+
+        channel.addReturnListener((replyCode, replyText, exchange, routingKey, properties, body) -> {
+
+            log.error("---------handle  return----------");
+            log.error("replyCode: " + replyCode);
+            log.error("replyText: " + replyText);
+            log.error("exchange: " + exchange);
+            log.error("routingKey: " + routingKey);
+            log.error("properties: " + properties);
+            log.error("body: " + new String(body));
         });
     }
 
