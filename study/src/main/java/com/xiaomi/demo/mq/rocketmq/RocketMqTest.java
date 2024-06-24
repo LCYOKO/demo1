@@ -3,6 +3,7 @@ package com.xiaomi.demo.mq.rocketmq;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
+import org.apache.rocketmq.client.producer.SendCallback;
 import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.common.message.Message;
 import org.junit.Before;
@@ -25,22 +26,53 @@ public class RocketMqTest {
     }
 
     @Test
-    public void testSimpleSend() throws MQClientException {
-        Message msg = new Message("test", ("Hello RocketMQ ").getBytes());
+    public void testSimpleSend() {
+        Message msg = new Message("test", ("testSimpleSend ").getBytes());
         try {
             SendResult sendResult = publishTemplate.send(msg);
-            System.out.printf("%s%n", sendResult);
+            log.info("result:{}", sendResult);
         } catch (Exception e) {
             log.info("send message failed. message:{}", msg, e);
         }
     }
 
     @Test
-    public void testBatchSend() throws MQClientException {
-        Message msg = new Message("test", ("Hello RocketMQ ").getBytes());
+    public void testBatchSend() {
+        Message msg = new Message("test", ("testBatchSend").getBytes());
         try {
             SendResult sendResult = publishTemplate.send(Collections.singletonList(msg));
-            System.out.printf("%s%n", sendResult);
+            log.info("result:{}", sendResult);
+        } catch (Exception e) {
+            log.info("send message failed. message:{}", msg, e);
+        }
+    }
+
+    @Test
+    public void testSentAsync() throws InterruptedException {
+        Message msg = new Message("test", ("testSendAsync").getBytes());
+        try {
+            publishTemplate.send(Collections.singletonList(msg), new SendCallback() {
+                @Override
+                public void onSuccess(SendResult sendResult) {
+                    log.info("result:{}", sendResult);
+                }
+
+                @Override
+                public void onException(Throwable throwable) {
+                    log.error("send failed", throwable);
+                }
+            });
+        } catch (Exception e) {
+            log.info("send message failed. message:{}", msg, e);
+        }
+        Thread.sleep(1000);
+    }
+
+    @Test
+    public void sendOneWay() {
+        Message msg = new Message("test", ("sendOneWay").getBytes());
+        try {
+            publishTemplate.sendOneway(msg);
         } catch (Exception e) {
             log.info("send message failed. message:{}", msg, e);
         }
@@ -56,4 +88,9 @@ public class RocketMqTest {
 //            log.info("send message failed. message:{}", msg, e);
 //        }
 //    }
+
+    @Test
+    public void testConsumer() {
+
+    }
 }
