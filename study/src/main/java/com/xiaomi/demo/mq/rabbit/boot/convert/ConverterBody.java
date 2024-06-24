@@ -1,4 +1,4 @@
-package com.xiaomi.demo.mq.rabbit.spring.convert;
+package com.xiaomi.demo.mq.rabbit.boot.convert;
 
 public class ConverterBody {
 

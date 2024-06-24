@@ -1,4 +1,4 @@
-package com.xiaomi.demo.mq.rabbit.spring.convert;
+package com.xiaomi.demo.mq.rabbit.boot.convert;
 
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageProperties;

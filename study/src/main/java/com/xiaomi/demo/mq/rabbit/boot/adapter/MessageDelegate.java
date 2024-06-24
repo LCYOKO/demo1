@@ -1,7 +1,7 @@
-package com.xiaomi.demo.mq.rabbit.spring.adapter;
+package com.xiaomi.demo.mq.rabbit.boot.adapter;
 
-import com.xiaomi.demo.mq.rabbit.spring.entity.Order;
-import com.xiaomi.demo.mq.rabbit.spring.entity.Packaged;
+import com.xiaomi.demo.mq.rabbit.boot.entity.Order;
+import com.xiaomi.demo.mq.rabbit.boot.entity.Packaged;
 
 import java.io.File;
 import java.util.Map;

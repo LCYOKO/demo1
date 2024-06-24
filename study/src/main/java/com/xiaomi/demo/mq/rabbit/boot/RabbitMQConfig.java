@@ -1,9 +1,9 @@
-package com.xiaomi.demo.mq.rabbit.spring;
+package com.xiaomi.demo.mq.rabbit.boot;
 
-import com.xiaomi.demo.mq.rabbit.spring.adapter.MessageDelegate;
-import com.xiaomi.demo.mq.rabbit.spring.convert.ImageMessageConverter;
-import com.xiaomi.demo.mq.rabbit.spring.convert.PDFMessageConverter;
-import com.xiaomi.demo.mq.rabbit.spring.convert.TextMessageConverter;
+import com.xiaomi.demo.mq.rabbit.boot.adapter.MessageDelegate;
+import com.xiaomi.demo.mq.rabbit.boot.convert.ImageMessageConverter;
+import com.xiaomi.demo.mq.rabbit.boot.convert.PDFMessageConverter;
+import com.xiaomi.demo.mq.rabbit.boot.convert.TextMessageConverter;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -15,7 +15,6 @@ import org.springframework.amqp.support.ConsumerTagStrategy;
 import org.springframework.amqp.support.converter.ContentTypeDelegatingMessageConverter;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 import java.util.UUID;
 
@@ -55,7 +54,8 @@ public class RabbitMQConfig {
 
     @Bean
     public Queue queue001() {
-        return new Queue("queue001", true); //队列持久  
+        //队列持久
+        return new Queue("queue001", true);
     }
 
     @Bean
@@ -107,7 +107,6 @@ public class RabbitMQConfig {
 
     @Bean
     public SimpleMessageListenerContainer messageContainer(ConnectionFactory connectionFactory) {
-
         SimpleMessageListenerContainer container = new SimpleMessageListenerContainer(connectionFactory);
         container.setQueues(queue001(), queue002(), queue003(), queue_image(), queue_pdf());
         container.setConcurrentConsumers(1);
@@ -222,13 +221,8 @@ public class RabbitMQConfig {
         PDFMessageConverter pdfConverter = new PDFMessageConverter();
         convert.addDelegate("application/pdf", pdfConverter);
 
-
         adapter.setMessageConverter(convert);
         container.setMessageListener(adapter);
-
         return container;
-
     }
-
-
 }
