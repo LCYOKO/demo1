@@ -27,7 +27,8 @@ public class RabbitMqTest {
         connectionFactory.setHost("myhost");
         connectionFactory.setPort(5672);
         connectionFactory.setVirtualHost("/");
-        // 2.通过连接工厂创建连接
+        connectionFactory.setAutomaticRecoveryEnabled(true);
+        connectionFactory.setNetworkRecoveryInterval(3000);
         Connection connection = connectionFactory.newConnection();
         channel = connection.createChannel();
     }
