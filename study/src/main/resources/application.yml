@@ -16,6 +16,10 @@ spring:
     name: demo
   profiles:
     active: "dev"
+  rabbitmq:
+    listener:
+      simple:
+        auto-startup: false
 
 app:
   id: test
@@ -116,4 +120,5 @@ user:
   age: 13
 conf:
   enabled: false
+
 

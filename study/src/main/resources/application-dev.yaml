@@ -7,15 +7,15 @@ nacos:
     auto-refresh: true
     bootstrap:
       enable: true
-dubbo:
-  registry:
-    address: "nacos://127.0.0.1:8848"
-  application:
-    name: "demo"
-    logger: "slf4j"
-  protocol:
-    name: "dubbo"
-    port: -1
-  scan:
-    base-packages: "com.xiaomi.demo.rpc.dubbo"
+#dubbo:
+#  registry:
+#    address: "nacos://127.0.0.1:8848"
+#  application:
+#    name: "demo"
+#    logger: "slf4j"
+#  protocol:
+#    name: "dubbo"
+#    port: -1
+#  scan:
+#    base-packages: "com.xiaomi.demo.rpc.dubbo"
 

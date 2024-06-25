@@ -3,12 +3,11 @@ package com.xiaomi.demo.nacos;
 
 import com.alibaba.nacos.api.config.annotation.NacosValue;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.info.GitProperties;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.annotation.Resource;
 
 /**
  * @Author: liuchiyun
@@ -21,7 +20,7 @@ public class NacosCtrl {
     @Setter
     private String name;
 
-    @Resource
+    @Autowired(required = false)
     private GitProperties gitProperties;
 
     @GetMapping("/name")
