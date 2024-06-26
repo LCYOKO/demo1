@@ -9,6 +9,9 @@ import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * @author liuchiyun
+ */
 //使用模式 默认是Mode.Throughput
 @BenchmarkMode(Mode.AverageTime)
 // 配置预热次数，默认是每次运行1秒，运行10次，这里设置为3次

@@ -15,6 +15,9 @@ public class TomcatConf {
         return factory;
     }
 
+    /**
+     * 就是开启AIO模式，作用不大
+     */
     private Connector http11Nio2() {
         Connector connector = new Connector("c");
         Http11Nio2Protocol protocolHandler = (Http11Nio2Protocol) connector.getProtocolHandler();

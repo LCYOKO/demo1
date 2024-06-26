@@ -9,7 +9,7 @@ import java.util.Date;
  * @Author: liuchiyun
  * @Date: 2023/12/11
  */
-public class Main {
+public class TestMapStructure {
 
     @Test
     public void test1() {
@@ -23,7 +23,7 @@ public class Main {
     }
 
     @Data
-    static class Programer {
+    public static class Programer {
         private String name;
         private String lang;
         private Double height;
@@ -34,7 +34,7 @@ public class Main {
     }
 
     @Data
-    static class ProgramerDto {
+    public static class ProgramerDto {
         private String name;
         private String proLang;
         private String height;
@@ -45,13 +45,13 @@ public class Main {
 
 
     @Data
-    static class Address {
+    public static class Address {
         private String address;
     }
 
 
     @Data
-    static class AddressDto {
+    public static class AddressDto {
         private String address;
     }
 }

@@ -13,44 +13,22 @@ import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 /**
- * RabbitMQ的监控
+ * @author liuchiyun
  */
 public class MonitorRabbitMQ {
-    //RabbitMQ的HTTP API——获取集群各个实例的状态信息，ip替换为自己部署相应实例的
+
+
     private static final String RABBIT_NODES_STATUS_REST_URL = "http://192.168.13.111:15672/api/nodes";
-    //RabbitMQ的HTTP API——获取集群用户信息，ip替换为自己部署相应实例的
+
     private static final String RABBIT_USERS_REST_URL = "http://192.168.13.111:15672/api/users";
-    //rabbitmq的用户名
+
+    private static final String RABBIT_QUEUE_STATUS_URL = "http://192.168.13.111:15672/api/queues";
+
     private static final String RABBIT_USER_NAME = "guest";
-    //rabbitmq的密码
     private static final String RABBIT_USER_PWD = "guest";
-
-    public static void main(String[] args) {
-        try {
-            //step1.获取rabbitmq集群各个节点实例的状态信息
-            Map<String, ClusterStatus> clusterMap = fetchRabbitMQClusterStatus(RABBIT_NODES_STATUS_REST_URL, RABBIT_USER_NAME, RABBIT_USER_PWD);
-
-            //step2.打印输出各个节点实例的状态信息
-            for (Map.Entry<String, ClusterStatus> entry : clusterMap.entrySet()) {
-                System.out.println(entry.getKey() + " : " + entry.getValue());
-            }
-
-            //step3.获取rabbitmq集群用户信息
-            Map<String, User> userMap = fetchRabbitMQUsers(RABBIT_USERS_REST_URL, RABBIT_USER_NAME, RABBIT_USER_PWD);
-
-            //step4.打印输出rabbitmq集群用户信息
-            for (Map.Entry<String, User> entry : userMap.entrySet()) {
-                System.out.println(entry.getKey() + " : " + entry.getValue());
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     public static Map<String, ClusterStatus> fetchRabbitMQClusterStatus(String url, String username, String password) throws IOException {
         Map<String, ClusterStatus> clusterStatusMap = new HashMap<String, ClusterStatus>();
@@ -68,21 +46,6 @@ public class MonitorRabbitMQ {
         return clusterStatusMap;
     }
 
-    public static Map<String, User> fetchRabbitMQUsers(String url, String username, String password) throws IOException {
-        Map<String, User> userMap = new HashMap<String, User>();
-        String nodeData = getData(url, username, password);
-        JsonNode jsonNode = null;
-        Iterator<JsonNode> iterator = jsonNode.iterator();
-        while (iterator.hasNext()) {
-            JsonNode next = iterator.next();
-            User user = new User();
-            user.setName(next.get("name").asText());
-            user.setTags(next.get("tags").asText());
-            userMap.put(next.get("name").asText(), user);
-        }
-        return userMap;
-    }
-
     public static String getData(String url, String username, String password) throws IOException {
         CloseableHttpClient httpClient = HttpClients.createDefault();
         UsernamePasswordCredentials creds = new UsernamePasswordCredentials(username, password);
@@ -98,10 +61,10 @@ public class MonitorRabbitMQ {
                 return EntityUtils.toString(entity);
             }
         }
-
         return null;
     }
 
+    @Data
     public static class User {
         private String name;
         private String tags;
@@ -112,23 +75,6 @@ public class MonitorRabbitMQ {
                     "name=" + name +
                     ", tags=" + tags +
                     '}';
-        }
-        //GET/SET方法省略
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getTags() {
-            return tags;
-        }
-
-        public void setTags(String tags) {
-            this.tags = tags;
         }
     }
 
