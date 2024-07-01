@@ -8,6 +8,7 @@ import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.client.producer.SendCallback;
 import org.apache.rocketmq.client.producer.SendResult;
+import org.apache.rocketmq.client.producer.TransactionMQProducer;
 import org.apache.rocketmq.common.consumer.ConsumeFromWhere;
 import org.apache.rocketmq.common.message.Message;
 import org.apache.rocketmq.common.message.MessageExt;
@@ -27,6 +28,7 @@ import java.util.concurrent.atomic.AtomicLong;
 @Slf4j
 public class RocketMqTest {
     private DefaultMQProducer publishTemplate;
+    private TransactionMQProducer transactionMQProducer;
     private DefaultMQPushConsumer consumer;
     private final String TEST_TOPIC = "test";
 
@@ -35,6 +37,10 @@ public class RocketMqTest {
         publishTemplate = new DefaultMQProducer("testProducer");
         publishTemplate.setNamesrvAddr("127.0.0.1:9876");
         publishTemplate.start();
+        transactionMQProducer = new TransactionMQProducer("trx");
+        transactionMQProducer.setNamesrvAddr("127.0.0.1:9876");
+        transactionMQProducer.setTransactionListener(new TransactionListenerImpl());
+        transactionMQProducer.start();
         consumer = new DefaultMQPushConsumer("CID_JODIE_1");
         consumer.setNamesrvAddr("127.0.0.1:9876");
     }
@@ -84,7 +90,7 @@ public class RocketMqTest {
 
     @Test
     public void sendOneWay() {
-        Message msg = new Message("test", ("sendOneWay").getBytes());
+        Message msg = new Message(TEST_TOPIC, ("sendOneWay").getBytes());
         try {
             publishTemplate.sendOneway(msg);
         } catch (Exception e) {
@@ -98,9 +104,11 @@ public class RocketMqTest {
         consumer.subscribe(TEST_TOPIC, "*");
         consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
         //wrong time format 2017_0422_221800
-        consumer.setConsumeTimestamp("20181109221800");
+//        consumer.setConsumeTimestamp("20181109221800");
         consumer.registerMessageListener((MessageListenerConcurrently) (msgs, context) -> {
-            log.info("mesgs:{}", msgs);
+            for (Message message : msgs) {
+                log.info("msg:{}, body:{}", message, new String(message.getBody()));
+            }
             return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
         });
         consumer.start();
@@ -147,5 +155,23 @@ public class RocketMqTest {
         });
         consumer.start();
         latch.await();
+    }
+
+    @Test
+    public void testSendDelayMessage() {
+        Message msg = new Message("test", ("test delay message").getBytes());
+        msg.setDelayTimeLevel(3);
+        try {
+            publishTemplate.sendOneway(msg);
+        } catch (Exception e) {
+            log.info("send message failed. message:{}", msg, e);
+        }
+    }
+
+    @Test
+    public void testTransactionMessage() throws MQClientException {
+        Message msg = new Message("test", ("transaction msg").getBytes());
+//        SendResult result = transactionMQProducer.sendMessageInTransaction(msg, "hello");
+        log.info("result:{}", 123);
     }
 }
