@@ -38,7 +38,7 @@ public class EsHighLevelTest {
 
     @Test
     public void getMovies() throws IOException {
-        GetResponse response = client.get(new GetRequest("movies", "1"), RequestOptions.DEFAULT);
+        GetResponse response = client.get(new GetRequest("users", "1"), RequestOptions.DEFAULT);
         log.info("resp:{}", response);
     }
 }
