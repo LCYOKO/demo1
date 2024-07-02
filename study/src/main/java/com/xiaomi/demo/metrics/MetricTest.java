@@ -1,6 +1,11 @@
 package com.xiaomi.demo.metrics;
 
+import com.codahale.metrics.*;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Author: liuchiyun
@@ -20,64 +25,78 @@ import lombok.extern.slf4j.Slf4j;
  * 回答是：没有关系，并存关系。
  * <p>
  * 我们知道，Spring监控框架是基于Micrometer，并深度集成的。然而Hadoop、HBase则是基于Dropwizard-Metrics拓展开来，你猜是为什么？先读读下面一句话。
- * “springboot2在spring-boot-actuator中引入了micrometer，对1.x的metrics进行了重构，另外支持对接的监控系统也更加丰富(Atlas、Datadog、Ganglia、Graphite、Influx、JMX、NewRelic、Prometheus、SignalFx、StatsD、Wavefront)。1.x的metrics都有点对齐dropwizard-metrics的味道，而micrometer除了一些基本metrics与dropwizard-metrics相类似外，重点支持了tag。这是一个很重要的信号，标志着老一代的statsd、graphite逐步让步于支持tag的influx以及prometheus。”
+ * “springboot2在spring-boot-actuator中引入了micrometer，对1.x的metrics进行了重构，另外支持对接的监控系统也更加丰富(Atlas、Datadog、Ganglia、Graphite、Influx、JMX、NewRelic、Prometheus、SignalFx、StatsD、Wavefront)。1.x的metrics都有点对齐dropwizard-metrics的味道，而micrometer除了一些基本metrics与dropwizard-metrics相类似外，
+ * 重点支持了tag。这是一个很重要的信号，标志着老一代的statsd、graphite逐步让步于支持tag的influx以及prometheus。”
  * 看着好像Micrometer更强大似的，简直像Dropwizard-Metrics二代升级版呀！不仅对接的监控系统更加丰富，而且还重点支持了tag
  */
 @Slf4j
 public class MetricTest {
-//    private final MetricRegistry metricRegistry = new MetricRegistry();
-//    private final ConsoleReporter reporter = ConsoleReporter.forRegistry(metricRegistry).build();
-//
-//    @Test
-//    public void testCounter() {
-//        Counter counter = metricRegistry.counter("counter");
-//        counter.inc(10);
-//        reporter.report();
-//    }
-//
-//    @Test
-//    public void testMeter() {
-//        Meter meter = metricRegistry.meter("meter");
-//        meter.mark();
-//        meter.mark();
-//        meter.mark();
-//        meter.mark();
-//        meter.mark();
-//        meter.mark();
-//        meter.mark();
-//        meter.mark();
-//        reporter.report();
-//    }
-//
-//    @Test
-//    public void testTimer() {
-//        Timer timer = metricRegistry.timer("timer");
-//        try (Timer.Context ignored = timer.time()) {
-//            Thread.sleep(10000);
-//        } catch (Exception exception) {
-//
-//        }
-//        reporter.report();
-//    }
-//
-//    @Test
-//    public void testGauge() {
-//        List<Integer> cache = new ArrayList<>();
-//        metricRegistry.register(
-//                MetricRegistry.name(TestMetric.class, "cache", "size"),
-//                (Gauge<Integer>) cache::size
-//        );
-//        reporter.report();
-//        cache.add(1);
-//        reporter.report();
-//        cache.add(2);
-//        reporter.report();
-//    }
-//
-//    @Test
-//    public void testHistogram(){
-//        Histogram histogram = metricRegistry.histogram("histogram");
-//        histogram.update(1);
-//        reporter.report();
-//    }
+    private final MetricRegistry metricRegistry = new MetricRegistry();
+    private final ConsoleReporter reporter = ConsoleReporter.forRegistry(metricRegistry).build();
+
+    /**
+     * 就是简单的计数器，是一个累计值
+     */
+    @Test
+    public void testCounter() {
+        Counter counter = metricRegistry.counter("counter");
+        counter.inc(10);
+        reporter.report();
+    }
+
+    /**
+     * 单位时间内统计，默认统计1分钟，5分钟，15分钟的数据
+     */
+    @Test
+    public void testMeter() {
+        Meter meter = metricRegistry.meter("meter");
+        meter.mark();
+        meter.mark();
+        meter.mark();
+        meter.mark();
+        meter.mark();
+        meter.mark();
+        reporter.report();
+    }
+
+    /**
+     * 查看tp75/90/95/99的耗时
+     */
+    @Test
+    public void testTimer() {
+        Timer timer = metricRegistry.timer("timer");
+        try (Timer.Context ignored = timer.time()) {
+            Thread.sleep(10000);
+        } catch (Exception exception) {
+
+        }
+        reporter.report();
+    }
+
+    /**
+     * Gauge计算的是当前值
+     */
+    @Test
+    public void testGauge() {
+        List<Integer> cache = new ArrayList<>();
+        metricRegistry.register(
+                MetricRegistry.name(MetricTest.class, "cache", "size"),
+                (Gauge<Integer>) cache::size
+        );
+        reporter.report();
+        cache.add(1);
+        reporter.report();
+        cache.add(2);
+        reporter.report();
+    }
+
+    /**
+     * 统计直方图，没啥卵用，可以忽略
+     */
+    @Test
+    public void testHistogram() {
+        Histogram histogram = metricRegistry.histogram("histogram");
+        histogram.update(1);
+        reporter.report();
+    }
 }

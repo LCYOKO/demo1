@@ -43,11 +43,13 @@ public class RocketMqTest {
         transactionMQProducer.start();
         consumer = new DefaultMQPushConsumer("CID_JODIE_1");
         consumer.setNamesrvAddr("127.0.0.1:9876");
+        consumer.setMaxReconsumeTimes(2);
     }
 
     @Test
     public void testSimpleSend() {
         Message msg = new Message(TEST_TOPIC, ("testSimpleSend ").getBytes());
+        msg.setKeys("00001");
         try {
             SendResult sendResult = publishTemplate.send(msg);
             log.info("result:{}", sendResult);
@@ -109,7 +111,7 @@ public class RocketMqTest {
             for (Message message : msgs) {
                 log.info("msg:{}, body:{}", message, new String(message.getBody()));
             }
-            return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
+            return ConsumeConcurrentlyStatus.RECONSUME_LATER;
         });
         consumer.start();
         latch.await();
@@ -171,7 +173,7 @@ public class RocketMqTest {
     @Test
     public void testTransactionMessage() throws MQClientException {
         Message msg = new Message("test", ("transaction msg").getBytes());
-//        SendResult result = transactionMQProducer.sendMessageInTransaction(msg, "hello");
-        log.info("result:{}", 123);
+        SendResult result = transactionMQProducer.sendMessageInTransaction(msg, "hello");
+        log.info("result:{}", result);
     }
 }
