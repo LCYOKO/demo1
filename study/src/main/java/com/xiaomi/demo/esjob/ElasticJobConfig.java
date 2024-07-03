@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 /**
  * @Author: liuchiyun
  * @Date: 2024/7/2
+ * https://shardingsphere.apache.org/elasticjob/current/cn/user-manual/usage/job-api/java-api/
  */
 public class ElasticJobConfig {
     @Value("${elasticJob.serverLists:zk_host:2181}")
@@ -16,9 +17,13 @@ public class ElasticJobConfig {
     @Value("${elasticJob.namespace:elastic-job-demo}")
     private String namespace;
 
-    public CoordinatorRegistryCenter createRegistryCenter() {
+    public CoordinatorRegistryCenter coordinatorRegistryCenter() {
         CoordinatorRegistryCenter regCenter = new ZookeeperRegistryCenter(new ZookeeperConfiguration(serverLists, namespace));
         regCenter.init();
         return regCenter;
     }
+
+//    public ScheduleJobBootstrap scheduleJobBootstrap(CoordinatorRegistryCenter coordinatorRegistryCenter ){
+//         new ScheduleJobBootstrap()
+//    }
 }
