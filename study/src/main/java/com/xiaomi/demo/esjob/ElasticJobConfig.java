@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
  * https://shardingsphere.apache.org/elasticjob/current/cn/user-manual/usage/job-api/java-api/
  */
 public class ElasticJobConfig {
-    @Value("${elasticJob.serverLists:zk_host:2181}")
+    @Value("${elasticJob.serverLists:localhost:2181}")
     private String serverLists;
 
     @Value("${elasticJob.namespace:elastic-job-demo}")
@@ -23,7 +23,7 @@ public class ElasticJobConfig {
         return regCenter;
     }
 
-//    public ScheduleJobBootstrap scheduleJobBootstrap(CoordinatorRegistryCenter coordinatorRegistryCenter ){
-//         new ScheduleJobBootstrap()
+//    public ScheduleJobBootstrap scheduleJobBootstrap(CoordinatorRegistryCenter coordinatorRegistryCenter) {
+//        new ScheduleJobBootstrap(coordinatorRegistryCenter, new DemoJob(), "0/5 * * * * ?");
 //    }
 }
