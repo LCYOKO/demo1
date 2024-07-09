@@ -2,15 +2,11 @@ package com.xiaomi.demo.spring.mvc;
 
 import org.apache.commons.lang3.LocaleUtils;
 import org.springframework.context.MessageSource;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.util.Collections;
-import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -23,6 +19,12 @@ import java.util.Map;
 public class TestController {
     @Resource
     private MessageSource messageSource;
+
+
+    @PostMapping("/filter")
+    public String filterTest(String name) {
+        return name;
+    }
 
     @GetMapping("/message")
     public Map<String, Object> getMessage(@Valid Param param) {

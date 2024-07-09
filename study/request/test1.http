@@ -3,3 +3,7 @@ Accept: application/json
 
 ###
 
+POST http://localhost:8777/test/filter
+Content-Type: application/x-www-form-urlencoded
+
+id=999&value=content

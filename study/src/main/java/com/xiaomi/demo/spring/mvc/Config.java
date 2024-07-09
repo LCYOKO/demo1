@@ -1,17 +1,16 @@
 package com.xiaomi.demo.spring.mvc;
 
-import com.xiaomi.demo.spring.mvc.LoggingRequestAndResponseFilter;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import com.xiaomi.demo.filter.PasswordDecoderFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.support.MessageSourceResourceBundle;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.web.filter.CommonsRequestLoggingFilter;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Collections;
 
 /**
  * @Author: liuchiyun
@@ -19,6 +18,19 @@ import java.nio.charset.StandardCharsets;
  */
 @Configuration
 public class Config implements WebMvcConfigurer {
+
+
+    //    @Bean
+    public FilterRegistrationBean<PasswordDecoderFilter> passwordDecoderFilterFilterRegistrationBean() {
+        FilterRegistrationBean<PasswordDecoderFilter> bean = new FilterRegistrationBean<>();
+        PasswordDecoderFilter passwordDecoderFilter = new PasswordDecoderFilter();
+
+
+        bean.setFilter(passwordDecoderFilter);
+        bean.setUrlPatterns(Collections.singletonList("/*"));
+        return bean;
+    }
+
     //    @Bean
     public FilterRegistrationBean<CommonsRequestLoggingFilter> logFilterRegistration() {
         CommonsRequestLoggingFilter filter = new LoggingRequestAndResponseFilter();
