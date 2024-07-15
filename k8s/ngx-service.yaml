@@ -5,17 +5,20 @@ metadata:
   name: ngx-svc
   labels:
     app: ngx-svc
-# 对象. 名字空间.svc.cluster.local  例如 ngx-svc.default.svc.cluster.local
+# 对象名字.空间.svc.cluster.local  例如 ngx-svc.default.svc.cluster.local
 spec:
   selector:
     app: nginx-dep
-
   ports:
     # 向外暴露的端口
     - port: 8666
       # pod暴露的端口
       targetPort: 80
-  # 向外暴露端口    ExternalName, LoadBalancer,NodePort, ClusterIp(默认值)
+  # 向外暴露端口
+  # ExternalName 转换到其他的一个内部域名上
+  # LoadBalancer, 绑定一个loadBalance
+  # NodePort, 绑定宿主机的一个端口
+  # ClusterIp(默认值) 提供一个虚拟ip
   type: NodePort
 
 

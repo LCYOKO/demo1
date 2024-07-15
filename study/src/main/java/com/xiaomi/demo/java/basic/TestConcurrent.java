@@ -1,11 +1,18 @@
 package com.xiaomi.demo.java.basic;
 
+import com.alibaba.ttl.TransmittableThreadLocal;
+import com.alibaba.ttl.TtlRunnable;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * @Author: liuchiyun
  * @Date: 2024/2/21
  */
+@Slf4j
 public class TestConcurrent {
     private volatile int num = 1;
 
@@ -36,8 +43,51 @@ public class TestConcurrent {
         num++;
     }
 
+    public static InheritableThreadLocal<Integer> threadLocal = new InheritableThreadLocal<>();
+    public static TransmittableThreadLocal<Integer> context = new TransmittableThreadLocal<>();
+
     @Test
-    public void test4() {
-//        ExecutorUtil.gracefulShutdown();
+    public void test4() throws InterruptedException {
+        ExecutorService executorService = Executors.newFixedThreadPool(3);
+        for (int i = 0; i < 10; i++) {
+            threadLocal.set(i);
+            new Thread(() -> {
+                String name = Thread.currentThread().getName();
+                log.info("threadName:{}, value:{}", name, threadLocal.get());
+                executorService.execute(new BusinessThread(name, false));
+            }).start();
+        }
+        Thread.sleep(10000);
+    }
+
+    @Test
+    public void test5() throws InterruptedException {
+        ExecutorService executorService = Executors.newFixedThreadPool(3);
+        for (int i = 0; i < 10; i++) {
+            context.set(i);
+            new Thread(() -> {
+                String name = Thread.currentThread().getName();
+                log.info("threadName:{}, value:{}", name, context.get());
+                executorService.execute(TtlRunnable.get(new BusinessThread(name, true)));
+            }).start();
+        }
+        Thread.sleep(10000);
+    }
+
+
+    public static class BusinessThread implements Runnable {
+        private String parentName;
+        private boolean useTtl;
+
+        public BusinessThread(String parentName, boolean useTtl) {
+            this.parentName = parentName;
+            this.useTtl = useTtl;
+        }
+
+        @Override
+        public void run() {
+            Integer value = useTtl ? context.get() : threadLocal.get();
+            log.info("pThreadName:{}, threadName:{}, value:{}", parentName, Thread.currentThread().getName(), value);
+        }
     }
 }

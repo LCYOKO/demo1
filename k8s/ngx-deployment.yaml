@@ -22,7 +22,7 @@ spec:
     spec:
       # 容器的路径
       containers:
-        - image: nginx:latest
+        - image: nginx:alpine
           name: nginx-latest
           ports:
             - containerPort: 80
@@ -32,32 +32,32 @@ spec:
               # 1000m = 1个cpu
               cpu: 100m
               # Ki、Mi、Gi 来表示 KB、MB、GB
-              memory: 500mi
+              memory: 200Mi
             limits:
               cpu: 200m
               memory: 1Gi
-          #启动探针
-          startupProbe:
-           periodSeconds: 1
-           exec:
-            command: [ "cat", "/var/run/nginx.pid" ]
-          #存活探针
-          livenessProbe:
-           periodSeconds: 10
-           tcpSocket:
-            port: 80
-          #就绪探针 访问某个接口比如/ready
-          readinessProbe:
-           periodSeconds: 5
-           # 超时时间
-           timeoutSeconds: 10
-           # 多少次失败才算失败
-           failureThreshold: 3
-           # 多少次才算成功
-           successThreshold: 1
-           httpGet:
-            path: /ready
-            port: 80
+#          #启动探针，只有启动后才会启用livenessProbe和readinessProbe
+#          startupProbe:
+#            periodSeconds: 1
+#            exec:
+#              command: [ "cat", "/var/run/nginx.pid" ]
+#          #存活探针
+#          livenessProbe:
+#            periodSeconds: 10
+#            tcpSocket:
+#              port: 80
+#          #就绪探针 访问某个接口比如/ready
+#          readinessProbe:
+#            periodSeconds: 5
+#            # 超时时间
+#            timeoutSeconds: 10
+#            # 多少次失败才算失败
+#            failureThreshold: 3
+#            # 多少次才算成功
+#            successThreshold: 1
+#            httpGet:
+#              path: /ready
+#              port: 80
           # 容器内的路径
 #          volumeMounts:
 #            - name: config
