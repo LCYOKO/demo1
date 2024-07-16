@@ -1,7 +1,11 @@
 package com.xiaomi.demo.java.net.selector;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.xiaomi.common.utils.JsonUtils;
+import com.xiaomi.demo.design.User;
+import com.xiaomi.demo.java.net.Response;
+import com.xiaomi.web.core.enumeration.HttpStatus;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.http.entity.ContentType;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -23,83 +27,93 @@ import java.util.concurrent.TimeUnit;
  * @Author: liuchiyun
  * @Date: 2024/1/18
  */
+@Slf4j
 public class SelectorServer {
-    private static final Logger logger = LoggerFactory.getLogger(Selector.class.getName());
 
-    private static List<SocketChannel> channelList = new ArrayList<>();
+    private final List<SocketChannel> channelList = new ArrayList<>();
 
     private final ServerSocketChannel serverSocketChannel;
+
+    private final int serverPort;
 
     private final Selector mainSelector;
 
     private final Selector subSelector;
 
-    private final ExecutorService MAIN_SELECTOR_THREAD_POOL = Executors.newFixedThreadPool(1);
+    private final ExecutorService SUB_SELECTOR_THREAD_POOL = Executors.newFixedThreadPool(1);
 
     private SelectorServer(int port) {
+        this.serverPort = port;
         try {
             serverSocketChannel = ServerSocketChannel.open();
-            serverSocketChannel.bind(new InetSocketAddress(8888));
+            serverSocketChannel.bind(new InetSocketAddress(serverPort));
             serverSocketChannel.configureBlocking(false);
-            logger.info("SelectorServer Binded");
             mainSelector = Selector.open();
             subSelector = Selector.open();
             SelectionKey key = serverSocketChannel.register(mainSelector, SelectionKey.OP_ACCEPT);
             key.attach(serverSocketChannel);
         } catch (Exception ex) {
-            logger.error("new server failed", ex);
+            log.error("new server failed", ex);
             throw new RuntimeException("new server failed", ex);
         }
-        startHeatBeatAsync();
     }
 
-    private void run() throws IOException {
+    public void start() throws IOException {
+        SUB_SELECTOR_THREAD_POOL.execute(this::runSubSelector);
         while (true) {
             mainSelector.select();
             Iterator<SelectionKey> iterator = mainSelector.selectedKeys().iterator();
             while (iterator.hasNext()) {
                 SelectionKey selectionKey = iterator.next();
+                iterator.remove();
                 if (selectionKey.isAcceptable()) {
                     ServerSocketChannel serverChannel = (ServerSocketChannel) selectionKey.attachment();
                     SocketChannel socketChannel = serverChannel.accept();
+                    channelList.add(socketChannel);
                     socketChannel.configureBlocking(false);
-                    MAIN_SELECTOR_THREAD_POOL.execute(() -> {
-                        try {
-                            socketChannel.register(subSelector, SelectionKey.OP_READ);
-                        } catch (Exception ex) {
-                            logger.error("subSelector register failed", ex);
-                            throw new RuntimeException("subSelector register failed", ex);
-                        }
-                        try {
-                            subSelector.select();
-                        } catch (Exception ex) {
-                            logger.error("subSelector select failed", ex);
-                            throw new RuntimeException("subSelector select failed", ex);
-                        }
-                        Iterator<SelectionKey> keyIterator = subSelector.selectedKeys().iterator();
-                        while (keyIterator.hasNext()) {
-                            SelectionKey curKey = keyIterator.next();
-                            if (curKey.isReadable()) {
-                                Charset charset = StandardCharsets.UTF_8;
-                                ByteBuffer buffer = ByteBuffer.allocate(1024);
-                                try {
-                                    int read = socketChannel.read(buffer);
-                                    if (read > 0) {
-                                        buffer.flip();
-                                        String request = charset.decode(buffer).toString();
-                                        logger.info(request);
-                                    }
-                                    socketChannel.write(charset.encode("SelectorServer Response"));
-                                    channelList.add(socketChannel);
-                                } catch (IOException e) {
-                                    throw new RuntimeException(e);
-                                }
-                            }
-                            keyIterator.remove();
-                        }
-                    });
+                    socketChannel.register(subSelector, SelectionKey.OP_READ).attach(socketChannel);
                 }
-                iterator.remove();
+            }
+        }
+    }
+
+    private void runSubSelector() {
+        while (true) {
+            try {
+                log.info("start select");
+                int select = subSelector.select(1000);
+                if (select <= 0) {
+                    continue;
+                }
+            } catch (Exception ex) {
+                log.error("subSelector select failed", ex);
+                throw new RuntimeException("subSelector select failed", ex);
+            }
+            Iterator<SelectionKey> keyIterator = subSelector.selectedKeys().iterator();
+            while (keyIterator.hasNext()) {
+                SelectionKey curKey = keyIterator.next();
+                SocketChannel socketChannel = (SocketChannel) curKey.attachment();
+                keyIterator.remove();
+                if (curKey.isReadable()) {
+                    Charset charset = StandardCharsets.UTF_8;
+                    ByteBuffer buffer = ByteBuffer.allocate(1024);
+                    try {
+                        int read = socketChannel.read(buffer);
+                        if (read > 0) {
+                            buffer.flip();
+                            String request = charset.decode(buffer).toString();
+                            log.info(request);
+                        }
+                        ByteBuffer responseByteBuffer = new Response()
+                                .withStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+                                .withContentType(ContentType.APPLICATION_JSON.toString())
+                                .withBody(JsonUtils.toByteArray(new User(2L, "xiaomi")))
+                                .getResponseByteBuffer();
+                        socketChannel.write(responseByteBuffer);
+                    } catch (Exception e) {
+                        log.info("error", e);
+                    }
+                }
             }
         }
     }
@@ -116,12 +130,16 @@ public class SelectorServer {
                     Charset charset = StandardCharsets.UTF_8;
                     try {
                         channel.write(charset.encode("Long ServerResponse"));
-                        logger.info("Send Long Response");
-                    } catch (IOException e) {
-                        logger.error("heart beat error. channel:{}", channel, e);
+                        log.info("Send Long Response");
+                    } catch (Exception e) {
+                        log.error("heart beat error. channel:{}", channel, e);
                     }
                 });
             }
         }).start();
+    }
+
+    public static void main(String[] args) throws IOException {
+        new SelectorServer(9999).start();
     }
 }

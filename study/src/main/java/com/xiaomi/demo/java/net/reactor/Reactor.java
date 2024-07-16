@@ -45,8 +45,10 @@ public class Reactor implements Runnable {
     public void run() {
         try {
             while (!Thread.interrupted()) {
-                // 服务端使用一个线程不断等待客户端的连接到达
-                selector.select();
+                int select = selector.select(1000);
+                if (select == 0) {
+                    continue;
+                }
                 Set<SelectionKey> keys = selector.selectedKeys();
                 Iterator<SelectionKey> iterator = keys.iterator();
                 while (iterator.hasNext()) {

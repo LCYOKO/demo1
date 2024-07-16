@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.web.context.WebApplicationContext;
 
 /**
  * @author liuchiyun
@@ -15,6 +16,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @EnableAspectJAutoProxy
 public class DemoApplication {
     public static void main(String[] args) {
+
         SpringApplication.run(DemoApplication.class, args);
     }
 }

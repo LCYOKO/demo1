@@ -1,7 +1,6 @@
 package com.xiaomi.demo.java.net.reactor;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.nio.channels.ServerSocketChannel;
@@ -13,8 +12,8 @@ import java.util.concurrent.ExecutorService;
  * @Author: liuchiyun
  * @Date: 2024/1/18
  */
+@Slf4j
 public class Acceptor implements Runnable {
-    private static final Logger logger = LoggerFactory.getLogger(Acceptor.class.getName());
 
     /**
      * 服务端Channel句柄
@@ -34,7 +33,6 @@ public class Acceptor implements Runnable {
 
     @Override
     public void run() {
-        logger.info("【subReactor】{}", Thread.currentThread().getName());
         try {
             // 获取客户端连接
             SocketChannel channel = serverSocket.accept();

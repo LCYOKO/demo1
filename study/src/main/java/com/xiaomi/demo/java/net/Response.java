@@ -4,8 +4,10 @@ import com.xiaomi.web.core.cookie.Cookie;
 import com.xiaomi.web.core.enumeration.HttpStatus;
 import com.xiaomi.web.core.response.Header;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.ArrayUtils;
 
 import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -21,49 +23,53 @@ import static com.xiaomi.web.core.constant.ContextConstant.DEFAULT_CONTENT_TYPE;
  */
 @Slf4j
 public class Response {
+    private final StringBuilder rowAppender;
     private final StringBuilder headerAppender;
     private final List<Cookie> cookies;
     private final List<Header> headers;
     private HttpStatus status = HttpStatus.OK;
     private String contentType = DEFAULT_CONTENT_TYPE;
     private byte[] body = new byte[0];
-    private com.xiaomi.web.core.network.handler.AbstractRequestHandler requestHandler;
 
     public Response() {
+        this.rowAppender = new StringBuilder();
         this.headerAppender = new StringBuilder();
         this.cookies = new ArrayList<>();
         this.headers = new ArrayList<>();
     }
 
-    /**
-     * 设置HTTP Status
-     */
-    public void setStatus(HttpStatus status) {
+    public Response withStatus(HttpStatus status) {
         this.status = status;
+        return this;
     }
 
-    public void setContentType(String contentType) {
+    public Response withContentType(String contentType) {
         this.contentType = contentType;
+        return this;
     }
 
-    public void setBody(byte[] body) {
+    public Response withBody(byte[] body) {
         this.body = body;
+        return this;
     }
 
-
-    public void addCookie(Cookie cookie) {
+    public Response addCookie(Cookie cookie) {
         cookies.add(cookie);
+        return this;
     }
 
-    public void addHeader(Header header) {
+    public Response addHeader(Header header) {
         headers.add(header);
+        return this;
     }
 
+
+    private void buildRow() {
+        //HTTP/1.1 200 OK
+        rowAppender.append(Constants.HTTP_VERSION).append(BLANK).append(status.getCode()).append(BLANK).append(status).append(CRLF);
+    }
 
     private void buildHeader() {
-        //HTTP/1.1 200 OK
-        headerAppender.append("HTTP/1.1").append(BLANK).append(status.getCode()).append(BLANK).append(status).append(CRLF);
-        //Date: Sat, 31 Dec 2005 23:59:59 GMT
         headerAppender.append("Date:").append(BLANK).append(new Date()).append(CRLF);
         headerAppender.append("Content-Type:").append(BLANK).append(contentType).append(CRLF);
         for (Header header : headers) {
@@ -74,29 +80,25 @@ public class Response {
                 headerAppender.append("Set-Cookie:").append(BLANK).append(cookie.getKey()).append("=").append(cookie.getValue()).append(CRLF);
             }
         }
-        headerAppender.append("Content-Length:").append(BLANK);
-    }
-
-    //一次性传入响应体
-    private void buildBody() {
-        this.headerAppender.append(body.length).append(CRLF).append(CRLF);
+        headerAppender.append("Content-Length:").append(BLANK).append(body.length).append(CRLF).append(CRLF);
     }
 
     /**
      * response构建的最后一步，将header和body转为字节数组
      */
     private void buildResponse() {
+        buildRow();
         buildHeader();
-        buildBody();
     }
 
     /**
      * 返回Response构建后的数据，用于NIO/AIO
      */
-    public ByteBuffer[] getResponseByteBuffer() {
+    public ByteBuffer getResponseByteBuffer() {
         buildResponse();
+        byte[] row = this.rowAppender.toString().getBytes(StandardCharsets.UTF_8);
         byte[] header = this.headerAppender.toString().getBytes(UTF_8_CHARSET);
-        return new ByteBuffer[]{ByteBuffer.wrap(header), ByteBuffer.wrap(body)};
+        return ByteBuffer.wrap(ArrayUtils.addAll(ArrayUtils.addAll(row, header), body));
     }
 
     /**
@@ -104,29 +106,8 @@ public class Response {
      */
     public byte[] getResponseBytes() {
         buildResponse();
+        byte[] row = this.rowAppender.toString().getBytes(StandardCharsets.UTF_8);
         byte[] header = this.headerAppender.toString().getBytes(UTF_8_CHARSET);
-        byte[] response = new byte[header.length + body.length];
-        System.arraycopy(header, 0, response, 0, header.length);
-        System.arraycopy(body, 0, response, header.length, body.length);
-        return response;
+        return ArrayUtils.addAll(ArrayUtils.addAll(row, header), body);
     }
-
-//    /**
-//     * 重定向，注意重定向后会立即写数据至socket中
-//     */
-//    public void sendRedirect(String url) {
-//        log.info("重定向至{}", url);
-//        addHeader(new Header("Location", url));
-//        setStatus(HttpStatus.MOVED_TEMPORARILY);
-//        buildResponse();
-//        // 刷新至客户端
-//        requestHandler.flushResponse();
-//    }
-//
-//    /**
-//     * 用于调用不同RequestHandler的写刷新（将response写入到客户端）
-//     */
-//    public void setRequestHandler(AbstractRequestHandler requestHandler) {
-//        this.requestHandler = requestHandler;
-//    }
 }
