@@ -1,5 +1,6 @@
 package com.xiaomi.demo.spring.mvc;
 
+import com.xiaomi.demo.filter.MdcFilter;
 import com.xiaomi.demo.filter.PasswordDecoderFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.MessageSource;
@@ -29,6 +30,14 @@ public class Config implements WebMvcConfigurer {
         bean.setFilter(passwordDecoderFilter);
         bean.setUrlPatterns(Collections.singletonList("/*"));
         return bean;
+    }
+
+    @Bean
+    public FilterRegistrationBean<MdcFilter> mdcFilterFilterRegistrationBean() {
+        FilterRegistrationBean<MdcFilter> registrationBean = new FilterRegistrationBean<>();
+        registrationBean.setFilter(new MdcFilter());
+        registrationBean.setUrlPatterns(Collections.singletonList("/*"));
+        return registrationBean;
     }
 
     //    @Bean
