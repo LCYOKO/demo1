@@ -56,11 +56,11 @@ public class SubscribeStoreServiceImpl implements GrozaSubscribeStoreService {
         }
         grozaSubscribeWildcardCache.all().forEach((topicFilter, map) -> {
             if (StrUtil.split(topic, '/').size() >= StrUtil.split(topicFilter, '/').size()) {
-                List<String> splitTopics = StrUtil.split(topic, '/');//a
-                List<String> spliteTopicFilters = StrUtil.split(topicFilter, '/');//#
+                List<String> splitTopics = StrUtil.split(topic, '/');
+                List<String> splitTopicFilters = StrUtil.split(topicFilter, '/');
                 StringBuilder newTopicFilter = new StringBuilder();
-                for (int i = 0; i < spliteTopicFilters.size(); i++) {
-                    String value = spliteTopicFilters.get(i);
+                for (int i = 0; i < splitTopicFilters.size(); i++) {
+                    String value = splitTopicFilters.get(i);
                     if ("+".equals(value)) {
                         newTopicFilter.append("+/");
                     } else if ("#".equals(value)) {
