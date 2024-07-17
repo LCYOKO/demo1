@@ -1,38 +1,51 @@
 package com.xiaomi.demo.java.net.netty.simple;
 
+import com.xiaomi.demo.java.net.netty.codec.PacketDecoder;
+import com.xiaomi.demo.java.net.netty.codec.PacketEncoder;
+import com.xiaomi.demo.java.net.netty.codec.Spliter;
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.*;
+import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.nio.charset.StandardCharsets;
 
 /**
  * @Author：liuchiyun
  * @Date: 2021/5/7
  */
+@Slf4j
 public class Server {
+    private final int port;
+    private final ServerBootstrap serverBootstrap;
 
-    private static void startServer() {
+    public Server(int port) {
+        this.port = port;
+        this.serverBootstrap = new ServerBootstrap();
+        init();
+    }
+
+    private void init() {
         NioEventLoopGroup boss = new NioEventLoopGroup();
         NioEventLoopGroup worker = new NioEventLoopGroup();
+        serverBootstrap.group(boss, worker)
+                .channel(NioServerSocketChannel.class)
+                .option(ChannelOption.SO_BACKLOG, 1024)
+                .childHandler(new ChildHandler());
+    }
+
+
+    public void startSync() {
+        ChannelFuture channelFuture;
         try {
-            ServerBootstrap serverBootstrap = new ServerBootstrap();
-            serverBootstrap.group(boss, worker)
-                    .channel(NioServerSocketChannel.class)
-                    .option(ChannelOption.SO_BACKLOG, 1024)
-                    .childHandler(new ChildHandler());
-            ChannelFuture future = serverBootstrap.bind(8999).sync();
-            future.channel().closeFuture().sync();
-        } catch (Exception e) {
-
-
-        } finally {
-            boss.shutdownGracefully();
-            worker.shutdownGracefully();
+            channelFuture = serverBootstrap.bind(port).sync();
+            channelFuture.channel().closeFuture().sync();
+        } catch (Exception ex) {
+            log.info("error", ex);
         }
     }
 
@@ -40,75 +53,16 @@ public class Server {
 
         @Override
         protected void initChannel(SocketChannel ch) throws Exception {
-            ch.pipeline().addLast(new MyChannelHandler());
-        }
-    }
-
-    private static class MyChannelHandler extends SimpleChannelInboundHandler<ByteBuffer> {
-
-        @Override
-        public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
-
-        }
-
-        @Override
-        public void channelUnregistered(ChannelHandlerContext ctx) throws Exception {
-
-        }
-
-        @Override
-        public void channelActive(ChannelHandlerContext ctx) throws Exception {
-
-        }
-
-        @Override
-        public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-
-        }
-
-        @Override
-        public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-//             System.out.println(((ByteBuf)msg).toString(StandardCharsets.UTF_8));
-        }
-
-        @Override
-        protected void channelRead0(ChannelHandlerContext ctx, ByteBuffer msg) throws Exception {
-            System.out.println(new String(msg.array(), StandardCharsets.UTF_8));
-        }
-
-        @Override
-        public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
-
-        }
-
-        @Override
-        public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
-
-        }
-
-        @Override
-        public void channelWritabilityChanged(ChannelHandlerContext ctx) throws Exception {
-
-        }
-
-        @Override
-        public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
-
-        }
-
-        @Override
-        public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
-
-        }
-
-        @Override
-        public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-
+            ch.pipeline().addLast(new Spliter());
+            ch.pipeline().addLast(new PacketDecoder());
+            ch.pipeline().addLast(new PacketEncoder());
+            ch.pipeline().addLast(new LoginRequestHandler());
+            ch.pipeline().addLast(new TestOutboundHandler());
         }
     }
 
     public static void main(String[] args) throws IOException {
-        startServer();
+        new Server(9999).startSync();
     }
 
 }
