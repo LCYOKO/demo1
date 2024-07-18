@@ -118,27 +118,6 @@ public class SelectorServer {
         }
     }
 
-    private void startHeatBeatAsync() {
-        new Thread(() -> {
-            while (true) {
-                try {
-                    TimeUnit.SECONDS.sleep(5);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-                channelList.forEach(channel -> {
-                    Charset charset = StandardCharsets.UTF_8;
-                    try {
-                        channel.write(charset.encode("Long ServerResponse"));
-                        log.info("Send Long Response");
-                    } catch (Exception e) {
-                        log.error("heart beat error. channel:{}", channel, e);
-                    }
-                });
-            }
-        }).start();
-    }
-
     public static void main(String[] args) throws IOException {
         new SelectorServer(9999).start();
     }

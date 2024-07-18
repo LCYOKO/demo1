@@ -1,5 +1,6 @@
 package com.xiaomi.demo.java.net.netty.http;
 
+import cn.hutool.http.ContentType;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.xiaomi.common.utils.JsonUtils;
@@ -41,12 +42,11 @@ public class HttpChannelHandler extends SimpleChannelInboundHandler<HttpObject> 
     public void channelRead0(ChannelHandlerContext ctx, HttpObject msg) throws Exception {
         User user = new User();
         user.setId(1L);
-        user.setName("sanshengshui");
+        user.setName("xiaomi");
         if (msg instanceof HttpRequest) {
             HttpRequest request = (HttpRequest) msg;
             headers = request.headers();
             String uri = request.uri();
-            log.info("http uri: " + uri);
             if (uri.equals(FAVICON_ICO)) {
                 return;
             }
@@ -69,7 +69,7 @@ public class HttpChannelHandler extends SimpleChannelInboundHandler<HttpObject> 
 
             byte[] content = JsonUtils.toByteArray(user);
             FullHttpResponse response = new DefaultFullHttpResponse(HTTP_1_1, OK, Unpooled.wrappedBuffer(content));
-            response.headers().set(CONTENT_TYPE, "text/plain");
+            response.headers().set(CONTENT_TYPE, ContentType.JSON.toString());
             response.headers().setInt(CONTENT_LENGTH, response.content().readableBytes());
             boolean keepAlive = HttpUtil.isKeepAlive(request);
             if (!keepAlive) {
