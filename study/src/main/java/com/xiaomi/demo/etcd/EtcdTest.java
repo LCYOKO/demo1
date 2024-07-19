@@ -1,8 +1,8 @@
 package com.xiaomi.demo.etcd;
 
 import io.etcd.jetcd.*;
+import io.etcd.jetcd.cluster.MemberListResponse;
 import io.etcd.jetcd.election.CampaignResponse;
-import io.etcd.jetcd.election.LeaderResponse;
 import io.etcd.jetcd.kv.DeleteResponse;
 import io.etcd.jetcd.kv.GetResponse;
 import io.etcd.jetcd.kv.PutResponse;
@@ -127,9 +127,16 @@ public class EtcdTest {
         Election electionClient = etcdClient.getElectionClient();
         ByteSequence sequence = ByteSequence.from("test_leader".getBytes(StandardCharsets.UTF_8));
         ByteSequence proposal = ByteSequence.from("one".getBytes(StandardCharsets.UTF_8));
-        CompletableFuture<CampaignResponse> completableFuture = electionClient.campaign(sequence,leaseGrantResponse.getID(),proposal);
+        CompletableFuture<CampaignResponse> completableFuture = electionClient.campaign(sequence, leaseGrantResponse.getID(), proposal);
         log.info("leader result:{}", completableFuture.get());
 
+    }
+
+    @Test
+    public void testCluster() throws ExecutionException, InterruptedException {
+        Cluster clusterClient = etcdClient.getClusterClient();
+        CompletableFuture<MemberListResponse> listMember = clusterClient.listMember();
+        log.info("cluster result:{}", listMember.get());
     }
 
     private ByteSequence of(String str) {
