@@ -1,6 +1,8 @@
 package com.xiaomi.demo.etcd;
 
 import io.etcd.jetcd.*;
+import io.etcd.jetcd.election.CampaignResponse;
+import io.etcd.jetcd.election.LeaderResponse;
 import io.etcd.jetcd.kv.DeleteResponse;
 import io.etcd.jetcd.kv.GetResponse;
 import io.etcd.jetcd.kv.PutResponse;
@@ -29,8 +31,8 @@ import java.util.concurrent.ExecutionException;
 public class EtcdTest {
     private Client etcdClient = Client.builder()
             .endpoints("http://localhost:2379")
-            .user(ByteSequence.from("root".getBytes(StandardCharsets.UTF_8)))
-            .password(ByteSequence.from("123".getBytes(StandardCharsets.UTF_8)))
+//            .user(ByteSequence.from("root".getBytes(StandardCharsets.UTF_8)))
+//            .password(ByteSequence.from("123".getBytes(StandardCharsets.UTF_8)))
             .build();
     private KV kvClient = etcdClient.getKVClient();
 
@@ -50,7 +52,6 @@ public class EtcdTest {
         CompletableFuture<PutResponse> future = kvClient.put(key, value);
         log.info("put result:{}", future.get());
     }
-
 
     @Test
     public void testGetData() throws ExecutionException, InterruptedException {
@@ -118,9 +119,17 @@ public class EtcdTest {
         log.info("lock result:{}", lock.get());
     }
 
-    public void testLeader() {
+    @Test
+    public void testLeader() throws ExecutionException, InterruptedException {
+        Lease leaseClient = etcdClient.getLeaseClient();
+        CompletableFuture<LeaseGrantResponse> grant = leaseClient.grant(10000);
+        LeaseGrantResponse leaseGrantResponse = grant.get();
         Election electionClient = etcdClient.getElectionClient();
-//        electionClient.leader()
+        ByteSequence sequence = ByteSequence.from("test_leader".getBytes(StandardCharsets.UTF_8));
+        ByteSequence proposal = ByteSequence.from("one".getBytes(StandardCharsets.UTF_8));
+        CompletableFuture<CampaignResponse> completableFuture = electionClient.campaign(sequence,leaseGrantResponse.getID(),proposal);
+        log.info("leader result:{}", completableFuture.get());
+
     }
 
     private ByteSequence of(String str) {
