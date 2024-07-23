@@ -1,6 +1,10 @@
 package com.xiaomi.demo.algo;
 
 import lombok.extern.slf4j.Slf4j;
+import org.junit.Test;
+
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 /**
  * @Author: liuchiyun
@@ -11,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ItemCheckSortTest {
 
+    @Test
     public void testTextDiff() {
-
     }
 }
