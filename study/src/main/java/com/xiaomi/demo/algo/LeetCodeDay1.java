@@ -1,6 +1,5 @@
 package com.xiaomi.demo.algo;
 
-import cn.hutool.core.thread.RejectPolicy;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
@@ -21,10 +20,6 @@ public class LeetCodeDay1 {
     @Test
     public void test() {
     }
-
-
-
-
 
 
 }
