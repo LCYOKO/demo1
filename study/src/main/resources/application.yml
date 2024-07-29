@@ -20,9 +20,6 @@ spring:
     listener:
       simple:
         auto-startup: false
-  datasource:
-    hikari:
-      auto-commit:
 
 app:
   id: test

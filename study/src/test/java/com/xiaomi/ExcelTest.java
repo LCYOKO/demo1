@@ -5,7 +5,6 @@ import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.read.listener.ReadListener;
 import lombok.Data;
-import org.junit.Test;
 
 import java.io.File;
 import java.util.Collection;
@@ -19,7 +18,7 @@ import java.util.function.Supplier;
  * @Date: 2024/2/8
  */
 public class ExcelTest {
-    @Test
+//    @Test
     public void test() {
         Map<String, Item> map = new HashMap<>();
         EasyExcel.read(new File("C:\\Users\\Admin\\Desktop\\商品历史成本.xlsx"), Item.class, new ReadListener<Item>() {
