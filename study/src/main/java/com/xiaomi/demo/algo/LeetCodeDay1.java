@@ -3,8 +3,6 @@ package com.xiaomi.demo.algo;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
-import java.util.Random;
-
 /**
  * @Author: liuchiyun
  * @Date: 2024/7/20
@@ -21,7 +19,5 @@ public class LeetCodeDay1 {
      */
     @Test
     public void test() {
-        Random random = new Random();
-        System.out.println(random.nextInt(1));
     }
 }

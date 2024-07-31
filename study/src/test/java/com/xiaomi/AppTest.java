@@ -8,8 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.jdbc.Sql;
 
 @Sql(value = {
-        "/script/init.sql",
-        "/script/data.sql"
+        "/script/user_test.sql"
 })
 public class AppTest extends TestBase {
     @Autowired(required = false)
@@ -21,10 +20,6 @@ public class AppTest extends TestBase {
         System.out.println(jdbcTemplate.query("select * from users", new BeanPropertyRowMapper<User>(User.class)));
     }
 
-    @Test
-    public void test2() {
-        System.out.println(2);
-    }
 
     @Data
     public static class User {
