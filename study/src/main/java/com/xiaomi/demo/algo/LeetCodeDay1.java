@@ -19,5 +19,6 @@ public class LeetCodeDay1 {
      */
     @Test
     public void test() {
+        findDuplicate(new int[]{3, 3, 3, 3});
     }
 }
