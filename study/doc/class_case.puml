@@ -1,0 +1,46 @@
+@startuml
+
+class 工程师 {
+    +String name
+    ~int age
+    -void work()
+}
+note right of 工程师::name
+  在 UML 注释了此方法
+end note
+
+note right of 工程师 : 这是一个注释
+
+
+interface people {
+    void getID();
+}
+package a{
+    class c1 {
+        +String name
+        ~int age
+        -void work()
+    }
+    class c2 {
+        +String name
+        ~int age
+        -void work()
+    }
+}
+
+工程师  <|.. 软件工程师 : 实现
+
+软件工程师 <|-- 测试工程师 : 继承（泛化）
+
+软件工程师 <|-- 开发工程师 : 继承（泛化）
+
+测试工程师 *-- 测试思维 : contains（组合）
+测试工程师 *-- 测试技术 : contains（组合）
+
+开发工程师 o-- 头发 : has（聚合）
+
+开发工程师 <--> 身份证 : 关联
+
+开发工程师 ..> IDE : 使用（依赖）
+
+@enduml

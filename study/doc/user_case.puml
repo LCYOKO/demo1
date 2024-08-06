@@ -1,0 +1,25 @@
+@startuml
+
+left to right direction
+
+actor : 其它LX提供给TA的后端系统: as otherLxTaBackendService
+
+note top of otherLxTaBackendService
+比如tianansp
+负责活动和文章的服务
+比如tiananseason
+负责西游活动的服务
+通过dubbo的rpc方法调用
+end note
+
+usecase 修改用户积分 as changeUserPoint
+usecase 查询用户总积分 as getUserTotalPoint
+usecase 登录校验 as getRestContextByAccessToken
+
+
+otherLxTaBackendService --> getRestContextByAccessToken:获取用户的登录态[RPC]
+otherLxTaBackendService --> changeUserPoint:活动增加或者扣减积分[RPC]
+otherLxTaBackendService --> getUserTotalPoint: 查询用户当前总积分[RPC]
+
+
+@enduml
