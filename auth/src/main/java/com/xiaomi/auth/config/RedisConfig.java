@@ -36,6 +36,7 @@ public class RedisConfig {
     }
 
     private void setSerializer(RedisTemplate<String, Object> template) {
+
         Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<>(Object.class);
         ObjectMapper om = new ObjectMapper();
         om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
