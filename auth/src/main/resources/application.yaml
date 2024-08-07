@@ -35,11 +35,11 @@ nacos:
     auto-refresh: true
     bootstrap:
       enable: true
-dubbo:
-  registry:
-    address: "nacos://127.0.0.1:8848"
-  protocol:
-    name: "dubbo"
-    port: -1
-  application:
-    register-consumer: true
+#dubbo:
+#  registry:
+#    address: "nacos://127.0.0.1:8848"
+#  protocol:
+#    name: "dubbo"
+#    port: -1
+#  application:
+#    register-consumer: true

@@ -17,15 +17,15 @@ import java.util.concurrent.TimeoutException;
  * @Author: liuchiyun
  * @Date: 2024/5/27
  */
-@RestController
-@RequestMapping("/dubbo")
-public class DubboCtrl {
-
-    @DubboReference(loadbalance = LoadbalanceRules.ROUND_ROBIN, timeout = 3000)
-    private UserService userService;
-
-    @GetMapping("/user")
-    public UserDto get() throws ExecutionException, InterruptedException, TimeoutException {
-        return userService.getByIdAsync(1L).get(3, TimeUnit.SECONDS);
-    }
-}
+//@RestController
+//@RequestMapping("/dubbo")
+//public class DubboCtrl {
+//
+//    @DubboReference(loadbalance = LoadbalanceRules.ROUND_ROBIN, timeout = 3000)
+//    private UserService userService;
+//
+//    @GetMapping("/user")
+//    public UserDto get() throws ExecutionException, InterruptedException, TimeoutException {
+//        return userService.getByIdAsync(1L).get(3, TimeUnit.SECONDS);
+//    }
+//}
