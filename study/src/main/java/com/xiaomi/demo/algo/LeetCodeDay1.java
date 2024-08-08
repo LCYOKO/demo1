@@ -3,6 +3,11 @@ package com.xiaomi.demo.algo;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 /**
  * @Author: liuchiyun
  * @Date: 2024/7/20
@@ -19,8 +24,8 @@ public class LeetCodeDay1 {
      */
     @Test
     public void test() {
-        findMedianSortedArrays(new int[]{1, 3}, new int[]{2});
     }
+
 
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
         int len1 = nums1.length;
