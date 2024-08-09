@@ -51,18 +51,18 @@ private static final long serialVersionUID = 0L;
             break;
           case 8: {
 
-            bookId_ = input.readInt64();
+            id_ = input.readInt64();
             break;
           }
           case 18: {
             com.google.protobuf.StringValue.Builder subBuilder = null;
             if (((bitField0_ & 0x00000001) != 0)) {
-              subBuilder = bookName_.toBuilder();
+              subBuilder = name_.toBuilder();
             }
-            bookName_ = input.readMessage(com.google.protobuf.StringValue.parser(), extensionRegistry);
+            name_ = input.readMessage(com.google.protobuf.StringValue.parser(), extensionRegistry);
             if (subBuilder != null) {
-              subBuilder.mergeFrom(bookName_);
-              bookName_ = subBuilder.buildPartial();
+              subBuilder.mergeFrom(name_);
+              name_ = subBuilder.buildPartial();
             }
             bitField0_ |= 0x00000001;
             break;
@@ -100,41 +100,41 @@ private static final long serialVersionUID = 0L;
   }
 
   private int bitField0_;
-  public static final int BOOKID_FIELD_NUMBER = 1;
-  private long bookId_;
+  public static final int ID_FIELD_NUMBER = 1;
+  private long id_;
   /**
-   * <code>int64 bookId = 1;</code>
-   * @return The bookId.
+   * <code>int64 id = 1;</code>
+   * @return The id.
    */
   @java.lang.Override
-  public long getBookId() {
-    return bookId_;
+  public long getId() {
+    return id_;
   }
 
-  public static final int BOOKNAME_FIELD_NUMBER = 2;
-  private com.google.protobuf.StringValue bookName_;
+  public static final int NAME_FIELD_NUMBER = 2;
+  private com.google.protobuf.StringValue name_;
   /**
-   * <code>.google.protobuf.StringValue bookName = 2;</code>
-   * @return Whether the bookName field is set.
+   * <code>.google.protobuf.StringValue name = 2;</code>
+   * @return Whether the name field is set.
    */
   @java.lang.Override
-  public boolean hasBookName() {
+  public boolean hasName() {
     return ((bitField0_ & 0x00000001) != 0);
   }
   /**
-   * <code>.google.protobuf.StringValue bookName = 2;</code>
-   * @return The bookName.
+   * <code>.google.protobuf.StringValue name = 2;</code>
+   * @return The name.
    */
   @java.lang.Override
-  public com.google.protobuf.StringValue getBookName() {
-    return bookName_ == null ? com.google.protobuf.StringValue.getDefaultInstance() : bookName_;
+  public com.google.protobuf.StringValue getName() {
+    return name_ == null ? com.google.protobuf.StringValue.getDefaultInstance() : name_;
   }
   /**
-   * <code>.google.protobuf.StringValue bookName = 2;</code>
+   * <code>.google.protobuf.StringValue name = 2;</code>
    */
   @java.lang.Override
-  public com.google.protobuf.StringValueOrBuilder getBookNameOrBuilder() {
-    return bookName_ == null ? com.google.protobuf.StringValue.getDefaultInstance() : bookName_;
+  public com.google.protobuf.StringValueOrBuilder getNameOrBuilder() {
+    return name_ == null ? com.google.protobuf.StringValue.getDefaultInstance() : name_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -151,11 +151,11 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (bookId_ != 0L) {
-      output.writeInt64(1, bookId_);
+    if (id_ != 0L) {
+      output.writeInt64(1, id_);
     }
     if (((bitField0_ & 0x00000001) != 0)) {
-      output.writeMessage(2, getBookName());
+      output.writeMessage(2, getName());
     }
     unknownFields.writeTo(output);
   }
@@ -166,13 +166,13 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (bookId_ != 0L) {
+    if (id_ != 0L) {
       size += com.google.protobuf.CodedOutputStream
-        .computeInt64Size(1, bookId_);
+        .computeInt64Size(1, id_);
     }
     if (((bitField0_ & 0x00000001) != 0)) {
       size += com.google.protobuf.CodedOutputStream
-        .computeMessageSize(2, getBookName());
+        .computeMessageSize(2, getName());
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -189,12 +189,12 @@ private static final long serialVersionUID = 0L;
     }
     com.xiaomi.demo.proto.BookRequest other = (com.xiaomi.demo.proto.BookRequest) obj;
 
-    if (getBookId()
-        != other.getBookId()) return false;
-    if (hasBookName() != other.hasBookName()) return false;
-    if (hasBookName()) {
-      if (!getBookName()
-          .equals(other.getBookName())) return false;
+    if (getId()
+        != other.getId()) return false;
+    if (hasName() != other.hasName()) return false;
+    if (hasName()) {
+      if (!getName()
+          .equals(other.getName())) return false;
     }
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
@@ -207,12 +207,12 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + BOOKID_FIELD_NUMBER;
+    hash = (37 * hash) + ID_FIELD_NUMBER;
     hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-        getBookId());
-    if (hasBookName()) {
-      hash = (37 * hash) + BOOKNAME_FIELD_NUMBER;
-      hash = (53 * hash) + getBookName().hashCode();
+        getId());
+    if (hasName()) {
+      hash = (37 * hash) + NAME_FIELD_NUMBER;
+      hash = (53 * hash) + getName().hashCode();
     }
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
@@ -342,18 +342,18 @@ private static final long serialVersionUID = 0L;
     private void maybeForceBuilderInitialization() {
       if (com.google.protobuf.GeneratedMessageV3
               .alwaysUseFieldBuilders) {
-        getBookNameFieldBuilder();
+        getNameFieldBuilder();
       }
     }
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      bookId_ = 0L;
+      id_ = 0L;
 
-      if (bookNameBuilder_ == null) {
-        bookName_ = null;
+      if (nameBuilder_ == null) {
+        name_ = null;
       } else {
-        bookNameBuilder_.clear();
+        nameBuilder_.clear();
       }
       bitField0_ = (bitField0_ & ~0x00000001);
       return this;
@@ -384,12 +384,12 @@ private static final long serialVersionUID = 0L;
       com.xiaomi.demo.proto.BookRequest result = new com.xiaomi.demo.proto.BookRequest(this);
       int from_bitField0_ = bitField0_;
       int to_bitField0_ = 0;
-      result.bookId_ = bookId_;
+      result.id_ = id_;
       if (((from_bitField0_ & 0x00000001) != 0)) {
-        if (bookNameBuilder_ == null) {
-          result.bookName_ = bookName_;
+        if (nameBuilder_ == null) {
+          result.name_ = name_;
         } else {
-          result.bookName_ = bookNameBuilder_.build();
+          result.name_ = nameBuilder_.build();
         }
         to_bitField0_ |= 0x00000001;
       }
@@ -442,11 +442,11 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(com.xiaomi.demo.proto.BookRequest other) {
       if (other == com.xiaomi.demo.proto.BookRequest.getDefaultInstance()) return this;
-      if (other.getBookId() != 0L) {
-        setBookId(other.getBookId());
+      if (other.getId() != 0L) {
+        setId(other.getId());
       }
-      if (other.hasBookName()) {
-        mergeBookName(other.getBookName());
+      if (other.hasName()) {
+        mergeName(other.getName());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -478,155 +478,155 @@ private static final long serialVersionUID = 0L;
     }
     private int bitField0_;
 
-    private long bookId_ ;
+    private long id_ ;
     /**
-     * <code>int64 bookId = 1;</code>
-     * @return The bookId.
+     * <code>int64 id = 1;</code>
+     * @return The id.
      */
     @java.lang.Override
-    public long getBookId() {
-      return bookId_;
+    public long getId() {
+      return id_;
     }
     /**
-     * <code>int64 bookId = 1;</code>
-     * @param value The bookId to set.
+     * <code>int64 id = 1;</code>
+     * @param value The id to set.
      * @return This builder for chaining.
      */
-    public Builder setBookId(long value) {
+    public Builder setId(long value) {
       
-      bookId_ = value;
+      id_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>int64 bookId = 1;</code>
+     * <code>int64 id = 1;</code>
      * @return This builder for chaining.
      */
-    public Builder clearBookId() {
+    public Builder clearId() {
       
-      bookId_ = 0L;
+      id_ = 0L;
       onChanged();
       return this;
     }
 
-    private com.google.protobuf.StringValue bookName_;
+    private com.google.protobuf.StringValue name_;
     private com.google.protobuf.SingleFieldBuilderV3<
-        com.google.protobuf.StringValue, com.google.protobuf.StringValue.Builder, com.google.protobuf.StringValueOrBuilder> bookNameBuilder_;
+        com.google.protobuf.StringValue, com.google.protobuf.StringValue.Builder, com.google.protobuf.StringValueOrBuilder> nameBuilder_;
     /**
-     * <code>.google.protobuf.StringValue bookName = 2;</code>
-     * @return Whether the bookName field is set.
+     * <code>.google.protobuf.StringValue name = 2;</code>
+     * @return Whether the name field is set.
      */
-    public boolean hasBookName() {
+    public boolean hasName() {
       return ((bitField0_ & 0x00000001) != 0);
     }
     /**
-     * <code>.google.protobuf.StringValue bookName = 2;</code>
-     * @return The bookName.
+     * <code>.google.protobuf.StringValue name = 2;</code>
+     * @return The name.
      */
-    public com.google.protobuf.StringValue getBookName() {
-      if (bookNameBuilder_ == null) {
-        return bookName_ == null ? com.google.protobuf.StringValue.getDefaultInstance() : bookName_;
+    public com.google.protobuf.StringValue getName() {
+      if (nameBuilder_ == null) {
+        return name_ == null ? com.google.protobuf.StringValue.getDefaultInstance() : name_;
       } else {
-        return bookNameBuilder_.getMessage();
+        return nameBuilder_.getMessage();
       }
     }
     /**
-     * <code>.google.protobuf.StringValue bookName = 2;</code>
+     * <code>.google.protobuf.StringValue name = 2;</code>
      */
-    public Builder setBookName(com.google.protobuf.StringValue value) {
-      if (bookNameBuilder_ == null) {
+    public Builder setName(com.google.protobuf.StringValue value) {
+      if (nameBuilder_ == null) {
         if (value == null) {
           throw new NullPointerException();
         }
-        bookName_ = value;
+        name_ = value;
         onChanged();
       } else {
-        bookNameBuilder_.setMessage(value);
+        nameBuilder_.setMessage(value);
       }
       bitField0_ |= 0x00000001;
       return this;
     }
     /**
-     * <code>.google.protobuf.StringValue bookName = 2;</code>
+     * <code>.google.protobuf.StringValue name = 2;</code>
      */
-    public Builder setBookName(
+    public Builder setName(
         com.google.protobuf.StringValue.Builder builderForValue) {
-      if (bookNameBuilder_ == null) {
-        bookName_ = builderForValue.build();
+      if (nameBuilder_ == null) {
+        name_ = builderForValue.build();
         onChanged();
       } else {
-        bookNameBuilder_.setMessage(builderForValue.build());
+        nameBuilder_.setMessage(builderForValue.build());
       }
       bitField0_ |= 0x00000001;
       return this;
     }
     /**
-     * <code>.google.protobuf.StringValue bookName = 2;</code>
+     * <code>.google.protobuf.StringValue name = 2;</code>
      */
-    public Builder mergeBookName(com.google.protobuf.StringValue value) {
-      if (bookNameBuilder_ == null) {
+    public Builder mergeName(com.google.protobuf.StringValue value) {
+      if (nameBuilder_ == null) {
         if (((bitField0_ & 0x00000001) != 0) &&
-            bookName_ != null &&
-            bookName_ != com.google.protobuf.StringValue.getDefaultInstance()) {
-          bookName_ =
-            com.google.protobuf.StringValue.newBuilder(bookName_).mergeFrom(value).buildPartial();
+            name_ != null &&
+            name_ != com.google.protobuf.StringValue.getDefaultInstance()) {
+          name_ =
+            com.google.protobuf.StringValue.newBuilder(name_).mergeFrom(value).buildPartial();
         } else {
-          bookName_ = value;
+          name_ = value;
         }
         onChanged();
       } else {
-        bookNameBuilder_.mergeFrom(value);
+        nameBuilder_.mergeFrom(value);
       }
       bitField0_ |= 0x00000001;
       return this;
     }
     /**
-     * <code>.google.protobuf.StringValue bookName = 2;</code>
+     * <code>.google.protobuf.StringValue name = 2;</code>
      */
-    public Builder clearBookName() {
-      if (bookNameBuilder_ == null) {
-        bookName_ = null;
+    public Builder clearName() {
+      if (nameBuilder_ == null) {
+        name_ = null;
         onChanged();
       } else {
-        bookNameBuilder_.clear();
+        nameBuilder_.clear();
       }
       bitField0_ = (bitField0_ & ~0x00000001);
       return this;
     }
     /**
-     * <code>.google.protobuf.StringValue bookName = 2;</code>
+     * <code>.google.protobuf.StringValue name = 2;</code>
      */
-    public com.google.protobuf.StringValue.Builder getBookNameBuilder() {
+    public com.google.protobuf.StringValue.Builder getNameBuilder() {
       bitField0_ |= 0x00000001;
       onChanged();
-      return getBookNameFieldBuilder().getBuilder();
+      return getNameFieldBuilder().getBuilder();
     }
     /**
-     * <code>.google.protobuf.StringValue bookName = 2;</code>
+     * <code>.google.protobuf.StringValue name = 2;</code>
      */
-    public com.google.protobuf.StringValueOrBuilder getBookNameOrBuilder() {
-      if (bookNameBuilder_ != null) {
-        return bookNameBuilder_.getMessageOrBuilder();
+    public com.google.protobuf.StringValueOrBuilder getNameOrBuilder() {
+      if (nameBuilder_ != null) {
+        return nameBuilder_.getMessageOrBuilder();
       } else {
-        return bookName_ == null ?
-            com.google.protobuf.StringValue.getDefaultInstance() : bookName_;
+        return name_ == null ?
+            com.google.protobuf.StringValue.getDefaultInstance() : name_;
       }
     }
     /**
-     * <code>.google.protobuf.StringValue bookName = 2;</code>
+     * <code>.google.protobuf.StringValue name = 2;</code>
      */
     private com.google.protobuf.SingleFieldBuilderV3<
         com.google.protobuf.StringValue, com.google.protobuf.StringValue.Builder, com.google.protobuf.StringValueOrBuilder> 
-        getBookNameFieldBuilder() {
-      if (bookNameBuilder_ == null) {
-        bookNameBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+        getNameFieldBuilder() {
+      if (nameBuilder_ == null) {
+        nameBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
             com.google.protobuf.StringValue, com.google.protobuf.StringValue.Builder, com.google.protobuf.StringValueOrBuilder>(
-                getBookName(),
+                getName(),
                 getParentForChildren(),
                 isClean());
-        bookName_ = null;
+        name_ = null;
       }
-      return bookNameBuilder_;
+      return nameBuilder_;
     }
     @java.lang.Override
     public final Builder setUnknownFields(

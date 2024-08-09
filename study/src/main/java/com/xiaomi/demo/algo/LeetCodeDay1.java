@@ -3,10 +3,7 @@ package com.xiaomi.demo.algo;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @Author: liuchiyun
@@ -24,7 +21,37 @@ public class LeetCodeDay1 {
      */
     @Test
     public void test() {
+
     }
+
+//    private void quickSort(int[] nums, int l, int r) {
+//        if (l >= r) {
+//            return;
+//        }
+//        int mid = (r - l) / 2 + l;
+//        int i = l;
+//        int j = r;
+//        while (i < j) {
+//            while (i < j && nums[j] >= nums[mid]) {
+//                j--;
+//            }
+//            while (i < j && nums[i] <= nums[mid]) {
+//                i++;
+//            }
+//            if (i < j) {
+//                int temp = nums[i];
+//                nums[i] = nums[j];
+//                nums[j] = temp;
+//                i++;
+//                j--;
+//            }
+//        }
+//        int temp = nums[mid];
+//        nums[mid] = nums[i];
+//        nums[i] = temp;
+//        quickSort(nums, l, i);
+//        quickSort(nums, i + 1, r);
+//    }
 
 
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {

@@ -8,20 +8,20 @@ public interface BookOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>int64 bookId = 1;</code>
-   * @return The bookId.
+   * <code>int64 id = 1;</code>
+   * @return The id.
    */
-  long getBookId();
+  long getId();
 
   /**
-   * <code>string bookName = 2;</code>
-   * @return The bookName.
+   * <code>string name = 2;</code>
+   * @return The name.
    */
-  java.lang.String getBookName();
+  java.lang.String getName();
   /**
-   * <code>string bookName = 2;</code>
-   * @return The bytes for bookName.
+   * <code>string name = 2;</code>
+   * @return The bytes for name.
    */
   com.google.protobuf.ByteString
-      getBookNameBytes();
+      getNameBytes();
 }

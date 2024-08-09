@@ -4,8 +4,8 @@ option java_multiple_files = true;
 import "google/protobuf/wrappers.proto";
 
 message Book{
-  int64 bookId = 1;
-  string bookName = 2;
+  int64 id = 1;
+  string name = 2;
 }
 enum Status{
   SUCCESS = 0;
@@ -15,8 +15,8 @@ enum Status{
 
 
 message BookRequest{
-  int64 bookId = 1;
-  optional google.protobuf.StringValue bookName = 2;
+  int64 id = 1;
+  optional google.protobuf.StringValue name = 2;
 }
 
 message BookResponse{

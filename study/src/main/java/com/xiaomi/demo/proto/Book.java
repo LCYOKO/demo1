@@ -16,7 +16,7 @@ private static final long serialVersionUID = 0L;
     super(builder);
   }
   private Book() {
-    bookName_ = "";
+    name_ = "";
   }
 
   @java.lang.Override
@@ -51,13 +51,13 @@ private static final long serialVersionUID = 0L;
             break;
           case 8: {
 
-            bookId_ = input.readInt64();
+            id_ = input.readInt64();
             break;
           }
           case 18: {
             java.lang.String s = input.readStringRequireUtf8();
 
-            bookName_ = s;
+            name_ = s;
             break;
           }
           default: {
@@ -92,49 +92,49 @@ private static final long serialVersionUID = 0L;
             com.xiaomi.demo.proto.Book.class, com.xiaomi.demo.proto.Book.Builder.class);
   }
 
-  public static final int BOOKID_FIELD_NUMBER = 1;
-  private long bookId_;
+  public static final int ID_FIELD_NUMBER = 1;
+  private long id_;
   /**
-   * <code>int64 bookId = 1;</code>
-   * @return The bookId.
+   * <code>int64 id = 1;</code>
+   * @return The id.
    */
   @java.lang.Override
-  public long getBookId() {
-    return bookId_;
+  public long getId() {
+    return id_;
   }
 
-  public static final int BOOKNAME_FIELD_NUMBER = 2;
-  private volatile java.lang.Object bookName_;
+  public static final int NAME_FIELD_NUMBER = 2;
+  private volatile java.lang.Object name_;
   /**
-   * <code>string bookName = 2;</code>
-   * @return The bookName.
+   * <code>string name = 2;</code>
+   * @return The name.
    */
   @java.lang.Override
-  public java.lang.String getBookName() {
-    java.lang.Object ref = bookName_;
+  public java.lang.String getName() {
+    java.lang.Object ref = name_;
     if (ref instanceof java.lang.String) {
       return (java.lang.String) ref;
     } else {
       com.google.protobuf.ByteString bs = 
           (com.google.protobuf.ByteString) ref;
       java.lang.String s = bs.toStringUtf8();
-      bookName_ = s;
+      name_ = s;
       return s;
     }
   }
   /**
-   * <code>string bookName = 2;</code>
-   * @return The bytes for bookName.
+   * <code>string name = 2;</code>
+   * @return The bytes for name.
    */
   @java.lang.Override
   public com.google.protobuf.ByteString
-      getBookNameBytes() {
-    java.lang.Object ref = bookName_;
+      getNameBytes() {
+    java.lang.Object ref = name_;
     if (ref instanceof java.lang.String) {
       com.google.protobuf.ByteString b = 
           com.google.protobuf.ByteString.copyFromUtf8(
               (java.lang.String) ref);
-      bookName_ = b;
+      name_ = b;
       return b;
     } else {
       return (com.google.protobuf.ByteString) ref;
@@ -155,11 +155,11 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (bookId_ != 0L) {
-      output.writeInt64(1, bookId_);
+    if (id_ != 0L) {
+      output.writeInt64(1, id_);
     }
-    if (!getBookNameBytes().isEmpty()) {
-      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, bookName_);
+    if (!getNameBytes().isEmpty()) {
+      com.google.protobuf.GeneratedMessageV3.writeString(output, 2, name_);
     }
     unknownFields.writeTo(output);
   }
@@ -170,12 +170,12 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (bookId_ != 0L) {
+    if (id_ != 0L) {
       size += com.google.protobuf.CodedOutputStream
-        .computeInt64Size(1, bookId_);
+        .computeInt64Size(1, id_);
     }
-    if (!getBookNameBytes().isEmpty()) {
-      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, bookName_);
+    if (!getNameBytes().isEmpty()) {
+      size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, name_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -192,10 +192,10 @@ private static final long serialVersionUID = 0L;
     }
     com.xiaomi.demo.proto.Book other = (com.xiaomi.demo.proto.Book) obj;
 
-    if (getBookId()
-        != other.getBookId()) return false;
-    if (!getBookName()
-        .equals(other.getBookName())) return false;
+    if (getId()
+        != other.getId()) return false;
+    if (!getName()
+        .equals(other.getName())) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -207,11 +207,11 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + BOOKID_FIELD_NUMBER;
+    hash = (37 * hash) + ID_FIELD_NUMBER;
     hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-        getBookId());
-    hash = (37 * hash) + BOOKNAME_FIELD_NUMBER;
-    hash = (53 * hash) + getBookName().hashCode();
+        getId());
+    hash = (37 * hash) + NAME_FIELD_NUMBER;
+    hash = (53 * hash) + getName().hashCode();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -345,9 +345,9 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public Builder clear() {
       super.clear();
-      bookId_ = 0L;
+      id_ = 0L;
 
-      bookName_ = "";
+      name_ = "";
 
       return this;
     }
@@ -375,8 +375,8 @@ private static final long serialVersionUID = 0L;
     @java.lang.Override
     public com.xiaomi.demo.proto.Book buildPartial() {
       com.xiaomi.demo.proto.Book result = new com.xiaomi.demo.proto.Book(this);
-      result.bookId_ = bookId_;
-      result.bookName_ = bookName_;
+      result.id_ = id_;
+      result.name_ = name_;
       onBuilt();
       return result;
     }
@@ -425,11 +425,11 @@ private static final long serialVersionUID = 0L;
 
     public Builder mergeFrom(com.xiaomi.demo.proto.Book other) {
       if (other == com.xiaomi.demo.proto.Book.getDefaultInstance()) return this;
-      if (other.getBookId() != 0L) {
-        setBookId(other.getBookId());
+      if (other.getId() != 0L) {
+        setId(other.getId());
       }
-      if (!other.getBookName().isEmpty()) {
-        bookName_ = other.bookName_;
+      if (!other.getName().isEmpty()) {
+        name_ = other.name_;
         onChanged();
       }
       this.mergeUnknownFields(other.unknownFields);
@@ -461,109 +461,109 @@ private static final long serialVersionUID = 0L;
       return this;
     }
 
-    private long bookId_ ;
+    private long id_ ;
     /**
-     * <code>int64 bookId = 1;</code>
-     * @return The bookId.
+     * <code>int64 id = 1;</code>
+     * @return The id.
      */
     @java.lang.Override
-    public long getBookId() {
-      return bookId_;
+    public long getId() {
+      return id_;
     }
     /**
-     * <code>int64 bookId = 1;</code>
-     * @param value The bookId to set.
+     * <code>int64 id = 1;</code>
+     * @param value The id to set.
      * @return This builder for chaining.
      */
-    public Builder setBookId(long value) {
+    public Builder setId(long value) {
       
-      bookId_ = value;
+      id_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>int64 bookId = 1;</code>
+     * <code>int64 id = 1;</code>
      * @return This builder for chaining.
      */
-    public Builder clearBookId() {
+    public Builder clearId() {
       
-      bookId_ = 0L;
+      id_ = 0L;
       onChanged();
       return this;
     }
 
-    private java.lang.Object bookName_ = "";
+    private java.lang.Object name_ = "";
     /**
-     * <code>string bookName = 2;</code>
-     * @return The bookName.
+     * <code>string name = 2;</code>
+     * @return The name.
      */
-    public java.lang.String getBookName() {
-      java.lang.Object ref = bookName_;
+    public java.lang.String getName() {
+      java.lang.Object ref = name_;
       if (!(ref instanceof java.lang.String)) {
         com.google.protobuf.ByteString bs =
             (com.google.protobuf.ByteString) ref;
         java.lang.String s = bs.toStringUtf8();
-        bookName_ = s;
+        name_ = s;
         return s;
       } else {
         return (java.lang.String) ref;
       }
     }
     /**
-     * <code>string bookName = 2;</code>
-     * @return The bytes for bookName.
+     * <code>string name = 2;</code>
+     * @return The bytes for name.
      */
     public com.google.protobuf.ByteString
-        getBookNameBytes() {
-      java.lang.Object ref = bookName_;
+        getNameBytes() {
+      java.lang.Object ref = name_;
       if (ref instanceof String) {
         com.google.protobuf.ByteString b = 
             com.google.protobuf.ByteString.copyFromUtf8(
                 (java.lang.String) ref);
-        bookName_ = b;
+        name_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
     /**
-     * <code>string bookName = 2;</code>
-     * @param value The bookName to set.
+     * <code>string name = 2;</code>
+     * @param value The name to set.
      * @return This builder for chaining.
      */
-    public Builder setBookName(
+    public Builder setName(
         java.lang.String value) {
       if (value == null) {
     throw new NullPointerException();
   }
   
-      bookName_ = value;
+      name_ = value;
       onChanged();
       return this;
     }
     /**
-     * <code>string bookName = 2;</code>
+     * <code>string name = 2;</code>
      * @return This builder for chaining.
      */
-    public Builder clearBookName() {
+    public Builder clearName() {
       
-      bookName_ = getDefaultInstance().getBookName();
+      name_ = getDefaultInstance().getName();
       onChanged();
       return this;
     }
     /**
-     * <code>string bookName = 2;</code>
-     * @param value The bytes for bookName to set.
+     * <code>string name = 2;</code>
+     * @param value The bytes for name to set.
      * @return This builder for chaining.
      */
-    public Builder setBookNameBytes(
+    public Builder setNameBytes(
         com.google.protobuf.ByteString value) {
       if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
       
-      bookName_ = value;
+      name_ = value;
       onChanged();
       return this;
     }

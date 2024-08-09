@@ -8,23 +8,23 @@ public interface BookRequestOrBuilder extends
     com.google.protobuf.MessageOrBuilder {
 
   /**
-   * <code>int64 bookId = 1;</code>
-   * @return The bookId.
+   * <code>int64 id = 1;</code>
+   * @return The id.
    */
-  long getBookId();
+  long getId();
 
   /**
-   * <code>.google.protobuf.StringValue bookName = 2;</code>
-   * @return Whether the bookName field is set.
+   * <code>.google.protobuf.StringValue name = 2;</code>
+   * @return Whether the name field is set.
    */
-  boolean hasBookName();
+  boolean hasName();
   /**
-   * <code>.google.protobuf.StringValue bookName = 2;</code>
-   * @return The bookName.
+   * <code>.google.protobuf.StringValue name = 2;</code>
+   * @return The name.
    */
-  com.google.protobuf.StringValue getBookName();
+  com.google.protobuf.StringValue getName();
   /**
-   * <code>.google.protobuf.StringValue bookName = 2;</code>
+   * <code>.google.protobuf.StringValue name = 2;</code>
    */
-  com.google.protobuf.StringValueOrBuilder getBookNameOrBuilder();
+  com.google.protobuf.StringValueOrBuilder getNameOrBuilder();
 }
