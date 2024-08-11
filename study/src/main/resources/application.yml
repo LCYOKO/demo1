@@ -10,7 +10,10 @@
 #    port: 6379
 server:
   port: 8777
-
+  ssl:
+    enabled: false
+    certificate: "classpath:ssl/server.crt"
+    certificate-private-key: "classpath:ssl/private.key"
 spring:
   application:
     name: demo

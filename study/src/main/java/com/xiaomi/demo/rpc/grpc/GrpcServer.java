@@ -1,4 +1,4 @@
-package com.xiaomi.demo.rpc.proto;
+package com.xiaomi.demo.rpc.grpc;
 
 import io.grpc.ServerBuilder;
 import lombok.extern.slf4j.Slf4j;
@@ -15,9 +15,9 @@ public class GrpcServer {
 
     public void startServer() {
         try {
-            ServerBuilder<?> serverBuilder = ServerBuilder.forPort(6333);
-            serverBuilder.addService(new BookServiceImpl());
-            io.grpc.Server server = serverBuilder.build();
+            io.grpc.Server server = ServerBuilder.forPort(6333)
+                    .addService(new BookServiceImpl())
+                    .build();
             server.start();
             server.awaitTermination();
         } catch (Exception ex) {

@@ -8,8 +8,6 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import lombok.Data;
-import org.apache.groovy.util.Maps;
-import org.assertj.core.util.Lists;
 import org.junit.Test;
 
 import java.util.Date;
@@ -19,7 +17,7 @@ import java.util.Date;
  * @Date: 2024/1/17
  */
 public class JwtTest {
-    private static final String SECRET = "XIAOMI@123";
+    private static final String SECRET = "xiaomi";
 
     @Test
     public void testCreateJwt() {
@@ -27,7 +25,7 @@ public class JwtTest {
         String token = JWT.create()
                 .withClaim("name", "lcy")
                 .withClaim("age", 18)
-                .withPayload(Maps.of("role", new Role("admin", "管理员", new String[]{"add", "delete"})))
+//                .withPayload(Maps.of("role", new Role("admin", "管理员", new String[]{"add", "delete"})))
                 .withExpiresAt(dateTime.toJdkDate())
                 .sign(Algorithm.HMAC256(SECRET));
         System.out.println(token);
@@ -36,7 +34,7 @@ public class JwtTest {
     @Test
     public void validateTokenTest() {
         JWTVerifier verifier = JWT.require(Algorithm.HMAC256(SECRET)).build();
-        DecodedJWT decodedJWT = verifier.verify("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoibGN5IiwiZXhwIjoxNzA1NTk0OTkxLCJhZ2UiOjE4fQ.SqA_rBQX-tUjlDGE1z1i31DuKnN8U5I0zocl36Sii0k");
+        DecodedJWT decodedJWT = verifier.verify("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6MSwiTmFtZSI6Imxpc2kiLCJpc3MiOiJsaXVjaGl5dW4iLCJleHAiOjE3MjMyOTk2NDF9.8DdSZMuNHGG48ND31Vq1oLBG06MkvVES-5ulOiHIEO8");
         System.out.println(decodedJWT.getClaims());
     }
 

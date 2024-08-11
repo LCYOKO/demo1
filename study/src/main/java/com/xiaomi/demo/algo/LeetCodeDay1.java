@@ -3,8 +3,6 @@ package com.xiaomi.demo.algo;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
-import java.util.*;
-
 /**
  * @Author: liuchiyun
  * @Date: 2024/7/20
@@ -21,8 +19,147 @@ public class LeetCodeDay1 {
      */
     @Test
     public void test() {
+        int[][] intervals = new int[][]{
+                {-52, 31},
+                {-73, -26},
+                {82, 97},
+                {-65, -11},
+                {-62, -49},
+                {95, 99},
+                {58, 95},
+                {-31, 49},
+                {66, 98},
+                {-63, 2}, {30, 47}, {-40, -26}
+        };
 
     }
+
+    class MyCircularDeque {
+        int[] arr;
+        int cap;
+        int front;
+        int tail;
+
+        public MyCircularDeque(int k) {
+            arr = new int[k + 1];
+            cap = k + 1;
+            front = 0;
+            tail = 0;
+        }
+
+        public boolean insertFront(int value) {
+            if (isFull()) {
+                return false;
+            }
+            front = (front - 1 + cap) % cap;
+            arr[front] = value;
+            return true;
+        }
+
+        public boolean insertLast(int value) {
+            if (isFull()) {
+                return false;
+            }
+            arr[tail] = value;
+            tail = (tail + 1) % cap;
+            return true;
+        }
+
+        public boolean deleteFront() {
+            if (isEmpty()) {
+                return false;
+            }
+            front = (front + 1) % cap;
+            return true;
+        }
+
+        public boolean deleteLast() {
+            if (isEmpty()) {
+                return false;
+            }
+            tail = (tail - 1 + cap) % cap;
+            return true;
+        }
+
+        public int getFront() {
+            if (isEmpty()) {
+                return -1;
+            }
+            return arr[front];
+        }
+
+        public int getRear() {
+            if (isEmpty()) {
+                return -1;
+            }
+            int idx = (tail - 1 + cap) % cap;
+            return arr[idx];
+        }
+
+        public boolean isEmpty() {
+            return tail == front;
+        }
+
+        public boolean isFull() {
+            return front == (tail + 1) % cap;
+        }
+    }
+
+
+    class MyCircularQueue {
+        int[] arr;
+        int cap;
+        int front;
+        int tail;
+
+        public MyCircularQueue(int k) {
+            arr = new int[k + 1];
+            cap = k + 1;
+            front = 0;
+            tail = 0;
+        }
+
+        public boolean enQueue(int value) {
+            if (isFull()) {
+                return false;
+            }
+            arr[tail] = value;
+            tail = (tail + 1) % cap;
+            return true;
+        }
+
+        public boolean deQueue() {
+            if (isEmpty()) {
+                return false;
+            }
+            front = (front + 1) % cap;
+            return true;
+        }
+
+        public int Front() {
+            if (isEmpty()) {
+                return -1;
+            }
+            return arr[front];
+        }
+
+        public int Rear() {
+            if (isEmpty()) {
+                return -1;
+            }
+            int idx = (tail - 1 + cap) % cap;
+            return arr[idx];
+        }
+
+        public boolean isEmpty() {
+            return tail == front;
+        }
+
+        public boolean isFull() {
+            return front == (tail + 1) % cap;
+        }
+    }
+
 
 //    private void quickSort(int[] nums, int l, int r) {
 //        if (l >= r) {
@@ -53,33 +190,4 @@ public class LeetCodeDay1 {
 //        quickSort(nums, i + 1, r);
 //    }
 
-
-    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-        int len1 = nums1.length;
-        int len2 = nums2.length;
-        int k1 = (nums1.length + nums2.length + 1) / 2;
-        int k2 = (nums1.length + nums2.length + 2) / 2;
-
-        return (findKth(nums1, 0, len1 - 1, nums2, 0, len2 - 1, k1) + findKth(nums1, 0, len1 - 1, nums2, 0, len2 - 1, k2)) / 2.0;
-    }
-
-    private int findKth(int[] nums1, int l1, int r1, int[] nums2, int l2, int r2, int k) {
-        if (l1 > r1) {
-            return nums2[l2 + k - 1];
-        }
-        if (l2 > r2) {
-            return nums1[l1 + k - 1];
-        }
-        if (k == 1) {
-            return Math.min(nums1[l1], nums2[l2]);
-        }
-        int idx1 = l1 + k / 2 > r1 ? r1 : l1 + k / 2;
-        int idx2 = l2 + k / 2 > r2 ? r2 : l2 + k / 2;
-
-        if (nums1[idx1] < nums2[idx2]) {
-            return findKth(nums1, idx1, r1, nums2, l2, r2, k - (idx1 - l1));
-        } else {
-            return findKth(nums1, l1, r1, nums2, idx2, r2, k - (idx2 - l2));
-        }
-    }
 }

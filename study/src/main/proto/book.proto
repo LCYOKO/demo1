@@ -1,4 +1,5 @@
 syntax = "proto3";
+package book;
 option java_package = "com.xiaomi.demo.proto";
 option java_multiple_files = true;
 import "google/protobuf/wrappers.proto";

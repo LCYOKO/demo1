@@ -6,13 +6,13 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
  */
 @javax.annotation.Generated(
     value = "by gRPC proto compiler (version 1.51.0)",
-    comments = "Source: Book.proto")
+    comments = "Source: book.proto")
 @io.grpc.stub.annotations.GrpcGenerated
 public final class BookServiceGrpc {
 
   private BookServiceGrpc() {}
 
-  public static final String SERVICE_NAME = "BookService";
+  public static final String SERVICE_NAME = "book.BookService";
 
   // Static method descriptors that strictly reflect the proto.
   private static volatile io.grpc.MethodDescriptor<com.xiaomi.demo.proto.BookRequest,
