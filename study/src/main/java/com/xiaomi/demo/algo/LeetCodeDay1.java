@@ -19,7 +19,30 @@ public class LeetCodeDay1 {
      */
     @Test
     public void test() {
+
     }
+
+    public int[] findErrorNums(int[] nums) {
+        for (int i = 0; i < nums.length; ) {
+            if (nums[nums[i] - 1] == nums[i]) {
+                i++;
+                continue;
+            }
+            if (nums[i] != nums[nums[i] - 1]) {
+                swap(nums, i, nums[i] - 1);
+            } else {
+                return new int[]{nums[i], i + 1};
+            }
+        }
+        return new int[]{0, 0};
+    }
+
+    private void swap(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+
 
 //    private void quickSort(int[] nums, int l, int r) {
 //        if (l >= r) {

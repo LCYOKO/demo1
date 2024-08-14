@@ -1,4 +1,4 @@
-package com.xiaomi.demo.mongo;
+package com.xiaomi.demo.db.mongo;
 
 
 
