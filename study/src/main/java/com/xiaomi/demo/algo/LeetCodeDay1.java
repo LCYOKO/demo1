@@ -3,6 +3,8 @@ package com.xiaomi.demo.algo;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
+import java.util.*;
+
 /**
  * @Author: liuchiyun
  * @Date: 2024/7/20
@@ -22,55 +24,73 @@ public class LeetCodeDay1 {
 
     }
 
-    public int[] findErrorNums(int[] nums) {
-        for (int i = 0; i < nums.length; ) {
-            if (nums[nums[i] - 1] == nums[i]) {
-                i++;
-                continue;
-            }
-            if (nums[i] != nums[nums[i] - 1]) {
-                swap(nums, i, nums[i] - 1);
-            } else {
-                return new int[]{nums[i], i + 1};
+    public int largestRectangleArea(int[] heights) {
+       int ans = 0;
+       for (int i = 0; i < heights.length; i++) {
+           int left = i;
+           int min = heights[i];
+           while(left<heights.length){
+               min = Math.min(min, heights[left]);
+               left++;
+           }
+           ans = Math.max(ans, min*(left-i));
+       }
+       return ans;
+    }
+
+
+    public int maxPoints(int[][] points) {
+        int n = points.length;
+        if (n < 2) {
+            return n;
+        }
+        Map<String, Set<String>> map = new HashMap<>();
+        int ans = 0;
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                int x = points[j][0] - points[i][0];
+                int y = points[j][1] - points[i][1];
+                String key = "";
+                if (x == 0) {
+                    key = points[i][0] + "-" + 0;
+                } else if (y == 0) {
+                    key = 0 + "-" + points[i][1];
+                } else {
+                    if (x < 0 && y < 0) {
+                        x = -x;
+                        y = -y;
+                    }
+                    if (y < 0 && x > 0) {
+                        x = -x;
+                        y = -y;
+                    }
+                    boolean xIsNegative = false;
+                    if (x < 0) {
+                        x = -x;
+                        xIsNegative = true;
+                    }
+                    int gcd = gcd(x, y);
+                    key = (xIsNegative ? -x : x) / gcd + "-" + y / gcd;
+                }
+                if (!map.containsKey(key)) {
+                    map.put(key, new HashSet<>());
+                }
+                map.get(key).add(getPoint(points[i]));
+                map.get(key).add(getPoint(points[j]));
+                ans = Math.max(ans, map.get(key).size());
             }
         }
-        return new int[]{0, 0};
+        return ans;
     }
 
-    private void swap(int[] nums, int i, int j) {
-        int temp = nums[i];
-        nums[i] = nums[j];
-        nums[j] = temp;
+    private String getPoint(int[] point) {
+        return point[0] + "_" + point[1];
     }
 
-
-//    private void quickSort(int[] nums, int l, int r) {
-//        if (l >= r) {
-//            return;
-//        }
-//        int mid = (r - l) / 2 + l;
-//        int i = l;
-//        int j = r;
-//        while (i < j) {
-//            while (i < j && nums[j] >= nums[mid]) {
-//                j--;
-//            }
-//            while (i < j && nums[i] <= nums[mid]) {
-//                i++;
-//            }
-//            if (i < j) {
-//                int temp = nums[i];
-//                nums[i] = nums[j];
-//                nums[j] = temp;
-//                i++;
-//                j--;
-//            }
-//        }
-//        int temp = nums[mid];
-//        nums[mid] = nums[i];
-//        nums[i] = temp;
-//        quickSort(nums, l, i);
-//        quickSort(nums, i + 1, r);
-//    }
-
+    private int gcd(int a, int b) {
+        if (b == 0) {
+            return a;
+        }
+        return gcd(b, a % b);
+    }
 }
