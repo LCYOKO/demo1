@@ -25,17 +25,29 @@ public class LeetCodeDay1 {
     }
 
     public int largestRectangleArea(int[] heights) {
-       int ans = 0;
-       for (int i = 0; i < heights.length; i++) {
-           int left = i;
-           int min = heights[i];
-           while(left<heights.length){
-               min = Math.min(min, heights[left]);
-               left++;
-           }
-           ans = Math.max(ans, min*(left-i));
-       }
-       return ans;
+        int ans = 0;
+        for (int i = 0; i < heights.length; i++) {
+            int left = i;
+            int min = heights[i];
+            while (left < heights.length) {
+                min = Math.min(min, heights[left]);
+                left++;
+            }
+            ans = Math.max(ans, min * (left - i));
+        }
+        return ans;
+    }
+
+    public int largestRectangleArea1(int[] heights) {
+        int ans = 0;
+        Deque<Integer> que = new ArrayDeque<>();
+        for (int i = 0; i < heights.length; i++) {
+            while (!que.isEmpty() && heights[que.peekLast()]>heights[i]){
+
+            }
+            q
+        }
+        return ans;
     }
 
 
