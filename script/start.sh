@@ -7,12 +7,6 @@
 # 4. 查看应用程序: sh run.sh status
 # 5. 重启应用程序: sh run.sh restart -c -d --ignore-console # -c 清空日志目录，-d 以后台进程方式启动，--ignore-console 忽略控制台输出
 # 6. 查看应用日志: sh run.sh logs
-# ====================================================== 作者信息 ======================================================
-# @author: houyu
-# @date: 2021-08-30
-# @mail: for.houyu@qq.com(272694308@qq.com)
-# @blog: https://www.ihouyu.cn
-# @csdn: https://blog.csdn.net/JinglongSource
 # ====================================================== 初始准备 =====================================================
 # 刷新环境变量
 export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin
@@ -36,6 +30,7 @@ JAVA_OPT="${JAVA_OPT} -XX:-OmitStackTraceInFastThrow -XX:+HeapDumpOnOutOfMemoryE
 JAVA_OPT="${JAVA_OPT} -XX:HeapDumpPath=${DIR_PATH}/logs/heap_dump.hprof"
 JAVA_OPT="${JAVA_OPT} -Xloggc:${DIR_PATH}/logs/gc.log -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintHeapAtGC"
 JAVA_OPT="${JAVA_OPT} -XX:+UseGCLogFileRotation -XX:NumberOfGCLogFiles=10 -XX:GCLogFileSize=100M"
+JAVA_OPT="${JAVA_OPT} -XX:NativeMemoryTracking=detail -XX:+UnlockDiagnosticVMOptions -XX:+PrintNMTStatistics"
 # ---------------------------------------------------------------
 # === Spring 参数
 SPRING_OPT="${SPRING_OPT} --spring.profiles.active=prod"

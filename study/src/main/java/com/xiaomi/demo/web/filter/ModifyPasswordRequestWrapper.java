@@ -1,4 +1,4 @@
-package com.xiaomi.demo.filter;
+package com.xiaomi.demo.web.filter;
 
 import javax.servlet.ReadListener;
 import javax.servlet.ServletInputStream;
