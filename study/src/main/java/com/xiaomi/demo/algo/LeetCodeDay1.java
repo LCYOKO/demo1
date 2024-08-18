@@ -21,7 +21,6 @@ public class LeetCodeDay1 {
      */
     @Test
     public void test() {
-
     }
 
     public int largestRectangleArea(int[] heights) {
@@ -42,7 +41,7 @@ public class LeetCodeDay1 {
         int ans = 0;
         Deque<Integer> que = new ArrayDeque<>();
         for (int i = 0; i < heights.length; i++) {
-            while (!que.isEmpty() && heights[que.peekLast()]>heights[i]){
+            while (!que.isEmpty() && heights[que.peekLast()] > heights[i]) {
 
             }
         }

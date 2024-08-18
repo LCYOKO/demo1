@@ -1,8 +1,8 @@
 package com.xiaomi.demo.spring.mvc;
 
 
-import com.xiaomi.demo.filter.MDCFilter;
-import com.xiaomi.demo.filter.PasswordDecoderFilter;
+import com.xiaomi.demo.web.filter.MDCFilter;
+import com.xiaomi.demo.web.filter.PasswordDecoderFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;

@@ -4,6 +4,7 @@ import com.alibaba.ttl.TransmittableThreadLocal;
 import com.alibaba.ttl.TtlRunnable;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
+import org.springframework.util.ConcurrentReferenceHashMap;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -76,7 +77,12 @@ public class TestConcurrent {
     }
 
     @Test
-    public void test6() {
+    public void test6(){
+        new ConcurrentReferenceHashMap<>().put("1", "1");
+    }
+
+    @Test
+    public void test7() {
         //对象不能共享
         ThreadLocalRandom random = ThreadLocalRandom.current();
         log.info("random:{}", random.nextInt());
