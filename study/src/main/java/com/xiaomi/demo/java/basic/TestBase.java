@@ -4,11 +4,13 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
+import java.util.stream.IntStream;
 
 /**
  * @Author: liuchiyun
@@ -49,6 +51,20 @@ public class TestBase {
         log.info("map:{}", map);
     }
 
+    @Test
+    public void test6() {
+//        new ArrayList<>().indexOf();
+        int[] arr1 = new int[]{1, 2, 3};
+        Integer[] arr2 = new Integer[]{1, 2, 3};
+        System.out.println(Arrays.asList(arr1));
+        System.out.println(Arrays.asList(arr2));
+    }
+
+    @Test
+    public void test7() {
+        IntStream.range(1, 1000).parallel().forEach(i -> log.info("val:{}", i));
+    }
+
     static class Item<T extends Base> {
 
     }
@@ -58,8 +74,16 @@ public class TestBase {
     }
 
     @Data
-    static
-    class Base {
+    static class Base {
         private String data;
+    }
+
+    @Data
+    static class Dataer {
+        public static int count = 0;
+
+        public synchronized void count() {
+            count++;
+        }
     }
 }

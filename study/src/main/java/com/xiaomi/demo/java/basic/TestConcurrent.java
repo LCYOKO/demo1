@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * @Author: liuchiyun
@@ -72,6 +73,13 @@ public class TestConcurrent {
             }).start();
         }
         Thread.sleep(10000);
+    }
+
+    @Test
+    public void test6() {
+        //对象不能共享
+        ThreadLocalRandom random = ThreadLocalRandom.current();
+        log.info("random:{}", random.nextInt());
     }
 
 

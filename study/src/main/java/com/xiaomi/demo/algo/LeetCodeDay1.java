@@ -45,7 +45,6 @@ public class LeetCodeDay1 {
             while (!que.isEmpty() && heights[que.peekLast()]>heights[i]){
 
             }
-            q
         }
         return ans;
     }
