@@ -180,8 +180,4 @@ public class AlgoTest {
         return isNegative ? -ans : ans;
     }
 
-
-    @Test
-    public void test1() {
-    }
 }

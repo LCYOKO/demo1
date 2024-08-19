@@ -93,6 +93,11 @@ management:
       enabled: true
     prometheus: #19、以可以被Prometheus服务器抓取的格式显示metrics信息，默认开启
       enabled: true
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
 #apollo:
 #  cache-dir: /opt/data/some-cache-dir             # 配置缓存路径
 #  autoUpdateInjectedSpringProperties: true        # 是否开启 Spring 参数自动更新

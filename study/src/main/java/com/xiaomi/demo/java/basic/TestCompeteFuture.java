@@ -1,11 +1,15 @@
 package com.xiaomi.demo.java.basic;
 
 
+import com.google.common.util.concurrent.*;
 import lombok.extern.slf4j.Slf4j;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.junit.Test;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * @Author: liuchiyun
@@ -15,8 +19,8 @@ import java.util.concurrent.ExecutionException;
 public class TestCompeteFuture {
 
     @Test
-    public void testFuture() throws ExecutionException, InterruptedException {
-        CompletableFuture.runAsync(() -> {
+    public void testFuture1() throws ExecutionException, InterruptedException {
+        CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
             try {
                 Thread.sleep(10000);
             } catch (InterruptedException e) {
@@ -27,7 +31,46 @@ public class TestCompeteFuture {
         }).whenComplete((unused, throwable) -> log.info("complete")).exceptionally(throwable -> {
             log.error("exeception", throwable);
             return null;
-        }).get();
-        CompletableFuture.allOf().join();
+        });
+        CompletableFuture.allOf(future).join();
+    }
+
+    @Test
+    public void testFuture2() throws ExecutionException, InterruptedException {
+        CompletableFuture<String> future = new CompletableFuture<>();
+        future.thenAccept(s -> {
+            log.info("result");
+        });
+        future.complete("123");
+        log.info("value:{}", future.get());
+
+    }
+
+    @Test
+    public void testGuava() {
+        ExecutorService threadPool = Executors.newFixedThreadPool(1);
+        ListeningExecutorService executorService = MoreExecutors.listeningDecorator(threadPool);
+        ListenableFuture<String> future = executorService.submit(() -> {
+            try {
+                Thread.sleep(2000);
+            } catch (Exception e) {
+                log.error("exeception", e);
+            }
+            log.info("hhahaha");
+            return "123";
+        });
+
+        Futures.addCallback(future, new FutureCallback<String>() {
+
+            @Override
+            public void onSuccess(@Nullable String result) {
+                log.info("result");
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                log.error("error", t);
+            }
+        }, executorService);
     }
 }

@@ -21,7 +21,127 @@ public class LeetCodeDay1 {
      */
     @Test
     public void test() {
+//        findNumberOfLIS(new int[]{1, 3, 5, 4, 7});
+        findNumberOfLIS(new int[]{2, 2, 2, 2, 2});
+        System.out.println(buildExpression("(6)-(8)-(7)+(1+(6))"));
     }
+
+
+    public int calculate(String str) {
+        Deque<String> expression = buildExpression(str);
+        Deque<Integer> nums = new ArrayDeque<>();
+        for (String s : expression) {
+            if (s.equals("+")) {
+                int num1 = nums.pollLast();
+                int num2 = nums.pollLast();
+                nums.addLast(num2 + num1);
+            } else if (s.equals("-")) {
+                int num1 = nums.pollLast();
+                int num2 = nums.pollLast();
+                nums.addLast(num2 - num1);
+
+            } else if (s.equals("*")) {
+                int num1 = nums.pollLast();
+                int num2 = nums.pollLast();
+                nums.addLast(num2 * num1);
+            } else if (s.equals("/")) {
+                int num1 = nums.pollLast();
+                int num2 = nums.pollLast();
+                nums.addLast(num2 / num1);
+            } else {
+                nums.addLast(Integer.parseInt(s));
+            }
+        }
+        int ans = 0;
+        while (!nums.isEmpty()) {
+            ans += nums.pollLast();
+        }
+        return ans;
+    }
+
+    private Deque<String> buildExpression(String s) {
+        Deque<String> expression = new ArrayDeque<>();
+        Deque<String> ops = new ArrayDeque<>();
+        StringBuilder num = new StringBuilder();
+        char pre = ' ';
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (c == ' ') {
+                continue;
+            }
+            if (c == '+' || c == '-') {
+                if (c == '-' && (pre < '0' || pre > '9')) {
+                    expression.addLast("0");
+                }
+                if (num.length() > 0) {
+                    expression.addLast(num.toString());
+                    num = new StringBuilder();
+                }
+                while (!ops.isEmpty() && !"(".equals(ops.peekLast())) {
+                    expression.addLast(ops.pollLast());
+                }
+                ops.addLast("" + c);
+            } else if (c == '*' || c == '/') {
+                if (num.length() > 0) {
+                    expression.addLast(num.toString());
+                    num = new StringBuilder();
+                }
+                while (!ops.isEmpty() && ("*".equals(ops.peekLast()) || "/".equals(ops.peekLast())) && !"(".equals(ops.peekLast())) {
+                    expression.addLast(ops.pollLast());
+                }
+                ops.addLast("" + c);
+            } else if (c == '(') {
+                ops.addLast("(");
+            } else if (c == ')') {
+                if (num.length() > 0) {
+                    expression.addLast(num.toString());
+                    num = new StringBuilder();
+                }
+                while (!ops.isEmpty() && !"(".equals(ops.peekLast())) {
+                    expression.addLast(ops.pollLast());
+                }
+                ops.pollLast();
+            } else {
+                num.append(c);
+            }
+            pre = c;
+        }
+        if (num.length() > 0) {
+            expression.addLast(num.toString());
+        }
+        while (!ops.isEmpty()) {
+            expression.addLast(ops.pollLast());
+        }
+        return expression;
+    }
+
+    public int findNumberOfLIS(int[] nums) {
+        if (nums.length == 0) {
+            return 0;
+        }
+        int ans = 1;
+        int max = 1;
+        int n = nums.length;
+        int[] dp = new int[n];
+        for (int i = 0; i < nums.length; i++) {
+            dp[i] = 1;
+            for (int j = 0; j < i; j++) {
+                if (nums[i] > nums[j]) {
+                    if (dp[j] + 1 > dp[i]) {
+                        dp[i] = dp[j] + 1;
+                    }
+                }
+                if (dp[i] > max) {
+                    max = dp[i];
+                    ans = 1;
+                } else if (dp[i] == max) {
+                    ans++;
+                }
+            }
+        }
+        return ans;
+    }
+
 
     public int largestRectangleArea(int[] heights) {
         int ans = 0;
