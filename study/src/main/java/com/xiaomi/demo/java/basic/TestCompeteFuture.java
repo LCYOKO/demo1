@@ -14,6 +14,7 @@ import java.util.concurrent.Executors;
 /**
  * @Author: liuchiyun
  * @Date: 2023/12/13
+ * https://tech.meituan.com/2022/05/12/principles-and-practices-of-completablefuture.html
  */
 @Slf4j
 public class TestCompeteFuture {
@@ -38,12 +39,11 @@ public class TestCompeteFuture {
     @Test
     public void testFuture2() throws ExecutionException, InterruptedException {
         CompletableFuture<String> future = new CompletableFuture<>();
-        future.thenAccept(s -> {
-            log.info("result");
+        CompletableFuture<String> result = future.thenApply(s -> {
+            return s + "123";
         });
         future.complete("123");
-        log.info("value:{}", future.get());
-
+        log.info("value:{}, result:{}", future.get(), result.get());
     }
 
     @Test
