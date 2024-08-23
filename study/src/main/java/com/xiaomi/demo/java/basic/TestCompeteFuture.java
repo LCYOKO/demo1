@@ -6,10 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.checkerframework.checker.nullness.qual.Nullable;
 import org.junit.Test;
 
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 /**
  * @Author: liuchiyun
@@ -23,7 +20,7 @@ public class TestCompeteFuture {
     public void testFuture1() throws ExecutionException, InterruptedException {
         CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
             try {
-                Thread.sleep(10000);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -47,6 +44,41 @@ public class TestCompeteFuture {
     }
 
     @Test
+    public void testFuture3() throws ExecutionException, InterruptedException {
+        ExecutorService threadPool1 = new ThreadPoolExecutor(10, 10, 0L, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<>(100));
+        CompletableFuture<String> future1 = CompletableFuture.supplyAsync(() -> {
+            log.info("supplyAsync 执行线程:{}", Thread.currentThread().getName());
+            return "";
+        }, threadPool1);
+
+        future1.thenApply(value -> {
+            log.info("thenApply 执行线程:{}", Thread.currentThread().getName());
+            return value + "1";
+        });
+        future1.thenApplyAsync(value -> {
+            log.info("thenApplyAsync1, 执行线程:{}", Thread.currentThread().getName());
+            return value + "1";
+        });
+        future1.thenApplyAsync(value -> {
+            log.info("thenApplyAsync2, 执行线程:{}", Thread.currentThread().getName());
+            return value + "1";
+        }, threadPool1);
+    }
+
+    @Test
+    public void testDeadLock() {
+        ExecutorService threadPool1 = new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<>(100));
+        CompletableFuture cf1 = CompletableFuture.supplyAsync(() -> {
+            //do sth
+            return CompletableFuture.supplyAsync(() -> {
+                System.out.println("child");
+                return "child";
+            }, threadPool1).join();
+        }, threadPool1);
+        cf1.join();
+    }
+
+    @Test
     public void testGuava() {
         ExecutorService threadPool = Executors.newFixedThreadPool(1);
         ListeningExecutorService executorService = MoreExecutors.listeningDecorator(threadPool);
@@ -60,8 +92,7 @@ public class TestCompeteFuture {
             return "123";
         });
 
-        Futures.addCallback(future, new FutureCallback<String>() {
-
+        Futures.addCallback(future, new FutureCallback<>() {
             @Override
             public void onSuccess(@Nullable String result) {
                 log.info("result");

@@ -21,11 +21,7 @@ public class LeetCodeDay1 {
      */
     @Test
     public void test() {
-//        findNumberOfLIS(new int[]{1, 3, 5, 4, 7});
-        findNumberOfLIS(new int[]{2, 2, 2, 2, 2});
-        System.out.println(buildExpression("(6)-(8)-(7)+(1+(6))"));
     }
-
 
     public int calculate(String str) {
         Deque<String> expression = buildExpression(str);
@@ -114,60 +110,6 @@ public class LeetCodeDay1 {
         }
         return expression;
     }
-
-    public int findNumberOfLIS(int[] nums) {
-        if (nums.length == 0) {
-            return 0;
-        }
-        int ans = 1;
-        int max = 1;
-        int n = nums.length;
-        int[] dp = new int[n];
-        for (int i = 0; i < nums.length; i++) {
-            dp[i] = 1;
-            for (int j = 0; j < i; j++) {
-                if (nums[i] > nums[j]) {
-                    if (dp[j] + 1 > dp[i]) {
-                        dp[i] = dp[j] + 1;
-                    }
-                }
-                if (dp[i] > max) {
-                    max = dp[i];
-                    ans = 1;
-                } else if (dp[i] == max) {
-                    ans++;
-                }
-            }
-        }
-        return ans;
-    }
-
-
-    public int largestRectangleArea(int[] heights) {
-        int ans = 0;
-        for (int i = 0; i < heights.length; i++) {
-            int left = i;
-            int min = heights[i];
-            while (left < heights.length) {
-                min = Math.min(min, heights[left]);
-                left++;
-            }
-            ans = Math.max(ans, min * (left - i));
-        }
-        return ans;
-    }
-
-    public int largestRectangleArea1(int[] heights) {
-        int ans = 0;
-        Deque<Integer> que = new ArrayDeque<>();
-        for (int i = 0; i < heights.length; i++) {
-            while (!que.isEmpty() && heights[que.peekLast()] > heights[i]) {
-
-            }
-        }
-        return ans;
-    }
-
 
     public int maxPoints(int[][] points) {
         int n = points.length;
