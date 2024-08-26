@@ -1,3 +1,5 @@
+# chrono @ 2022-05
+
 # https://docs.nginx.com/nginx-ingress-controller/
 
 # metadata: name
@@ -40,7 +42,8 @@ spec:
     spec:
       serviceAccountName: nginx-ingress
       containers:
-        - image: us.gcr.io/k8s-artifacts-prod/ingress-nginx/controller:v1.1.1
+        #- image: nginx/nginx-ingress:2.2.0
+        - image: nginx/nginx-ingress:2.2-alpine
           imagePullPolicy: IfNotPresent
           name: nginx-ingress
           ports:
@@ -50,8 +53,6 @@ spec:
               containerPort: 443
             - name: readiness-port
               containerPort: 8081
-            - name: prometheus
-              containerPort: 9113
           readinessProbe:
             httpGet:
               path: /nginx-ready
@@ -75,13 +76,10 @@ spec:
                 fieldRef:
                   fieldPath: metadata.name
           args:
-            - -ingress-class=ngx-igk
+            - -ingress-class=ngx-ink
             - -health-status
             - -ready-status
             - -nginx-status
-
-            - -nginx-configmaps=$(POD_NAMESPACE)/nginx-config
-            - -default-server-tls-secret=$(POD_NAMESPACE)/default-server-secret
             #- -v=3 # Enables extensive logging. Useful for troubleshooting.
             #- -report-ingress-status
             #- -external-service=nginx-ingress
