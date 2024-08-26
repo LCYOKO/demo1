@@ -15,7 +15,7 @@ spec:
     - volumeMounts:
         - mountPath: /tmp/cm-items
           name: cm-vol
-        - mountPath: /temp/sc-items
+        - mountPath: /tmp/sc-items
           name: sc-vol
       name: si
       image: busybox:latest

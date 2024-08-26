@@ -1,10 +1,37 @@
 apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ngx-config
+  labels:
+    app: ngx-config
+data:
+  default.conf: |
+   server {
+     listen 80;
+     default_type text/html;
+     location / {
+      proxy_http_version 1.1;
+      proxy_set_header Host $host;
+      proxy_pass http://127.0.0.1:8080;
+      }
+    }
+
+---
+
+apiVersion: v1
 kind: Pod
 metadata:
   name: ngx-pod
 spec:
+  volumes:
+    - name: config
+      configMap:
+        name: ngx-config
   containers:
     - name: ngx
+      volumeMounts:
+        - mountPath: /etc/nginx/conf.d
+          name: config
       image: nginx:latest
       # kubectl port-forward ngx-pod 8080:80 & 来暴露端口
       ports:

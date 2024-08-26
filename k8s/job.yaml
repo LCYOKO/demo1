@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: job-pod
+  labels:
+    app: job-pod
+  namespace: dev
+spec:
+  #重试多少次
+  backoffLimit: 4
+  #并发度
+  parallelism: 1
+  #要运行多少次
+  completions: 4
+  template:
+    spec:
+      containers:
+      - name: job-pod
+        image: busybox:latest
+        command: ["sh", "-c", "echo Hello World!"]
+        imagePullPolicy: IfNotPresent
+      # 失败时重新器容器，不会创建新的
+      restartPolicy: OnFailure

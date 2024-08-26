@@ -7,7 +7,7 @@ metadata:
 spec:
   ingressClassName: ngx-igk
   rules:
-    - host: ngx.test
+    - host: 114.55.147.178
       http:
         paths:
           - path: /
@@ -16,6 +16,6 @@ spec:
               service:
                 name: ngx-svc
                 port:
-                  number: 8666
+                  number: 8081
 
 

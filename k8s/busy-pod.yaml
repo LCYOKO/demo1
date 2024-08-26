@@ -8,7 +8,6 @@ metadata:
     env: demo
     region: north
     tier: back
-  namespace: dev
 spec:
   containers:
   - name: pod-env
