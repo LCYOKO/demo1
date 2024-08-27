@@ -1,4 +1,5 @@
 <configuration debug="false" scan="false">
+    <!-- https://logback.qos.ch/manual/configuration.html#webShutdownHook 相关配置-->
     <springProperty scop="context" name="spring.application.name" source="spring.application.name" defaultValue=""/>
     <property name="log.path" value="logs/${spring.application.name}"/>
     <!-- 彩色日志格式 -->
@@ -75,6 +76,12 @@
             </layout>
         </encoder>
     </appender>
+
+<!--    <appender name="asyncAppLog" class="ch.qos.logback.classic.AsyncAppender">-->
+    <!--        <discardingThreshold>0</discardingThreshold>-->
+    <!--        <queueSize>500</queueSize>-->
+    <!--        <appender-ref ref="appLog" />-->
+    <!--    </appender>-->
 
     <!--nacos 心跳 INFO 屏蔽-->
     <logger name="com.alibaba.nacos" level="OFF">

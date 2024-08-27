@@ -7,6 +7,8 @@ metadata:
   annotations:
     kubernetes.io/change-cause: v1, ngx=1.21
 spec:
+  #成功后需要等待的时间
+  minReadySeconds: 15
   # 副本的数量  kubectl scale --replicas=2 deploy nginx-deploy
   replicas: 2
   selector:
@@ -36,6 +38,16 @@ spec:
               cpu: 200m
               memory: 1Gi
 #          #启动探针，只有启动后才会启用livenessProbe和readinessProbe
+          #StartupProbe 探针主要用来解决服务启动慢的问题，对于一些大型的应用例如 Java 服
+          #务，我建议你为它们配置 StartupProbe，以确保在服务启动完成后再对它进行常规的就绪和存
+          #活健康检查
+          #  - `initialDelaySeconds` 的含义是在容器启动之后，延迟 10 秒钟再进行第一次探针检查。
+          # - `failureThreshold` 的含义是，如果连续 5 次探针失败则代表 Readiness 探针失败，Pod 状
+          #态为 NotReady，此时 Pod 不会接收外部请求。
+          # - `periodSeconds` 的含义是探针每 10 秒钟轮询检测 1 次。
+          # - `successThreshold` 的含义是只要探针成功 1 次就代表探针成功了，Pod 状态为 Ready 表
+          #示可以接收外部请求。
+          # - `timeoutSeconds` 代表探针的超时时间为 1 秒
 #          startupProbe:
 #            periodSeconds: 1
 #            exec:
