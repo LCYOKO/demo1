@@ -21,7 +21,54 @@ public class LeetCodeDay1 {
      */
     @Test
     public void test() {
+        System.out.println(garbageCollection(new String[]{"G", "P", "GP", "GG"}, new int[]{2, 4, 3}));
     }
+
+    public int garbageCollection(String[] garbage, int[] travel) {
+        Map<Character, List<Integer>> map = new HashMap<>();
+        for (int i = 0; i < garbage.length; i++) {
+            for (int j = 0; j < garbage[i].length(); j++) {
+                char c = garbage[i].charAt(j);
+                final int idx = i;
+                if (c == 'M') {
+                    map.computeIfAbsent('M', k -> {
+                        ArrayList<Integer> list = new ArrayList<>();
+                        list.add(idx);
+                        return list;
+                    });
+                } else if (c == 'P') {
+                    map.computeIfAbsent('P', k -> {
+                        ArrayList<Integer> list = new ArrayList<>();
+                        list.add(idx);
+                        return list;
+                    });
+                } else {
+                    map.computeIfAbsent('G', k -> {
+                        ArrayList<Integer> list = new ArrayList<>();
+                        list.add(idx);
+                        return list;
+                    });
+                }
+            }
+        }
+        int[] prefix = new int[travel.length + 1];
+        for (int i = 1; i <= travel.length; i++) {
+            prefix[i] = prefix[i - 1] + travel[i - 1];
+        }
+        int ans = 0;
+        for (Map.Entry<Character, List<Integer>> entry : map.entrySet()) {
+            for (int i : entry.getValue()) {
+                for (char c : garbage[i].toCharArray()) {
+                    if (c == entry.getKey()) {
+                        ans++;
+                    }
+                }
+            }
+            ans += prefix[entry.getValue().get(entry.getValue().size() - 1)];
+        }
+        return ans;
+    }
+
 
     public int calculate(String str) {
         Deque<String> expression = buildExpression(str);
@@ -109,60 +156,5 @@ public class LeetCodeDay1 {
             expression.addLast(ops.pollLast());
         }
         return expression;
-    }
-
-    public int maxPoints(int[][] points) {
-        int n = points.length;
-        if (n < 2) {
-            return n;
-        }
-        Map<String, Set<String>> map = new HashMap<>();
-        int ans = 0;
-        for (int i = 0; i < n; i++) {
-            for (int j = i + 1; j < n; j++) {
-                int x = points[j][0] - points[i][0];
-                int y = points[j][1] - points[i][1];
-                String key = "";
-                if (x == 0) {
-                    key = points[i][0] + "-" + 0;
-                } else if (y == 0) {
-                    key = 0 + "-" + points[i][1];
-                } else {
-                    if (x < 0 && y < 0) {
-                        x = -x;
-                        y = -y;
-                    }
-                    if (y < 0 && x > 0) {
-                        x = -x;
-                        y = -y;
-                    }
-                    boolean xIsNegative = false;
-                    if (x < 0) {
-                        x = -x;
-                        xIsNegative = true;
-                    }
-                    int gcd = gcd(x, y);
-                    key = (xIsNegative ? -x : x) / gcd + "-" + y / gcd;
-                }
-                if (!map.containsKey(key)) {
-                    map.put(key, new HashSet<>());
-                }
-                map.get(key).add(getPoint(points[i]));
-                map.get(key).add(getPoint(points[j]));
-                ans = Math.max(ans, map.get(key).size());
-            }
-        }
-        return ans;
-    }
-
-    private String getPoint(int[] point) {
-        return point[0] + "_" + point[1];
-    }
-
-    private int gcd(int a, int b) {
-        if (b == 0) {
-            return a;
-        }
-        return gcd(b, a % b);
     }
 }

@@ -13,7 +13,7 @@ import org.slf4j.MDC;
  * @Author: liuchiyun
  * @Date: 2024/7/15
  */
-@Aspect
+//@Aspect
 public class DynamicDataSourceAspect {
 
     @Pointcut("execution(public * com.xiaomi.demo.controller..*(..))")

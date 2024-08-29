@@ -23,6 +23,14 @@ spring:
     listener:
       simple:
         auto-startup: false
+  datasource:
+    url: jdbc:mysql://localhost:33060/test?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: lcyoko123
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      maximum-pool-size: 10
 
 app:
   id: test
@@ -128,3 +136,4 @@ user:
   age: 13
 conf:
   enabled: false
+

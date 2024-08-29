@@ -2,6 +2,8 @@ package com.xiaomi.demo.mq;
 
 import com.xiaomi.demo.mq.rabbit.boot.RabbitPushTemplate;
 import com.xiaomi.demo.mq.rabbit.boot.entity.Order;
+import com.xiaomi.demo.orm.mybatis.UserMapper;
+import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
