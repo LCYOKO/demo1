@@ -3,7 +3,8 @@ package com.xiaomi.demo.algo;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 /**
  * @Author: liuchiyun
@@ -21,54 +22,7 @@ public class LeetCodeDay1 {
      */
     @Test
     public void test() {
-        System.out.println(garbageCollection(new String[]{"G", "P", "GP", "GG"}, new int[]{2, 4, 3}));
     }
-
-    public int garbageCollection(String[] garbage, int[] travel) {
-        Map<Character, List<Integer>> map = new HashMap<>();
-        for (int i = 0; i < garbage.length; i++) {
-            for (int j = 0; j < garbage[i].length(); j++) {
-                char c = garbage[i].charAt(j);
-                final int idx = i;
-                if (c == 'M') {
-                    map.computeIfAbsent('M', k -> {
-                        ArrayList<Integer> list = new ArrayList<>();
-                        list.add(idx);
-                        return list;
-                    });
-                } else if (c == 'P') {
-                    map.computeIfAbsent('P', k -> {
-                        ArrayList<Integer> list = new ArrayList<>();
-                        list.add(idx);
-                        return list;
-                    });
-                } else {
-                    map.computeIfAbsent('G', k -> {
-                        ArrayList<Integer> list = new ArrayList<>();
-                        list.add(idx);
-                        return list;
-                    });
-                }
-            }
-        }
-        int[] prefix = new int[travel.length + 1];
-        for (int i = 1; i <= travel.length; i++) {
-            prefix[i] = prefix[i - 1] + travel[i - 1];
-        }
-        int ans = 0;
-        for (Map.Entry<Character, List<Integer>> entry : map.entrySet()) {
-            for (int i : entry.getValue()) {
-                for (char c : garbage[i].toCharArray()) {
-                    if (c == entry.getKey()) {
-                        ans++;
-                    }
-                }
-            }
-            ans += prefix[entry.getValue().get(entry.getValue().size() - 1)];
-        }
-        return ans;
-    }
-
 
     public int calculate(String str) {
         Deque<String> expression = buildExpression(str);

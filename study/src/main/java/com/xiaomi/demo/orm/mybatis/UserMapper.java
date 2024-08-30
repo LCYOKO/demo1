@@ -6,5 +6,4 @@ package com.xiaomi.demo.orm.mybatis;
  */
 public interface UserMapper {
 
-    U
 }
