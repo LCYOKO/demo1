@@ -83,8 +83,6 @@
             <artifactId>cglib</artifactId>
             <version>3.1</version>
         </dependency>
-
-
         <dependency>
             <groupId>io.github.resilience4j</groupId>
             <artifactId>resilience4j-circuitbreaker</artifactId>
@@ -167,7 +165,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-
         <!-- https://mvnrepository.com/artifact/com.xuxueli/xxl-job-core -->
         <dependency>
             <groupId>com.xuxueli</groupId>
@@ -185,10 +182,6 @@
             <artifactId>slf4j-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-test</artifactId>
         </dependency>
@@ -202,6 +195,11 @@
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
             <version>1.4.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.caffinitas.ohc</groupId>
+            <artifactId>ohc-core</artifactId>
+            <version>0.7.0</version>
         </dependency>
     </dependencies>
 
@@ -241,6 +239,19 @@
                     <target>9</target>
                 </configuration>
             </plugin>
+<!--            <plugin>-->
+            <!--                <artifactId>maven-assembly-plugin</artifactId>-->
+            <!--                <configuration>-->
+            <!--                    <archive>-->
+            <!--                        <manifestEntries>-->
+            <!--                            <Premain-Class>com.dianping.rhino.agent.AgentBoot</Premain-Class>-->
+            <!--                            <Agent-Class>com.dianping.rhino.agent.AgentBoot</Agent-Class>-->
+            <!--                            <Can-Redefine-Classes>true</Can-Redefine-Classes>-->
+            <!--                            <Can-Retransform-Classes>true</Can-Retransform-Classes>-->
+            <!--                        </manifestEntries>-->
+            <!--                    </archive>-->
+            <!--                </configuration>-->
+            <!--            </plugin>-->
         </plugins>
     </build>
 </project>

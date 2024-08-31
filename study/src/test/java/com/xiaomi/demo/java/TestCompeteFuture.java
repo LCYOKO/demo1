@@ -1,4 +1,4 @@
-package com.xiaomi.demo.java.basic;
+package com.xiaomi.demo.java;
 
 
 import com.google.common.util.concurrent.*;

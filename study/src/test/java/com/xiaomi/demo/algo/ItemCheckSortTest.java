@@ -3,9 +3,6 @@ package com.xiaomi.demo.algo;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.stream.Collectors;
-
 /**
  * @Author: liuchiyun
  * @Date: 2024/7/6

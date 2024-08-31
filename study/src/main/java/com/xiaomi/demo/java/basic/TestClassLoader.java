@@ -1,9 +1,16 @@
 package com.xiaomi.demo.java.basic;
 
+import lombok.extern.slf4j.Slf4j;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+
 /**
  * @Author: liuchiyun
  * @Date: 2024/2/26
  */
+@Slf4j
 public class TestClassLoader {
     /**
      * 1 加载是指查找字节流，并且据此创建类的过程
@@ -16,25 +23,39 @@ public class TestClassLoader {
 
     }
 
-
     class MyClassLoader extends ClassLoader {
-        private String path;
+        private String classPath;
 
-        public MyClassLoader(String path) {
-            this.path = path;
+        public MyClassLoader(String classPath) {
+            this.classPath = classPath;
         }
 
         @Override
         protected Class<?> findClass(String name) throws ClassNotFoundException {
+            // Check if the class has been loaded already
+            Class<?> cls = findLoadedClass(name);
+            if (cls != null) {
+                return cls;
+            }
 
-//        return defineClass();
-            return null;
-        }
+            try {
+                // Delegate to parent class loader first
+                cls = getParent().loadClass(name);
+                return cls;  // Use the class loaded by the parent
+            } catch (ClassNotFoundException e) {
+                // Parent didn't find the class, we attempt to load it ourselves
+                log.info("Class {} not found in parent class loader, attempting to load it ourselves", name);
+            }
 
-        private byte[] getBytes(String name) {
-            name = name.replaceAll("\\.", "\\\\");
-            String classPath = path + name + ".class";
-            return null;
+            // Convert the class name to a path
+            String filePath = classPath + File.separator + name.replace('.', File.separatorChar) + ".class";
+            try (FileInputStream fis = new FileInputStream(filePath)) {
+                byte[] classData = new byte[fis.available()];
+                fis.read(classData);
+                return defineClass(name, classData, 0, classData.length);
+            } catch (IOException e) {
+                throw new ClassNotFoundException("Could not load class " + name, e);
+            }
         }
     }
 }
