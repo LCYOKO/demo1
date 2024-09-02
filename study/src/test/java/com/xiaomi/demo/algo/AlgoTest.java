@@ -227,4 +227,7 @@ public class AlgoTest {
         return expression;
     }
 
+    @Test
+    public void test2() {
+    }
 }
