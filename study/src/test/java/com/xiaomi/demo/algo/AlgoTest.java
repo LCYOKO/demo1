@@ -1,13 +1,10 @@
 package com.xiaomi.demo.algo;
 
 import org.junit.Assert;
+import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.Locale;
-import java.util.PriorityQueue;
+import java.util.*;
 
 /**
  * @Author: liuchiyun
@@ -230,4 +227,5 @@ public class AlgoTest {
     @Test
     public void test2() {
     }
+
 }
