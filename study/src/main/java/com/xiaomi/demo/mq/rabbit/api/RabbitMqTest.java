@@ -18,12 +18,12 @@ import java.util.concurrent.TimeoutException;
 @Slf4j
 public class RabbitMqTest {
     private Channel channel;
-    private final String DIRECT_EXCHANGE_NAME = "direct_exchange";
-    private final String FANOUT_EXCHANGE_NAME = "fanout_exchange";
-    private final String TOPIC_EXCHANGE_NAME = "topic_exchange";
-    private final String DLX_EXCHANGE_NAME = "dlx_exchange";
-    public final String EXCHANGE_NAME = "main_exchange";
-    public final String BAK_EXCHANGE_NAME = "backup_exchange";
+    private static final String DIRECT_EXCHANGE_NAME = "direct_exchange";
+    private static final String FANOUT_EXCHANGE_NAME = "fanout_exchange";
+    private static  final String TOPIC_EXCHANGE_NAME = "topic_exchange";
+    private static final String DLX_EXCHANGE_NAME = "dlx_exchange";
+    public static final String EXCHANGE_NAME = "main_exchange";
+    public static final String BAK_EXCHANGE_NAME = "backup_exchange";
 
     @Before
     public void init() throws IOException, TimeoutException {
