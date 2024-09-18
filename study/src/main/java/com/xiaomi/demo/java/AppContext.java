@@ -15,8 +15,7 @@ import org.slf4j.MDC;
 public class AppContext {
     private static final TransmittableThreadLocal<AppContext> TRANSMITTABLE_THREAD_LOCAL = new TransmittableThreadLocal<>();
 
-    private String flag;
-
+    private String testOrderFlag;
 
     public static AppContext getContext() {
         return TRANSMITTABLE_THREAD_LOCAL.get();
@@ -24,10 +23,10 @@ public class AppContext {
 
     public static void setContext(AppContext context) {
         //判断标记
-        if (StringUtils.isNotEmpty(context.getFlag())) {
-            MDC.put("dunshan", "shadow");
+        if (StringUtils.isNotEmpty(context.getTestOrderFlag())) {
+            MDC.put("testOrderFlag", "shadow");
         } else {
-            MDC.put("dunshan", "produce");
+            MDC.put("testOrderFlag", "produce");
         }
         TRANSMITTABLE_THREAD_LOCAL.set(context);
     }

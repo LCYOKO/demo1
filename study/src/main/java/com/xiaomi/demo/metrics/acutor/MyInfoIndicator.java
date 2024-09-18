@@ -6,14 +6,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MyInfoIndicator implements InfoContributor {
-//    @Autowired
-//    private ServerProperties.Undertow undertow;
 
     @Override
     public void contribute(Info.Builder builder) {
         builder.withDetail("name", "test");
         builder.withDetail("age", 18);
         builder.withDetail("id", 19);
-//        builder.withDetail("undertow_current_thread_",undertow.getThreads().)
     }
 }

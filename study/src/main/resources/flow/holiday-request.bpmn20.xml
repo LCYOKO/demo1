@@ -37,7 +37,7 @@
         <sequenceFlow sourceRef="holidayApprovedTask" targetRef="approveEnd"/>
 
         <serviceTask id="sendRejectionMail" name="Send out rejection email"
-                     flowable:class="org.flowable.SendRejectionMail"/>
+                     flowable:class="com.xiaomi.demo.flow.flowable.LogReject"/>
         <sequenceFlow sourceRef="sendRejectionMail" targetRef="rejectEnd"/>
 
         <endEvent id="approveEnd"/>
