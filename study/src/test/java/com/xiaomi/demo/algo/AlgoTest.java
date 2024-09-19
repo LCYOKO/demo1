@@ -45,53 +45,6 @@ public class AlgoTest {
         }
         return dp[k][0];
     }
-
-    int[][] dirs = new int[][]{
-            {1, 0},
-            {-1, 0},
-            {0, 1},
-            {0, -1}
-    };
-
-    public int trapRainWater(int[][] heightMap) {
-        int n = heightMap.length;
-        if (n <= 2) {
-            return 0;
-        }
-        int m = heightMap[0].length;
-        if (m <= 2) {
-            return 0;
-        }
-        PriorityQueue<int[]> que = new PriorityQueue<>((o1, o2) -> o1[2] - o2[2]);
-        boolean[][] visited = new boolean[n][m];
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                if (i == 0 || i == n - 1 || j == 0 || j == m - 1) {
-                    que.add(new int[]{i, j, heightMap[i][j]});
-                    visited[i][j] = true;
-                }
-            }
-        }
-        int ans = 0;
-        while (!que.isEmpty()) {
-            int[] dot = que.poll();
-            int x = dot[0], y = dot[1], h = dot[2];
-            for (int[] dir : dirs) {
-                int nX = x + dir[0];
-                int nY = y + dir[1];
-                if (nX < 0 || nX >= n || nY < 0 || nY >= m || visited[nX][nY]) {
-                    continue;
-                }
-                if (heightMap[nX][nY] < h) {
-                    ans += h - heightMap[nX][nY];
-                }
-                que.add(new int[]{nX, nY, heightMap[nX][nY]});
-                visited[nX][nY] = true;
-            }
-        }
-        return ans;
-    }
-
     public int divide(int dividend, int divisor) {
         if (dividend == Integer.MIN_VALUE && divisor == -1) {
             return Integer.MAX_VALUE;
@@ -125,16 +78,6 @@ public class AlgoTest {
         return isNegative ? -ans : ans;
     }
 
-    /**
-     * len = len1+len2;
-     * <p>
-     * x =  len1+ y
-     * 2len1+2y = len1+n*len2+y;
-     * len1 = n*len2-y;
-     */
-    @org.junit.Test
-    public void test() {
-    }
 
     public int calculate(String str) {
         Deque<String> expression = buildExpression(str);
@@ -226,5 +169,52 @@ public class AlgoTest {
 
     @Test
     public void test2() {
+    }
+
+    int[][] dirs = new int[][]{{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+
+    public int trapRainWater(int[][] heightMap) {
+        int n = heightMap.length;
+        if (n <= 2) {
+            return 0;
+        }
+        int m = heightMap[0].length;
+        if (m <= 2) {
+            return 0;
+        }
+        PriorityQueue<int[]> queue = new PriorityQueue<>((a, b) -> a[2] - b[2]);
+        boolean[][] visited = new boolean[n][m];
+        for (int i = 0; i < n; i++) {
+            queue.offer(new int[]{i, 0, heightMap[i][0]});
+            queue.offer(new int[]{i, m - 1, heightMap[i][m - 1]});
+            visited[i][0] = true;
+            visited[i][m - 1] = true;
+        }
+
+        for (int j = 1; j < m - 1; j++) {
+            queue.offer(new int[]{0, j, heightMap[0][j]});
+            queue.offer(new int[]{n - 1, j, heightMap[n - 1][j]});
+            visited[0][j] = true;
+            visited[n - 1][j] = true;
+        }
+
+        int ans = 0;
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            int[] cur = queue.poll();
+            int x = cur[0], y = cur[1], h = cur[2];
+            for (int[] dir : dirs) {
+                int nx = x + dir[0], ny = y + dir[1];
+                if (nx < 0 && nx >= n && ny < 0 && ny >= m && visited[nx][ny]) {
+                    continue;
+                }
+                visited[nx][ny] = true;
+                if (heightMap[nx][ny] < h) {
+                    ans += h - heightMap[nx][ny];
+                }
+                queue.offer(new int[]{nx, ny, Math.max(heightMap[nx][ny], h)});
+            }
+        }
+        return ans;
     }
 }

@@ -75,8 +75,6 @@ public class RedisRouteDefinitionWriter implements RouteDefinitionRepository {
      * 动态路由入口
      * <p>
      * 1. 先从内存中获取 2. 为空加载Redis中数据 3. 更新内存
-     *
-     * @return
      */
     @Override
     public Flux<RouteDefinition> getRouteDefinitions() {
@@ -90,7 +88,6 @@ public class RedisRouteDefinitionWriter implements RouteDefinitionRepository {
         redisTemplate.setHashValueSerializer(new Jackson2JsonRedisSerializer<>(RouteDefinitionVo.class));
         List<RouteDefinitionVo> values = redisTemplate.opsForHash().values(CacheConstants.ROUTE_KEY);
         log.info("redis 中路由定义条数： {}， {}", values.size(), values);
-
         RouteCacheHolder.setRouteList(values);
         return Flux.fromIterable(values);
     }
