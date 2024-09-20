@@ -7,3 +7,14 @@ POST http://localhost:8777/test/filter
 Content-Type: application/x-www-form-urlencoded
 
 id=999&value=content
+
+###
+POST http://192.168.14.102:17808/api/devices/getDeviceBySN
+Content-Type: application/json
+
+{
+  "sn": "ls20://0201B7A65B7E"
+}
+
+###
+GET http://192.168.14.102:10008/tts_xf.single?text=有车辆上磅35.5千克，请刷卡。&voice_name=xiaoyan&speed=50&volume=100
