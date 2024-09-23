@@ -32,20 +32,15 @@ public class ArraySortTest {
     }
 
     private int[] heapSort(int[] nums) {
-        //这里元素的索引是从0开始的,所以最后一个非叶子结点array.length/2 - 1
         for (int i = nums.length / 2 - 1; i >= 0; i--) {
             adjustHeap(nums, i, nums.length);
         }
-
         // 上述逻辑，建堆结束
         // 下面，开始排序逻辑
         for (int j = nums.length - 1; j > 0; j--) {
             // 元素交换,作用是去掉大顶堆
             // 把大顶堆的根元素，放到数组的最后；换句话说，就是每一次的堆调整之后，都会有一个元素到达自己的最终位置
             swap(nums, 0, j);
-            // 元素交换之后，毫无疑问，最后一个元素无需再考虑排序问题了。
-            // 接下来我们需要排序的，就是已经去掉了部分元素的堆了，这也是为什么此方法放在循环里的原因
-            // 而这里，实质上是自上而下，自左向右进行调整的
             adjustHeap(nums, 0, j);
         }
         return nums;

@@ -1,52 +1,61 @@
 package com.xiaomi.demo.algo.sort;
 
+import org.junit.Test;
+
+import java.util.Arrays;
+import java.util.Random;
+
 public class QuickSort2Ways {
-    // 双路快速排序的partition
-    // 返回p, 使得arr[l...p-1] < arr[p] ; arr[p+1...r] > arr[p]
-    private static int partition(Comparable[] arr, int l, int r) {
+    Random random = new Random();
 
-        // 随机在arr[l...r]的范围中, 选择一个数值作为标定点pivot
-        swap(arr, l, (int) (Math.random() * (r - l + 1)) + l);
-
-        Comparable v = arr[l];
-        // arr[l+1...i) <= v; arr(j...r] >= v
-        int i = l + 1, j = r;
-        while (true) {
-            // 注意这里的边界, arr[i].compareTo(v) < 0, 不能是arr[i].compareTo(v) <= 0
-            // 思考一下为什么?
-            while (i <= r && arr[i].compareTo(v) < 0) {
+    private int partition(int[] arr, int l, int r) {
+        if (l > r) {
+            return -1;
+        }
+        if (l == r) {
+            return l;
+        }
+        int randomIndex = random.nextInt(r - l + 1) + l;
+        swap(arr, l, randomIndex);
+        int v = arr[l];
+        int i = l + 1;
+        int j = r;
+        while (i <= j) {
+            while (i <= r && arr[i] < v) {
                 i++;
             }
-
-            // 注意这里的边界, arr[j].compareTo(v) > 0, 不能是arr[j].compareTo(v) >= 0
-            // 思考一下为什么?
-            while (j >= l + 1 && arr[j].compareTo(v) > 0) {
+            while (j >= l + 1 && arr[j] > v) {
                 j--;
             }
-            // 对于上面的两个边界的设定, 有的同学在课程的问答区有很好的回答:)
-            // 大家可以参考: http://coding.imooc.com/learn/questiondetail/4920.html
-
-            if (i > j) {
-                break;
+            if (i <= j) {
+                swap(arr, i, j);
+                i++;
+                j--;
             }
-            swap(arr, i, j);
-            i++;
-            j--;
         }
         swap(arr, l, j);
         return j;
     }
 
-    // 递归使用快速排序,对arr[l...r]的范围进行排序
-    private static void sort(Comparable[] arr, int l, int r) {
+    private void sort(int[] arr, int l, int r) {
+        if (l >= r) {
+            return;
+        }
         int p = partition(arr, l, r);
         sort(arr, l, p - 1);
         sort(arr, p + 1, r);
     }
 
-    private static void swap(Object[] arr, int i, int j) {
-        Object t = arr[i];
+    private void swap(int[] arr, int i, int j) {
+        int t = arr[i];
         arr[i] = arr[j];
         arr[j] = t;
+    }
+
+    @Test
+    public void test() {
+        int[] arr = new int[]{1, 3, 5, 7, 7, 7, 2, 1, 9, 2, 4, 6, 8, 0};
+        sort(arr, 0, arr.length - 1);
+        System.out.println(Arrays.toString(arr));
     }
 }

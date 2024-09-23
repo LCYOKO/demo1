@@ -1,59 +1,53 @@
 package com.xiaomi.demo.algo.sort;
 
-public class HeapSort {
-    public static void sort(Comparable[] arr) {
+import org.junit.Test;
 
-        int n = arr.length;
-        // 注意，此时我们的堆是从0开始索引的
-        // 从(最后一个元素的索引-1)/2开始
-        // 最后一个元素的索引 = n-1
-        for (int i = (n - 1 - 1) / 2; i >= 0; i--) {
-            shiftDown2(arr, n, i);
-        }
-        for (int i = n - 1; i > 0; i--) {
+import java.util.Arrays;
+
+public class HeapSort {
+
+    @Test
+    public void test() {
+        int[] arr = new int[]{1, 3, 5, 7, 7, 7, 2, 1, 9, 2, 4, 6, 8, 0};
+        sort(arr);
+        System.out.println(Arrays.toString(arr));
+    }
+    public void sort(int[] arr) {
+        heapfy(arr);
+        int len = arr.length;
+        for (int i = len - 1; i >= 0; i--) {
             swap(arr, 0, i);
-            shiftDown2(arr, i, 0);
+            adjust(arr, i, 0);
         }
     }
 
-    // 交换堆中索引为i和j的两个元素
-    private static void swap(Object[] arr, int i, int j) {
-        Object t = arr[i];
+    private void swap(int[] arr, int i, int j) {
+        int t = arr[i];
         arr[i] = arr[j];
         arr[j] = t;
     }
-
-    // 原始的shiftDown过程
-    private static void shiftDown(Comparable[] arr, int n, int k) {
-
-        while (2 * k + 1 < n) {
-            int j = 2 * k + 1;
-            if (j + 1 < n && arr[j + 1].compareTo(arr[j]) > 0) {
-                j += 1;
-            }
-            if (arr[k].compareTo(arr[j]) >= 0) {
-                break;
-            }
-            swap(arr, k, j);
-            k = j;
+    private void heapfy(int[] arr) {
+        int len = arr.length;
+        for (int i = len / 2 - 1; i >= 0; i--) {
+            adjust(arr, arr.length, i);
         }
     }
 
-    // 优化的shiftDown过程, 使用赋值的方式取代不断的swap,
-    // 该优化思想和我们之前对插入排序进行优化的思路是一致的
-    private static void shiftDown2(Comparable[] arr, int n, int k) {
-        Comparable e = arr[k];
-        while (2 * k + 1 < n) {
-            int j = 2 * k + 1;
-            if (j + 1 < n && arr[j + 1].compareTo(arr[j]) > 0) {
-                j += 1;
+    private void adjust(int[] arr, int len, int i) {
+        int val = arr[i];
+        int left = 2 * i + 1;
+        while (left < len) {
+            //左右子节点取最大的
+            if (left + 1 < len && arr[left + 1] > arr[left]) {
+                left += 1;
             }
-            if (e.compareTo(arr[j]) >= 0) {
+            if (val >= arr[left]) {
                 break;
             }
-            arr[k] = arr[j];
-            k = j;
+            arr[i] = arr[left];
+            i = left;
+            left = 2 * i + 1;
         }
-        arr[k] = e;
+        arr[i] = val;
     }
 }

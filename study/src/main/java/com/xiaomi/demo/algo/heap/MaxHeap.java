@@ -1,104 +1,96 @@
 package com.xiaomi.demo.algo.heap;
 
-public class MaxHeap<Item extends Comparable> {
+/**
+ * @author Admin
+ */
+public class MaxHeap<E extends Comparable<E>> {
 
-    protected Item[] data;
-    protected int count;
-    protected int capacity;
+    private final Object[] data;
+    private int size;
+    private final int capacity;
 
-    // 构造函数, 构造一个空堆, 可容纳capacity个元素
     public MaxHeap(int capacity) {
-        data = (Item[]) new Comparable[capacity + 1];
-        count = 0;
+        data = new Object[capacity + 1];
+        size = 0;
         this.capacity = capacity;
     }
 
-    // 构造函数, 通过一个给定数组创建一个最大堆
-    // 该构造堆的过程, 时间复杂度为O(n)
-    public MaxHeap(Item arr[]) {
-
+    public MaxHeap(E[] arr) {
         int n = arr.length;
-
-        data = (Item[]) new Comparable[n + 1];
+        data = new Object[n];
         capacity = n;
-
-        for (int i = 0; i < n; i++)
+        for (int i = 0; i < n; i++) {
             data[i + 1] = arr[i];
-        count = n;
-
-        for (int i = count / 2; i >= 1; i--)
-            shiftDown(i);
+        }
+        size = n;
     }
 
-    // 返回堆中的元素个数
     public int size() {
-        return count;
+        return size;
     }
 
-    // 返回一个布尔值, 表示堆中是否为空
     public boolean isEmpty() {
-        return count == 0;
+        return size == 0;
     }
 
-    // 像最大堆中插入一个新的元素 item
-    public void insert(Item item) {
-
-        assert count + 1 <= capacity;
-        data[count + 1] = item;
-        count++;
-        shiftUp(count);
+    public boolean isFull() {
+        return size == capacity;
     }
 
-    // 从最大堆中取出堆顶元素, 即堆中所存储的最大数据
-    public Item extractMax() {
-        assert count > 0;
-        Item ret = data[1];
+    public void add(E item) {
+        if (isFull()) {
+            throw new IllegalArgumentException("Heap is full.");
+        }
+        data[size + 1] = item;
+        size++;
+        heapfiy();
+    }
 
-        swap(1, count);
-        count--;
-        shiftDown(1);
+    public E peek() {
+        if (isEmpty()) {
+            throw new IllegalArgumentException("Heap is empty.");
+        }
+        return (E) data[0];
+    }
 
+    public E poll() {
+        if (isEmpty()) {
+            throw new IllegalArgumentException("Heap is empty.");
+        }
+        E ret = (E) data[0];
+        swap(0, size - 1);
+        size--;
+        adjust(size, 0);
         return ret;
     }
 
-    // 获取最大堆中的堆顶元素
-    public Item getMax() {
-        assert (count > 0);
-        return data[1];
-    }
-
-
-    // 交换堆中索引为i和j的两个元素
     private void swap(int i, int j) {
-        Item t = data[i];
+        Object temp = data[i];
         data[i] = data[j];
-        data[j] = t;
+        data[j] = temp;
     }
 
-    //********************
-    //* 最大堆核心辅助函数
-    //********************
-    private void shiftUp(int k) {
-
-        while (k > 1 && data[k / 2].compareTo(data[k]) < 0) {
-            swap(k, k / 2);
-            k /= 2;
+    private void heapfiy() {
+        for (int i = size / 2 - 1; i >= 0; i--) {
+            adjust(size, i);
         }
     }
 
-    private void shiftDown(int k) {
-        while (2 * k <= count) {
-            // 在此轮循环中,data[k]和data[j]交换位置
-            int j = 2 * k;
-            if (j + 1 <= count && data[j + 1].compareTo(data[j]) > 0) {
-                j++;
+    private void adjust(int n, int i) {
+        //左节点
+        int left = i * 2 + 1;
+        Object val = data[i];
+        while (left < n) {
+            if (left + 1 < n && ((Comparable<E>) data[left + 1]).compareTo((E) data[left]) > 0) {
+                left++;
             }
-            // data[j] 是 data[2*k]和data[2*k+1]中的最大值
-            if (data[k].compareTo(data[j]) >= 0) {
+            if (((Comparable<E>) data[left]).compareTo((E) val) >= 0) {
                 break;
             }
-            swap(k, j);
-            k = j;
+            data[i] = data[left];
+            i = left;
+            left = i * 2 + 1;
         }
+        data[i] = val;
     }
 }
