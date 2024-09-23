@@ -4,7 +4,10 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.Locale;
+import java.util.PriorityQueue;
 
 /**
  * @Author: liuchiyun
@@ -45,6 +48,7 @@ public class AlgoTest {
         }
         return dp[k][0];
     }
+
     public int divide(int dividend, int divisor) {
         if (dividend == Integer.MIN_VALUE && divisor == -1) {
             return Integer.MAX_VALUE;
@@ -169,7 +173,35 @@ public class AlgoTest {
 
     @Test
     public void test2() {
+        findMaximizedCapital(2, 0, new int[]{1, 2, 3}, new int[]{0, 1, 1});
     }
+
+
+    public int findMaximizedCapital(int k, int w, int[] profits, int[] capital) {
+        PriorityQueue<int[]> minHeap = new PriorityQueue<>((a, b) -> {
+            if (a[0] == b[0]) {
+                return b[1] - a[1];
+            }
+            return a[0] - b[0];
+        });
+        for (int i = 0; i < profits.length; i++) {
+            minHeap.offer(new int[]{capital[i], profits[i]});
+        }
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>((a, b) -> b - a);
+        while (k > 0) {
+            while (!minHeap.isEmpty() && minHeap.peek()[0] <= w) {
+                int[] arr = minHeap.poll();
+                maxHeap.add(arr[1]);
+            }
+            if (maxHeap.isEmpty()) {
+                break;
+            }
+            w += maxHeap.poll();
+            k--;
+        }
+        return w;
+    }
+
 
     int[][] dirs = new int[][]{{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
 
@@ -200,12 +232,11 @@ public class AlgoTest {
 
         int ans = 0;
         while (!queue.isEmpty()) {
-            int size = queue.size();
             int[] cur = queue.poll();
             int x = cur[0], y = cur[1], h = cur[2];
             for (int[] dir : dirs) {
                 int nx = x + dir[0], ny = y + dir[1];
-                if (nx < 0 && nx >= n && ny < 0 && ny >= m && visited[nx][ny]) {
+                if (nx < 0 || nx >= n || ny < 0 || ny >= m || visited[nx][ny]) {
                     continue;
                 }
                 visited[nx][ny] = true;
