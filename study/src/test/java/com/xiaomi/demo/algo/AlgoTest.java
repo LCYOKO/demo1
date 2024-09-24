@@ -173,35 +173,34 @@ public class AlgoTest {
 
     @Test
     public void test2() {
-        findMaximizedCapital(2, 0, new int[]{1, 2, 3}, new int[]{0, 1, 1});
     }
 
-
-    public int findMaximizedCapital(int k, int w, int[] profits, int[] capital) {
-        PriorityQueue<int[]> minHeap = new PriorityQueue<>((a, b) -> {
-            if (a[0] == b[0]) {
-                return b[1] - a[1];
-            }
-            return a[0] - b[0];
-        });
-        for (int i = 0; i < profits.length; i++) {
-            minHeap.offer(new int[]{capital[i], profits[i]});
+    public int maxSubarraySumCircular(int[] nums) {
+        int n = nums.length;
+        if (n == 0) {
+            return 0;
         }
-        PriorityQueue<Integer> maxHeap = new PriorityQueue<>((a, b) -> b - a);
-        while (k > 0) {
-            while (!minHeap.isEmpty() && minHeap.peek()[0] <= w) {
-                int[] arr = minHeap.poll();
-                maxHeap.add(arr[1]);
-            }
-            if (maxHeap.isEmpty()) {
-                break;
-            }
-            w += maxHeap.poll();
-            k--;
+        if (n == 1) {
+            return nums[0];
         }
-        return w;
+        int sum = nums[0];
+        int maxSum = nums[0];
+        int minSum = nums[0];
+        for (int i = 1; i < n; i++) {
+            if (maxSum < 0) {
+                maxSum = nums[i];
+            } else {
+                maxSum += nums[i];
+            }
+            if (minSum > 0) {
+                minSum = Math.min(nums[i], minSum + nums[i]);
+            } else {
+                minSum += nums[i];
+            }
+            sum += nums[i];
+        }
+        return Math.max(maxSum, sum - minSum);
     }
-
 
     int[][] dirs = new int[][]{{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
 
