@@ -1,5 +1,7 @@
 package com.xiaomi.demo.java.basic;
 
+import org.junit.Test;
+
 /**
  * @Author: liuchiyun
  * @Date: 2024/2/26
@@ -18,6 +20,7 @@ public class TestOptimize {
      * 即时编译是由方法调用计数器和循环回边计数器触发的。在使用分层编译的情况下，
      * 触发编译的阈值是根据当前待编译的方法数目动态调整的
      */
+    @Test
     public void test1() {
 
     }
@@ -28,6 +31,7 @@ public class TestOptimize {
      * 然而，对于即时编译器来说，内联越多，编译时间也就越长，而程序达到峰值性能的时刻也将被推迟。
      * 此外，内联越多也将导致生成的机器码越长
      */
+    @Test
     public void test2() {
 
     }
@@ -36,6 +40,7 @@ public class TestOptimize {
      * 逃逸分析
      * 即时编译器可以根据逃逸分析的结果进行诸如锁消除、栈上分配以及标量替换的优化
      */
+    @Test
     public void test3() {
 
     }
@@ -43,6 +48,7 @@ public class TestOptimize {
     /**
      * 死代码和冗余优化
      */
+    @Test
     public void test4() {
 
     }

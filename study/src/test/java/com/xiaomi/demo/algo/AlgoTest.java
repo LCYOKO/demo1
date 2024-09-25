@@ -1,13 +1,11 @@
 package com.xiaomi.demo.algo;
 
+import com.google.common.collect.ImmutableList;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.Locale;
-import java.util.PriorityQueue;
+import java.util.*;
 
 /**
  * @Author: liuchiyun
@@ -53,6 +51,9 @@ public class AlgoTest {
         if (dividend == Integer.MIN_VALUE && divisor == -1) {
             return Integer.MAX_VALUE;
         }
+        if (dividend < divisor || dividend == 0 || divisor == Integer.MAX_VALUE || divisor == Integer.MIN_VALUE) {
+            return 0;
+        }
         if (divisor == 1) {
             return dividend;
         }
@@ -70,9 +71,6 @@ public class AlgoTest {
         }
         dividendL = Math.abs(dividendL);
         divisorL = Math.abs(divisorL);
-        if (dividend < divisor || dividend == 0 || divisor == Integer.MAX_VALUE || divisor == Integer.MIN_VALUE) {
-            return 0;
-        }
         int ans = 1, temp = (int) divisorL;
         while ((dividendL - divisorL) >= divisorL) {
             ans += ans;
@@ -82,169 +80,7 @@ public class AlgoTest {
         return isNegative ? -ans : ans;
     }
 
-
-    public int calculate(String str) {
-        Deque<String> expression = buildExpression(str);
-        Deque<Integer> nums = new ArrayDeque<>();
-        for (String s : expression) {
-            if (s.equals("+")) {
-                int num1 = nums.pollLast();
-                int num2 = nums.pollLast();
-                nums.addLast(num2 + num1);
-            } else if (s.equals("-")) {
-                int num1 = nums.pollLast();
-                int num2 = nums.pollLast();
-                nums.addLast(num2 - num1);
-
-            } else if (s.equals("*")) {
-                int num1 = nums.pollLast();
-                int num2 = nums.pollLast();
-                nums.addLast(num2 * num1);
-            } else if (s.equals("/")) {
-                int num1 = nums.pollLast();
-                int num2 = nums.pollLast();
-                nums.addLast(num2 / num1);
-            } else {
-                nums.addLast(Integer.parseInt(s));
-            }
-        }
-        int ans = 0;
-        while (!nums.isEmpty()) {
-            ans += nums.pollLast();
-        }
-        return ans;
-    }
-
-    private Deque<String> buildExpression(String s) {
-        Deque<String> expression = new ArrayDeque<>();
-        Deque<String> ops = new ArrayDeque<>();
-        StringBuilder num = new StringBuilder();
-        char pre = ' ';
-        for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
-            if (c == ' ') {
-                continue;
-            }
-            if (c == '+' || c == '-') {
-                if (c == '-' && (pre < '0' || pre > '9')) {
-                    expression.addLast("0");
-                }
-                if (num.length() > 0) {
-                    expression.addLast(num.toString());
-                    num = new StringBuilder();
-                }
-                while (!ops.isEmpty() && !"(".equals(ops.peekLast())) {
-                    expression.addLast(ops.pollLast());
-                }
-                ops.addLast("" + c);
-            } else if (c == '*' || c == '/') {
-                if (num.length() > 0) {
-                    expression.addLast(num.toString());
-                    num = new StringBuilder();
-                }
-                while (!ops.isEmpty() && ("*".equals(ops.peekLast()) || "/".equals(ops.peekLast())) && !"(".equals(ops.peekLast())) {
-                    expression.addLast(ops.pollLast());
-                }
-                ops.addLast("" + c);
-            } else if (c == '(') {
-                ops.addLast("(");
-            } else if (c == ')') {
-                if (num.length() > 0) {
-                    expression.addLast(num.toString());
-                    num = new StringBuilder();
-                }
-                while (!ops.isEmpty() && !"(".equals(ops.peekLast())) {
-                    expression.addLast(ops.pollLast());
-                }
-                ops.pollLast();
-            } else {
-                num.append(c);
-            }
-            pre = c;
-        }
-        if (num.length() > 0) {
-            expression.addLast(num.toString());
-        }
-        while (!ops.isEmpty()) {
-            expression.addLast(ops.pollLast());
-        }
-        return expression;
-    }
-
     @Test
     public void test2() {
-    }
-
-    public int maxSubarraySumCircular(int[] nums) {
-        int n = nums.length;
-        if (n == 0) {
-            return 0;
-        }
-        if (n == 1) {
-            return nums[0];
-        }
-        int sum = nums[0];
-        int maxSum = nums[0];
-        int minSum = nums[0];
-        for (int i = 1; i < n; i++) {
-            if (maxSum < 0) {
-                maxSum = nums[i];
-            } else {
-                maxSum += nums[i];
-            }
-            if (minSum > 0) {
-                minSum = Math.min(nums[i], minSum + nums[i]);
-            } else {
-                minSum += nums[i];
-            }
-            sum += nums[i];
-        }
-        return Math.max(maxSum, sum - minSum);
-    }
-
-    int[][] dirs = new int[][]{{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
-
-    public int trapRainWater(int[][] heightMap) {
-        int n = heightMap.length;
-        if (n <= 2) {
-            return 0;
-        }
-        int m = heightMap[0].length;
-        if (m <= 2) {
-            return 0;
-        }
-        PriorityQueue<int[]> queue = new PriorityQueue<>((a, b) -> a[2] - b[2]);
-        boolean[][] visited = new boolean[n][m];
-        for (int i = 0; i < n; i++) {
-            queue.offer(new int[]{i, 0, heightMap[i][0]});
-            queue.offer(new int[]{i, m - 1, heightMap[i][m - 1]});
-            visited[i][0] = true;
-            visited[i][m - 1] = true;
-        }
-
-        for (int j = 1; j < m - 1; j++) {
-            queue.offer(new int[]{0, j, heightMap[0][j]});
-            queue.offer(new int[]{n - 1, j, heightMap[n - 1][j]});
-            visited[0][j] = true;
-            visited[n - 1][j] = true;
-        }
-
-        int ans = 0;
-        while (!queue.isEmpty()) {
-            int[] cur = queue.poll();
-            int x = cur[0], y = cur[1], h = cur[2];
-            for (int[] dir : dirs) {
-                int nx = x + dir[0], ny = y + dir[1];
-                if (nx < 0 || nx >= n || ny < 0 || ny >= m || visited[nx][ny]) {
-                    continue;
-                }
-                visited[nx][ny] = true;
-                if (heightMap[nx][ny] < h) {
-                    ans += h - heightMap[nx][ny];
-                }
-                queue.offer(new int[]{nx, ny, Math.max(heightMap[nx][ny], h)});
-            }
-        }
-        return ans;
     }
 }
