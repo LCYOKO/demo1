@@ -130,7 +130,7 @@ public class TestJvmBasic {
     }
 
     /**
-     * 标记清楚发
+     * 标记清除法
      */
     public void test6(){
 

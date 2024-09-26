@@ -51,9 +51,6 @@ public class AlgoTest {
         if (dividend == Integer.MIN_VALUE && divisor == -1) {
             return Integer.MAX_VALUE;
         }
-        if (dividend < divisor || dividend == 0 || divisor == Integer.MAX_VALUE || divisor == Integer.MIN_VALUE) {
-            return 0;
-        }
         if (divisor == 1) {
             return dividend;
         }
@@ -62,6 +59,9 @@ public class AlgoTest {
         }
         if (dividend == divisor) {
             return 1;
+        }
+        if (dividend < divisor || dividend == 0 || divisor == Integer.MAX_VALUE || divisor == Integer.MIN_VALUE) {
+            return 0;
         }
         boolean isNegative = false;
         long dividendL = dividend;
