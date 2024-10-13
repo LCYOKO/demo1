@@ -41,4 +41,24 @@ public class EsHighLevelTest {
         GetResponse response = client.get(new GetRequest("users", "1"), RequestOptions.DEFAULT);
         log.info("resp:{}", response);
     }
+
+    public void testMget(){
+           new Mut
+        client.mget()
+    }
+
+    @Test
+    public void testSearch() {
+
+    }
+
+    @Test
+    public void testMapping() {
+
+    }
+
+    @Test
+    public void testSetting() {
+    }
+
 }
