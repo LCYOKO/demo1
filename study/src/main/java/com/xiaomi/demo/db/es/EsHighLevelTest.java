@@ -1,19 +1,18 @@
 package com.xiaomi.demo.db.es;
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableMap;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpHost;
 import org.elasticsearch.action.DocWriteRequest;
-import org.elasticsearch.action.admin.cluster.storedscripts.GetStoredScriptRequest;
-import org.elasticsearch.action.admin.cluster.storedscripts.GetStoredScriptResponse;
 import org.elasticsearch.action.delete.DeleteRequest;
 import org.elasticsearch.action.delete.DeleteResponse;
-import org.elasticsearch.action.get.GetRequest;
-import org.elasticsearch.action.get.GetResponse;
+import org.elasticsearch.action.get.*;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.index.IndexResponse;
+import org.elasticsearch.action.search.SearchRequest;
+import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.client.RequestOptions;
@@ -22,11 +21,19 @@ import org.elasticsearch.client.RestClientBuilder;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.client.indices.GetIndexRequest;
 import org.elasticsearch.client.indices.GetIndexResponse;
+import org.elasticsearch.index.query.Operator;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.SearchHit;
+import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.elasticsearch.search.sort.SortOrder;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @Author: liuchiyun
@@ -35,13 +42,13 @@ import java.util.Map;
 @Slf4j
 public class EsHighLevelTest {
     private RestHighLevelClient client;
-    private ObjectMapper objectMapper;
+    private final String MOVIE_INDEX = "movies";
+    private final String ORDER_INDEX = "orders";
 
     @Before
     public void before() {
         RestClientBuilder httpClientBuilder = RestClient.builder(new HttpHost("localhost", 9200));
         client = new RestHighLevelClient(httpClientBuilder);
-        objectMapper = new ObjectMapper();
     }
 
     @Test
@@ -102,11 +109,125 @@ public class EsHighLevelTest {
         //Whitespace Analyzer – 按照空格切分，不转小写
         //Keyword Analyzer – 不分词，直接将输入当作输出
         //Patter Analyzer – 正则表达式，默认 \W+ (非字符分隔)
-        //ICU 中文分词器
+        //IK 中文分词器
     }
 
     @Test
-    public void testSearch() {
-
+    public void testMget() throws IOException {
+        MultiGetRequest request = new MultiGetRequest();
+        request.preference("true").add("users", "1").add("users", "2");
+        MultiGetResponse response = client.mget(request, RequestOptions.DEFAULT);
+        log.info("response:{}", Arrays.stream(response.getResponses()).map(MultiGetItemResponse::getResponse).collect(Collectors.toList()));
     }
+
+    @SneakyThrows
+    @Test
+    public void testSearchQueryAll() {
+        SearchRequest request = buildSearchRequest(MOVIE_INDEX);
+        SearchSourceBuilder builder = new SearchSourceBuilder();
+        builder.query(QueryBuilders.matchAllQuery());
+        builder.size(10);
+        builder.from(10);
+        builder.sort("movieId", SortOrder.DESC);
+        request.source(builder);
+        SearchResponse response = client.search(request, RequestOptions.DEFAULT);
+        log.info("response:{}", convert(response));
+    }
+
+    @Test
+    public void testSearchQuery() throws IOException {
+        SearchRequest request = buildSearchRequest(MOVIE_INDEX);
+        SearchSourceBuilder builder = new SearchSourceBuilder();
+        builder.query(QueryBuilders.matchQuery("title", "Beautiful Mind"));
+        builder.size(10);
+        builder.from(10);
+        builder.fetchSource("title", null);
+        request.source(builder);
+        SearchResponse response = client.search(request, RequestOptions.DEFAULT);
+        log.info("response:{}", convert(response));
+    }
+
+    @Test
+    public void testSearchQueryOp() throws IOException {
+        SearchRequest request = buildSearchRequest(MOVIE_INDEX);
+        SearchSourceBuilder builder = new SearchSourceBuilder();
+        builder.query(QueryBuilders.matchQuery("title", "Beautiful Mind").operator(Operator.AND));
+        builder.fetchSource("title", null);
+        request.source(builder);
+        SearchResponse response = client.search(request, RequestOptions.DEFAULT);
+        log.info("response:{}", convert(response));
+    }
+
+    @Test
+    public void testSearchQueryPhrase() throws IOException {
+        SearchRequest request = buildSearchRequest(MOVIE_INDEX);
+        SearchSourceBuilder builder = new SearchSourceBuilder();
+        builder.query(QueryBuilders.matchPhraseQuery("title", "Beautiful Mind"));
+        builder.fetchSource("title", null);
+        request.source(builder);
+        SearchResponse response = client.search(request, RequestOptions.DEFAULT);
+        log.info("response:{}", convert(response));
+    }
+
+    @Test
+    public void testSearchQueryMulti() throws IOException {
+        SearchRequest request = buildSearchRequest(MOVIE_INDEX);
+        SearchSourceBuilder builder = new SearchSourceBuilder();
+        builder.query(QueryBuilders.multiMatchQuery("Beautiful Mind", "title", "genres"));
+        builder.fetchSource("title", null);
+        request.source(builder);
+        SearchResponse response = client.search(request, RequestOptions.DEFAULT);
+        log.info("response:{}", convert(response));
+    }
+
+    @Test
+    public void testSearchPrefix() throws IOException {
+        SearchRequest request = buildSearchRequest(MOVIE_INDEX);
+        SearchSourceBuilder builder = new SearchSourceBuilder();
+        builder.query(QueryBuilders.matchQuery("title", "Beautiful"));
+        builder.fetchSource("title", null);
+        request.source(builder);
+        SearchResponse response = client.search(request, RequestOptions.DEFAULT);
+        log.info("response:{}", convert(response));
+    }
+
+    @Test
+    public void testCreateMapping() {
+        //创建mapping
+//#修改为strict
+//        PUT dynamic_mapping_test/_mapping
+//        {
+//            "dynamic": "strict"
+        //true时能写能索引， false时能写不能索引, strict时不能写
+//        }
+//        PUT users
+//        {
+//            "mappings" : {
+//            "properties" : {
+//                "firstName" : {
+//                    "type" : "text",
+        //            "analyzer": "english",
+        //            "search_analyzer":"english"
+//                },
+//                "lastName" : {
+//                    "type" : "text"
+//                },
+//                "mobile" : {
+//                    "type" : "keyword",
+//                            "null_value": "NULL"
+//                }
+//
+//            }
+//        }
+//        }
+    }
+
+    private List<String> convert(SearchResponse response) {
+        return Arrays.stream(response.getHits().getHits()).map(SearchHit::getSourceAsString).collect(Collectors.toList());
+    }
+
+    public SearchRequest buildSearchRequest(String index) {
+        return new SearchRequest().indices(index);
+    }
+
 }
