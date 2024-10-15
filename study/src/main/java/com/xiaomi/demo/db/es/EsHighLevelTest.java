@@ -43,7 +43,6 @@ import java.util.stream.Collectors;
 public class EsHighLevelTest {
     private RestHighLevelClient client;
     private final String MOVIE_INDEX = "movies";
-    private final String ORDER_INDEX = "orders";
 
     @Before
     public void before() {
@@ -185,6 +184,18 @@ public class EsHighLevelTest {
         SearchRequest request = buildSearchRequest(MOVIE_INDEX);
         SearchSourceBuilder builder = new SearchSourceBuilder();
         builder.query(QueryBuilders.matchQuery("title", "Beautiful"));
+        builder.fetchSource("title", null);
+        request.source(builder);
+        SearchResponse response = client.search(request, RequestOptions.DEFAULT);
+        log.info("response:{}", convert(response));
+    }
+
+
+    @Test
+    public void testTermQuery() throws IOException {
+        SearchRequest request = buildSearchRequest(MOVIE_INDEX);
+        SearchSourceBuilder builder = new SearchSourceBuilder();
+        builder.query(QueryBuilders.termQuery("title", "Beautiful"));
         builder.fetchSource("title", null);
         request.source(builder);
         SearchResponse response = client.search(request, RequestOptions.DEFAULT);
