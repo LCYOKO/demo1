@@ -28,7 +28,7 @@ import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.sort.SortOrder;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -135,7 +135,6 @@ public class EsHighLevelTest {
     }
 
     @Test
-    @Transactional()
     public void testSearchQuery() throws IOException {
         SearchRequest request = buildSearchRequest(MOVIE_INDEX);
         SearchSourceBuilder builder = new SearchSourceBuilder();

@@ -48,6 +48,8 @@ public class TestConcurrent {
     public static InheritableThreadLocal<Integer> threadLocal = new InheritableThreadLocal<>();
     public static TransmittableThreadLocal<Integer> context = new TransmittableThreadLocal<>();
 
+    //Spring 环境下推荐是使用这个
+    //ThreadPoolTaskExecutor
     @Test
     public void test4() throws InterruptedException {
         ExecutorService executorService = Executors.newFixedThreadPool(3);
@@ -77,7 +79,7 @@ public class TestConcurrent {
     }
 
     @Test
-    public void test6(){
+    public void test6() {
         new ConcurrentReferenceHashMap<>().put("1", "1");
     }
 
