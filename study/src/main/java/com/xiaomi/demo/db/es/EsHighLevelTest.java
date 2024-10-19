@@ -42,11 +42,6 @@ public class EsHighLevelTest {
         log.info("resp:{}", response);
     }
 
-    public void testMget(){
-           new Mut
-        client.mget()
-    }
-
     @Test
     public void testSearch() {
 
