@@ -9,6 +9,8 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 /**
  * @Author: liuchiyun
  * @Date: 2024/1/10
+ * https://mp.weixin.qq.com/s/IXInfuWkKe5D1fmtpQQ1SA
+ * https://developer.aliyun.com/article/1281193
  */
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, RabbitAutoConfiguration.class, RedisAutoConfiguration.class})
 public class GatewayApp {

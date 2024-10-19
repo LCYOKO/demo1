@@ -1,11 +1,10 @@
 package com.xiaomi.demo.algo;
 
-import com.google.common.collect.ImmutableList;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 
-import java.util.*;
+import java.util.Locale;
 
 /**
  * @Author: liuchiyun
@@ -21,7 +20,7 @@ public class AlgoTest {
     }
 
 
-    @org.junit.Test
+    @Test
     public void testCircleSteps() {
         System.out.println(circleSteps(10, 2));
     }

@@ -16,7 +16,6 @@ import java.util.Map;
 public class CustomerInterceptor implements ProducerInterceptor<String,String> {
     @Override
     public ProducerRecord<String, String> onSend(ProducerRecord<String, String> record) {
-
         log.info("before send  message:{}", record);
         return record;
     }
