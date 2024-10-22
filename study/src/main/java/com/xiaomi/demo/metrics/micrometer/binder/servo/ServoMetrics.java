@@ -29,7 +29,6 @@ import org.springframework.util.StringUtils;
 
 import javax.management.*;
 import java.lang.management.ManagementFactory;
-import java.util.Collections;
 import java.util.Set;
 import java.util.StringJoiner;
 import java.util.function.ToDoubleFunction;
@@ -63,7 +62,6 @@ public class ServoMetrics implements MeterBinder, ApplicationListener<Applicatio
     public void onApplicationEvent(ApplicationReadyEvent event) { // Spring Boot 完全启动后
         initClassLoader(event);
         initConversionService(event);
-
         registerServoMetrics(classLoader);
     }
 
@@ -79,7 +77,6 @@ public class ServoMetrics implements MeterBinder, ApplicationListener<Applicatio
         this.mBeanServer = ManagementFactory.getPlatformMBeanServer();
         Set<ObjectName> objectNames = findServoMBeanObjectNames();
         for (ObjectName objectName : objectNames) {
-            // registerServoMeter(objectName);
             registerServoMetrics(objectName);
         }
     }
@@ -112,23 +109,22 @@ public class ServoMetrics implements MeterBinder, ApplicationListener<Applicatio
     private void registerServoCounterMeter(ObjectName objectName, MBeanInfo mBeanInfo) throws Throwable {
         String name = objectName.getKeyProperty("name");
         String className = objectName.getKeyProperty("class");
-
         MBeanAttributeInfo[] attributes = mBeanInfo.getAttributes();
         for (MBeanAttributeInfo attribute : attributes) {
             String attributeName = attribute.getName();
             String counterName = buildMeterName(objectName, attributeName);
             // 构建 Counter
             FunctionCounter.builder(counterName, mBeanServer, mbs -> {
-                        Double counterValue = null;
-                        try {
-                            Object attributeValue = mbs.getAttribute(objectName, attributeName);
-                            // Counter -> double
-                            // 'value' attribute -> java.lang.Number
-                            counterValue = conversionService.convert(attributeValue, Double.class);
-                        } catch (Throwable e) {
-                        }
-                        return counterValue;
-                    })
+                Double counterValue = null;
+                try {
+                    Object attributeValue = mbs.getAttribute(objectName, attributeName);
+                    // Counter -> double
+                    // 'value' attribute -> java.lang.Number
+                    counterValue = conversionService.convert(attributeValue, Double.class);
+                } catch (Throwable e) {
+                }
+                return counterValue;
+            })
                     .tags("name", name, "className", className)
                     .register(registry);
         }
@@ -139,10 +135,8 @@ public class ServoMetrics implements MeterBinder, ApplicationListener<Applicatio
         String name = objectName.getKeyProperty("name"); // name=success
         String className = objectName.getKeyProperty("class"); // class=TimedSupervisorTask
         String id = objectName.getKeyProperty("id"); // id=cacheRefresh
-
         // ${type}.${class}.${id}.${name}.${attributeName}
         StringJoiner joiner = new StringJoiner(".");
-
         appendIfPresent(joiner, type)
                 .appendIfPresent(joiner, className)
                 .appendIfPresent(joiner, id)
@@ -184,13 +178,11 @@ public class ServoMetrics implements MeterBinder, ApplicationListener<Applicatio
 
                 switch (type) {
                     case "COUNTER":
-                        // 构建 FunctionCounter
                         FunctionCounter.builder(meterName, mBeanServer, toDoubleFunction)
                                 .tags("name", name, "className", className)
                                 .register(registry);
                         break;
                     case "GAUGE":
-                        // 构建 Gauge
                         Gauge.builder(meterName, mBeanServer, toDoubleFunction)
                                 .tags("name", name, "className", className)
                                 .register(registry);
@@ -209,7 +201,7 @@ public class ServoMetrics implements MeterBinder, ApplicationListener<Applicatio
     }
 
     private Set<ObjectName> findServoMBeanObjectNames() {
-        Set<ObjectName> objectNames = Collections.emptySet();
+        Set<ObjectName> objectNames;
         try {
             ObjectName objectName = new ObjectName(OBJECT_NAME_PATTERN);
             objectNames = mBeanServer.queryNames(objectName, objectName);

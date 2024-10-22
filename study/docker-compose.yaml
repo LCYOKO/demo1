@@ -1,0 +1,48 @@
+version: '3'
+services:
+  redis-master1:
+    container_name: redis1
+    image: redis:latest
+    restart: always
+    ports:
+      - 6379:6379
+    networks:
+      - redis_cluster
+  redis-slave1:
+    container_name: redis2
+    image: redis:latest
+    ports:
+      - 6378:6379
+    restart: always
+    networks:
+      - redis_cluster
+  redis-master2:
+    container_name: redis3
+    image: redis:latest
+    restart: always
+    ports:
+      - 6377:6379
+    networks:
+      - redis_cluster
+  redis-slave2:
+    container_name: redis4
+    image: redis:latest
+    ports:
+      - 6376:6379
+    restart: always
+    networks:
+      - redis_cluster
+#  redis-sentinel:
+#    container_name: redis3
+#    image: redis:latest
+#    ports:
+#      - 6377:6379
+#      - 26379:26379
+#    restart: always
+#    networks:
+#      - redis_cluster
+
+networks:
+  redis_cluster:
+    name: redis_cluster
+    driver: bridge

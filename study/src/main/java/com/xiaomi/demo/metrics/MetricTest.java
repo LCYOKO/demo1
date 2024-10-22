@@ -48,7 +48,7 @@ public class MetricTest {
      * 单位时间内统计，默认统计1分钟，5分钟，15分钟的数据
      */
     @Test
-    public void testMeter() {
+    public void testMeter() throws InterruptedException {
         Meter meter = metricRegistry.meter("meter");
         meter.mark();
         meter.mark();
@@ -56,6 +56,7 @@ public class MetricTest {
         meter.mark();
         meter.mark();
         meter.mark();
+        Thread.sleep(10000);
         reporter.report();
     }
 
