@@ -18,6 +18,7 @@ public class GrpcClient {
 
     public GrpcClient() {
         managedChannel = ManagedChannelBuilder.forAddress("localhost", 6333).usePlaintext().build();
-        service = BookServiceGrpc.newStub(managedChannel);
+        service = BookServiceGrpc.newStub(managedChannel).withOption()
+        BookServiceGrpc.
     }
 }
