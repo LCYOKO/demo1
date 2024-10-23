@@ -16,6 +16,8 @@ public class GrpcServer {
     public void startServer() {
         try {
             io.grpc.Server server = ServerBuilder.forPort(6333)
+//                    .addService(new LoginServiceImpl())
+//                    .addService(ServerInterceptors.intercept(new HelloServiceImpl(), new AuthInterceptor()))
                     .addService(new BookServiceImpl())
                     .build();
             server.start();

@@ -82,6 +82,10 @@ public class AlgoTest {
 
     @Test
     public void test2() {
-
     }
+
+//    public List<String> buildArray(int[] target, int n) {
+//
+//    }
+
 }
