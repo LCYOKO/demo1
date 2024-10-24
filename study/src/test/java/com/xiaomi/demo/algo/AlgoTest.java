@@ -4,7 +4,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 
-import java.util.Arrays;
 import java.util.Locale;
 
 /**
@@ -84,8 +83,8 @@ public class AlgoTest {
     public void test2() {
     }
 
-//    public List<String> buildArray(int[] target, int n) {
-//
-//    }
 
+    public int longestPalindromeSubseq(String s) {
+
+    }
 }
