@@ -82,9 +82,4 @@ public class AlgoTest {
     @Test
     public void test2() {
     }
-
-
-    public int longestPalindromeSubseq(String s) {
-
-    }
 }
