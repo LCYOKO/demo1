@@ -22,7 +22,7 @@ public class GrpcClient {
     private BookServiceGrpc.BookServiceStub service;
 
     public GrpcClient() {
-        managedChannel = ManagedChannelBuilder.forAddress("localhost", 6333).usePlaintext().build();
+        managedChannel = ManagedChannelBuilder.forAddress("localhost", 8999).usePlaintext().build();
         // 开启SSL安全链接
 //        managedChannel = NettyChannelBuilder.forAddress("localhost", 6333).useTransportSecurity().sslContext().build();
 //        service = BookServiceGrpc.newStub(managedChannel).withCallCredentials(new JwtCredential("eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJqYXZhYm95In0.IMMp7oh1dl_trUn7sn8qiv9GtO-COQyCGDz_Yy8VI4fIqUcRfwQddP45IoxNovxL"));
