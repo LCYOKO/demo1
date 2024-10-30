@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Premain-Class: com.xiaomi.test.MyAgent
+Agent-Class: com.xiaomi.test.MyAgent
+Can-Retransform-Classes: true
