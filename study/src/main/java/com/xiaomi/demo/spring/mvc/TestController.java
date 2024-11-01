@@ -1,6 +1,7 @@
 package com.xiaomi.demo.spring.mvc;
 
 import org.apache.commons.lang3.LocaleUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,10 +21,12 @@ public class TestController {
     @Resource
     private MessageSource messageSource;
 
+    @Value("${MYSQL_USER}")
+    private String mysqlUser;
 
-    @PostMapping("/filter")
+    @GetMapping("/filter")
     public String filterTest(String name) {
-        return name;
+        return mysqlUser;
     }
 
     @GetMapping("/message")
