@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
 
 import java.util.Locale;
+import java.util.Random;
 
 /**
  * @Author: liuchiyun
@@ -81,5 +82,6 @@ public class AlgoTest {
 
     @Test
     public void test2() {
+
     }
 }

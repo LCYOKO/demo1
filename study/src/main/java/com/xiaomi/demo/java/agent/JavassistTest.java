@@ -5,8 +5,6 @@ import javassist.CtClass;
 import javassist.CtMethod;
 import javassist.NotFoundException;
 import lombok.SneakyThrows;
-import net.bytebuddy.ByteBuddy;
-import net.bytebuddy.agent.ByteBuddyAgent;
 import org.junit.Test;
 
 import java.lang.reflect.Method;
