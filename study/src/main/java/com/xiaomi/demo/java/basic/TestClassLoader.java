@@ -1,10 +1,13 @@
 package com.xiaomi.demo.java.basic;
 
 import lombok.extern.slf4j.Slf4j;
+import org.junit.Test;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.lang.reflect.Method;
+import java.util.Arrays;
 
 /**
  * @Author: liuchiyun
@@ -19,19 +22,26 @@ public class TestClassLoader {
      * 4 解析阶段的目的，正是将这些符号引用解析成为实际引用
      * 5 初始化，则是为标记为常量值的字段赋值，以及执行 < clinit > 方法的过程。类的初始化仅会被执行一次，这个特性被用来实现单例的延迟初始化
      */
-    public void test1() {
-
+    @Test
+    public void test() throws ClassNotFoundException {
+        MyClassLoader loader = new MyClassLoader("");
+        Class<?> aClass = loader.findClass("com.xiaomi.demo.java.MyString");
+        Method[] methods = aClass.getMethods();
+        // 设置私有方法可访问
+//        methods[0].setAccessible();
+        System.out.println(Arrays.toString(methods));
     }
 
     class MyClassLoader extends ClassLoader {
-        private String classPath;
+        private java.lang.String classPath;
 
-        public MyClassLoader(String classPath) {
+        public MyClassLoader(java.lang.String classPath) {
             this.classPath = classPath;
         }
 
+
         @Override
-        protected Class<?> findClass(String name) throws ClassNotFoundException {
+        protected Class<?> findClass(java.lang.String name) throws ClassNotFoundException {
             // Check if the class has been loaded already
             Class<?> cls = findLoadedClass(name);
             if (cls != null) {
@@ -48,7 +58,7 @@ public class TestClassLoader {
             }
 
             // Convert the class name to a path
-            String filePath = classPath + File.separator + name.replace('.', File.separatorChar) + ".class";
+            java.lang.String filePath = classPath + File.separator + name.replace('.', File.separatorChar) + ".class";
             try (FileInputStream fis = new FileInputStream(filePath)) {
                 byte[] classData = new byte[fis.available()];
                 fis.read(classData);

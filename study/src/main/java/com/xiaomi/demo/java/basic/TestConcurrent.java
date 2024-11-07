@@ -8,6 +8,7 @@ import org.springframework.util.ConcurrentReferenceHashMap;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -56,9 +57,9 @@ public class TestConcurrent {
         for (int i = 0; i < 10; i++) {
             threadLocal.set(i);
             new Thread(() -> {
-                String name = Thread.currentThread().getName();
-                log.info("threadName:{}, value:{}", name, threadLocal.get());
-                executorService.execute(new BusinessThread(name, false));
+//                String name = Thread.currentThread().getName();
+//                log.info("threadName:{}, value:{}", name, threadLocal.get());
+//                executorService.execute(new BusinessThread(name, false));
             }).start();
         }
         Thread.sleep(10000);
@@ -88,6 +89,26 @@ public class TestConcurrent {
         //对象不能共享
         ThreadLocalRandom random = ThreadLocalRandom.current();
         log.info("random:{}", random.nextInt());
+    }
+
+    @Test
+    public void test8() throws InterruptedException {
+        Object o = new Object();
+        synchronized (o) {
+            o.wait();
+        }
+    }
+
+    @Test
+    public void test9() {
+        ThreadLocal<String> threadLocal = new ThreadLocal<>();
+        threadLocal.get();
+//        new LinkedBlockingQueue<>()
+    }
+
+    @Test
+    public void test10(){
+        new ForkJoinPool()
     }
 
 
