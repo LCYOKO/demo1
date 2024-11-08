@@ -27,8 +27,6 @@ public class TestClassLoader {
         MyClassLoader loader = new MyClassLoader("");
         Class<?> aClass = loader.findClass("com.xiaomi.demo.java.MyString");
         Method[] methods = aClass.getMethods();
-        // 设置私有方法可访问
-//        methods[0].setAccessible();
         System.out.println(Arrays.toString(methods));
     }
 

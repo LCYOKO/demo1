@@ -7,8 +7,10 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeoutException;
 
 /**
@@ -18,9 +20,10 @@ import java.util.concurrent.TimeoutException;
 @Slf4j
 public class RabbitMqTest {
     private Channel channel;
+    private Connection connection;
     private static final String DIRECT_EXCHANGE_NAME = "direct_exchange";
     private static final String FANOUT_EXCHANGE_NAME = "fanout_exchange";
-    private static  final String TOPIC_EXCHANGE_NAME = "topic_exchange";
+    private static final String TOPIC_EXCHANGE_NAME = "topic_exchange";
     private static final String DLX_EXCHANGE_NAME = "dlx_exchange";
     public static final String EXCHANGE_NAME = "main_exchange";
     public static final String BAK_EXCHANGE_NAME = "backup_exchange";
@@ -36,7 +39,7 @@ public class RabbitMqTest {
         connectionFactory.setPassword("admin");
         connectionFactory.setAutomaticRecoveryEnabled(true);
         connectionFactory.setNetworkRecoveryInterval(3000);
-        Connection connection = connectionFactory.newConnection();
+        connection = connectionFactory.newConnection();
         channel = connection.createChannel();
     }
 
@@ -69,6 +72,22 @@ public class RabbitMqTest {
         channel.queueBind(queue1, DIRECT_EXCHANGE_NAME, bindingKey);
         channel.basicConsume(queue1, true, new MyConsumer(channel));
         Thread.sleep(20000);
+    }
+
+    @Test
+    public void testExclusiveConsumer() throws IOException, InterruptedException {
+        CountDownLatch countDownLatch = new CountDownLatch(1);
+//        CyclicBarrier barrier = new CyclicBarrier(3);
+
+        Channel channel1 = connection.createChannel();
+        Channel channel2 = connection.createChannel();
+        final String queue = "test_queue_exclusive";
+        channel1.queueDeclare(queue, true, true, false, Collections.emptyMap());
+        channel2.queueDeclare(queue, true, true, false, Collections.emptyMap());
+        channel1.queueBind(queue, DIRECT_EXCHANGE_NAME, "error");
+        channel1.basicConsume(queue, true, new MyConsumer(channel1, "channel1"));
+        channel2.basicConsume(queue, true, new MyConsumer(channel2, "channel2"));
+        countDownLatch.await();
     }
 
     @Test

@@ -108,7 +108,7 @@ public class TestConcurrent {
 
     @Test
     public void test10(){
-        new ForkJoinPool()
+//        new ForkJoinPool();
     }
 
 

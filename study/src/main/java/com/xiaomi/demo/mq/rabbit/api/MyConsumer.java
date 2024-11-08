@@ -13,14 +13,21 @@ import java.io.IOException;
  */
 @Slf4j
 public class MyConsumer extends DefaultConsumer {
+    private String name;
+
     public MyConsumer(Channel channel) {
         super(channel);
     }
 
+    public MyConsumer(Channel channel, String name) {
+        super(channel);
+        this.name = name;
+    }
+
     @Override
     public void handleDelivery(String consumerTag, Envelope envelope, AMQP.BasicProperties properties, byte[] body) throws IOException {
-        log.info("tag:{}, envelope:{}, properties:{}, msg:{}", consumerTag, envelope, properties, new String(body));
-        getChannel().basicReject(envelope.getDeliveryTag(), false);
+        log.info("name:{}, tag:{}, envelope:{}, properties:{}, msg:{}", name, consumerTag, envelope, properties, new String(body));
+
         // checked消息会被删除
         // unchecked的消息会等到channel重启后，才会变成ready等待消费
 //        channel.basicAck(envelope.getDeliveryTag(), false);
