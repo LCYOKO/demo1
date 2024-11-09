@@ -1,1 +1,32 @@
-version: "2.2"
+version: '3'
+services:
+  rabbit-mq1:
+    container_name: rabbit1
+    image: rabbitmq:3.8.1
+    ports:
+      - 4369:4369  #epmd，RabbitMQ节点和CLI工具使用的对等发现服务
+      - 5671:5671  #客户端和broker端口+tls
+      - 5672:5672  #客户端和broker端口
+      - 15672:15672 # web端口
+      - 25672:25672 #Erlang分布式节点通信端口，用于集群中的内部通信
+    networks:
+      - rabbit_cluster
+  rabbit-mq2:
+    container_name: rabbit2
+    image: rabbitmq:3.8.1
+    ports:
+      - 5673:5672  #客户端和broker端口
+    networks:
+      - rabbit_cluster
+  rabbit-mq3:
+    container_name: rabbit3
+    image: rabbitmq:3.8.1
+    ports:
+      - 5674:5672  #客户端和broker端口
+    networks:
+      - rabbit_cluster
+
+networks:
+  rabbit_cluster:
+    name: rabbit_cluster
+    driver: bridge

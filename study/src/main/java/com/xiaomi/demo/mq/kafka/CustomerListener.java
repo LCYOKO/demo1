@@ -3,6 +3,7 @@ package com.xiaomi.demo.mq.kafka;
 import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.listener.ConsumerAwareMessageListener;
+import org.springframework.kafka.listener.ConsumerSeekAware;
 
 /**
  * @Author liuchiyun

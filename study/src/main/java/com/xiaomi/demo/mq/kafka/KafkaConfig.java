@@ -2,14 +2,15 @@ package com.xiaomi.demo.mq.kafka;
 
 import com.google.common.collect.Lists;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
+import org.apache.kafka.clients.consumer.OffsetResetStrategy;
+import org.apache.kafka.clients.consumer.internals.Fetcher;
 import org.apache.kafka.clients.producer.ProducerConfig;
+import org.apache.kafka.common.requests.OffsetFetchRequest;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.kafka.core.*;
-import org.springframework.kafka.listener.ConcurrentMessageListenerContainer;
-import org.springframework.kafka.listener.ContainerProperties;
-import org.springframework.kafka.listener.MessageListener;
+import org.springframework.kafka.listener.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -42,9 +43,10 @@ public class KafkaConfig {
     public ConsumerFactory<String, String> consumerFactory() {
         Map<String, Object> props = new HashMap<>();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, "test");
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-        props.put(ConsumerConfig.GROUP_ID_CONFIG, "test");
+        Fetcher
         return new DefaultKafkaConsumerFactory<>(props);
     }
 
@@ -64,6 +66,7 @@ public class KafkaConfig {
         ConcurrentMessageListenerContainer<String, String> container = new ConcurrentMessageListenerContainer<>(consumerFactory, containerProperties);
         container.setConcurrency(3);
         container.setAutoStartup(true);
+        container.se
         return container;
     }
 }
