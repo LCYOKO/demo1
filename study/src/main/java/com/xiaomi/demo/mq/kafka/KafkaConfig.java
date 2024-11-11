@@ -9,6 +9,7 @@ import org.apache.kafka.common.requests.OffsetFetchRequest;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.core.*;
 import org.springframework.kafka.listener.*;
 
@@ -20,7 +21,7 @@ import java.util.Map;
  * @Date 2021/5/9 9:06 下午
  * @Version 1.0
  */
-//@Configuration
+@Configuration
 public class KafkaConfig {
     @Bean
     public ProducerFactory<String, String> producerFactory() {
@@ -46,6 +47,7 @@ public class KafkaConfig {
         props.put(ConsumerConfig.GROUP_ID_CONFIG, "test");
         props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+//        props.put(ConsumerConfig.PARTITION_ASSIGNMENT_STRATEGY_CONFIG, CustomerAssignor.class);
         return new DefaultKafkaConsumerFactory<>(props);
     }
 
@@ -65,7 +67,6 @@ public class KafkaConfig {
         ConcurrentMessageListenerContainer<String, String> container = new ConcurrentMessageListenerContainer<>(consumerFactory, containerProperties);
         container.setConcurrency(3);
         container.setAutoStartup(true);
-        container.se
         return container;
     }
 }

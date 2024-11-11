@@ -3,9 +3,9 @@ package com.xiaomi.demo.algo;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
+import org.springframework.util.StopWatch;
 
 import java.util.Locale;
-import java.util.Random;
 
 /**
  * @Author: liuchiyun
@@ -81,7 +81,11 @@ public class AlgoTest {
     }
 
     @Test
-    public void test2() {
-
+    public void test2() throws InterruptedException {
+        StopWatch watch = new StopWatch();
+        watch.start();
+        Thread.sleep(1000);
+        watch.stop();
+        System.out.println(watch.prettyPrint());
     }
 }
