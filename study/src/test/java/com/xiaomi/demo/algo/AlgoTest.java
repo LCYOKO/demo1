@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.CountDownLatch;
 
 /**
  * @Author: liuchiyun
@@ -54,6 +55,21 @@ public class AlgoTest {
         System.out.println(fractionToDecimal(1, 3));
     }
 
+    public void testCpu() throws InterruptedException {
+        CountDownLatch countDownLatch = new CountDownLatch(1);
+        int maxCpuCores = Runtime.getRuntime().availableProcessors();
+        for (int i = 0; i < maxCpuCores; i++) {
+            new Thread(() -> {
+                int count = 0;
+                while (true) {
+                    count++;
+                }
+            }).start();
+        }
+        countDownLatch.await();
+    }
+
+
 
     public int countPrimes(int n) {
         //解答 为什么从x*x开始 为什么到 sqrt（x）就停止。
@@ -78,7 +94,7 @@ public class AlgoTest {
             // 如果当前是素数
             if (isPrim[i]) {
                 // 就把从 i*i 开始，i 的所有倍数都设置为 false。
-                for (int j = i * i; j < n; j+=i) {
+                for (int j = i * i; j < n; j += i) {
                     isPrim[j] = false;
                 }
             }
@@ -96,7 +112,7 @@ public class AlgoTest {
 
     public String fractionToDecimal(int numerator, int denominator) {
         if (numerator == Integer.MIN_VALUE && denominator == -1) {
-            return String.valueOf(Integer.MIN_VALUE*-1L);
+            return String.valueOf(Integer.MIN_VALUE * -1L);
         }
         if (numerator == 0) {
             return "0";
