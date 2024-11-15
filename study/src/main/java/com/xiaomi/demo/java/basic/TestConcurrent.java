@@ -6,10 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.springframework.util.ConcurrentReferenceHashMap;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ForkJoinPool;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.*;
 
 /**
  * @Author: liuchiyun
@@ -109,6 +106,11 @@ public class TestConcurrent {
     @Test
     public void test10(){
 //        new ForkJoinPool();
+    }
+
+    @Test
+    public void test11(){
+        new ConcurrentHashMap<>().get()
     }
 
 

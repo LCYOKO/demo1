@@ -1,2 +1,3 @@
 
 --add-opens java.base/java.lang=ALL-UNNAMED  JDK11以上需要添加
+-io.netty.tryReflectionSetsAccessible=true
