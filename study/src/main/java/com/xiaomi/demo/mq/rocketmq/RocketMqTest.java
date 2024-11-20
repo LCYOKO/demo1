@@ -54,7 +54,7 @@ public class RocketMqTest {
             SendResult sendResult = publishTemplate.send(msg);
             log.info("result:{}", sendResult);
         } catch (Exception e) {
-            log.info("send message failed. message:{}", msg, e);
+            log.error("send message failed. message:{}", msg, e);
         }
     }
 

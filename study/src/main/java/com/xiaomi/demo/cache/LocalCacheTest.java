@@ -13,11 +13,12 @@ import java.nio.ByteBuffer;
  * https://github.com/snazy/ohc
  */
 public class LocalCacheTest {
-    CacheSerializer<byte[]> valueSerializer = new CacheSerializer<>() {
+    CacheSerializer<byte[]> valueSerializer = new CacheSerializer() {
+
         @Override
-        public void serialize(byte[] bytes, ByteBuffer byteBuffer) {
-            byteBuffer.putInt(bytes.length);
-            byteBuffer.put(bytes);
+        public void serialize(Object o, ByteBuffer byteBuffer) {
+//            byteBuffer.putInt(bytes.length);
+//            byteBuffer.put(bytes);
         }
 
         @Override
@@ -28,8 +29,8 @@ public class LocalCacheTest {
         }
 
         @Override
-        public int serializedSize(byte[] bytes) {
-            return bytes.length;
+        public int serializedSize(Object o) {
+            return 0;
         }
     };
 

@@ -33,7 +33,7 @@ public class GrpcClient {
         GrpcClient client = new GrpcClient();
         BookRequest request = BookRequest.newBuilder().setId(1L).build();
         CountDownLatch latch = new CountDownLatch(1);
-        StreamObserver<BookResponse> streamObserver = new StreamObserver<>() {
+        StreamObserver<BookResponse> streamObserver = new StreamObserver<BookResponse>() {
 
             @Override
             public void onNext(BookResponse bookResponse) {

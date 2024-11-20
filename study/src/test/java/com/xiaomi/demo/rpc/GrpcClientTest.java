@@ -30,7 +30,7 @@ public class GrpcClientTest {
         BookServiceGrpc.BookServiceStub service = grpcClient.getService();
         BookRequest request = BookRequest.newBuilder().setId(1L).build();
         CountDownLatch countDownLatch = new CountDownLatch(1);
-        StreamObserver<BookResponse> responseObserver = new StreamObserver<>() {
+        StreamObserver<BookResponse> responseObserver = new StreamObserver<BookResponse>() {
             @Override
             public void onNext(BookResponse value) {
                 System.out.println(value);
@@ -56,7 +56,7 @@ public class GrpcClientTest {
         BookRequest request = BookRequest.newBuilder().setId(1L).build();
         CountDownLatch countDownLatch = new CountDownLatch(1);
         AtomicInteger count = new AtomicInteger(1);
-        StreamObserver<BookResponse> responseObserver = new StreamObserver<>() {
+        StreamObserver<BookResponse> responseObserver = new StreamObserver<BookResponse>() {
             @Override
             public void onNext(BookResponse value) {
                 log.info("count:{}, resp:{}", count.getAndIncrement(), value);
@@ -83,7 +83,7 @@ public class GrpcClientTest {
         BookRequest request = BookRequest.newBuilder().setId(1L).build();
         CountDownLatch countDownLatch = new CountDownLatch(1);
         AtomicInteger count = new AtomicInteger(1);
-        StreamObserver<BookResponse> responseObserver = new StreamObserver<>() {
+        StreamObserver<BookResponse> responseObserver = new StreamObserver<BookResponse>() {
             @Override
             public void onNext(BookResponse value) {
                 log.info("count:{}, resp:{}", count.getAndIncrement(), value);
@@ -114,7 +114,7 @@ public class GrpcClientTest {
         BookRequest request = BookRequest.newBuilder().setId(1L).build();
         CountDownLatch countDownLatch = new CountDownLatch(1);
         AtomicInteger count = new AtomicInteger(1);
-        StreamObserver<BookResponse> responseObserver = new StreamObserver<>() {
+        StreamObserver<BookResponse> responseObserver = new StreamObserver<BookResponse>() {
             @Override
             public void onNext(BookResponse value) {
                 log.info("count:{}, resp:{}", count.getAndIncrement(), value);

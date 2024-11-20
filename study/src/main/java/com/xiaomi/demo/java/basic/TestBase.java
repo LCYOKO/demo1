@@ -47,13 +47,12 @@ public class TestBase {
 
     @Test
     public void test5() {
-        Map<Integer, String> map = Map.of(1, "2");
-        log.info("map:{}", map);
+//        Map<Integer, String> map = Map.of(1, "2");
+//        log.info("map:{}", map);
     }
 
     @Test
     public void test6() {
-//        new ArrayList<>().indexOf();
         int[] arr1 = new int[]{1, 2, 3};
         Integer[] arr2 = new Integer[]{1, 2, 3};
         System.out.println(Arrays.asList(arr1));
@@ -63,6 +62,20 @@ public class TestBase {
     @Test
     public void test7() {
         IntStream.range(1, 1000).parallel().forEach(i -> log.info("val:{}", i));
+    }
+
+    @Test
+    public void test8() {
+        //长度最大就是Integer_MAX_VALUE
+//        new int[Long.MAX_VALUE];
+    }
+
+    @Test
+    public void test9() {
+        //当内存不足时回收
+//        new SoftReference<>();
+        //当执行垃圾回收时，回收
+//        new WeakReference<>();
     }
 
     static class Item<T extends Base> {

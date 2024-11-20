@@ -25,7 +25,8 @@ public class TestFunction {
 
     @Test
     public void testFunction1() {
-        Function<Integer, Integer> identity = new Function<>() {
+        Function<Integer, Integer> identity = new Function<Integer, Integer>() {
+
             @Override
             public Integer apply(Integer integer) {
                 return integer;

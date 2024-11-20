@@ -92,7 +92,7 @@ public class TestCompeteFuture {
             return "123";
         });
 
-        Futures.addCallback(future, new FutureCallback<>() {
+        Futures.addCallback(future, new FutureCallback<String>() {
             @Override
             public void onSuccess(@Nullable String result) {
                 log.info("result");

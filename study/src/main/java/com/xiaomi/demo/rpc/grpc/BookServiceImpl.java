@@ -55,7 +55,7 @@ public class BookServiceImpl extends BookServiceGrpc.BookServiceImplBase {
 
     @Override
     public StreamObserver<BookRequest> getBooks3(StreamObserver<BookResponse> responseObserver) {
-        return new StreamObserver<>() {
+        return new StreamObserver<BookRequest>() {
             @Override
             public void onNext(BookRequest request) {
                 log.info("request:{}", request);
@@ -79,7 +79,7 @@ public class BookServiceImpl extends BookServiceGrpc.BookServiceImplBase {
 
     @Override
     public StreamObserver<BookRequest> getBooks4(StreamObserver<BookResponse> responseObserver) {
-        return new StreamObserver<>() {
+        return new StreamObserver<BookRequest>() {
             @Override
             public void onNext(BookRequest request) {
                 log.info("request:{}", request);
