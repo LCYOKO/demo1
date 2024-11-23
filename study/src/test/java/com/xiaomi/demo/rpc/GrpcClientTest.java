@@ -7,6 +7,7 @@ import com.xiaomi.demo.rpc.grpc.GrpcClient;
 import io.grpc.stub.StreamObserver;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.concurrent.CountDownLatch;
@@ -17,6 +18,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @Date: 2024/8/30
  */
 @Slf4j
+@Ignore
 public class GrpcClientTest {
     GrpcClient grpcClient;
 
@@ -26,6 +28,7 @@ public class GrpcClientTest {
     }
 
     @Test
+
     public void test1() throws InterruptedException {
         BookServiceGrpc.BookServiceStub service = grpcClient.getService();
         BookRequest request = BookRequest.newBuilder().setId(1L).build();

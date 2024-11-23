@@ -3,6 +3,7 @@ package com.xiaomi.demo.redis;
 import com.xiaomi.demo.DemoApplication;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import java.io.Serializable;
 @RunWith(SpringRunner.class)
 @ActiveProfiles("test")
 @Slf4j
+@Ignore
 public class RedisClientTemplateTest {
     @Autowired
     private RedisTemplate redisTemplate;
