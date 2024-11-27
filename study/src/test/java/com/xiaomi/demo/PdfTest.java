@@ -7,7 +7,6 @@ import org.junit.Test;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @Author: liuchiyun
@@ -41,6 +40,10 @@ public class PdfTest {
 //                .apiKey("YOUR_API_KEY")
 //                .appId("67f2148292234593a19f8bb0366ffe67")
 //                .build();
-        new ConcurrentHashMap<>().size()
+    }
+
+
+    @Test
+    public void test3() throws IOException {
     }
 }

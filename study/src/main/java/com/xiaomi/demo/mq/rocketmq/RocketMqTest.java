@@ -19,7 +19,6 @@ import org.junit.Test;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * @Author: liuchiyun
@@ -111,7 +110,7 @@ public class RocketMqTest {
             for (Message message : msgs) {
                 log.info("msg:{}, body:{}", message, new String(message.getBody()));
             }
-            return ConsumeConcurrentlyStatus.RECONSUME_LATER;
+            return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
         });
         consumer.start();
         latch.await();
@@ -138,22 +137,10 @@ public class RocketMqTest {
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("please_rename_unique_group_name_3");
         consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
         consumer.subscribe(TEST_TOPIC, "TagA || TagC || TagD");
-        consumer.registerMessageListener(new MessageListenerOrderly() {
-            final AtomicLong consumeTimes = new AtomicLong(0);
+        consumer.registerMessageListener((MessageListenerOrderly) (msgs, context) -> {
+            System.out.printf("%s Receive New Messages: %s %n", Thread.currentThread().getName(), msgs);
 
-            @Override
-            public ConsumeOrderlyStatus consumeMessage(List<MessageExt> msgs, ConsumeOrderlyContext context) {
-                context.setAutoCommit(true);
-                System.out.printf("%s Receive New Messages: %s %n", Thread.currentThread().getName(), msgs);
-                this.consumeTimes.incrementAndGet();
-                if ((this.consumeTimes.get() % 2) == 0) {
-                    return ConsumeOrderlyStatus.SUCCESS;
-                } else if ((this.consumeTimes.get() % 5) == 0) {
-                    context.setSuspendCurrentQueueTimeMillis(3000);
-                    return ConsumeOrderlyStatus.SUSPEND_CURRENT_QUEUE_A_MOMENT;
-                }
-                return ConsumeOrderlyStatus.SUCCESS;
-            }
+            return ConsumeOrderlyStatus.SUCCESS;
         });
         consumer.start();
         latch.await();
