@@ -2,7 +2,10 @@ package com.xiaomi.demo.mq.rocketmq;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
-import org.apache.rocketmq.client.consumer.listener.*;
+import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
+import org.apache.rocketmq.client.consumer.listener.ConsumeOrderlyStatus;
+import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
+import org.apache.rocketmq.client.consumer.listener.MessageListenerOrderly;
 import org.apache.rocketmq.client.exception.MQBrokerException;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
@@ -11,13 +14,11 @@ import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.client.producer.TransactionMQProducer;
 import org.apache.rocketmq.common.consumer.ConsumeFromWhere;
 import org.apache.rocketmq.common.message.Message;
-import org.apache.rocketmq.common.message.MessageExt;
 import org.apache.rocketmq.remoting.exception.RemotingException;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
 /**
@@ -29,19 +30,20 @@ public class RocketMqTest {
     private DefaultMQProducer publishTemplate;
     private TransactionMQProducer transactionMQProducer;
     private DefaultMQPushConsumer consumer;
-    private final String TEST_TOPIC = "test";
+    private static final String TEST_TOPIC = "test";
+    private static final String NAME_SERVER = "127.0.0.1:9876";
 
     @Before
     public void init() throws MQClientException {
         publishTemplate = new DefaultMQProducer("testProducer");
-        publishTemplate.setNamesrvAddr("127.0.0.1:9876");
+        publishTemplate.setNamesrvAddr(NAME_SERVER);
         publishTemplate.start();
         transactionMQProducer = new TransactionMQProducer("trx");
-        transactionMQProducer.setNamesrvAddr("127.0.0.1:9876");
+        transactionMQProducer.setNamesrvAddr(NAME_SERVER);
         transactionMQProducer.setTransactionListener(new TransactionListenerImpl());
         transactionMQProducer.start();
         consumer = new DefaultMQPushConsumer("CID_JODIE_1");
-        consumer.setNamesrvAddr("127.0.0.1:9876");
+        consumer.setNamesrvAddr(NAME_SERVER);
         consumer.setMaxReconsumeTimes(2);
     }
 
@@ -92,11 +94,7 @@ public class RocketMqTest {
     @Test
     public void sendOneWay() {
         Message msg = new Message(TEST_TOPIC, ("sendOneWay").getBytes());
-        try {
-            publishTemplate.sendOneway(msg);
-        } catch (Exception e) {
-            log.info("send message failed. message:{}", msg, e);
-        }
+        sendMessageOneWay(msg);
     }
 
     @Test
@@ -139,7 +137,6 @@ public class RocketMqTest {
         consumer.subscribe(TEST_TOPIC, "TagA || TagC || TagD");
         consumer.registerMessageListener((MessageListenerOrderly) (msgs, context) -> {
             System.out.printf("%s Receive New Messages: %s %n", Thread.currentThread().getName(), msgs);
-
             return ConsumeOrderlyStatus.SUCCESS;
         });
         consumer.start();
@@ -150,11 +147,7 @@ public class RocketMqTest {
     public void testSendDelayMessage() {
         Message msg = new Message("test", ("test delay message").getBytes());
         msg.setDelayTimeLevel(3);
-        try {
-            publishTemplate.sendOneway(msg);
-        } catch (Exception e) {
-            log.info("send message failed. message:{}", msg, e);
-        }
+        sendMessageOneWay(msg);
     }
 
     @Test
@@ -162,5 +155,14 @@ public class RocketMqTest {
         Message msg = new Message("test", ("transaction msg").getBytes());
         SendResult result = transactionMQProducer.sendMessageInTransaction(msg, "hello");
         log.info("result:{}", result);
+    }
+
+
+    private void sendMessageOneWay(Message msg) {
+        try {
+            publishTemplate.sendOneway(msg);
+        } catch (Exception e) {
+            log.info("send message failed. message:{}", msg, e);
+        }
     }
 }

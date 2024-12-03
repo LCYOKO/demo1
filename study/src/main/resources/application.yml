@@ -24,7 +24,7 @@ spring:
       simple:
         auto-startup: false
   datasource:
-    url: jdbc:mysql://localhost:33060/test?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:33060/test?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: lcyoko123
