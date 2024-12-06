@@ -1,0 +1,22 @@
+#端口
+port ${PORT}
+#非保护模式
+protected-mode no
+#启用集群模式
+cluster-enabled yes 
+cluster-config-file nodes.conf 
+#超时时间
+cluster-node-timeout 5000 
+#集群各节点IP地址
+cluster-announce-ip 192.168.88.110 
+#集群节点映射端口 
+cluster-announce-port ${PORT} 
+#集群总线端口 
+cluster-announce-bus-port 1${PORT} 
+#开启aof持久化策略
+appendonly yes
+#后台运行
+#daemonize yes
+#集群加密
+#masterauth 123456
+#requirepass 123456

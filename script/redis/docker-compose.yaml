@@ -2,33 +2,55 @@ version: '3'
 services:
   redis-master1:
     container_name: redis1
-    image: redis:latest
+    image: redis:cluster
     restart: always
     ports:
       - 6379:6379
+      - 16379:16739
     networks:
       - redis_cluster
   redis-slave1:
     container_name: redis2
-    image: redis:latest
+    image: redis:cluster
     ports:
       - 6378:6379
+      - 16378:16739
     restart: always
     networks:
       - redis_cluster
   redis-master2:
     container_name: redis3
-    image: redis:latest
+    image: redis:cluster
     restart: always
     ports:
       - 6377:6379
+      - 16377:16739
     networks:
       - redis_cluster
   redis-slave2:
     container_name: redis4
-    image: redis:latest
+    image: redis:cluster
     ports:
       - 6376:6379
+      - 16376:16739
+    restart: always
+    networks:
+      - redis_cluster
+  redis-master3:
+    container_name: redis5
+    image: redis:cluster
+    restart: always
+    ports:
+      - 6375:6379
+      - 16375:16739
+    networks:
+      - redis_cluster
+  redis-slave3:
+    container_name: redis6
+    image: redis:cluster
+    ports:
+      - 6374:6379
+      - 16374:16739
     restart: always
     networks:
       - redis_cluster
