@@ -1,0 +1,1 @@
+docker run -d -it -p 7006:7006 -p 17006:17006 -v E:\\test\\7006\\conf\\redis.conf:/usr/local/etc/redis/redis.conf --privileged=true  --name redis-7006 --net redis-net --sysctl net.core.somaxconn=1024 redis:4.0.14 redis-server '/usr/local/etc/redis/redis.conf'
